@@ -54,7 +54,7 @@ def create_concentric_mask(center, im_dims, sector_width=10, num_sectors=10):
 
     """
     
-    yy, xx = np.meshgrid(np.arange(im_dims[0]),np.arange(im_dims[1]))
+    yy, xx = np.meshgrid(np.arange(im_dims[1]),np.arange(im_dims[0]))
     roi_mask = np.zeros(im_dims, dtype=np.bool_)
     concentric_masks = [roi_mask]
 
@@ -90,7 +90,7 @@ def create_sector_mask(center, im_dims, angular_width=20, max_rad=50):
 
     """
 
-    yy, xx = np.meshgrid(np.arange(im_dims[0]),np.arange(im_dims[1]))
+    yy, xx = np.meshgrid(np.arange(im_dims[1]),np.arange(im_dims[0]))
     angles = np.arctan2(xx-center[0],yy-center[1])
     angles %= (2*np.pi)
     rad_mask = np.sqrt((xx - center[0])**2 + (yy - center[1])**2) < max_rad
