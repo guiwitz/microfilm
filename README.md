@@ -1,3 +1,4 @@
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/guiwitz/microfilm/master?urlpath=lab)
 # Microfilm
 
 This package is a collection of tools to handle time-lapse microscopy datasets. The ```dataset``` submodule in particular allows to import series of tiff files, multi-page tiffs, h5 and Nikon ND2 files and to handle them through a common set of functions.
