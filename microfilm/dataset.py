@@ -154,7 +154,7 @@ class TIFFSeries(Data):
         if self.channel_name is None:
             self.channel_name = []
             for f in self.expdir.glob('*'):
-                if f.is_dir():
+                if (f.is_dir()) and (f.name[0] != '.'):
                     self.channel_name.append(f.name)
         if len(self.channel_name) == 0:
             raise Exception(f"Sorry, no folders found in {self.expdir}")
