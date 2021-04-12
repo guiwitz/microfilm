@@ -19,8 +19,8 @@ class Data:
     ----------
     expdir: str
         path to data folder (tif) or file (ND2)
-    signal_name: list of str
-        names of data to use as signals
+    channel_name: list of str
+        names of data to use as channels
     bad_frames: list, optional
         list of time-points to discard
     step: int
@@ -38,7 +38,7 @@ class Data:
         XY image dimensions
     valid_frames: 1D array
         indices of considered frames
-    signalfile: str or list
+    channelfile: str or list
         'series':
             list of list of str, each element is a filename,
             files are grouped in a list for each channel, and
@@ -55,7 +55,7 @@ class Data:
     def __init__(
         self,
         expdir,
-        signal_name=None,
+        channel_name=None,
         bad_frames=[],
         step=1,
         max_time=None,
@@ -64,13 +64,13 @@ class Data:
 
         self.data_type = data_type
         self.expdir = Path(expdir)
-        self.signal_name = signal_name
+        self.channel_name = channel_name
         self.bad_frames = np.array(bad_frames)
         self.step = step
         self.max_time = max_time
 
         self.dims = None
-        self.signalfile = None
+        self.channelfile = None
         self.data_type = data_type
 
     def set_valid_frames(self):
@@ -109,29 +109,29 @@ class Data:
 
     def check_channel_time_available(self, channel, frame):
 
-        assert (channel < len(self.signalfile)), f"Only {len(self.signalfile)} channels available."
+        assert (channel in self.channel_name), f"{channel} is not in the list of available channels {self.channel_name}."
         assert (frame < len(self.valid_frames)), f"Only {len(self.valid_frames)} frames available."
 
-    def load_frame_signal(self, m, k):
-        """Load index k of valid frames of channel index m in self.signalfile"""
+    def load_frame(self, channel_name, frame):
+        """Load index k of valid frames of channel index m in self.channelfile"""
         raise NotImplementedError
 
     def frame_generator(self, channel):
         
         for t in self.valid_frames:
-            image = self.load_frame_signal(channel, t)
+            image = self.load_frame(channel, t)
             yield image
 
     def get_channel_name(self, m):
         """Get name of channel index m"""
 
-        return self.signal_name[m]
+        return self.channel_name[m]
 
 class TIFFSeries(Data):
     def __init__(
         self,
         expdir,
-        signal_name=None,
+        channel_name=None,
         bad_frames=[],
         step=1,
         max_time=None,
@@ -139,7 +139,7 @@ class TIFFSeries(Data):
     ):
         super().__init__(
             expdir,
-            signal_name,
+            channel_name,
             bad_frames,
             step,
             max_time,
@@ -150,37 +150,38 @@ class TIFFSeries(Data):
 
     def initialize(self):
 
-        # if no signal names are provided, consider all folders as signal
-        if self.signal_name is None:
-            self.signal_name = []
+        # if no channel names are provided, consider all folders as channel
+        if self.channel_name is None:
+            self.channel_name = []
             for f in self.expdir.glob('*'):
                 if f.is_dir():
-                    self.signal_name.append(f.name)
-        if len(self.signal_name) == 0:
+                    self.channel_name.append(f.name)
+        if len(self.channel_name) == 0:
             raise Exception(f"Sorry, no folders found in {self.expdir}")
 
-        self.signalfile = [
-                self.find_files(os.path.join(self.expdir, x)) for x in self.signal_name
+        self.channelfile = [
+                self.find_files(os.path.join(self.expdir, x)) for x in self.channel_name
             ]
 
         if self.max_time is None:
-            self.max_time = len(self.signalfile[0])
+            self.max_time = len(self.channelfile[0])
             # print(self.max_time)
 
         self.set_valid_frames()
 
-        image = self.load_frame_signal(0, 0)
+        image = self.load_frame(self.channel_name[0], 0)
         self.dims = image.shape
         self.shape = image.shape
 
-    def load_frame_signal(self, m, k):
-        """Load index k of valid frames of channel index m in self.signalfile"""
+    def load_frame(self, channel_name, frame):
+        """Load index k of valid frames of channel index m in self.channelfile"""
 
-        self.check_channel_time_available(m, k)
+        self.check_channel_time_available(channel_name, frame)
+        ch_index = self.channel_name.index(channel_name)
 
-        time = self.valid_frames[k]
+        time = self.valid_frames[frame]
         full_path = os.path.join(
-            self.expdir, self.signal_name[m], self.signalfile[m][time]
+            self.expdir, channel_name, self.channelfile[ch_index][time]
         )
         return skimage.io.imread(full_path).astype(dtype=np.uint16)
 
@@ -189,7 +190,7 @@ class MultipageTIFF(Data):
     def __init__(
         self,
         expdir,
-        signal_name=None,
+        channel_name=None,
         bad_frames=[],
         step=1,
         max_time=None,
@@ -197,7 +198,7 @@ class MultipageTIFF(Data):
     ):
         super().__init__(
             expdir,
-            signal_name,
+            channel_name,
             bad_frames,
             step,
             max_time,
@@ -208,40 +209,41 @@ class MultipageTIFF(Data):
 
     def initialize(self):
         
-        # if no signal names are provided, consider all folders as signal
-        if self.signal_name is None:
-            self.signal_name = []
+        # if no channel names are provided, consider all folders as channel
+        if self.channel_name is None:
+            self.channel_name = []
             for ext in ('*.tif', '*.TIFF', '*.tiff'):
                 files = self.expdir.glob(ext)
                 for f in files:
-                    self.signal_name.append(f.name)
-        if len(self.signal_name) == 0:
+                    self.channel_name.append(f.name)
+        if len(self.channel_name) == 0:
             raise Exception(f"Sorry, no tif/tiff/TIFF files found in {self.expdir}")
 
-        self.signalfile = self.signal_name
+        self.channelfile = self.channel_name
 
-        self.signal_imobj = [
+        self.channel_imobj = [
             AICSImage(os.path.join(self.expdir, x), known_dims="TYX")
-            for x in self.signal_name
+            for x in self.channel_name
         ]
 
         if self.max_time is None:
-            self.max_time = self.signal_imobj[0].size_t
+            self.max_time = self.channel_imobj[0].size_t
 
         self.set_valid_frames()
 
-        image = self.load_frame_signal(0,0)
+        image = self.load_frame(self.channel_name[0],0)
         self.dims = image.shape
         self.shape = image.shape
 
-    def load_frame_signal(self, m, k):
-        """Load index k of valid frames of channel index m in self.signalfile"""
+    def load_frame(self, channel_name, frame):
+        """Load index k of valid frames of channel index m in self.channelfile"""
 
-        self.check_channel_time_available(m, k)
+        self.check_channel_time_available(channel_name, frame)
 
-        time = self.valid_frames[k]
+        time = self.valid_frames[frame]
+        ch_index = self.channel_name.index(channel_name)
 
-        image = self.signal_imobj[m].get_image_data("YX", S=0, T=time, C=0, Z=0)
+        image = self.channel_imobj[ch_index].get_image_data("YX", S=0, T=time, C=0, Z=0)
         return image.astype(dtype=np.uint16)
 
 
@@ -250,7 +252,7 @@ class ND2(Data):
     def __init__(
         self,
         expdir,
-        signal_name=None,
+        channel_name=None,
         bad_frames=[],
         step=1,
         max_time=None,
@@ -258,7 +260,7 @@ class ND2(Data):
     ):
         super().__init__(
             expdir,
-            signal_name,
+            channel_name,
             bad_frames,
             step,
             max_time,
@@ -272,9 +274,9 @@ class ND2(Data):
         self.nd2file = ND2Reader(self.expdir.as_posix())
         self.nd2file.metadata["z_levels"] = range(0)
 
-        if self.signal_name is None:
-            self.signal_name = list(self.nd2file.metadata["channels"])
-        self.signalfile = self.signal_name
+        if self.channel_name is None:
+            self.channel_name = list(self.nd2file.metadata["channels"])
+        self.channelfile = self.channel_name
 
 
         if self.max_time is None:
@@ -282,18 +284,18 @@ class ND2(Data):
 
         self.set_valid_frames()
 
-        image = self.load_frame_signal(0, 0)
+        image = self.load_frame(self.channel_name[0], 0)
         self.dims = image.shape
         self.shape = image.shape
 
-    def load_frame_signal(self, m, k):
-        """Load index k of valid frames of channel index m in self.signalfile"""
+    def load_frame(self, channel_name, frame):
+        """Load index k of valid frames of channel index m in self.channelfile"""
 
-        self.check_channel_time_available(m, k)
+        self.check_channel_time_available(channel_name, frame)
 
-        time = self.valid_frames[k]
+        time = self.valid_frames[frame]
 
-        ch_index = self.nd2file.metadata["channels"].index(self.signalfile[m])
+        ch_index = self.nd2file.metadata["channels"].index(channel_name)
         image = self.nd2file.get_frame_2D(x=0, y=0, z=0, c=ch_index, t=time, v=0)
         return image
 
@@ -302,7 +304,7 @@ class H5(Data):
     def __init__(
         self,
         expdir,
-        signal_name=None,
+        channel_name=None,
         bad_frames=[],
         step=1,
         max_time=None,
@@ -310,7 +312,7 @@ class H5(Data):
     ):
         super().__init__(
             expdir,
-            signal_name,
+            channel_name,
             bad_frames,
             step,
             max_time,
@@ -321,36 +323,36 @@ class H5(Data):
 
     def initialize(self):
 
-        if self.signal_name is None:
-            self.signal_name = []
+        if self.channel_name is None:
+            self.channel_name = []
             for ext in ('*.h5','*.H5'):
                 files = self.expdir.glob(ext)
                 for f in files:
-                    self.signal_name.append(f.name)
-        if len(self.signal_name) == 0:
+                    self.channel_name.append(f.name)
+        if len(self.channel_name) == 0:
             raise Exception(f"Sorry, no tif/tiff/TIFF files found in {self.expdir}")
 
-        self.signalfile = self.signal_name
+        self.channelfile = self.channel_name
         
-        self.signal_imobj = [
+        self.channel_imobj = [
             h5py.File(os.path.join(self.expdir, x), "r").get("volume")
-            for x in self.signal_name
+            for x in self.channel_name
         ]
 
         if self.max_time is None:
-            self.max_time = self.signal_imobj[0].shape[0]
+            self.max_time = self.channel_imobj[0].shape[0]
 
         self.set_valid_frames()
 
-        image = self.load_frame_signal(0, 0)
+        image = self.load_frame(self.channel_name[0], 0)
         self.dims = image.shape
         self.shape = image.shape
 
-    def load_frame_signal(self, m, k):
-        """Load index k of valid frames of channel index m in self.signalfile"""
+    def load_frame(self, channel_name, frame):
+        """Load index k of valid frames of channel index m in self.channelfile"""
 
-        self.check_channel_time_available(m, k)
+        self.check_channel_time_available(channel_name, frame)
 
-        time = self.valid_frames[k]
-
-        return self.signal_imobj[m][time, :, :]
+        time = self.valid_frames[frame]
+        ch_index = self.channel_name.index(channel_name)
+        return self.channel_imobj[ch_index][time, :, :]
