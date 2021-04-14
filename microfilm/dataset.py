@@ -1,11 +1,14 @@
 import os
 import re
+from pathlib import Path
+import warnings
+
 from aicsimageio import AICSImage
 from nd2reader import ND2Reader
 import h5py
 import skimage.io
 import numpy as np
-from pathlib import Path
+import natsort
 
 
 class Data:
@@ -89,12 +92,21 @@ class Data:
         image_names = os.listdir(folderpath)
         image_names = np.array([x for x in image_names if x[0] != "."])
         if len(image_names) > 0:
+            # check if xxx_t0.tif structure is found
             times = [re.findall(".*\_t*(\d+)\.(?:tif|TIF|tiff)", x) for x in image_names]
-            times = [int(x[0]) for x in times if len(x) > 0]
-            if len(times) < len(image_names):
-                raise Exception(f"Sorry, file names could not be parsed.\
-                    Make sure they conform to XXX_txxx.tif/TIF/tiff")
-            image_names = image_names[np.argsort(times)]
+            
+            # if any element doesn't have xxx_t0.tif structure, find tif files and use natsort
+            if any([len(x)==0 for x in times]):
+                image_names = [re.findall(".*\.(?:tif|TIF|tiff)", x) for x in image_names]
+                image_names = [t[0] for t in image_names if len(t)>0]
+                if len(image_names) > 0:
+                    image_names = natsort.natsorted(image_names)
+                    warnings.warn(f"No times detected, using natural name sorting")
+                else:
+                    raise Exception(f"Sorry, no tif/tiff/TIF files could be found")
+            else:
+                times = [int(x[0]) for x in times if len(x) > 0]
+                image_names = image_names[np.argsort(times)]
         else:
             raise Exception(f"Sorry, files found in {folderpath}")
         return image_names
