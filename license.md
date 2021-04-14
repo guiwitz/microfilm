@@ -1,0 +1,1 @@
+The test file cluster.nd2 is copied from the [pims_nd2](https://github.com/soft-matter/pims_nd2) project and is covered by [this license](https://github.com/soft-matter/pims_nd2/blob/master/license.txt).
