@@ -120,7 +120,7 @@ def rescale_image(image, rescale_type='min_max', limits=None):
         image_rescaled = image_rescaled - limits[0]
         image_rescaled[image_rescaled<0]=0
         image_rescaled[image_rescaled>limits[1]] = limits[1]
-        image_rescaled = image_rescaled / image_rescaled.max()
+        image_rescaled = image_rescaled / limits[1]
     
     return image_rescaled
 
