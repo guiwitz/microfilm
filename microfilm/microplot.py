@@ -6,6 +6,7 @@ import matplotlib
 from matplotlib.colors import ListedColormap
 from matplotlib.patches import Rectangle
 
+
 def colormap_from_name(image, cmap_name, flip_map=False, rescale_type='min_max', limits=None):
     """
     Return 2D image as 3D RGB stack colored with a given colormap.
@@ -39,6 +40,8 @@ def colormap_from_name(image, cmap_name, flip_map=False, rescale_type='min_max',
             cmap = ListedColormap(np.c_[np.zeros(steps), np.linspace(0,1,steps), np.zeros(steps)])
         if cmap_name == 'pure_blue':
             cmap = ListedColormap(np.c_[np.zeros(steps), np.zeros(steps), np.linspace(0,1,steps)])
+        if cmap_name == 'segmentation':
+            cmap = random_cmap()
     if flip_map:
             cmap = cmap.reversed()
             
@@ -79,6 +82,16 @@ def colormap_from_colorhex(image, cmap_hex='#ff6600', flip_map=False, rescale_ty
     image_colored = cmap(image)
     
     return image_colored
+
+def random_cmap(alpha=0.5):
+    """Create random colormap for segmentation"""
+    
+    colmat = np.random.rand(256,4)
+    colmat[:,-1] = alpha
+    colmat[0,-1] = 0
+    cmap = matplotlib.colors.ListedColormap(colmat)
+    return cmap
+
 
 def rescale_image(image, rescale_type='min_max', limits=None):
     """
