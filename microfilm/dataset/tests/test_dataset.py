@@ -1,10 +1,10 @@
 from microfilm import dataset
 import numpy as np
 
-data_tiffseries = dataset.TIFFSeries('test_folders/test_tifseries_good/')
-data_multipagetiff = dataset.MultipageTIFF('test_folders/test_multipage_good/')
-data_nd2 = dataset.ND2('test_folders/test_nd2_good/cluster.nd2')
-data_h5 = dataset.H5('test_folders/test_h5_good/')
+data_tiffseries = dataset.TIFFSeries('microfilm/dataset/tests/test_folders/test_tifseries_good/')
+data_multipagetiff = dataset.MultipageTIFF('microfilm/dataset/tests/test_folders/test_multipage_good/')
+data_nd2 = dataset.ND2('microfilm/dataset/tests/test_folders/test_nd2_good/cluster.nd2')
+data_h5 = dataset.H5('microfilm/dataset/tests/test_folders/test_h5_good/')
 
 all_data = {'tiffseries': data_tiffseries,
             'multipagetiff': data_multipagetiff,
