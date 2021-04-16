@@ -173,7 +173,7 @@ def multichannel_to_rgb(images, cmaps=None, flip_map=False, rescale_type='min_ma
         flip_map = [flip_map for i in range(len(images))]
     if not isinstance(rescale_type, list):
         rescale_type = [rescale_type for i in range(len(images))]
-    if (limits is None) or (not any(isinstance(i, list) for i in test)):
+    if (limits is None) or (not any(isinstance(i, list) for i in limits)):
         limits = [limits for i in range(len(images))]
     
     converted = combine_image(
@@ -300,6 +300,7 @@ def microshow(images, cmaps=None, flip_map=False, rescale_type='min_max', limits
                          transform=ax.transAxes, fontdict={'color':scale_color, 'size':scale_font_size})
         
             if scale_text_centered:
+                # trick https://stackoverflow.com/questions/5320205/matplotlib-text-dimensions
                 r = fig.canvas.get_renderer()
                 text_width = scale_text.get_window_extent(renderer=r).width / images[0].shape[1]
                 bar_middle = 1-0.5*scale_width-0.05
@@ -308,4 +309,49 @@ def microshow(images, cmaps=None, flip_map=False, rescale_type='min_max', limits
         
         ax.add_patch(scale_bar)
         
-    return ax.figure, ax
+    microim = Microimage(ax.figure, ax)
+        
+    return microim#ax.figure, ax
+
+def add_scalebar(ax, unit, scalebar_units, unit_per_pix, height_pixels=3, scale_ypos=0.05,
+                scale_color='white'):
+          
+    if (unit is None) or (scalebar_units is None) or (unit_per_pix is None):
+        raise Exception(f"You need to provide a unit (unit), scale (unit_per_pix) and size of your scale bar (scalebar_units)")
+
+    height_pixels /= ax.get_images()[0].get_array().shape[0]
+
+    pixelsize = scalebar_units / unit_per_pix
+    image_width = ax.get_images()[0].get_array().shape[1]
+    scale_width = pixelsize / image_width
+    
+    scale_bar = Rectangle((1-scale_width-0.05, scale_ypos), width=scale_width, height=height_pixels,
+                          transform=ax.transAxes, facecolor=scale_color)
+
+    ax.add_patch(scale_bar)
+    return ax
+
+
+class Microimage:
+    def __init__(self, fig, ax):
+        
+        self.fig, self.ax = (fig, ax)
+        
+    
+    def add_scalebar(self, unit, scalebar_units, unit_per_pix, height_pixels=3, scale_ypos=0.05,
+        scale_color='white'):
+
+        if (unit is None) or (scalebar_units is None) or (unit_per_pix is None):
+            raise Exception(f"You need to provide a unit (unit), scale (unit_per_pix) and size of your scale bar (scalebar_units)")
+
+        height_pixels /= self.ax.get_images()[0].get_array().shape[0]
+
+        pixelsize = scalebar_units / unit_per_pix
+        image_width = self.ax.get_images()[0].get_array().shape[1]
+        scale_width = pixelsize / image_width
+
+        scale_bar = Rectangle((1-scale_width-0.05, scale_ypos), width=scale_width, height=height_pixels,
+                              transform=self.ax.transAxes, facecolor=scale_color)
+
+        self.ax.add_patch(scale_bar)
+        return self.ax
