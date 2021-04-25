@@ -7,12 +7,14 @@ import matplotlib.pyplot as plt
 
 def get_roi_cm(roi_path=None, roi_im=None):
     """
-    This is my function.
+    Find the center of mass of a roi defined as a single label in an image.
 
     Parameters
     ----------
     roi_path: str
         path to roi image
+    roi_im = 2d array
+        image containing roi
 
     Returns
     -------
