@@ -13,10 +13,10 @@ import natsort
 
 class Data:
     """
-    Class defining and handling datasets. Given an experiment directory
-    (tiff files or stacks) or a a file (ND2) the available data are
-    automatically parsed. Parameters specific to an analysis run such as
-    bad frame indices or the time steps are also stored in the Data object.
+    Class defining and handling datasets of 2D multi-channel time-lapse images.
+    Given an experiment directory (tiff files or stacks) or a a file (ND2, H5)
+    the available data are automatically parsed. Parameters specific to an analysis
+    run such as bad frame indices or the time steps are also stored in the Data object.
 
     Parameters
     ----------
@@ -77,7 +77,7 @@ class Data:
         self.data_type = data_type
 
     def set_valid_frames(self):
-        """Create a list of indices of valid frames"""
+        """Create a list of indices of valid frames given a set of bad frames"""
 
         self.valid_frames = np.arange(self.max_time)
         self.valid_frames = self.valid_frames[
@@ -87,7 +87,7 @@ class Data:
         self.K = len(self.valid_frames)
 
     def find_files(self, folderpath):
-        """Given a folder, parse contents to find all time points"""
+        """Given a folder, find all tif files contained in it and try to sort as time-lapse"""
 
         image_names = os.listdir(folderpath)
         image_names = np.array([x for x in image_names if x[0] != "."])
@@ -120,6 +120,7 @@ class Data:
         self.set_valid_frames()
 
     def check_channel_time_available(self, channel, frame):
+        """Given a channel and frame index, check that they exist"""
 
         assert (channel in self.channel_name), f"{channel} is not in the list of available channels {self.channel_name}."
         assert (frame < len(self.valid_frames)), f"Only {len(self.valid_frames)} frames available."
@@ -129,6 +130,7 @@ class Data:
         raise NotImplementedError
 
     def frame_generator(self, channel):
+        """Create a generator returning successive frames of a given channel"""
         
         for t in self.valid_frames:
             image = self.load_frame(channel, t)
