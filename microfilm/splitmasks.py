@@ -3,6 +3,7 @@ import skimage.io
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
+import pandas as pd
 
 
 def get_roi_cm(roi_path=None, roi_im=None):
@@ -151,4 +152,106 @@ def measure_intensities(time_image, im_labels, max_time):
     signal = np.stack([x['mean_intensity'] for x in measures],axis=0)
     
     return signal
+
+def plot_signals(signal, color_array=None, ax=None):
+    """
+    Plot extracted signal with specific colormap
     
+    Parameters
+    ----------
+    signal: 2d array
+        signal array with rows as time points and columns as sectors
+    color_array: 2d array
+        N x 4 array of RGBA colors where N >= sectors
+    ax: Matplotlib axis
+
+    Returns
+    -------
+    ax if ax passed as input otherwise fig
+    
+    """
+
+    fig = None
+    if ax is None:
+        fig, ax = plt.subplots(figsize=(6,6))
+    for i in range(signal.shape[1]):
+        if color_array is not None:
+            ax.plot(signal[:,i], color=color_array[i])
+        else:
+            ax.plot(signal[:,i])
+    ax.set_xlabel('Time', fontsize=20)
+    ax.set_ylabel('Intensity', fontsize=20)
+    ax.tick_params(axis='both', which='major', labelsize=15)
+    
+    if fig is not None:
+        fig.tight_layout()
+        return fig
+    
+    return ax
+
+def plot_sectors(image, sectors, channel=None, time=0, cmap=None, ax=None):
+    """
+    Plot image and overlayed sectors with a given colormap
+    
+    Parameters
+    ----------
+    image: dataset object
+        image to be plotted
+    sectors: 2d array
+        labelled image of sectors
+    channel: str
+        name of channel to plot
+    time: int
+        frame to plot
+    cmap: Matploltlib colormap
+    ax: Matplotlib axis
+
+    Returns
+    -------
+    ax if ax passed as input otherwise fig
+    
+    """
+    fig = None
+    if ax is None:
+        fig, ax = plt.subplots(figsize=(6,6))
+    if channel is None:
+        channel = image.channel_name[0]
+
+    sector_labels_nan = nan_labels(sectors)
+
+    ax.imshow(image.load_frame(channel,0), cmap='gray')
+    ax.imshow(sector_labels_nan, cmap=cmap, interpolation='none', alpha=0.5)
+    if fig is not None:
+        fig.tight_layout()
+        return fig
+    
+    return ax
+
+def save_signal(signal, name='mycsv.csv',format='long'):
+    """
+    Save the sector signal in a CSV file with a given name
+
+    Parameters
+    ----------
+    signal: 2d array
+        signal array with rows as time points and columns as sectors
+    name: str
+        file name for export (should end in .csv)
+    format: str
+        'long' or 'wide'
+        in 'long' format, the table has three columns, time/sector/intensity
+        in 'wide' format, rows correspond to time and columns to sectors
+
+    Returns
+    -------
+    ax if ax passed as input otherwise fig
+    
+    """
+    
+    if format == 'wide':
+        signal_df = pd.DataFrame(signal)
+        signal_df.to_csv(name, index=False)
+    elif format == 'long':
+        signal_df = pd.DataFrame(signal).reset_index().rename({'index': 'time'}, axis='columns')
+        signal_df = pd.melt(signal_df, id_vars='time', var_name='sector', value_name='intensity')
+        signal_df.to_csv(name, index=False)
