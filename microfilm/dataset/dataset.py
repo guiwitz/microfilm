@@ -142,6 +142,10 @@ class Data:
         return self.channel_name[m]
 
 class TIFFSeries(Data):
+    """Data class to ingest series of single tif files. Channels are organised
+    by folder and frames ideally denoted as xxxx_t1.tif, xxxx_t2.tif etc. Otherwise
+    frames are sorted using natsort."""
+
     def __init__(
         self,
         expdir,
@@ -201,6 +205,9 @@ class TIFFSeries(Data):
 
 
 class MultipageTIFF(Data):
+    """Data class to ingest multipage tiff files. A folder should contain multiple 
+    single-plane multi-page tif files, one for each channel."""
+
     def __init__(
         self,
         expdir,
@@ -263,6 +270,9 @@ class MultipageTIFF(Data):
 
 
 class ND2(Data):
+    """Data class for digesting ND2 files containing multi-channel time-lapse data.
+    This class is very brittle and highly dependent on the version of NIS Elements used."""
+
     def __init__(
         self,
         expdir,
@@ -315,6 +325,9 @@ class ND2(Data):
 
 
 class H5(Data):
+    """Data class for digesting H5 data. The h5 file is expected to contain a 
+    "volume" object of dimension TXY. A folder should contain on h5 file per channel."""
+
     def __init__(
         self,
         expdir,
@@ -372,6 +385,9 @@ class H5(Data):
         return self.channel_imobj[ch_index][time, :, :]
 
 class Nparray(Data):
+    """Data class for digesting numpy arrays. The expected dimensions of the 
+    input array are CTXY"""
+
     def __init__(
         self,
         nparray,
