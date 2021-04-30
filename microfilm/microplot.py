@@ -313,7 +313,7 @@ def microshow(images, cmaps=None, flip_map=False, rescale_type='min_max', limits
         
     microim = Microimage(ax)  
     return microim
-
+    
 
 class Microimage:
     def __init__(self, ax):
@@ -346,6 +346,9 @@ class Microimage:
             
         """
         
+        if len(self.ax.get_images())==0:
+            raise Exception(f"You need to have an image in your plot to add a scale bar.")
+
         if (unit is None) or (scalebar_units is None) or (unit_per_pix is None):
             raise Exception(f"You need to provide a unit (unit), scale (unit_per_pix) and size of your scale bar (scalebar_units)")
 
