@@ -370,3 +370,60 @@ class H5(Data):
         time = self.valid_frames[frame]
         ch_index = self.channel_name.index(channel_name)
         return self.channel_imobj[ch_index][time, :, :]
+
+class Nparray(Data):
+    def __init__(
+        self,
+        nparray,
+        expdir='',
+        channel_name=None,
+        bad_frames=[],
+        step=1,
+        max_time=None,
+        data_type="np",
+    ):
+        super().__init__(
+            expdir,
+            channel_name,
+            bad_frames,
+            step,
+            max_time,
+            data_type,
+        )
+
+        self.nparray = nparray
+        self.initialize()
+
+    def initialize(self):
+
+        # if no channel names are provided, consider all folders as channel
+        if self.channel_name is None:
+            self.channel_name = [str(i) for i in range(self.nparray.shape[0])]
+            
+        self.channelfile = self.channel_name
+            
+        import xarray as xr
+
+        time = np.arange(self.nparray.shape[1])
+        rows = np.arange(self.nparray.shape[2])
+        cols = np.arange(self.nparray.shape[3])
+
+        self.ximage = xr.DataArray(self.nparray, coords=[self.channel_name, time, rows, cols], dims=["channel", "time", "rows", "channels"])
+
+        if self.max_time is None:
+            self.max_time = self.nparray.shape[1]
+
+        self.set_valid_frames()
+
+        image = self.load_frame(self.channel_name[0], 0)
+        self.dims = image.shape
+        self.shape = image.shape
+
+    def load_frame(self, channel_name, frame):
+        """Load index k of valid frames of channel index m in self.channelfile"""
+
+        self.check_channel_time_available(channel_name, frame)
+        ch_index = self.channel_name.index(channel_name)
+
+        time = self.valid_frames[frame]
+        return self.nparray[ch_index, time]

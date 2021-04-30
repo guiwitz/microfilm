@@ -1,1 +1,1 @@
-from .dataset import (TIFFSeries, MultipageTIFF, H5, ND2)
+from .dataset import (TIFFSeries, MultipageTIFF, H5, ND2, Nparray)
