@@ -449,3 +449,5 @@ class Microimage:
   
             label_text.set_y(y=0.01)
             label_text.set_x(x=1-text_width-0.01)
+
+        return label_text
