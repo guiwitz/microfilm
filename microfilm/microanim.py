@@ -39,6 +39,7 @@ class Microanim:
         self.time_slider.observe(self.show_segmentation, names="value")
 
         self.output = ipw.Output()
+        self.timestamps = None
 
         # initialize
         images = [self.data.load_frame(x, 0) for x in self.channels]
@@ -64,7 +65,8 @@ class Microanim:
                                     rescale_type=self.rescale_type, limits=self.limits, num_colors=self.num_colors)
 
         self.microim.ax.get_images()[0].set_data(converted)
-        self.timestamps.set_text(self.times[t])
+        if self.timestamps:
+            self.timestamps.set_text(self.times[t])
 
     def add_time_stamp(self, unit, unit_per_frame, location='upper left'):
         """
@@ -88,9 +90,6 @@ class Microanim:
         self.times = times.strftime('%H:%M:%S')
 
         self.timestamps = self.microim.add_label(self.times[0], location=location)
-
-
-
 
 
     
