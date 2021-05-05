@@ -229,8 +229,9 @@ def check_input(images):
     
 def microshow(images, cmaps=None, flip_map=False, rescale_type='min_max', limits=None, num_colors=256,
               scalebar=False, height_pixels=3, unit_per_pix=None, scalebar_units=None, unit=None,
-              scale_ypos=0.05, scale_color='white', scale_font_size=12,
-              scale_text_centered=False, ax=None, fig_scaling=3
+              scale_ypos=0.05, scale_color='white', scale_font_size=12, scale_text_centered=False,
+              ax=None, fig_scaling=3, label_text=None, label_location='upper left',
+              label_color='white', label_font_size=15
              ):
     """
     Plot image
@@ -274,6 +275,16 @@ def microshow(images, cmaps=None, flip_map=False, rescale_type='min_max', limits
         provide existing axis
     fig_scaling: int
         control figure scaling
+    label_text: str
+        image label
+    label_location: str or list
+        position of the label on the image, can be
+        'upper left', 'upper right', 'lower left', 'lower right' or
+        a list with xy coordinates [xpos, ypos] where 0 < xpos, ypos < 1
+    label_color: str
+        color of label
+    label_font_size: int
+        size of label
             
     Returns
     -------
@@ -299,7 +310,6 @@ def microshow(images, cmaps=None, flip_map=False, rescale_type='min_max', limits
     fig.set_size_inches(size_fact*width / height, size_fact, forward=False)
     ax = plt.Axes(fig, [0.0, 0.0, 1.0, 1.0])
     fig.add_axes(ax)'''
-    
     
     returnfig = False
     if ax is None:
@@ -329,7 +339,11 @@ def microshow(images, cmaps=None, flip_map=False, rescale_type='min_max', limits
         microim.add_scalebar(unit, scalebar_units, unit_per_pix, height_pixels=height_pixels,
                              scale_ypos=scale_ypos, scale_color=scale_color,
                              scale_font_size=scale_font_size, scale_text_centered=scale_text_centered)
-        
+
+    if label_text:
+        microim.add_label(label_text=label_text, label_location=label_location,
+        label_color=label_color, label_font_size=label_font_size)
+
     microim = Microimage(ax)  
     return microim
     
@@ -413,7 +427,7 @@ class Microimage:
             scale_text.set_x(text_start)
         self.ax.add_patch(scale_bar)
                 
-    def add_label(self, label_text, location='upper left', label_color='white',
+    def add_label(self, label_text, label_location='upper left', label_color='white',
                  label_font_size=15):
         """
         Add a figure label to an image.
@@ -422,7 +436,7 @@ class Microimage:
         ----------
         label_text: str
             image label
-        location: str or list
+        label_location: str or list
             position of the label on the image, can be
             'upper left', 'upper right', 'lower left', 'lower right' or
             a list with xy coordinates [xpos, ypos] where 0 < xpos, ypos < 1
@@ -444,28 +458,28 @@ class Microimage:
         text_height = label_text.get_window_extent(renderer=r).height / image_height
         text_width = label_text.get_window_extent(renderer=r).width / image_width
         
-        if isinstance(location, list):
-            if len(location) !=2:
+        if isinstance(label_location, list):
+            if len(label_location) !=2:
                 raise Exception(f"You need to provide a pair of xy positions as a list [xpos, ypos].")
-            label_text.set_y(y=location[0])
-            label_text.set_x(x=location[1])
+            label_text.set_y(y=label_location[0])
+            label_text.set_x(x=label_location[1])
                 
-        if location == 'upper left':
+        if label_location == 'upper left':
   
             label_text.set_y(y=1-text_height)
             label_text.set_x(x=0.01)
         
-        elif location == 'upper right':
+        elif label_location == 'upper right':
   
             label_text.set_y(y=1-text_height)
             label_text.set_x(x=1-text_width-0.01)
             
-        elif location == 'lower left':
+        elif label_location == 'lower left':
             
             label_text.set_y(y=0.01)
             label_text.set_x(x=0.01)
             
-        elif location == 'lower right':
+        elif label_location == 'lower right':
   
             label_text.set_y(y=0.01)
             label_text.set_x(x=1-text_width-0.01)
