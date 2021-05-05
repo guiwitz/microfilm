@@ -11,7 +11,7 @@ from .dataset import Nparray
 class Microanim:
     
     def __init__(self, data, channels=None, cmaps=None, flip_map=False, rescale_type='min_max',
-        limits=None, num_colors=256, scalebar=False, height_pixels=3, unit_per_pix=None, 
+        limits=None, num_colors=256, height_pixels=3, unit_per_pix=None, 
         scalebar_units=None, unit=None, scale_ypos=0.05, scale_color='white', scale_font_size=12,
         scale_text_centered=False, ax=None, fig_scaling=3):
 
@@ -39,8 +39,6 @@ class Microanim:
             [min, max] limits to use for rescaling
         num_colors: int
             number of steps in color scale
-        scalebar: bool
-            add scale bar or not
         height_pixels: int
             height of scale bar
         unit_per_pix: float
@@ -96,7 +94,7 @@ class Microanim:
         with self.output:
             self.microim = microshow(
                 images, cmaps=cmaps, flip_map=flip_map, rescale_type=rescale_type, limits=limits, num_colors=num_colors,
-                scalebar=scalebar, height_pixels=height_pixels, unit_per_pix=unit_per_pix,
+                height_pixels=height_pixels, unit_per_pix=unit_per_pix,
                 scalebar_units=scalebar_units, unit=unit, scale_ypos=scale_ypos,
                 scale_color=scale_color, scale_font_size=scale_font_size,
                 scale_text_centered=scale_text_centered, ax=ax, fig_scaling=fig_scaling)
@@ -122,7 +120,8 @@ class Microanim:
         if self.timestamps:
             self.timestamps.set_text(self.times[t])
 
-    def add_time_stamp(self, unit, unit_per_frame, location='upper left'):
+    def add_time_stamp(self, unit, unit_per_frame, location='upper left',
+        timestamp_size=15, timestamp_color='white'):
         """
         Add time-stamp to movie
         
@@ -136,6 +135,10 @@ class Microanim:
             position of the time-stamp on the image, can be
             'upper left', 'upper right', 'lower left', 'lower right' or
             a list with xy coordinates [xpos, ypos] where 0 < xpos, ypos < 1
+        timestamp_size: int
+            size of timestamp font
+        timestamp_color: str
+            color of label
 
         """
 
@@ -143,7 +146,8 @@ class Microanim:
         times = pd.date_range(start=0, periods=periods, freq=str(unit_per_frame)+unit)
         self.times = times.strftime('%H:%M:%S')
 
-        self.timestamps = self.microim.add_label(self.times[0], location=location)
+        self.timestamps = self.microim.add_label(self.times[0], label_location=location,
+        label_font_size=timestamp_size, label_color=timestamp_color)
 
     def save_movie(self, movie_name, fps=20, quality=5, format=None):
         """Save a movie
