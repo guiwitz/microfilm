@@ -29,10 +29,10 @@ from microfilm.microplot import microshow
 image = skimage.io.imread('../microfilm/dataset/tests/Sample/mitosis.tif')
 im_proj = image.max(axis=1)[0]
 
-anim = microshow(images=im_proj, fig_scaling=5,
-                 cmaps=['pure_blue','pure_red'], limits=[[0,20000],[0,18000]],
-                 unit='um', scalebar_units=20, unit_per_pix=0.5,scale_text_centered=True, scale_font_size=20,
-                 label_text='A', label_font_size=30)
+anim = microshow(
+    images=im_proj, fig_scaling=5,
+    cmaps=['pure_blue','pure_red'], limits=[[0,20000],[0,18000]],
+    unit='um', scalebar_units=20, unit_per_pix=0.5,scale_text_centered=True, scale_font_size=20, label_text='A', label_font_size=30)
 ```
 
 <img src="/illustrations/composite.png" alt="image" width="400">
@@ -48,8 +48,9 @@ from microfilm.microanim import Microanim
 im_proj = np.moveaxis(image.max(axis=1),0,1)
 
 # create animation
-microanim = Microanim(data=im_proj, cmaps=['pure_blue','pure_red'],
-                unit='um', scalebar_units=10, unit_per_pix=0.5, fig_scaling=5)
+microanim = Microanim(
+    data=im_proj, cmaps=['pure_blue','pure_red'],
+    unit='um', scalebar_units=10, unit_per_pix=0.5, fig_scaling=5)
 # add label
 microanim.microim.add_label('A', label_font_size=30)
 # add timestamp
