@@ -1,7 +1,9 @@
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/guiwitz/microfilm/master?urlpath=lab)
 # Microfilm
 
-This package is a collection of tools to handle and plot 2D time-lapse microscopy datasets based on the Matplotlib library. In particular it makes it possible to create in a single line of code plots of multi-channel datasets in *composite* mode, completed with standard annotations like a figure label and scale bar. In addition, one can animate such time-lapse plots interactively in Jupyter notebooks and to export the movies in standard formats (mp4, gif etc.) Following the model of packages like seaborn, ```microfilm``` offers tight integration with Matplotlib, giving full access to the underlying structures like axis and figures, allowing thus for the creation of arbitrarily complex plots.
+This package is a collection of tools to handle 2D time-lapse microscopy images. Its focus is primarily on plotting such datasets. In particular it makes it easy to represents multi-channel datasets in *composite* mode where the color maps of multiple channels are combined into a single image. It also allows to easily complete such figures with standard annotations like labels and scale bars. In addition, these figures can be turned into animations if time-lapse data are provided. Animations are either interactive when run in a Jupyter notebook, or save in standard movie formats (mp4, gif etc.)
+
+Following the model of packages like [seaborn](https://seaborn.pydata.org/index.html), ```microfilm``` offers tight integration with Matplotlib. Complete access is given to the structures like axis and figures underlying the ```microfilm``` objects, allowing thus for the creation of arbitrarily complex plots for users familiar with Matplotlib.
 
 ## Installation
 
@@ -61,3 +63,11 @@ microanim.save_movie('../illustrations/composite_movie.gif')
 ```
 
 <img src="/illustrations/composite_movie.gif" alt="movie" width="400">
+
+## Features
+
+In addition to plotting and animation, ```microfilm``` currently provides two other modules: ```dataset```to handle time-lapse data of various formats and ```splitmasks``` which provides tools to analyze the evolution of intensity over time in complex regions. More documentation on those modules comes soon.
+
+## Authors
+
+This package has been created by Guillaume Witz, Micorscopy Imaging Center and Science IT Support, Bern University.
