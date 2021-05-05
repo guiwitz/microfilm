@@ -34,7 +34,9 @@ anim = microshow(images=im_proj, fig_scaling=5,
                  unit='um', scalebar_units=20, unit_per_pix=0.5, scale_text_centered=True, scale_font_size=20,
                  label_text='A', label_font_size=30)
 ```
-![image](illustrations/composite.png)
+
+<img src="/illustrations/composite.png" alt="image" width="400">
+
 
 It is then straightforward to extend a simple image into an animation as both objects take the same options. Additionally, a time-stamp can be added to the animation. This code generates the movie visible below:
 
@@ -55,4 +57,5 @@ microanim.add_time_stamp('S', 5, location='lower left', timestamp_size=20)
 # save animation as gif
 microanim.save_movie('../illustrations/composite_movie.gif')
 ```
-![movie](illustrations/composite_movie.png)
+
+<img src="/illustrations/composite_movie.gif" alt="movie" width="400">
