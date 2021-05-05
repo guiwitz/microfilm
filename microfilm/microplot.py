@@ -227,8 +227,8 @@ def check_input(images):
     return images
             
     
-def microshow(images, cmaps=None, flip_map=False, rescale_type='min_max', limits=None, num_colors=256,
-              scalebar=False, height_pixels=3, unit_per_pix=None, scalebar_units=None, unit=None,
+def microshow(images, cmaps=None, flip_map=False, rescale_type=None, limits=None, num_colors=256,
+              height_pixels=3, unit_per_pix=None, scalebar_units=None, unit=None,
               scale_ypos=0.05, scale_color='white', scale_font_size=12, scale_text_centered=False,
               ax=None, fig_scaling=3, label_text=None, label_location='upper left',
               label_color='white', label_font_size=15
@@ -253,8 +253,6 @@ def microshow(images, cmaps=None, flip_map=False, rescale_type='min_max', limits
         [min, max] limits to use for rescaling
     num_colors: int
         number of steps in color scale
-    scalebar: bool
-        add scale bar or not
     height_pixels: int
         height of scale bar
     unit_per_pix: float
@@ -293,6 +291,22 @@ def microshow(images, cmaps=None, flip_map=False, rescale_type='min_max', limits
     """
     
     images = check_input(images)
+
+    # if limits provides use those otherwise default to min_max
+    if limits is not None:
+        if rescale_type is None:
+            rescale_type = 'limits'
+        elif rescale_type != 'limits':
+            warnings.warn(f"You gave explicit limits but are not using 'limits'\
+                for rescale_type. rescale_type is ignored and set to 'limits'")
+    else:
+        if rescale_type is None:
+            rescale_type = 'min_max'
+        elif rescale_type == 'limits':
+            rescale_type = 'min_max'
+            warnings.warn(f"You set rescale_type to 'limits'\
+                but did not provide such limits. Defaulting to 'min_max'")
+
     converted = multichannel_to_rgb(images, cmaps=cmaps, flip_map=flip_map,
                                     rescale_type=rescale_type, limits=limits, num_colors=num_colors)
     
@@ -313,7 +327,7 @@ def microshow(images, cmaps=None, flip_map=False, rescale_type='min_max', limits
     
     returnfig = False
     if ax is None:
-        
+        # trick https://stackoverflow.com/a/63187965
         fig = plt.figure(frameon=False)
         fig.set_size_inches(width_scaled, height_scaled, forward=False)
         ax = plt.Axes(fig, [0.0, 0.0, 1.0, 1.0])
@@ -331,8 +345,8 @@ def microshow(images, cmaps=None, flip_map=False, rescale_type='min_max', limits
     
     microim = Microimage(ax)
     
-    if scalebar:
-        
+    if unit is not None:
+    
         image_width = images[0].shape[1]
         pixelsize = scalebar_units / unit_per_pix
         scale_width = pixelsize / image_width
