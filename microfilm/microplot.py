@@ -230,7 +230,7 @@ def check_input(images):
 def microshow(images, cmaps=None, flip_map=False, rescale_type='min_max', limits=None, num_colors=256,
               scalebar=False, height_pixels=3, unit_per_pix=None, scalebar_units=None, unit=None,
               scale_ypos=0.05, scale_color='white', scale_font_size=12,
-              scale_text_centered=False, ax=None
+              scale_text_centered=False, ax=None, fig_scaling=3
              ):
     """
     Plot image
@@ -270,7 +270,10 @@ def microshow(images, cmaps=None, flip_map=False, rescale_type='min_max', limits
         size of text, set to None for no text
     scale_text_centered: bool
         center text above scale bar
-            
+    ax: Matplotlib axis
+        provide existing axis
+    fig_scaling: int
+        control figure scaling
             
     Returns
     -------
@@ -283,7 +286,13 @@ def microshow(images, cmaps=None, flip_map=False, rescale_type='min_max', limits
                                     rescale_type=rescale_type, limits=limits, num_colors=num_colors)
     
     height = images[0].shape[0]
-    width = images[1].shape[0]
+    width = images[0].shape[1]
+    if height > width:
+        height_scaled = fig_scaling
+        width_scaled = fig_scaling*width / height
+    else:
+        width_scaled = fig_scaling
+        height_scaled = fig_scaling*height / width
 
     '''size_fact = 5
     fig = plt.figure()
@@ -291,9 +300,19 @@ def microshow(images, cmaps=None, flip_map=False, rescale_type='min_max', limits
     ax = plt.Axes(fig, [0.0, 0.0, 1.0, 1.0])
     fig.add_axes(ax)'''
     
+    
     returnfig = False
     if ax is None:
-        fig, ax = plt.subplots()
+        
+        fig = plt.figure(frameon=False)
+        fig.set_size_inches(width_scaled, height_scaled, forward=False)
+        ax = plt.Axes(fig, [0.0, 0.0, 1.0, 1.0])
+        ax.set_axis_off()
+        fig.add_axes(ax)
+        #plt.subplots_adjust(top = 1, bottom = 0, right = 1, left = 0, hspace = 0, wspace = 0)
+        #plt.margins(0,0)
+
+        #fig, ax = plt.subplots()
         returnfig = True
     else:
         fig = ax.figure
@@ -347,7 +366,8 @@ class Microimage:
         """
         
         if len(self.ax.get_images())==0:
-            raise Exception(f"You need to have an image in your plot to add a scale bar.")
+            raise Exception(f"You need to have an image in your plot to add a scale bar.\
+                Create your Microimage object using the microshow() function.")
 
         if (unit is None) or (scalebar_units is None) or (unit_per_pix is None):
             raise Exception(f"You need to provide a unit (unit), scale (unit_per_pix) and size of your scale bar (scalebar_units)")
