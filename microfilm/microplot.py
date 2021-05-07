@@ -8,7 +8,7 @@ from matplotlib.colors import ListedColormap
 from matplotlib.patches import Rectangle
 
 
-def colormap_from_name(image, cmap_name, flip_map=False, rescale_type='min_max', limits=None, num_colors=256):
+def colorify_by_name(image, cmap_name, flip_map=False, rescale_type='min_max', limits=None, num_colors=256):
     """
     Return 2D image as 3D RGB stack colored with a given colormap.
     
@@ -51,7 +51,7 @@ def colormap_from_name(image, cmap_name, flip_map=False, rescale_type='min_max',
     
     return image_colored
     
-def colormap_from_colorhex(image, cmap_hex='#ff6600', flip_map=False, rescale_type='min_max',
+def colorify_by_hex(image, cmap_hex='#ff6600', flip_map=False, rescale_type='min_max',
                            limits=None, num_colors=256):
     """
     Return 2D image as 3D RGB stack colored with a hex color.
@@ -123,9 +123,12 @@ def rescale_image(image, rescale_type='min_max', limits=None):
         raise Exception(f"Image should be unsigned integer but yours is {image.dtype}")   
 
     max_of_dtype = np.iinfo(image.dtype).max
+    image = image.astype(np.float)
     
     if rescale_type == 'min_max':
-        image_rescaled = (image-image.min())/(image.max()-image.min())
+        min_val = np.min(image[image>0])
+        image_rescaled = (image-min_val)/(image.max()-min_val)
+        image_rescaled[image_rescaled<0] = 0
     elif rescale_type == 'dtype':
         image_rescaled = image / max_of_dtype
     elif rescale_type == 'zero_max':
@@ -133,11 +136,9 @@ def rescale_image(image, rescale_type='min_max', limits=None):
     elif rescale_type == 'limits':
         if limits is None:
             raise Exception(f"You need to provide explicit intensity limits of the form [min, max]")
-        image_rescaled = image.astype(np.float)
-        image_rescaled = image_rescaled - limits[0]
-        image_rescaled[image_rescaled<0]=0
-        image_rescaled[image_rescaled>limits[1]] = limits[1]
-        image_rescaled = image_rescaled / limits[1]
+        image_rescaled = (image - limits[0]) / (limits[1] - limits[0])
+        image_rescaled[image_rescaled<0] = 0
+        image_rescaled[image_rescaled>1] = 1
     
     return image_rescaled
 
@@ -197,7 +198,7 @@ def multichannel_to_rgb(images, cmaps=None, flip_map=False, rescale_type='min_ma
         limits = [limits for i in range(len(images))]
     
     converted = combine_image(
-        [colormap_from_name(
+        [colorify_by_name(
             im, cmap_name=cmaps[ind],
             flip_map=flip_map[ind],
             rescale_type=rescale_type[ind],
@@ -225,6 +226,26 @@ def check_input(images):
             raise Exception(f"Are should be 2D. You passed {len(images[0].shape)}D array.")
     
     return images
+
+def check_rescale_type(rescale_type, limits):
+    """Adjust rescale_type depending on its own value and that of limits"""
+
+    # if limits provides use those otherwise default to min_max
+    if limits is not None:
+        if rescale_type is None:
+            rescale_type = 'limits'
+        elif rescale_type != 'limits':
+            warnings.warn(f"You gave explicit limits but are not using 'limits'\
+                for rescale_type. rescale_type is ignored and set to 'limits'")
+    else:
+        if rescale_type is None:
+            rescale_type = 'min_max'
+        elif rescale_type == 'limits':
+            rescale_type = 'min_max'
+            warnings.warn(f"You set rescale_type to 'limits'\
+                but did not provide such limits. Defaulting to 'min_max'")
+
+    return rescale_type
             
     
 def microshow(images, cmaps=None, flip_map=False, rescale_type=None, limits=None, num_colors=256,
@@ -292,20 +313,7 @@ def microshow(images, cmaps=None, flip_map=False, rescale_type=None, limits=None
     
     images = check_input(images)
 
-    # if limits provides use those otherwise default to min_max
-    if limits is not None:
-        if rescale_type is None:
-            rescale_type = 'limits'
-        elif rescale_type != 'limits':
-            warnings.warn(f"You gave explicit limits but are not using 'limits'\
-                for rescale_type. rescale_type is ignored and set to 'limits'")
-    else:
-        if rescale_type is None:
-            rescale_type = 'min_max'
-        elif rescale_type == 'limits':
-            rescale_type = 'min_max'
-            warnings.warn(f"You set rescale_type to 'limits'\
-                but did not provide such limits. Defaulting to 'min_max'")
+    rescale_type = check_rescale_type(rescale_type, limits)
 
     converted = multichannel_to_rgb(images, cmaps=cmaps, flip_map=flip_map,
                                     rescale_type=rescale_type, limits=limits, num_colors=num_colors)
