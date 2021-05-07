@@ -28,14 +28,14 @@ import numpy as np
 import skimage.io
 from microfilm.microplot import microshow
 
-image = skimage.io.imread('../microfilm/dataset/tests/Sample/mitosis.tif')
-im_proj = image.max(axis=1)[0]
+image = skimage.io.imread('../demodata/coli_nucl_ori_ter.tif')
+image_t10 = image[:,10]
+microim = microshow(images=image_t10, fig_scaling=5,
+                 cmaps=['pure_blue','pure_red', 'pure_green'],
+                 unit='um', scalebar_units=2, unit_per_pix=0.065, scale_text_centered=True, scale_font_size=20,
+                 label_text='A', label_font_size=30)
 
-anim = microshow(
-    images=im_proj, fig_scaling=5,
-    cmaps=['pure_blue','pure_red'], limits=[[0,20000],[0,18000]],
-    unit='um', scalebar_units=20, unit_per_pix=0.5,scale_text_centered=True, 
-    scale_font_size=20, label_text='A', label_font_size=30)
+microim.ax.figure.savefig('../illustrations/composite.png', bbox_inches = 'tight', pad_inches = 0, dpi=600)
 ```
 
 <img src="/illustrations/composite.png" alt="image" width="400">
@@ -48,21 +48,15 @@ import numpy as np
 import skimage.io
 from microfilm.microanim import Microanim
 
-im_proj = np.moveaxis(image.max(axis=1),0,1)
-
-# create animation
-microanim = Microanim(
-    data=im_proj, cmaps=['pure_blue','pure_red'],
-    unit='um', scalebar_units=10, unit_per_pix=0.5, fig_scaling=5)
-# add label
+image = skimage.io.imread('../demodata/coli_nucl_ori_ter.tif')
+microanim = Microanim(data=image, cmaps=['pure_blue','pure_red', 'pure_green'], fig_scaling=5,
+                      unit='um', scalebar_units=2, unit_per_pix=0.065,
+                      scale_text_centered=True, scale_font_size=20,)
 microanim.microim.add_label('A', label_font_size=30)
-# add timestamp
-microanim.add_time_stamp('S', 5, location='lower left', timestamp_size=20)
-# save animation as gif
-microanim.save_movie('../illustrations/composite_movie.gif')
+microanim.add_time_stamp('T', 10, location='lower left', timestamp_size=20)
 ```
 
-<img src="/illustrations/composite_movie.gif" alt="movie" width="400">
+<img src="/illustrations/composite_movie.mp4" alt="movie" width="400">
 
 ## Features
 
