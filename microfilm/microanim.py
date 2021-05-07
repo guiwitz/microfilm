@@ -6,11 +6,11 @@ import matplotlib
 import pandas as pd
 import ipywidgets as ipw
 import imageio
-from .microplot import microshow, multichannel_to_rgb
+from .microplot import microshow, multichannel_to_rgb, check_rescale_type
 from .dataset import Nparray
 class Microanim:
     
-    def __init__(self, data, channels=None, cmaps=None, flip_map=False, rescale_type='min_max',
+    def __init__(self, data, channels=None, cmaps=None, flip_map=False, rescale_type=None,
         limits=None, num_colors=256, height_pixels=3, unit_per_pix=None, 
         scalebar_units=None, unit=None, scale_ypos=0.05, scale_color='white', scale_font_size=12,
         scale_text_centered=False, ax=None, fig_scaling=3):
@@ -77,10 +77,11 @@ class Microanim:
 
         self.cmaps=cmaps
         self.flip_map=flip_map
-        self.rescale_type=rescale_type
-        self.limits=limits
         self.num_colors=num_colors
 
+        self.rescale_type = check_rescale_type(rescale_type, limits)
+        self.limits=limits
+        
         self.time_slider = ipw.IntSlider(
             description="Time", min=0, max=self.data.K-1, value=0, continuous_update=True
         )
