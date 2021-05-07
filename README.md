@@ -38,7 +38,7 @@ microim = microshow(images=image_t10, fig_scaling=5,
 microim.ax.figure.savefig('../illustrations/composite.png', bbox_inches = 'tight', pad_inches = 0, dpi=600)
 ```
 
-<img src="/illustrations/composite.png" alt="image" width="400">
+<img src="/illustrations/composite.png" alt="image" width="300">
 
 
 It is then straightforward to extend a simple image into an animation as both objects take the same options. Additionally, a time-stamp can be added to the animation. This code generates the movie visible below:
