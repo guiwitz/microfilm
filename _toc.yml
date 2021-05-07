@@ -1,0 +1,7 @@
+- file: README
+- file: notebooks/create_plots
+- file: notebooks/create_animations
+
+- part: Reference
+  chapters:
+    - file: docs/source/microfilm
