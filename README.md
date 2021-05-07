@@ -1,5 +1,5 @@
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/guiwitz/microfilm/master?urlpath=lab)
-# Microfilm
+# microfilm
 
 This package is a collection of tools to handle 2D time-lapse microscopy images. Its focus is primarily on plotting such datasets. In particular it makes it easy to represents multi-channel datasets in *composite* mode where the color maps of multiple channels are combined into a single image. It also allows to easily complete such figures with standard annotations like labels and scale bars. In addition, these figures can be turned into animations if time-lapse data are provided. Animations are either interactive when run in a Jupyter notebook, or save in standard movie formats (mp4, gif etc.)
 
@@ -56,7 +56,7 @@ microanim.microim.add_label('A', label_font_size=30)
 microanim.add_time_stamp('T', 10, location='lower left', timestamp_size=20)
 ```
 
-<img src="/illustrations/composite_movie.mp4" alt="movie" width="400">
+https://user-images.githubusercontent.com/4622767/117501901-01276b00-af7f-11eb-9c50-fda62ebd41c1.mp4
 
 ## Features
 
