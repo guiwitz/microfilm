@@ -59,6 +59,7 @@ microanim.add_time_stamp('T', 10, location='lower left', timestamp_size=20)
 <video width="320" height="240" controls>
   <source src="https://user-images.githubusercontent.com/4622767/117501901-01276b00-af7f-11eb-9c50-fda62ebd41c1.mp4" type="video/mp4">
 </video>
+https://user-images.githubusercontent.com/4622767/117501901-01276b00-af7f-11eb-9c50-fda62ebd41c1.mp4
 
 ## Features
 
