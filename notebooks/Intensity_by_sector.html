@@ -1,0 +1,713 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Measure intensity vs. time in angular or concentric regions &#8212; microfilm</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      <h1 class="site-logo" id="site-title">microfilm</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   microfilm
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Documentation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="create_plots.html">
+   Producing figures with multi-channel images
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="create_animations.html">
+   Creating animations
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Reference
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../docs/source/microfilm.html">
+   microfilm package
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../docs/source/microfilm.dataset.html">
+     microfilm.dataset package
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/Intensity_by_sector.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/guiwitz/microfilm"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/guiwitz/microfilm/master?urlpath=tree/notebooks/Intensity_by_sector.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-paths-to-image-and-roi">
+   Define paths to image and roi
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import-data">
+   Import data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#measure-the-roi-center-of-mass">
+   Measure the roi center of mass
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#radial-sectors">
+   Radial sectors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#angular-sectors">
+   Angular sectors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#extracting-signals">
+   Extracting signals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plotting">
+   Plotting
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#export">
+   Export
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interactive-display">
+   Interactive display
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <section id="measure-intensity-vs-time-in-angular-or-concentric-regions">
+<h1>Measure intensity vs. time in angular or concentric regions<a class="headerlink" href="#measure-intensity-vs-time-in-angular-or-concentric-regions" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">skimage.io</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="n">cmap</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">ListedColormap</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+
+<span class="kn">import</span> <span class="nn">microfilm.splitmasks</span>
+<span class="kn">from</span> <span class="nn">microfilm.dataset</span> <span class="kn">import</span> <span class="n">MultipageTIFF</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="define-paths-to-image-and-roi">
+<h2>Define paths to image and roi<a class="headerlink" href="#define-paths-to-image-and-roi" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_path</span> <span class="o">=</span> <span class="s1">&#39;../microfilm/dataset/tests/test_folders/test_multipage_good/&#39;</span>
+<span class="n">roi_path</span> <span class="o">=</span> <span class="s1">&#39;../microfilm/dataset/tests/test_folders/test_multipage_good/roi.bmp&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="import-data">
+<h2>Import data<a class="headerlink" href="#import-data" title="Permalink to this headline">¶</a></h2>
+<p>Here we use a <code class="docutils literal notranslate"><span class="pre">MultipageTIFF</span></code> dataset as defined in the <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">microfilm.dataset</span></code> module. We can however exchange this for a tif series, h5 or Nikon ND2 file.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image</span> <span class="o">=</span> <span class="n">MultipageTIFF</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+<span class="n">roi</span> <span class="o">=</span> <span class="n">skimage</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">roi_path</span><span class="p">)</span>
+
+<span class="c1">## create roi</span>
+<span class="c1">#import skimage.morphology</span>
+<span class="c1">#roi = np.zeros(image.dims, dtype=np.uint8)</span>
+<span class="c1">#roi[70,90] = 1</span>
+<span class="c1">#roi = 255*skimage.morphology.binary_dilation(roi, skimage.morphology.disk(10)).astype(np.uint8)</span>
+<span class="c1">#skimage.io.imsave(&#39;../tests/test_folders/test_multipage_good/roi.bmp&#39;, roi)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image</span><span class="o">.</span><span class="n">channel_name</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;C2-MAX_mitosis.tif&#39;, &#39;C1-MAX_mitosis.tif&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="measure-the-roi-center-of-mass">
+<h2>Measure the roi center of mass<a class="headerlink" href="#measure-the-roi-center-of-mass" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cm</span> <span class="o">=</span> <span class="n">microfilm</span><span class="o">.</span><span class="n">splitmasks</span><span class="o">.</span><span class="n">get_roi_cm</span><span class="p">(</span><span class="n">roi_im</span><span class="o">=</span><span class="n">roi</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">im_np</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">load_frame</span><span class="p">(</span><span class="n">channel_name</span><span class="o">=</span><span class="n">image</span><span class="o">.</span><span class="n">channel_name</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">frame</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im_np</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">roi</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Reds&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">250</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im_np</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">roi</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Reds&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">200</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intensity_by_sector_10_0.png" src="../_images/Intensity_by_sector_10_0.png" />
+</div>
+</div>
+</section>
+<section id="radial-sectors">
+<h2>Radial sectors<a class="headerlink" href="#radial-sectors" title="Permalink to this headline">¶</a></h2>
+<p>Here we create a labelled image with sectors as concentric rings. We can define the width and the number of rings.</p>
+<p>We also create a colormap which optimally scales for the number of regions generated. The color map can be used both to display the labelled image and for regular plots (see below).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sector_width</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">num_sectors</span> <span class="o">=</span> <span class="mi">10</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">radius_labels</span> <span class="o">=</span> <span class="n">microfilm</span><span class="o">.</span><span class="n">splitmasks</span><span class="o">.</span><span class="n">create_concentric_mask</span><span class="p">(</span><span class="n">center</span><span class="o">=</span><span class="n">cm</span><span class="p">,</span> <span class="n">im_dims</span><span class="o">=</span><span class="n">image</span><span class="o">.</span><span class="n">dims</span><span class="p">,</span>
+                                                         <span class="n">sector_width</span><span class="o">=</span><span class="n">sector_width</span><span class="p">,</span> <span class="n">num_sectors</span><span class="o">=</span><span class="n">num_sectors</span><span class="p">)</span>
+<span class="n">colors_rad</span><span class="p">,</span> <span class="n">cmap_rad</span> <span class="o">=</span> <span class="n">microfilm</span><span class="o">.</span><span class="n">splitmasks</span><span class="o">.</span><span class="n">get_cmap_labels</span><span class="p">(</span><span class="n">radius_labels</span><span class="p">,</span> <span class="n">cmap_name</span><span class="o">=</span><span class="s1">&#39;cool&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">myplot</span> <span class="o">=</span> <span class="n">microfilm</span><span class="o">.</span><span class="n">splitmasks</span><span class="o">.</span><span class="n">plot_sectors</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">radius_labels</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap_rad</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intensity_by_sector_14_0.png" src="../_images/Intensity_by_sector_14_0.png" />
+</div>
+</div>
+<p>To save the figure, just use:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">myplot</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;mysectors.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="angular-sectors">
+<h2>Angular sectors<a class="headerlink" href="#angular-sectors" title="Permalink to this headline">¶</a></h2>
+<p>Here we create a labelled image with sectors as “pie” parts of a disk. We can define the angular size of the parts and the radius of the disk. Again, we create an optimal color map.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">angular_width</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">max_rad</span> <span class="o">=</span><span class="mi">50</span>
+<span class="n">sector_labels</span> <span class="o">=</span> <span class="n">microfilm</span><span class="o">.</span><span class="n">splitmasks</span><span class="o">.</span><span class="n">create_sector_mask</span><span class="p">(</span><span class="n">center</span><span class="o">=</span><span class="n">cm</span><span class="p">,</span> <span class="n">im_dims</span><span class="o">=</span><span class="n">image</span><span class="o">.</span><span class="n">dims</span><span class="p">,</span>
+                                                     <span class="n">angular_width</span><span class="o">=</span><span class="n">angular_width</span><span class="p">,</span> <span class="n">max_rad</span><span class="o">=</span><span class="n">max_rad</span><span class="p">)</span>
+<span class="n">colors_angle</span><span class="p">,</span> <span class="n">cmap_angle</span> <span class="o">=</span> <span class="n">microfilm</span><span class="o">.</span><span class="n">splitmasks</span><span class="o">.</span><span class="n">get_cmap_labels</span><span class="p">(</span><span class="n">sector_labels</span><span class="p">,</span> <span class="n">cmap_name</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To display the image and the sectors, you can use the <code class="docutils literal notranslate"><span class="pre">plot_sectors</span></code> function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microfilm</span><span class="o">.</span><span class="n">splitmasks</span><span class="o">.</span><span class="n">plot_sectors</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">sector_labels</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap_angle</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intensity_by_sector_20_0.png" src="../_images/Intensity_by_sector_20_0.png" />
+</div>
+</div>
+</section>
+<section id="extracting-signals">
+<h2>Extracting signals<a class="headerlink" href="#extracting-signals" title="Permalink to this headline">¶</a></h2>
+<p>With the labelled image of sectors and the time-lapse data, we can now extract the intensity in each sector across time and plot it. If multiple channels are available in the dataset, we can change it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">channel</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">channel_name</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">signal_radius</span> <span class="o">=</span> <span class="n">microfilm</span><span class="o">.</span><span class="n">splitmasks</span><span class="o">.</span><span class="n">measure_intensities</span><span class="p">(</span><span class="n">time_image</span><span class="o">=</span><span class="n">image</span><span class="o">.</span><span class="n">frame_generator</span><span class="p">(</span><span class="n">channel</span><span class="o">=</span><span class="n">channel</span><span class="p">),</span> 
+                                                      <span class="n">im_labels</span><span class="o">=</span><span class="n">radius_labels</span><span class="p">,</span><span class="n">max_time</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">signal_angle</span> <span class="o">=</span> <span class="n">microfilm</span><span class="o">.</span><span class="n">splitmasks</span><span class="o">.</span><span class="n">measure_intensities</span><span class="p">(</span><span class="n">time_image</span><span class="o">=</span><span class="n">image</span><span class="o">.</span><span class="n">frame_generator</span><span class="p">(</span><span class="n">channel</span><span class="o">=</span><span class="n">channel</span><span class="p">),</span> 
+                                                     <span class="n">im_labels</span><span class="o">=</span><span class="n">sector_labels</span><span class="p">,</span><span class="n">max_time</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To plot the signals you can use the <code class="docutils literal notranslate"><span class="pre">plot_signals</span></code> function. You can pass the colormap array produced by the <code class="docutils literal notranslate"><span class="pre">get_cmap_labels</span></code> function to color the curves with the same colors as the corresponding sectors.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">myplot</span> <span class="o">=</span> <span class="n">microfilm</span><span class="o">.</span><span class="n">splitmasks</span><span class="o">.</span><span class="n">plot_signals</span><span class="p">(</span><span class="n">signal_radius</span><span class="p">,</span> <span class="n">color_array</span><span class="o">=</span><span class="n">colors_rad</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intensity_by_sector_24_0.png" src="../_images/Intensity_by_sector_24_0.png" />
+</div>
+</div>
+</section>
+<section id="plotting">
+<h2>Plotting<a class="headerlink" href="#plotting" title="Permalink to this headline">¶</a></h2>
+<p>The plotting functions return simple Matplotlib axes, so one can combine them into more complex plots:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+
+<span class="n">microfilm</span><span class="o">.</span><span class="n">splitmasks</span><span class="o">.</span><span class="n">plot_signals</span><span class="p">(</span><span class="n">signal_radius</span><span class="p">,</span> <span class="n">color_array</span><span class="o">=</span><span class="n">colors_rad</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]);</span>
+<span class="n">microfilm</span><span class="o">.</span><span class="n">splitmasks</span><span class="o">.</span><span class="n">plot_signals</span><span class="p">(</span><span class="n">signal_angle</span><span class="p">,</span> <span class="n">color_array</span><span class="o">=</span><span class="n">colors_angle</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]);</span>
+
+<span class="n">microfilm</span><span class="o">.</span><span class="n">splitmasks</span><span class="o">.</span><span class="n">plot_sectors</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">radius_labels</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap_rad</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]);</span>
+<span class="n">microfilm</span><span class="o">.</span><span class="n">splitmasks</span><span class="o">.</span><span class="n">plot_sectors</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">sector_labels</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap_angle</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intensity_by_sector_26_0.png" src="../_images/Intensity_by_sector_26_0.png" />
+</div>
+</div>
+</section>
+<section id="export">
+<h2>Export<a class="headerlink" href="#export" title="Permalink to this headline">¶</a></h2>
+<p>To save a simple plot you can use the Matplotlib <code class="docutils literal notranslate"><span class="pre">savefig</span></code> function with all its options. This works both for the image plots and the signal plots:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">myplot</span> <span class="o">=</span> <span class="n">microfilm</span><span class="o">.</span><span class="n">splitmasks</span><span class="o">.</span><span class="n">plot_signals</span><span class="p">(</span><span class="n">signal_radius</span><span class="p">,</span> <span class="n">color_array</span><span class="o">=</span><span class="n">colors_rad</span><span class="p">);</span>
+
+<span class="n">myplot</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;myplot.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intensity_by_sector_28_0.png" src="../_images/Intensity_by_sector_28_0.png" />
+</div>
+</div>
+<p>To export the data as CSV file use the <code class="docutils literal notranslate"><span class="pre">save_signal</span></code> function. You can export in two different format, ‘long’ or ‘wide’. In long format you obtain a table with three columns - time, sector, intensity - while in ‘wide’ format the rows correspond to time and the columns to sectors.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microfilm</span><span class="o">.</span><span class="n">splitmasks</span><span class="o">.</span><span class="n">save_signal</span><span class="p">(</span><span class="n">signal</span><span class="o">=</span><span class="n">signal_radius</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;signal_radius_long.csv&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;long&#39;</span><span class="p">)</span>
+
+<span class="n">microfilm</span><span class="o">.</span><span class="n">splitmasks</span><span class="o">.</span><span class="n">save_signal</span><span class="p">(</span><span class="n">signal</span><span class="o">=</span><span class="n">signal_radius</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;signal_radius_wide.csv&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;wide&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To re-import the data you can just use the standard Pandas reader:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;signal_radius_long.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>time</th>
+      <th>sector</th>
+      <th>intensity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>0</td>
+      <td>7348.579710</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>0</td>
+      <td>7095.826087</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>0</td>
+      <td>5644.507246</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>0</td>
+      <td>5671.275362</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>0</td>
+      <td>6026.623188</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>505</th>
+      <td>46</td>
+      <td>9</td>
+      <td>3624.617209</td>
+    </tr>
+    <tr>
+      <th>506</th>
+      <td>47</td>
+      <td>9</td>
+      <td>3583.294715</td>
+    </tr>
+    <tr>
+      <th>507</th>
+      <td>48</td>
+      <td>9</td>
+      <td>3653.734417</td>
+    </tr>
+    <tr>
+      <th>508</th>
+      <td>49</td>
+      <td>9</td>
+      <td>3763.945799</td>
+    </tr>
+    <tr>
+      <th>509</th>
+      <td>50</td>
+      <td>9</td>
+      <td>3657.179539</td>
+    </tr>
+  </tbody>
+</table>
+<p>510 rows × 3 columns</p>
+</div></div></div>
+</div>
+</section>
+<section id="interactive-display">
+<h2>Interactive display<a class="headerlink" href="#interactive-display" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">ipw</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> widget
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">microfilm</span><span class="o">.</span><span class="n">splitmasks</span><span class="o">.</span><span class="n">plot_sectors</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">sector_labels</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap_angle</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">microfilm</span><span class="o">.</span><span class="n">splitmasks</span><span class="o">.</span><span class="n">plot_signals</span><span class="p">(</span><span class="n">signal_angle</span><span class="p">,</span> <span class="n">color_array</span><span class="o">=</span><span class="n">colors_angle</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>  
+<span class="n">time_line</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="n">signal_angle</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">signal_angle</span><span class="o">.</span><span class="n">max</span><span class="p">()],</span><span class="s1">&#39;-r&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">plot_sectors_time</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_images</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">load_frame</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">channel_name</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">t</span><span class="p">))</span> 
+    <span class="c1">#im.set_array(image.load_frame(image.channel_name[0],t))</span>
+    <span class="n">time_line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xdata</span><span class="p">([</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="p">])</span>
+    
+<span class="n">ipw</span><span class="o">.</span><span class="n">interactive</span><span class="p">(</span><span class="n">plot_sectors_time</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">ipw</span><span class="o">.</span><span class="n">IntSlider</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">image</span><span class="o">.</span><span class="n">max_time</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "5571721d04c2429ea7ca60d3fc62c851", "version_major": 2, "version_minor": 0}
+</script><script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "1d47d22237ec475993df607a086993fc", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By The Jupyter Book community<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
