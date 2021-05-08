@@ -54,12 +54,10 @@ microanim = Microanim(data=image, cmaps=['pure_blue','pure_red', 'pure_green'], 
                       scale_text_centered=True, scale_font_size=20,)
 microanim.microim.add_label('A', label_font_size=30)
 microanim.add_time_stamp('T', 10, location='lower left', timestamp_size=20)
+microanim.save_movie('../illustrations/composite_movie.gif')
 ```
 
-<video width="320" height="240" controls>
-  <source src="https://user-images.githubusercontent.com/4622767/117501901-01276b00-af7f-11eb-9c50-fda62ebd41c1.mp4" type="video/mp4">
-</video>
-https://user-images.githubusercontent.com/4622767/117501901-01276b00-af7f-11eb-9c50-fda62ebd41c1.mp4
+<img src="https://github.com/guiwitz/microfilm/raw/master/illustrations/composite_movie.gif" alt="image" width="300">
 
 ## Features
 
