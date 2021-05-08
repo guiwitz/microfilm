@@ -277,7 +277,7 @@
 <span class="n">microim</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;../illustrations/composite.png&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span> <span class="o">=</span> <span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
 </pre></div>
 </div>
-<img src="/illustrations/composite.png" alt="image" width="300">
+<img src="https://github.com/guiwitz/microfilm/raw/master/illustrations/composite.png" alt="image" width="300">
 <p>It is then straightforward to extend a simple image into an animation as both objects take the same options. Additionally, a time-stamp can be added to the animation. This code generates the movie visible below:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">skimage.io</span>
@@ -289,9 +289,10 @@
                       <span class="n">scale_text_centered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scale_font_size</span><span class="o">=</span><span class="mi">20</span><span class="p">,)</span>
 <span class="n">microanim</span><span class="o">.</span><span class="n">microim</span><span class="o">.</span><span class="n">add_label</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">label_font_size</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
 <span class="n">microanim</span><span class="o">.</span><span class="n">add_time_stamp</span><span class="p">(</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s1">&#39;lower left&#39;</span><span class="p">,</span> <span class="n">timestamp_size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">microanim</span><span class="o">.</span><span class="n">save_movie</span><span class="p">(</span><span class="s1">&#39;../illustrations/composite_movie.gif&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><a class="reference external" href="https://user-images.githubusercontent.com/4622767/117501901-01276b00-af7f-11eb-9c50-fda62ebd41c1.mp4">https://user-images.githubusercontent.com/4622767/117501901-01276b00-af7f-11eb-9c50-fda62ebd41c1.mp4</a></p>
+<img src="https://github.com/guiwitz/microfilm/raw/master/illustrations/composite_movie.gif" alt="image" width="300">
 </section>
 <section id="features">
 <h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>

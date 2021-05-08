@@ -38,7 +38,7 @@ microim = microshow(images=image_t10, fig_scaling=5,
 microim.ax.figure.savefig('../illustrations/composite.png', bbox_inches = 'tight', pad_inches = 0, dpi=600)
 ```
 
-<img src="/illustrations/composite.png" alt="image" width="300">
+<img src="https://github.com/guiwitz/microfilm/raw/master/illustrations/composite.png" alt="image" width="300">
 
 
 It is then straightforward to extend a simple image into an animation as both objects take the same options. Additionally, a time-stamp can be added to the animation. This code generates the movie visible below:
@@ -54,9 +54,10 @@ microanim = Microanim(data=image, cmaps=['pure_blue','pure_red', 'pure_green'], 
                       scale_text_centered=True, scale_font_size=20,)
 microanim.microim.add_label('A', label_font_size=30)
 microanim.add_time_stamp('T', 10, location='lower left', timestamp_size=20)
+microanim.save_movie('../illustrations/composite_movie.gif')
 ```
 
-https://user-images.githubusercontent.com/4622767/117501901-01276b00-af7f-11eb-9c50-fda62ebd41c1.mp4
+<img src="https://github.com/guiwitz/microfilm/raw/master/illustrations/composite_movie.gif" alt="image" width="300">
 
 ## Features
 
