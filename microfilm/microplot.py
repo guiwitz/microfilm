@@ -47,6 +47,10 @@ def colorify_by_name(image, cmap_name, flip_map=False, rescale_type='min_max', l
         cmap = ListedColormap(np.c_[np.zeros(num_colors), np.linspace(0,1,num_colors), np.zeros(num_colors)])
     elif cmap_name == 'pure_blue':
         cmap = ListedColormap(np.c_[np.zeros(num_colors), np.zeros(num_colors), np.linspace(0,1,num_colors)])
+    elif cmap_name == 'pure_cyan':
+        cmap = ListedColormap(np.c_[np.zeros(num_colors), np.linspace(0,1,num_colors), np.linspace(0,1,num_colors)])
+    elif cmap_name == 'pure_magenta':
+        cmap = ListedColormap(np.c_[np.linspace(0,1,num_colors), np.zeros(num_colors), np.linspace(0,1,num_colors)])
     elif cmap_name == 'segmentation':
         cmap = random_cmap(num_colors=num_colors)
     else:
