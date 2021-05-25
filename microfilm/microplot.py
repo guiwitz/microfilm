@@ -248,9 +248,8 @@ def multichannel_to_rgb(images, cmaps=None, flip_map=False, rescale_type='min_ma
             flip_map=flip_map[ind],
             rescale_type=rescale_type[ind],
             limits=limits[ind],
-            num_colors=num_colors,
-            proj_type=proj_type) for ind, im in enumerate(images)
-        ])
+            num_colors=num_colors) for ind, im in enumerate(images)
+        ], proj_type=proj_type)
     
     return converted
 
