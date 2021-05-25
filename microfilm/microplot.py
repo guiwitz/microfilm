@@ -191,7 +191,7 @@ def combine_image(images, proj_type='max'):
     return im_combined
 
 def multichannel_to_rgb(images, cmaps=None, flip_map=False, rescale_type='min_max',
-                        limits=None, num_colors=256):
+                        limits=None, num_colors=256, proj_type='max'):
     """
     Convert a list of images to a single RGB image. Options can be passed
     as lists, one per channel, or as single element in which case the same value is used
@@ -214,6 +214,10 @@ def multichannel_to_rgb(images, cmaps=None, flip_map=False, rescale_type='min_ma
         [min, max] limits to use for rescaling
     num_colors: int
         number of steps in color scale
+    proj_type: str
+        projection type of color combination
+        max: maximum
+        sum: sum projection, restricted to dtype range
         
     Returns
     -------
@@ -244,7 +248,8 @@ def multichannel_to_rgb(images, cmaps=None, flip_map=False, rescale_type='min_ma
             flip_map=flip_map[ind],
             rescale_type=rescale_type[ind],
             limits=limits[ind],
-            num_colors=num_colors) for ind, im in enumerate(images)
+            num_colors=num_colors,
+            proj_type=proj_type) for ind, im in enumerate(images)
         ])
     
     return converted
@@ -290,7 +295,7 @@ def check_rescale_type(rescale_type, limits):
             
     
 def microshow(images, cmaps=None, flip_map=False, rescale_type=None, limits=None, num_colors=256,
-              height_pixels=3, unit_per_pix=None, scalebar_units=None, unit=None,
+              proj_type='max', height_pixels=3, unit_per_pix=None, scalebar_units=None, unit=None,
               scale_ypos=0.05, scale_color='white', scale_font_size=12, scale_text_centered=False,
               ax=None, fig_scaling=3, label_text=None, label_location='upper left',
               label_color='white', label_font_size=15
@@ -315,6 +320,10 @@ def microshow(images, cmaps=None, flip_map=False, rescale_type=None, limits=None
         [min, max] limits to use for rescaling
     num_colors: int
         number of steps in color scale
+    proj_type: str
+        projection type of color combination
+        max: maximum
+        sum: sum projection, restricted to dtype range
     height_pixels: int
         height of scale bar
     unit_per_pix: float
@@ -357,7 +366,8 @@ def microshow(images, cmaps=None, flip_map=False, rescale_type=None, limits=None
     rescale_type = check_rescale_type(rescale_type, limits)
 
     converted = multichannel_to_rgb(images, cmaps=cmaps, flip_map=flip_map,
-                                    rescale_type=rescale_type, limits=limits, num_colors=num_colors)
+                                    rescale_type=rescale_type, limits=limits, num_colors=num_colors,
+                                    proj_type=proj_type)
     
     height = images[0].shape[0]
     width = images[0].shape[1]
