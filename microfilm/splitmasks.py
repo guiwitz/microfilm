@@ -71,7 +71,7 @@ def create_concentric_mask(center, im_dims, sector_width=10, num_sectors=10):
     
     return concentric_labels
 
-def create_sector_mask(center, im_dims, angular_width=20, max_rad=50, radius=None):
+def create_sector_mask(center, im_dims, angular_width=20, max_rad=50, ring_width=None):
     """
     Create a labelled mask of a disk or ring split in angular sectors. If radius is
     provided, the mask is a ring otherwise a disk.
@@ -86,7 +86,7 @@ def create_sector_mask(center, im_dims, angular_width=20, max_rad=50, radius=Non
         size of angular sectors in degrees
     max_rad: float
         disk radius
-    radius: int
+    ring_width: int
         ring width
 
 
@@ -102,10 +102,10 @@ def create_sector_mask(center, im_dims, angular_width=20, max_rad=50, radius=Non
     angles %= (2*np.pi)
     rad_mask = np.sqrt((xx - center[0])**2 + (yy - center[1])**2)
     
-    if radius is None:
+    if ring_width is None:
         rad_mask = rad_mask < max_rad
     else:
-        rad_mask = (rad_mask < max_rad) & (rad_mask > max_rad-radius)
+        rad_mask = (rad_mask < max_rad) & (rad_mask > max_rad-ring_width)
 
     sector_masks = [rad_mask*(ind+1)*((angles >= np.deg2rad(i)) *(angles < np.deg2rad(i+angular_width)))
                     for ind, i in enumerate(np.arange(0,360-angular_width+1,angular_width))]
