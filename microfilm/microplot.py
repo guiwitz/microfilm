@@ -29,21 +29,29 @@ def colorify_by_name(image, cmap_name, flip_map=False, rescale_type='min_max', l
         [min, max] limits to use for rescaling
     num_colors: int
         number of steps in color scale
+
+    Returns
+    -------
+    image_colored: array
+        3D RGB float array
+
     """
     
     image = rescale_image(image, rescale_type=rescale_type, limits=limits)
     
-    try:
+    if cmap_name in plt.colormaps():
         cmap = plt.get_cmap(cmap_name, num_colors)
-    except ValueError:
-        if cmap_name == 'pure_red':
-            cmap = ListedColormap(np.c_[np.linspace(0,1,num_colors), np.zeros(num_colors), np.zeros(num_colors)])
-        if cmap_name == 'pure_green':
-            cmap = ListedColormap(np.c_[np.zeros(num_colors), np.linspace(0,1,num_colors), np.zeros(num_colors)])
-        if cmap_name == 'pure_blue':
-            cmap = ListedColormap(np.c_[np.zeros(num_colors), np.zeros(num_colors), np.linspace(0,1,num_colors)])
-        if cmap_name == 'segmentation':
-            cmap = random_cmap(num_colors=num_colors)
+    elif cmap_name == 'pure_red':
+        cmap = ListedColormap(np.c_[np.linspace(0,1,num_colors), np.zeros(num_colors), np.zeros(num_colors)])
+    elif cmap_name == 'pure_green':
+        cmap = ListedColormap(np.c_[np.zeros(num_colors), np.linspace(0,1,num_colors), np.zeros(num_colors)])
+    elif cmap_name == 'pure_blue':
+        cmap = ListedColormap(np.c_[np.zeros(num_colors), np.zeros(num_colors), np.linspace(0,1,num_colors)])
+    elif cmap_name == 'segmentation':
+        cmap = random_cmap(num_colors=num_colors)
+    else:
+        raise Exception(f"Your colormap {cmap_name} doesn't exist either in Matplotlib or microfilm.")
+            
     if flip_map:
             cmap = cmap.reversed()
             
@@ -73,6 +81,12 @@ def colorify_by_hex(image, cmap_hex='#ff6600', flip_map=False, rescale_type='min
         [min, max] limits to use for rescaling
     num_colors: int
         number of steps in color scale
+    
+    Returns
+    -------
+    image_colored: array
+        3D RGB float array
+
     """
     
     image = rescale_image(image, rescale_type=rescale_type, limits=limits)
@@ -94,6 +108,7 @@ def random_cmap(alpha=0.5, num_colors=256):
     colmat[:,-1] = alpha
     colmat[0,-1] = 0
     cmap = matplotlib.colors.ListedColormap(colmat)
+
     return cmap
 
 
@@ -142,10 +157,32 @@ def rescale_image(image, rescale_type='min_max', limits=None):
     
     return image_rescaled
 
-def combine_image(images):
-    """Combine a list of 3D RGB arrays by max projection"""
+def combine_image(images, proj_type='max'):
+    """
+    Combine a list of 3D RGB arrays by max projection
     
-    im_combined = np.max(np.stack(images,axis = 3),axis = 3)
+    Parameters
+    ----------
+    images: list of arrays
+        list of 2d arrays
+    proj_type: str
+        projection type of color combination
+        max: maximum
+        sum: sum projection, restricted to dtype range
+
+    Returns
+    -------
+    im_combined: array
+        3D RGB array
+    """
+    
+    if proj_type == 'max':
+        im_combined = np.max(np.stack(images,axis = 3),axis = 3)
+    elif proj_type == 'sum':
+        im_combined = np.sum(np.stack(images,axis = 3),axis = 3)
+        im_combined[im_combined > 1] = 1
+    else:
+        raise Exception(f"Your projection type {proj_type} is not implemented.")
     
     return im_combined
 
