@@ -497,7 +497,8 @@ class Microimage:
             self.label_color = {}
             self.label_font_size = {}
 
-    def update(self):
+    def update(self, ax=None):
+        self.ax = ax
         microshow(microim=self)
 
     
@@ -584,7 +585,7 @@ class Microimage:
             scale_text.set_x(text_start)
         self.ax.add_patch(scale_bar)
                 
-    def add_label(self, label_text, label_name, label_location='upper left', label_color='white',
+    def add_label(self, label_text, label_name='default', label_location='upper left', label_color='white',
                  label_font_size=15):
         """
         Add a figure label to an image.
@@ -646,19 +647,19 @@ class Microimage:
             label_text.set_y(y=0.01)
             label_text.set_x(x=1-text_width-0.01)
 
-        return label_text
+        #return label_text
 
 class Micropanel:
     
-    def __init__(self, rows, cols):
+    def __init__(self, rows, cols, **fig_kwargs):
 
         self.microplots = []
-        self.fig, self.ax = plt.subplots(rows, cols)
+        self.fig, self.ax = plt.subplots(rows, cols, **fig_kwargs)
 
     def add_element(self, pos, microim):
         if isinstance(pos, list):
-            microim.ax = self.ax[pos[0], pos[1]]
+            microim.update(self.ax[pos[0], pos[1]])
         else:
-            microim.ax = self.ax[pos]
-        microim.show()
+            microim.update(self.ax[pos])
+        
         self.microplots.append(microim)
