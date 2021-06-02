@@ -293,11 +293,11 @@ def check_rescale_type(rescale_type, limits):
     return rescale_type
             
     
-def microshow(images, cmaps=None, flip_map=False, rescale_type=None, limits=None, num_colors=256,
+def microshow(images=None, cmaps=None, flip_map=False, rescale_type=None, limits=None, num_colors=256,
               proj_type='max', height_pixels=3, unit_per_pix=None, scalebar_units=None, unit=None,
               scale_ypos=0.05, scale_color='white', scale_font_size=12, scale_text_centered=False,
               ax=None, fig_scaling=3, label_text=None, label_location='upper left',
-              label_color='white', label_font_size=15
+              label_color='white', label_font_size=15, microim=None
              ):
     """
     Plot image
@@ -359,71 +359,147 @@ def microshow(images, cmaps=None, flip_map=False, rescale_type=None, limits=None
     Microimage object
     
     """
-    
-    images = check_input(images)
 
-    rescale_type = check_rescale_type(rescale_type, limits)
-
-    converted = multichannel_to_rgb(images, cmaps=cmaps, flip_map=flip_map,
-                                    rescale_type=rescale_type, limits=limits, num_colors=num_colors,
-                                    proj_type=proj_type)
+    if microim is None:
+        if images is None:
+            raise Exception(f"You need to provide at least images")
+ 
+        microim = Microimage(images=images, cmaps=cmaps, flip_map=flip_map, rescale_type=rescale_type,
+        limits=limits, num_colors=num_colors, proj_type=proj_type, height_pixels=height_pixels, 
+        unit_per_pix=unit_per_pix, scalebar_units=scalebar_units, unit=unit,
+        scale_ypos=scale_ypos, scale_color=scale_color, scale_font_size=scale_font_size,
+        scale_text_centered=scale_text_centered, ax=ax, fig_scaling=fig_scaling, label_text=label_text,
+        label_location=label_location, label_color=label_color, label_font_size=label_font_size
+        )
     
-    height = images[0].shape[0]
-    width = images[0].shape[1]
+    microim.images = check_input(microim.images)
+
+    microim.rescale_type = check_rescale_type(microim.rescale_type, microim.limits)
+
+    converted = multichannel_to_rgb(microim.images, cmaps=microim.cmaps, flip_map=microim.flip_map,
+                                    rescale_type=microim.rescale_type, limits=microim.limits,
+                                    num_colors=microim.num_colors, proj_type=microim.proj_type)
+    
+    height = microim.images[0].shape[0]
+    width = microim.images[0].shape[1]
     if height > width:
-        height_scaled = fig_scaling
-        width_scaled = fig_scaling*width / height
+        height_scaled = microim.fig_scaling
+        width_scaled = microim.fig_scaling*width / height
     else:
-        width_scaled = fig_scaling
-        height_scaled = fig_scaling*height / width
-
-    '''size_fact = 5
-    fig = plt.figure()
-    fig.set_size_inches(size_fact*width / height, size_fact, forward=False)
-    ax = plt.Axes(fig, [0.0, 0.0, 1.0, 1.0])
-    fig.add_axes(ax)'''
+        width_scaled = microim.fig_scaling
+        height_scaled = microim.fig_scaling*height / width
     
-    returnfig = False
-    if ax is None:
+    if microim.ax is None:
         # trick https://stackoverflow.com/a/63187965
-        fig = plt.figure(frameon=False)
-        fig.set_size_inches(width_scaled, height_scaled, forward=False)
-        ax = plt.Axes(fig, [0.0, 0.0, 1.0, 1.0])
-        ax.set_axis_off()
-        fig.add_axes(ax)
-        #plt.subplots_adjust(top = 1, bottom = 0, right = 1, left = 0, hspace = 0, wspace = 0)
-        #plt.margins(0,0)
-
-        #fig, ax = plt.subplots()
-        returnfig = True
+        microim.fig = plt.figure(frameon=False)
+        microim.fig.set_size_inches(width_scaled, height_scaled, forward=False)
+        microim.ax = plt.Axes(microim.fig, [0.0, 0.0, 1.0, 1.0])
+        microim.ax.set_axis_off()
+        microim.fig.add_axes(microim.ax)
     else:
-        fig = ax.figure
-    ax.imshow(converted, interpolation='nearest')
-    ax.set_axis_off()
+        microim.fig = microim.ax.figure
+    microim.ax.imshow(converted, interpolation='nearest')
+    microim.ax.set_axis_off()
     
-    microim = Microimage(ax)
+    if microim.unit is not None:
     
-    if unit is not None:
-    
-        image_width = images[0].shape[1]
-        pixelsize = scalebar_units / unit_per_pix
+        image_width = microim.images[0].shape[1]
+        pixelsize = microim.scalebar_units / microim.unit_per_pix
         scale_width = pixelsize / image_width
-        microim.add_scalebar(unit, scalebar_units, unit_per_pix, height_pixels=height_pixels,
-                             scale_ypos=scale_ypos, scale_color=scale_color,
-                             scale_font_size=scale_font_size, scale_text_centered=scale_text_centered)
+        microim.add_scalebar(microim.unit, microim.scalebar_units, microim.unit_per_pix,
+                             height_pixels=microim.height_pixels, scale_ypos=microim.scale_ypos,
+                             scale_color=microim.scale_color, scale_font_size=microim.scale_font_size,
+                             scale_text_centered=microim.scale_text_centered)
+    if len(microim.label_text) > 0:
+        for key in microim.label_text:
+            if key != 'time_stamp':
+                microim.add_label(label_text=microim.label_text[key],
+                label_name=key, label_location=microim.label_location[key],
+                label_color=microim.label_color[key], label_font_size=microim.label_font_size[key])
 
-    if label_text:
-        microim.add_label(label_text=label_text, label_location=label_location,
-        label_color=label_color, label_font_size=label_font_size)
-
-    microim = Microimage(ax)  
     return microim
     
 
 class Microimage:
-    def __init__(self, ax):
+    def __init__(self, images, cmaps=None, flip_map=False, rescale_type=None, limits=None, num_colors=256,
+              proj_type='max', height_pixels=3, unit_per_pix=None, scalebar_units=None, unit=None,
+              scale_ypos=0.05, scale_color='white', scale_font_size=12, scale_text_centered=False,
+              ax=None, fig_scaling=3, label_text=None, label_location='upper left',
+              label_color='white', label_font_size=15
+             ):
+        """
+        Plot image
         
-        self.ax = ax        
+        Parameters
+        ----------
+        images: list or array
+            list of 2d arrays or DxMxN array D<4
+        cmaps: list of str
+            colormap names
+        flip_map: bool or list of bool
+            invert colormap or not
+        rescale_type: str or list of str
+            'min_max': between extrema values of image
+            'dtype': full range of image dtype
+            'zero_max': between zero and image max
+            'limits': between limits given by parameter limits
+        limits: list or list of lists
+            [min, max] limits to use for rescaling
+        num_colors: int
+            number of steps in color scale
+        proj_type: str
+            projection type of color combination
+            max: maximum
+            sum: sum projection, restricted to dtype range
+        height_pixels: int
+            height of scale bar
+        unit_per_pix: float
+            pixel scaling (e.g. 25um per pixel)
+        scalebar_units: float
+            size of scale bar in true units
+        unit: str
+            name of the scale unit
+        scale_y_pos: float
+            y position of scale bar (0-1)
+        scale_color: str
+            color of scale bar
+        scale_font_size: int
+            size of text, set to None for no text
+        scale_text_centered: bool
+            center text above scale bar
+        ax: Matplotlib axis
+            provide existing axis
+        fig_scaling: int
+            control figure scaling
+        label_text: str
+            image label
+        label_location: str or list
+            position of the label on the image, can be
+            'upper left', 'upper right', 'lower left', 'lower right' or
+            a list with xy coordinates [xpos, ypos] where 0 < xpos, ypos < 1
+        label_color: str
+            color of label
+        label_font_size: int
+            size of label
+        """
+        
+        self.__dict__.update(locals())
+        del self.self
+
+        if self.label_text is not None:
+            self.label_text = {'label': label_text}
+            self.label_location = {'label': label_location}
+            self.label_color = {'label': label_color}
+            self.label_font_size = {'label': label_font_size}
+        else:
+            self.label_text = {}
+            self.label_location = {}
+            self.label_color = {}
+            self.label_font_size = {}
+
+    def update(self):
+        microshow(microim=self)
+
     
     def add_scalebar(self, unit, scalebar_units, unit_per_pix, height_pixels=3, scale_ypos=0.05,
         scale_color='white', scale_font_size=12, scale_text_centered=False):
@@ -450,6 +526,15 @@ class Microimage:
             center text above scale bar
             
         """
+
+        self.unit = unit
+        self.scalebar_units = scalebar_units
+        self.unit_per_pix = unit_per_pix
+        self.height_pixels = height_pixels
+        self.scale_ypos = scale_ypos
+        self.scale_color = scale_color
+        self.scale_font_size = scale_font_size
+        self.scale_text_centered = scale_text_centered
         
         if len(self.ax.get_images())==0:
             raise Exception(f"You need to have an image in your plot to add a scale bar.\
@@ -499,7 +584,7 @@ class Microimage:
             scale_text.set_x(text_start)
         self.ax.add_patch(scale_bar)
                 
-    def add_label(self, label_text, label_location='upper left', label_color='white',
+    def add_label(self, label_text, label_name, label_location='upper left', label_color='white',
                  label_font_size=15):
         """
         Add a figure label to an image.
@@ -519,6 +604,11 @@ class Microimage:
 
         """
         
+        self.label_text[label_name] = label_text
+        self.label_location[label_name] = label_location
+        self.label_color[label_name] = label_color
+        self.label_font_size[label_name] = label_font_size
+
         r = self.ax.figure.canvas.get_renderer()
         label_text = self.ax.text(x=0.05, y=0.05, s=label_text,
                          transform=self.ax.transAxes, fontdict={'color':label_color, 'size':label_font_size})
@@ -557,3 +647,18 @@ class Microimage:
             label_text.set_x(x=1-text_width-0.01)
 
         return label_text
+
+class Micropanel:
+    
+    def __init__(self, rows, cols):
+
+        self.microplots = []
+        self.fig, self.ax = plt.subplots(rows, cols)
+
+    def add_element(self, pos, microim):
+        if isinstance(pos, list):
+            microim.ax = self.ax[pos[0], pos[1]]
+        else:
+            microim.ax = self.ax[pos]
+        microim.show()
+        self.microplots.append(microim)
