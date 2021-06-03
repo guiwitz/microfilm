@@ -1,7 +1,10 @@
+from pathlib import Path
+
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import ipywidgets as ipw
+import imageio
 
 from .microplot import multichannel_to_rgb, check_rescale_type
 from .microplot import Microimage
@@ -16,7 +19,7 @@ class Microanim(Microimage):
         proj_type='max', height_pixels=3, unit_per_pix=None, scalebar_units=None, unit=None,
         scale_ypos=0.05, scale_color='white', scale_font_size=12, scale_text_centered=False,
         ax=None, fig_scaling=3, label_text=None, label_location='upper left',
-        label_color='white', label_font_size=15
+        label_color='white', label_font_size=15, show_plot=True
     ):
         super().__init__(
             None, cmaps, flip_map, rescale_type, limits, num_colors,
@@ -48,11 +51,14 @@ class Microanim(Microimage):
         self.timestamps = None
 
         self.images = [self.data.load_frame(x, 0) for x in self.channels]
-        
+        if show_plot:
+            self.show()
+        self.ui = ipw.VBox([self.output, self.time_slider])
+
+    def show(self):
         with self.output:
             self.update()
 
-        self.ui = ipw.VBox([self.output, self.time_slider])
 
     def update_timeslider(self, change=None):
         """Update segmentation plot"""
@@ -70,9 +76,10 @@ class Microanim(Microimage):
 
         self.ax.get_images()[0].set_data(converted)
         #print("timestamps1")
-        if 'time_stamp' in self.label_text.keys():
-            #print("timestamps")
-            self.timestamps.set_text(self.times[t])
+        if self.label_text is not None:
+            if 'time_stamp' in self.label_text.keys():
+                #print("timestamps")
+                self.timestamps.set_text(self.times[t])
 
     def add_time_stamp(self, unit, unit_per_frame, location='upper left',
         timestamp_size=15, timestamp_color='white'):
@@ -102,10 +109,13 @@ class Microanim(Microimage):
 
         self.timestamps = self.add_label(self.times[0], 'time_stamp', label_location=location,
         label_font_size=timestamp_size, label_color=timestamp_color)
+    
+    def save_movie(self, movie_name, fps=20, quality=5, format=None):
+        save_movie(self, movie_name, fps=fps, quality=quality, format=format)
 
 class Microanimpanel:
     
-    def __init__(self, rows, cols):
+    def __init__(self, rows, cols, **fig_kwargs):
 
         self.microanims = []
 
@@ -116,24 +126,34 @@ class Microanimpanel:
 
         self.output = ipw.Output()
         with self.output:
-            self.fig, self.ax = plt.subplots(rows, cols)
+            self.fig, self.ax = plt.subplots(rows, cols, **fig_kwargs)
         self.ui = ipw.VBox([self.output, self.time_slider])
 
         self.debug = ipw.Output()
 
     def add_element(self, pos, microanim):
         if isinstance(pos, list):
-            microanim.ax = self.ax[pos[0], pos[1]]
+            selaxis = self.ax[pos[0], pos[1]]
         else:
-            microanim.ax = self.ax[pos]
-        microanim.show()
-        if 'time_stamp' in microanim.label_text.keys():
-            microanim.timestamps = microanim.add_label(microanim.times[0], 'time_stamp',
-            label_location=microanim.label_location['time_stamp'],
-            label_color=microanim.label_color['time_stamp'], label_font_size=microanim.label_font_size['time_stamp'])
+            selaxis = self.ax[pos]
+        newanim = Microanim(microanim.data, show_plot=False, ax=selaxis)
+        
+        micro_dict = microanim.__dict__
+        for k in micro_dict:
+            if (k != 'ax') and (k!='fig'):
+                newanim.__setattr__(k, micro_dict[k])
+        with self.output:
+            newanim.update(selaxis)
+        
+        if newanim.label_text is not None:
+            if 'time_stamp' in newanim.label_text.keys():
+                newanim.timestamps = newanim.add_label(newanim.times[0], 'time_stamp',
+                label_location=newanim.label_location['time_stamp'],
+                label_color=newanim.label_color['time_stamp'], label_font_size=newanim.label_font_size['time_stamp'])
 
-        self.microanims.append(microanim)
-        self.time_slider.max = microanim.data.K-1
+        self.microanims.append(newanim)
+        self.max_time = newanim.data.K-1
+        self.time_slider.max = newanim.data.K-1
 
     def update_timeslider(self, change=None):
         """Update segmentation plot"""
@@ -148,3 +168,49 @@ class Microanimpanel:
             a.update_animation(t)
             with self.debug:
                 print(a.timestamps)
+
+    def save_movie(self, movie_name, fps=20, quality=5, format=None):
+        save_movie(self, movie_name, fps=fps, quality=quality, format=format)
+
+
+def save_movie(anim_object, movie_name, fps=20, quality=5, format=None):
+        """Save a movie
+        
+        Parameters
+        ----------
+        movie_name: str or path object
+            where to save the movie
+        fps: int
+            frames per second
+        quality: int
+            quality of images (see imageio)
+        format: str
+            format for export
+        """
+
+        path_obj = Path(movie_name)
+
+        if path_obj.suffix in [".mov", ".avi", ".mpg", ".mpeg", ".mp4", ".mkv", ".wmv"]:
+            writer = imageio.get_writer(
+                path_obj,
+                fps=fps,
+                quality=quality,
+                format=format,
+            )
+        else:
+            writer = imageio.get_writer(path_obj, fps=fps, format=format)
+
+        for t in range(anim_object.max_time):
+            anim_object.update_animation(t)
+            #self.ax.figure.canvas.draw()
+            anim_object.fig.canvas.draw()
+            #buf = np.frombuffer(self.ax.figure.canvas.tostring_rgb(), dtype=np.uint8 )
+            buf = np.frombuffer(anim_object.fig.canvas.tostring_rgb(), dtype=np.uint8 )
+            #w,h = anim_object.ax.figure.canvas.get_width_height()
+            w,h = anim_object.fig.canvas.get_width_height()
+            buf.shape = (h, w, 3)
+            writer.append_data(buf)
+            
+        writer.close()
+
+    
