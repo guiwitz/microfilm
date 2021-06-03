@@ -410,12 +410,13 @@ def microshow(images=None, cmaps=None, flip_map=False, rescale_type=None, limits
                              height_pixels=microim.height_pixels, scale_ypos=microim.scale_ypos,
                              scale_color=microim.scale_color, scale_font_size=microim.scale_font_size,
                              scale_text_centered=microim.scale_text_centered)
-    if len(microim.label_text) > 0:
-        for key in microim.label_text:
-            if key != 'time_stamp':
-                microim.add_label(label_text=microim.label_text[key],
-                label_name=key, label_location=microim.label_location[key],
-                label_color=microim.label_color[key], label_font_size=microim.label_font_size[key])
+    if microim.label_text is not None:
+        if len(microim.label_text) > 0:
+            for key in microim.label_text:
+                if key != 'time_stamp':
+                    microim.add_label(label_text=microim.label_text[key],
+                    label_name=key, label_location=microim.label_location[key],
+                    label_color=microim.label_color[key], label_font_size=microim.label_font_size[key])
 
     return microim
     
@@ -486,20 +487,41 @@ class Microimage:
         self.__dict__.update(locals())
         del self.self
 
-        if self.label_text is not None:
+        if isinstance(self.label_text, dict):
+            self.label_text = label_text
+            self.label_location = label_location
+            self.label_color = label_color
+            self.label_font_size = label_font_size
+
+        elif self.label_text is not None:
             self.label_text = {'label': label_text}
             self.label_location = {'label': label_location}
             self.label_color = {'label': label_color}
             self.label_font_size = {'label': label_font_size}
         else:
-            self.label_text = {}
-            self.label_location = {}
-            self.label_color = {}
-            self.label_font_size = {}
+            self.label_text = None
+            self.label_location = None
+            self.label_color = None
+            self.label_font_size = None
 
-    def update(self, ax=None):
-        self.ax = ax
-        microshow(microim=self)
+    def update(self, ax=None, copy=False):
+        
+        if copy is False:
+            self.ax = ax
+            if self.ax is not None:
+                self.fig = self.ax.figure
+            microshow(microim=self)
+        else:
+            params = self.__dict__
+            params_copy = params.copy()
+            param_needed = list(inspect.signature(microshow).parameters)
+            for k in params.keys():
+                if k not in param_needed:
+                    params_copy.pop(k, None)
+
+            params_copy['ax'] = ax
+            new_microim = microshow(**params_copy, microim=None)
+            return new_microim
 
     
     def add_scalebar(self, unit, scalebar_units, unit_per_pix, height_pixels=3, scale_ypos=0.05,
@@ -605,6 +627,12 @@ class Microimage:
 
         """
         
+        if self.label_text is None:
+            self.label_text = {}
+            self.label_location = {}
+            self.label_color = {}
+            self.label_font_size = {}
+
         self.label_text[label_name] = label_text
         self.label_location[label_name] = label_location
         self.label_color[label_name] = label_color
@@ -647,7 +675,7 @@ class Microimage:
             label_text.set_y(y=0.01)
             label_text.set_x(x=1-text_width-0.01)
 
-        #return label_text
+        return label_text
 
 class Micropanel:
     
