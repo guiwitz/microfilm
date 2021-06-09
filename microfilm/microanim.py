@@ -2,86 +2,49 @@ from pathlib import Path
 
 import matplotlib.pyplot as plt
 import numpy as np
-import matplotlib
 import pandas as pd
 import ipywidgets as ipw
 import imageio
-from .microplot import microshow, multichannel_to_rgb, check_rescale_type
-from .dataset import Nparray
-class Microanim:
-    
-    def __init__(self, data, channels=None, cmaps=None, flip_map=False, rescale_type=None,
-        limits=None, num_colors=256, height_pixels=3, unit_per_pix=None, 
-        scalebar_units=None, unit=None, scale_ypos=0.05, scale_color='white', scale_font_size=12,
-        scale_text_centered=False, ax=None, fig_scaling=3):
 
-        """
-        Class implementing methods to create interactive animations via ipywidgets in notebooks
-        and to save animations as movies. Most options parameters are the same as for microplots.
-        
-        Parameters
-        ----------
-        data: microfilm.dataset.Data object or ndarray
-            object allowing for easy loading of images. If an
-            ndarray is used it needs dimension ordering CTXY
-        channels: list of str
-            list of channels from data object to plot
-        cmaps: list of str
-            colormap names
-        flip_map: bool or list of bool
-            invert colormap or not
-        rescale_type: str or list of str
-            'min_max': between extrema values of image
-            'dtype': full range of image dtype
-            'zero_max': between zero and image max
-            'limits': between limits given by parameter limits
-        limits: list or list of lists
-            [min, max] limits to use for rescaling
-        num_colors: int
-            number of steps in color scale
-        height_pixels: int
-            height of scale bar
-        unit_per_pix: float
-            pixel scaling (e.g. 25um per pixel)
-        scalebar_units: float
-            size of scale bar in true units
-        unit: str
-            name of the scale unit
-        scale_y_pos: float
-            y position of scale bar (0-1)
-        scale_color: str
-            color of scale bar
-        scale_font_size: int
-            size of text, set to None for no text
-        scale_text_centered: bool
-            center text above scale bar
-        ax: Matplotlib axis
-            provide existing axis
-        fig_scaling: int
-            control figure scaling
-        
-        Attributes
-        ----------
-        
-        """
-        
+from .microplot import multichannel_to_rgb, check_rescale_type
+from .microplot import Microimage
+from .dataset import Nparray
+
+class Microanim(Microimage):
+    """
+    Class implementing an animation object. This object is a subclass of of the
+    Microimage object and takes the same options. The main difference is that it
+    takes a time-lapse dataset as obligatory parameter, not a simple image.
+    """
+
+    def __init__(
+        self, data, channels=None, cmaps=None, flip_map=False, rescale_type=None, limits=None, num_colors=256,
+        proj_type='max', height_pixels=3, unit_per_pix=None, scalebar_units=None, unit=None,
+        scale_ypos=0.05, scale_color='white', scale_font_size=12, scale_text_centered=False,
+        ax=None, fig_scaling=3, label_text=None, label_location='upper left',
+        label_color='white', label_font_size=15, show_plot=True
+    ):
+        super().__init__(
+            None, cmaps, flip_map, rescale_type, limits, num_colors,
+            proj_type, height_pixels, unit_per_pix, scalebar_units, unit,
+            scale_ypos, scale_color, scale_font_size, scale_text_centered,
+            ax, fig_scaling, label_text, label_location,
+            label_color, label_font_size
+        )
+
         if isinstance(data, np.ndarray):
             data = Nparray(nparray=data)
 
         self.data = data
+        self.max_time = self.data.K-1
         
         if channels is None:
             self.channels = self.data.channel_name
         else:
             self.channels = channels
-
-        self.cmaps=cmaps
-        self.flip_map=flip_map
-        self.num_colors=num_colors
-
-        self.rescale_type = check_rescale_type(rescale_type, limits)
-        self.limits=limits
         
+        self.rescale_type = check_rescale_type(rescale_type, limits)
+
         self.time_slider = ipw.IntSlider(
             description="Time", min=0, max=self.data.K-1, value=0, continuous_update=True
         )
@@ -90,18 +53,17 @@ class Microanim:
         self.output = ipw.Output()
         self.timestamps = None
 
-        # initialize
-        images = [self.data.load_frame(x, 0) for x in self.channels]
-        with self.output:
-            self.microim = microshow(
-                images, cmaps=cmaps, flip_map=flip_map, rescale_type=rescale_type, limits=limits, num_colors=num_colors,
-                height_pixels=height_pixels, unit_per_pix=unit_per_pix,
-                scalebar_units=scalebar_units, unit=unit, scale_ypos=scale_ypos,
-                scale_color=scale_color, scale_font_size=scale_font_size,
-                scale_text_centered=scale_text_centered, ax=ax, fig_scaling=fig_scaling)
-
+        self.images = [self.data.load_frame(x, 0) for x in self.channels]
+        if show_plot:
+            self.show()
         self.ui = ipw.VBox([self.output, self.time_slider])
-            
+
+    def show(self):
+        """Display animation object"""
+
+        with self.output:
+            self.update()
+
 
     def update_timeslider(self, change=None):
         """Update segmentation plot"""
@@ -112,14 +74,17 @@ class Microanim:
     def update_animation(self, t):
         """Update animation to time t"""
 
-        images = [self.data.load_frame(x, t) for x in self.channels]
+        self.images = [self.data.load_frame(x, t) for x in self.channels]
 
-        converted = multichannel_to_rgb(images, cmaps=self.cmaps, flip_map=self.flip_map,
+        converted = multichannel_to_rgb(self.images, cmaps=self.cmaps, flip_map=self.flip_map,
                                     rescale_type=self.rescale_type, limits=self.limits, num_colors=self.num_colors)
 
-        self.microim.ax.get_images()[0].set_data(converted)
-        if self.timestamps:
-            self.timestamps.set_text(self.times[t])
+        self.ax.get_images()[0].set_data(converted)
+        #print("timestamps1")
+        if self.label_text is not None:
+            if 'time_stamp' in self.label_text.keys():
+                #print("timestamps")
+                self.timestamps.set_text(self.times[t])
 
     def add_time_stamp(self, unit, unit_per_frame, location='upper left',
         timestamp_size=15, timestamp_color='white'):
@@ -147,10 +112,115 @@ class Microanim:
         times = pd.date_range(start=0, periods=periods, freq=str(unit_per_frame)+unit)
         self.times = times.strftime('%H:%M:%S')
 
-        self.timestamps = self.microim.add_label(self.times[0], label_location=location,
+        self.timestamps = self.add_label(self.times[0], 'time_stamp', label_location=location,
         label_font_size=timestamp_size, label_color=timestamp_color)
+    
+    def save_movie(self, movie_name, fps=20, quality=5, format=None):
+        save_movie(self, movie_name, fps=fps, quality=quality, format=format)
+
+class Microanimpanel:
+    """
+    Class implementing a multi-panel animation. All animations should 
+    have the same number of time points.
+
+    Parameters
+    ----------
+    rows: int
+        number of rows
+    cols: int
+        number of columns
+    fig_kwargs: kwargs
+        parameters that one can pass to plt.subplots() function
+
+    Attributes
+    ----------
+    microanims: list
+        list of Microanim objects
+    time_slider: ipywidget slider
+        time slider
+    output: ipywidget Output
+        widget to display plot
+    fig: Matplotlib figure object
+        figure containing the panel
+    ax: list
+        list of Matplotlib axis objects
+    ui: ipywidgets box
+        animation interface
+    max_time: int
+        number of time points
+
+    """
+
+    def __init__(self, rows, cols, **fig_kwargs):
+
+        self.microanims = []
+
+        self.time_slider = ipw.IntSlider(
+            description="Time", min=0, max=0, value=0, continuous_update=True
+        )
+        self.time_slider.observe(self.update_timeslider, names="value")
+
+        self.output = ipw.Output()
+        with self.output:
+            self.fig, self.ax = plt.subplots(rows, cols, **fig_kwargs)
+        self.ui = ipw.VBox([self.output, self.time_slider])
+
+        self.debug = ipw.Output()
+
+    def add_element(self, pos, microanim):
+        """Add an animation object to a panel
+        
+        Parameters
+        ----------
+        pos: int
+            linear position where to place object
+        microanim: Microanim object
+            object to add to panel
+
+        """
+
+        if isinstance(pos, list):
+            selaxis = self.ax[pos[0], pos[1]]
+        else:
+            selaxis = self.ax[pos]
+        newanim = Microanim(microanim.data, show_plot=False, ax=selaxis)
+        
+        micro_dict = microanim.__dict__
+        for k in micro_dict:
+            if (k != 'ax') and (k!='fig'):
+                newanim.__setattr__(k, micro_dict[k])
+        with self.output:
+            newanim.update(selaxis)
+        
+        if newanim.label_text is not None:
+            if 'time_stamp' in newanim.label_text.keys():
+                newanim.timestamps = newanim.add_label(newanim.times[0], 'time_stamp',
+                label_location=newanim.label_location['time_stamp'],
+                label_color=newanim.label_color['time_stamp'], label_font_size=newanim.label_font_size['time_stamp'])
+
+        self.microanims.append(newanim)
+        self.max_time = newanim.data.K-1
+        self.time_slider.max = newanim.data.K-1
+
+    def update_timeslider(self, change=None):
+        """Update segmentation plot"""
+
+        t = self.time_slider.value
+        self.update_animation(t)
+    
+    def update_animation(self, t):
+        """Update all subplots"""
+
+        for a in self.microanims:
+            a.update_animation(t)
+            with self.debug:
+                print(a.timestamps)
 
     def save_movie(self, movie_name, fps=20, quality=5, format=None):
+        save_movie(self, movie_name, fps=fps, quality=quality, format=format)
+
+
+def save_movie(anim_object, movie_name, fps=20, quality=5, format=None):
         """Save a movie
         
         Parameters
@@ -163,7 +233,6 @@ class Microanim:
             quality of images (see imageio)
         format: str
             format for export
-
         """
 
         path_obj = Path(movie_name)
@@ -178,16 +247,17 @@ class Microanim:
         else:
             writer = imageio.get_writer(path_obj, fps=fps, format=format)
 
-        for t in range(self.data.K-1):
-            self.update_animation(t)
-            self.microim.ax.figure.canvas.draw()
-            buf = np.frombuffer(self.microim.ax.figure.canvas.tostring_rgb(), dtype=np.uint8 )
-            w,h = self.microim.ax.figure.canvas.get_width_height()
+        for t in range(anim_object.max_time):
+            anim_object.update_animation(t)
+            #self.ax.figure.canvas.draw()
+            anim_object.fig.canvas.draw()
+            #buf = np.frombuffer(self.ax.figure.canvas.tostring_rgb(), dtype=np.uint8 )
+            buf = np.frombuffer(anim_object.fig.canvas.tostring_rgb(), dtype=np.uint8 )
+            #w,h = anim_object.ax.figure.canvas.get_width_height()
+            w,h = anim_object.fig.canvas.get_width_height()
             buf.shape = (h, w, 3)
             writer.append_data(buf)
             
         writer.close()
-
-
 
     
