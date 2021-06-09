@@ -11,8 +11,11 @@ from .microplot import Microimage
 from .dataset import Nparray
 
 class Microanim(Microimage):
-    """Data class to ingest multipage tiff files. A folder should contain multiple 
-    single-plane multi-page tif files, one for each channel."""
+    """
+    Class implementing an animation object. This object is a subclass of of the
+    Microimage object and takes the same options. The main difference is that it
+    takes a time-lapse dataset as obligatory parameter, not a simple image.
+    """
 
     def __init__(
         self, data, channels=None, cmaps=None, flip_map=False, rescale_type=None, limits=None, num_colors=256,
@@ -56,6 +59,8 @@ class Microanim(Microimage):
         self.ui = ipw.VBox([self.output, self.time_slider])
 
     def show(self):
+        """Display animation object"""
+
         with self.output:
             self.update()
 
@@ -114,7 +119,38 @@ class Microanim(Microimage):
         save_movie(self, movie_name, fps=fps, quality=quality, format=format)
 
 class Microanimpanel:
-    
+    """
+    Class implementing a multi-panel animation. All animations should 
+    have the same number of time points.
+
+    Parameters
+    ----------
+    rows: int
+        number of rows
+    cols: int
+        number of columns
+    fig_kwargs: kwargs
+        parameters that one can pass to plt.subplots() function
+
+    Attributes
+    ----------
+    microanims: list
+        list of Microanim objects
+    time_slider: ipywidget slider
+        time slider
+    output: ipywidget Output
+        widget to display plot
+    fig: Matplotlib figure object
+        figure containing the panel
+    ax: list
+        list of Matplotlib axis objects
+    ui: ipywidgets box
+        animation interface
+    max_time: int
+        number of time points
+
+    """
+
     def __init__(self, rows, cols, **fig_kwargs):
 
         self.microanims = []
@@ -132,6 +168,17 @@ class Microanimpanel:
         self.debug = ipw.Output()
 
     def add_element(self, pos, microanim):
+        """Add an animation object to a panel
+        
+        Parameters
+        ----------
+        pos: int
+            linear position where to place object
+        microanim: Microanim object
+            object to add to panel
+
+        """
+
         if isinstance(pos, list):
             selaxis = self.ax[pos[0], pos[1]]
         else:
