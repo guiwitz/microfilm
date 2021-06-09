@@ -135,9 +135,9 @@ class Data:
         
         for t in self.valid_frames:
             if isinstance(channel, list):
-                image = np.zeros([len(channel)]+list(self.dims))
+                image = np.zeros(list(self.dims)+[len(channel)])
                 for ind, c in enumerate(channel):
-                    image[ind, :, :] = self.load_frame(c, t)
+                    image[:, :, ind] = self.load_frame(c, t)
             else:
                 image = self.load_frame(channel, t)
             yield image
