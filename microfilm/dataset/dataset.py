@@ -130,10 +130,16 @@ class Data:
         raise NotImplementedError
 
     def frame_generator(self, channel):
-        """Create a generator returning successive frames of a given channel"""
+        """Create a generator returning successive frames of a given channel.
+        The channel parameter can be either a channel name or a list of those."""
         
         for t in self.valid_frames:
-            image = self.load_frame(channel, t)
+            if isinstance(channel, list):
+                image = np.zeros([len(channel)]+list(self.dims))
+                for ind, c in enumerate(channel):
+                    image[ind, :, :] = self.load_frame(c, t)
+            else:
+                image = self.load_frame(channel, t)
             yield image
 
     def get_channel_name(self, m):
