@@ -1,3 +1,5 @@
+import itertools
+
 import skimage.measure
 import skimage.io
 import numpy as np
@@ -131,7 +133,7 @@ def nan_labels(im_label):
     
     return im_label_nan
 
-def measure_intensities(time_image, im_labels, max_time):
+def measure_intensities(time_image, im_labels, min_time=0, max_time=None, step=1):
     """
     Measure average intensity in a time-lapse image using a labelled image
 
@@ -153,13 +155,17 @@ def measure_intensities(time_image, im_labels, max_time):
     """
 
     measures = []
+    time_image_part = itertools.islice(time_image, min_time, max_time, step)
 
-    for im_np in time_image:
-        #im_np = nd2_image.get_frame_2D(x=0, y=0, c=channel, t=t)
+    for im_np in time_image_part:
         measures.append(skimage.measure.regionprops_table(im_labels, 
                                                           intensity_image=im_np, properties=('label','mean_intensity')))
 
-    signal = np.stack([x['mean_intensity'] for x in measures],axis=0)
+    if im_np.ndim == 3:
+        signals = [np.stack([x['mean_intensity-'+str(k)] for x in measures],axis=0) for k in range(im_np.shape[2])]
+        signal = np.stack(signals, axis=2)
+    else:
+        signal = np.stack([x['mean_intensity'] for x in measures],axis=0)
     
     return signal
 
@@ -199,7 +205,7 @@ def plot_signals(signal, color_array=None, ax=None):
     
     return ax
 
-def plot_sectors(image, sectors, channel=None, time=0, cmap=None, ax=None):
+def plot_sectors(image, sectors, channel=None, time=0, cmap=None, im_cmap=None, ax=None):
     """
     Plot image and overlayed sectors with a given colormap
     
@@ -213,7 +219,10 @@ def plot_sectors(image, sectors, channel=None, time=0, cmap=None, ax=None):
         name of channel to plot
     time: int
         frame to plot
-    cmap: Matploltlib colormap
+    cmap: Matplotlib colormap
+        colormap for split mask
+    im_cmap: Matplotlib colormap
+        colormap for image
     ax: Matplotlib axis
 
     Returns
@@ -221,6 +230,10 @@ def plot_sectors(image, sectors, channel=None, time=0, cmap=None, ax=None):
     ax if ax passed as input otherwise fig
     
     """
+    
+    if im_cmap is None:
+        im_cmap = plt.get_cmap('gray')
+
     fig = None
     if ax is None:
         fig, ax = plt.subplots(figsize=(6,6))
@@ -229,7 +242,7 @@ def plot_sectors(image, sectors, channel=None, time=0, cmap=None, ax=None):
 
     sector_labels_nan = nan_labels(sectors)
 
-    ax.imshow(image.load_frame(channel,0), cmap='gray')
+    ax.imshow(image.load_frame(channel,0), cmap=im_cmap)
     ax.imshow(sector_labels_nan, cmap=cmap, interpolation='none', alpha=0.5)
     if fig is not None:
         fig.tight_layout()
@@ -237,14 +250,15 @@ def plot_sectors(image, sectors, channel=None, time=0, cmap=None, ax=None):
     
     return ax
 
-def save_signal(signal, name='mycsv.csv',format='long'):
+def save_signal(signal, name='mycsv.csv',format='long', channels=None):
     """
     Save the sector signal in a CSV file with a given name
 
     Parameters
     ----------
-    signal: 2d array
+    signal: array
         signal array with rows as time points and columns as sectors
+        a third dimension indicates multiple channels
     name: str
         file name for export (should end in .csv)
     format: str
@@ -258,10 +272,29 @@ def save_signal(signal, name='mycsv.csv',format='long'):
     
     """
     
+    if signal.ndim == 3:
+        format = 'long'
+        if channels is None:
+            channels = ['channel-'+str(i) for i in range(signal.shape[2])]
+
+    def reshape_df(signal_array, int_name='intensity'):
+        df = pd.DataFrame(signal_array)
+        df = df.reset_index().rename({'index': 'time'}, axis='columns')
+        df = pd.melt(df, id_vars='time', var_name='sector', value_name=int_name)
+        return df
+
     if format == 'wide':
         signal_df = pd.DataFrame(signal)
         signal_df.to_csv(name, index=False)
     elif format == 'long':
-        signal_df = pd.DataFrame(signal).reset_index().rename({'index': 'time'}, axis='columns')
-        signal_df = pd.melt(signal_df, id_vars='time', var_name='sector', value_name='intensity')
+        if signal.ndim == 2:
+            signal_df = reshape_df(signal)
+        else:
+            dfs = []
+            for k in range(signal.shape[2]):
+                temp_df = reshape_df(signal[:, :, k], int_name='intensity')
+                temp_df['channel'] = channels[k]
+                dfs.append(temp_df)
+            signal_df = pd.concat(dfs)
+            
         signal_df.to_csv(name, index=False)
