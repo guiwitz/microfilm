@@ -39,6 +39,32 @@ def colorify_by_name(image, cmap_name, flip_map=False, rescale_type='min_max', l
     
     image = rescale_image(image, rescale_type=rescale_type, limits=limits)
     
+    cmap = cmaps_def(cmap_name, num_colors=num_colors, flip_map=flip_map)
+            
+    image_colored = cmap(image)
+    
+    return image_colored
+
+def cmaps_def(cmap_name, num_colors=256, flip_map=False):
+    """
+    Return a colormap defined by its name
+    
+    Parameters
+    ----------
+    cmap_name: str
+        Matplotlib colormap or 'pure_red', 'pure_green', 'pure_blue'
+        'pure_magenta', 'pure_cyan'
+    num_colors: int
+        number of steps in color scale
+    flip_map: bool
+        invert colormap
+
+    Returns
+    -------
+    cmap: Matplotlib colormap
+
+    """
+
     if cmap_name in plt.colormaps():
         cmap = plt.get_cmap(cmap_name, num_colors)
     elif cmap_name == 'pure_red':
@@ -58,10 +84,9 @@ def colorify_by_name(image, cmap_name, flip_map=False, rescale_type='min_max', l
             
     if flip_map:
             cmap = cmap.reversed()
-            
-    image_colored = cmap(image)
     
-    return image_colored
+    return cmap
+
     
 def colorify_by_hex(image, cmap_hex='#ff6600', flip_map=False, rescale_type='min_max',
                            limits=None, num_colors=256):
@@ -410,6 +435,7 @@ def microshow(images=None, cmaps=None, flip_map=False, rescale_type=None, limits
                              height_pixels=microim.height_pixels, scale_ypos=microim.scale_ypos,
                              scale_color=microim.scale_color, scale_font_size=microim.scale_font_size,
                              scale_text_centered=microim.scale_text_centered)
+    
     if microim.label_text is not None:
         if len(microim.label_text) > 0:
             for key in microim.label_text:
@@ -487,6 +513,7 @@ class Microimage:
         self.__dict__.update(locals())
         del self.self
 
+        # if labels are provided convert them to dict from if necessary
         if isinstance(self.label_text, dict):
             self.label_text = label_text
             self.label_location = label_location
@@ -505,6 +532,22 @@ class Microimage:
             self.label_font_size = None
 
     def update(self, ax=None, copy=False):
+        """
+        Update the Microimage axis or create a new copy of the object
+        with a new axis and figure.
+
+        Parameters
+        ----------
+        ax: Matplotlib axis
+            Matplotlib axis to use for plot
+        copy : bool
+            create a new figure for plot, by default False
+
+        Returns
+        -------
+        microim: if a new plot object is created (copy==True), the
+                object is returned
+        """
         
         if copy is False:
             self.ax = ax
@@ -678,6 +721,27 @@ class Microimage:
         return label_text
 
 class Micropanel:
+    """
+    Class implementing a panel object of multiple Microimage
+    objects.
+
+    Parameters
+    ----------
+    rows: int
+        number of panel rows
+    cols: int
+        number of panel columns
+    fig_kwargs: parameters normally passed to plt.subplots()
+
+    Attributes
+    ----------
+    fig: Matplotlib figure object
+    ax: list
+        list of Matplotlib axis objects
+    microplots: list
+        list of Microimage objects
+
+    """
     
     def __init__(self, rows, cols, **fig_kwargs):
 
