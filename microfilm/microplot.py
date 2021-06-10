@@ -452,67 +452,70 @@ def microshow(images=None, cmaps=None, flip_map=False, rescale_type=None, limits
     
 
 class Microimage:
+    """
+    Class implementing the plot object. It is usually created by
+    calling the microshow function but can also be used directly.
+    
+    Parameters
+    ----------
+    images: list or array
+        list of 2d arrays or DxMxN array D<4
+    cmaps: list of str
+        colormap names
+    flip_map: bool or list of bool
+        invert colormap or not
+    rescale_type: str or list of str
+        'min_max': between extrema values of image
+        'dtype': full range of image dtype
+        'zero_max': between zero and image max
+        'limits': between limits given by parameter limits
+    limits: list or list of lists
+        [min, max] limits to use for rescaling
+    num_colors: int
+        number of steps in color scale
+    proj_type: str
+        projection type of color combination
+        max: maximum
+        sum: sum projection, restricted to dtype range
+    height_pixels: int
+        height of scale bar
+    unit_per_pix: float
+        pixel scaling (e.g. 25um per pixel)
+    scalebar_units: float
+        size of scale bar in true units
+    unit: str
+        name of the scale unit
+    scale_y_pos: float
+        y position of scale bar (0-1)
+    scale_color: str
+        color of scale bar
+    scale_font_size: int
+        size of text, set to None for no text
+    scale_text_centered: bool
+        center text above scale bar
+    ax: Matplotlib axis
+        provide existing axis
+    fig_scaling: int
+        control figure scaling
+    label_text: str
+        image label
+    label_location: str or list
+        position of the label on the image, can be
+        'upper left', 'upper right', 'lower left', 'lower right' or
+        a list with xy coordinates [xpos, ypos] where 0 < xpos, ypos < 1
+    label_color: str
+        color of label
+    label_font_size: int
+        size of label
+
+    """
+
     def __init__(self, images, cmaps=None, flip_map=False, rescale_type=None, limits=None, num_colors=256,
               proj_type='max', height_pixels=3, unit_per_pix=None, scalebar_units=None, unit=None,
               scale_ypos=0.05, scale_color='white', scale_font_size=12, scale_text_centered=False,
               ax=None, fig_scaling=3, label_text=None, label_location='upper left',
               label_color='white', label_font_size=15
              ):
-        """
-        Plot image
-        
-        Parameters
-        ----------
-        images: list or array
-            list of 2d arrays or DxMxN array D<4
-        cmaps: list of str
-            colormap names
-        flip_map: bool or list of bool
-            invert colormap or not
-        rescale_type: str or list of str
-            'min_max': between extrema values of image
-            'dtype': full range of image dtype
-            'zero_max': between zero and image max
-            'limits': between limits given by parameter limits
-        limits: list or list of lists
-            [min, max] limits to use for rescaling
-        num_colors: int
-            number of steps in color scale
-        proj_type: str
-            projection type of color combination
-            max: maximum
-            sum: sum projection, restricted to dtype range
-        height_pixels: int
-            height of scale bar
-        unit_per_pix: float
-            pixel scaling (e.g. 25um per pixel)
-        scalebar_units: float
-            size of scale bar in true units
-        unit: str
-            name of the scale unit
-        scale_y_pos: float
-            y position of scale bar (0-1)
-        scale_color: str
-            color of scale bar
-        scale_font_size: int
-            size of text, set to None for no text
-        scale_text_centered: bool
-            center text above scale bar
-        ax: Matplotlib axis
-            provide existing axis
-        fig_scaling: int
-            control figure scaling
-        label_text: str
-            image label
-        label_location: str or list
-            position of the label on the image, can be
-            'upper left', 'upper right', 'lower left', 'lower right' or
-            a list with xy coordinates [xpos, ypos] where 0 < xpos, ypos < 1
-        label_color: str
-            color of label
-        label_font_size: int
-            size of label
-        """
         
         self.__dict__.update(locals())
         del self.self
