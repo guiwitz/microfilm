@@ -762,3 +762,8 @@ class Micropanel:
             microim.update(self.ax[pos])
         
         self.microplots.append(microim)
+
+    def savefig(self, *args, **kwargs):
+
+        self.fig.savefig(*args, **kwargs)
+    savefig.__doc__ = plt.savefig.__doc__
