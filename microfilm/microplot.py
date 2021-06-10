@@ -55,7 +55,7 @@ def cmaps_def(cmap_name, num_colors=256, flip_map=False):
     ----------
     cmap_name: str
         Matplotlib colormap or 'pure_red', 'pure_green', 'pure_blue'
-        'pure_magenta', 'pure_cyan'
+        'pure_magenta', 'pure_cyan', 'pure_yellow'
     num_colors: int
         number of steps in color scale
     flip_map: bool
@@ -79,6 +79,8 @@ def cmaps_def(cmap_name, num_colors=256, flip_map=False):
         cmap = ListedColormap(np.c_[np.zeros(num_colors), np.linspace(0,1,num_colors), np.linspace(0,1,num_colors)])
     elif cmap_name == 'pure_magenta':
         cmap = ListedColormap(np.c_[np.linspace(0,1,num_colors), np.zeros(num_colors), np.linspace(0,1,num_colors)])
+    elif cmap_name == 'pure_yellow':
+        cmap = ListedColormap(np.c_[np.linspace(0,1,num_colors), np.linspace(0,1,num_colors), np.zeros(num_colors)])
     elif cmap_name == 'segmentation':
         cmap = random_cmap(num_colors=num_colors)
     else:
