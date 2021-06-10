@@ -5,7 +5,7 @@ This package is a collection of tools to display and analyze 2D and 2D time-laps
 
 Following the model of packages like [seaborn](https://seaborn.pydata.org/index.html), ```microfilm``` offers tight integration with Matplotlib. Complete access is given to structures like axis and figures underlying the ```microfilm``` objects, allowing thus for the creation of arbitrarily complex plots for users familiar with Matplotlib.
 
-**Note**: If you use the ````dataset``` module and encounter errors when trying to use the ND2 format because of errors related to unusual ROIs (non-square), you can try to install an alternative version with:
+**Note**: If you use the ```dataset``` module and encounter errors when trying to use the ND2 format because of errors related to unusual ROIs (non-square), you can try to install an alternative version with:
 
 ```
 pip install git+https://github.com/guiwitz/nd2reader.git@master#egg=nd2reader -U
