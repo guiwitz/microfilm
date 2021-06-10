@@ -23,6 +23,7 @@ jobs:
     - name: Install dependencies
       run: |
         $CONDA/bin/pip install -r book/requirements.txt
+        $CONDA/bin/pip install .
 
     # Compile the docs
     - name: Compile sphinx
