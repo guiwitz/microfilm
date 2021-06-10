@@ -4,6 +4,7 @@
   chapters:
   - file: notebooks/create_plots
   - file: notebooks/create_animations
+  - file: notebooks/create_panels
   
 
 - part: Reference
