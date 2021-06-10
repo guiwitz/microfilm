@@ -1,6 +1,8 @@
 import warnings
 import inspect
+import functools
 
+from matplotlib.pyplot import savefig
 import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib
@@ -565,6 +567,11 @@ class Microimage:
             params_copy['ax'] = ax
             new_microim = microshow(**params_copy, microim=None)
             return new_microim
+
+    def savefig(self, *args, **kwargs):
+
+        self.fig.savefig(*args, **kwargs)
+    savefig.__doc__ = plt.savefig.__doc__
 
     
     def add_scalebar(self, unit, scalebar_units, unit_per_pix, height_pixels=3, scale_ypos=0.05,
