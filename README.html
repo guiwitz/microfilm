@@ -23,8 +23,8 @@
       
 
     
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
@@ -34,17 +34,17 @@
     
   <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
+    <script>
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
         const thebe_selector_output = ".output"
@@ -101,6 +101,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="notebooks/create_animations.html">
    Creating animations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="notebooks/create_panels.html">
+   Creating multi-panel figures
   </a>
  </li>
 </ul>
@@ -217,13 +222,23 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#simple-example">
-   Simple example
+  <a class="reference internal nav-link" href="#simple-plot">
+   Simple plot
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#features">
-   Features
+  <a class="reference internal nav-link" href="#animation">
+   Animation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#panels">
+   Panels
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#additional-functionalities">
+   Additional functionalities
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -247,8 +262,12 @@
   <p><a class="reference external" href="https://mybinder.org/v2/gh/guiwitz/microfilm/master?urlpath=lab"><img alt="Binder" src="https://mybinder.org/badge_logo.svg" /></a></p>
 <section id="microfilm">
 <h1>microfilm<a class="headerlink" href="#microfilm" title="Permalink to this headline">¶</a></h1>
-<p>This package is a collection of tools to handle 2D time-lapse microscopy images. Its focus is primarily on plotting such datasets. In particular it makes it easy to represents multi-channel datasets in <em>composite</em> mode where the color maps of multiple channels are combined into a single image. It also allows to easily complete such figures with standard annotations like labels and scale bars. In addition, these figures can be turned into animations if time-lapse data are provided. Animations are either interactive when run in a Jupyter notebook, or save in standard movie formats (mp4, gif etc.)</p>
-<p>Following the model of packages like <a class="reference external" href="https://seaborn.pydata.org/index.html">seaborn</a>, <code class="docutils literal notranslate"><span class="pre">microfilm</span></code> offers tight integration with Matplotlib. Complete access is given to the structures like axis and figures underlying the <code class="docutils literal notranslate"><span class="pre">microfilm</span></code> objects, allowing thus for the creation of arbitrarily complex plots for users familiar with Matplotlib.</p>
+<p>This package is a collection of tools to display and analyze 2D and 2D time-lapse microscopy images. In particular it makes it straightforward to create figures of containing multi-channel images represented in a <em>composite</em> color mode as done in the popular image processing software Fiji. It also allows to easily complete such figures with standard annotations like <em>labels</em>, <em>scale bars</em> and <em>time counters</em>. In case of time-lapse data, the figures are turned into animations which can be interactively browsed from a Jupyter notebook and saved in standard movie formats (mp4, gif etc.). Finally, figures and animations can easily be combined into larger <em>panels</em>. These main functionalities are provided by the <code class="docutils literal notranslate"><span class="pre">microfilm.microplot</span></code> and <code class="docutils literal notranslate"><span class="pre">microfilm.microanim</span></code> modules.</p>
+<p>Following the model of packages like <a class="reference external" href="https://seaborn.pydata.org/index.html">seaborn</a>, <code class="docutils literal notranslate"><span class="pre">microfilm</span></code> offers tight integration with Matplotlib. Complete access is given to structures like axis and figures underlying the <code class="docutils literal notranslate"><span class="pre">microfilm</span></code> objects, allowing thus for the creation of arbitrarily complex plots for users familiar with Matplotlib.</p>
+<p><strong>Note</strong>: If you use the ````dataset``` module and encounter errors when trying to use the ND2 format because of errors related to unusual ROIs (non-square), you can try to install an alternative version with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">guiwitz</span><span class="o">/</span><span class="n">nd2reader</span><span class="o">.</span><span class="n">git</span><span class="nd">@master</span><span class="c1">#egg=nd2reader -U</span>
+</pre></div>
+</div>
 <section id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <p>You can install this package directly from Github using:</p>
@@ -260,43 +279,99 @@
 </pre></div>
 </div>
 </section>
-<section id="simple-example">
-<h2>Simple example<a class="headerlink" href="#simple-example" title="Permalink to this headline">¶</a></h2>
-<p>It is very easy to create a ready-to-use plot of a multi-channel image dataset. In the following code snippet, we load a Numpy array, reshape it (input should by CTXY) and generate the figure below in a single line:</p>
+<section id="simple-plot">
+<h2>Simple plot<a class="headerlink" href="#simple-plot" title="Permalink to this headline">¶</a></h2>
+<p>It is straightforward to create a ready-to-use plot of a multi-channel image dataset. In the following code snippet, we load a Numpy array of a multi-channel time-lapse dataset with shape <code class="docutils literal notranslate"><span class="pre">CTXY</span></code> (three channels). The figure below showing the time-point <code class="docutils literal notranslate"><span class="pre">t=10</span></code> is generated in a single command with a few options and saved as a png:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">skimage.io</span>
 <span class="kn">from</span> <span class="nn">microfilm.microplot</span> <span class="kn">import</span> <span class="n">microshow</span>
 
 <span class="n">image</span> <span class="o">=</span> <span class="n">skimage</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;../demodata/coli_nucl_ori_ter.tif&#39;</span><span class="p">)</span>
-<span class="n">image_t10</span> <span class="o">=</span> <span class="n">image</span><span class="p">[:,</span><span class="mi">10</span><span class="p">]</span>
-<span class="n">microim</span> <span class="o">=</span> <span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="n">image_t10</span><span class="p">,</span> <span class="n">fig_scaling</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-                 <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_blue&#39;</span><span class="p">,</span><span class="s1">&#39;pure_red&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_green&#39;</span><span class="p">],</span>
-                 <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">scalebar_units</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">scale_text_centered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scale_font_size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
-                 <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">label_font_size</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">time</span> <span class="o">=</span> <span class="mi">10</span>
 
-<span class="n">microim</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;../illustrations/composite.png&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span> <span class="o">=</span> <span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+<span class="n">microim</span> <span class="o">=</span> <span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="n">image</span><span class="p">[:,</span> <span class="n">time</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">fig_scaling</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                 <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_blue&#39;</span><span class="p">,</span><span class="s1">&#39;pure_red&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_green&#39;</span><span class="p">],</span>
+                 <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">scalebar_units</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">scale_text_centered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scale_font_size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">label_font_size</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+
+<span class="n">microim</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;../illustrations/composite.png&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span> <span class="o">=</span> <span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
 </pre></div>
 </div>
 <img src="https://github.com/guiwitz/microfilm/raw/master/illustrations/composite.png" alt="image" width="300">
-<p>It is then straightforward to extend a simple image into an animation as both objects take the same options. Additionally, a time-stamp can be added to the animation. This code generates the movie visible below:</p>
+</section>
+<section id="animation">
+<h2>Animation<a class="headerlink" href="#animation" title="Permalink to this headline">¶</a></h2>
+<p>It is then easy to extend a simple figure into an animation as both objects take the same options. Additionally, a time-stamp can be added to the animation. This code generates the movie visible below:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">skimage.io</span>
 <span class="kn">from</span> <span class="nn">microfilm.microanim</span> <span class="kn">import</span> <span class="n">Microanim</span>
 
 <span class="n">image</span> <span class="o">=</span> <span class="n">skimage</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;../demodata/coli_nucl_ori_ter.tif&#39;</span><span class="p">)</span>
+
 <span class="n">microanim</span> <span class="o">=</span> <span class="n">Microanim</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">image</span><span class="p">,</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_blue&#39;</span><span class="p">,</span><span class="s1">&#39;pure_red&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_green&#39;</span><span class="p">],</span> <span class="n">fig_scaling</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
                       <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">scalebar_units</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span>
-                      <span class="n">scale_text_centered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scale_font_size</span><span class="o">=</span><span class="mi">20</span><span class="p">,)</span>
+                      <span class="n">scale_text_centered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scale_font_size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
 <span class="n">microanim</span><span class="o">.</span><span class="n">microim</span><span class="o">.</span><span class="n">add_label</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">label_font_size</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
 <span class="n">microanim</span><span class="o">.</span><span class="n">add_time_stamp</span><span class="p">(</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s1">&#39;lower left&#39;</span><span class="p">,</span> <span class="n">timestamp_size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
 <span class="n">microanim</span><span class="o">.</span><span class="n">save_movie</span><span class="p">(</span><span class="s1">&#39;../illustrations/composite_movie.gif&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <img src="https://github.com/guiwitz/microfilm/raw/master/illustrations/composite_movie.gif" alt="image" width="300">
 </section>
-<section id="features">
-<h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
-<p>In addition to plotting and animation, <code class="docutils literal notranslate"><span class="pre">microfilm</span></code> currently provides two other modules: <code class="docutils literal notranslate"><span class="pre">dataset</span></code>to handle time-lapse data of various formats and <code class="docutils literal notranslate"><span class="pre">splitmasks</span></code> which provides tools to analyze the evolution of intensity over time in complex regions. More documentation on those modules comes soon.</p>
+<section id="panels">
+<h2>Panels<a class="headerlink" href="#panels" title="Permalink to this headline">¶</a></h2>
+<p>Both simple figures and animations can be combined into larger panels via the <code class="docutils literal notranslate"><span class="pre">microplot.Micropanel</span></code> and <code class="docutils literal notranslate"><span class="pre">microanim.Microanimpanel</span></code> objects. For example we can first create two figures <code class="docutils literal notranslate"><span class="pre">microim1</span></code> and <code class="docutils literal notranslate"><span class="pre">microim2</span></code> and then combine them into <code class="docutils literal notranslate"><span class="pre">micropanel</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">microfilm</span> <span class="kn">import</span> <span class="n">microplot</span>
+<span class="kn">import</span> <span class="nn">skimage.io</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">skimage</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;../demodata/coli_nucl_ori_ter.tif&#39;</span><span class="p">)</span>
+
+<span class="n">microim1</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">image</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]],</span>
+                               <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_magenta&#39;</span><span class="p">],</span> <span class="n">flip_map</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+                               <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">label_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">microim2</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">image</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]],</span>
+                               <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_cyan&#39;</span><span class="p">],</span> <span class="n">flip_map</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+                               <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="n">label_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+<span class="n">micropanel</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">Micropanel</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">micropanel</span><span class="o">.</span><span class="n">add_element</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">microim</span><span class="o">=</span><span class="n">microim1</span><span class="p">)</span>
+<span class="n">micropanel</span><span class="o">.</span><span class="n">add_element</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">microim</span><span class="o">=</span><span class="n">microim2</span><span class="p">)</span>
+
+<span class="n">micropanel</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;../illustrations/panel.png&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span> <span class="o">=</span> <span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+<img src="https://github.com/guiwitz/microfilm/raw/master/illustrations/panel.png" alt="image" width="300">
+<p>And similarly for animations:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">microfilm</span> <span class="kn">import</span> <span class="n">microplot</span>
+<span class="kn">import</span> <span class="nn">skimage.io</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">skimage</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;../demodata/coli_nucl_ori_ter.tif&#39;</span><span class="p">)</span>
+
+<span class="n">microanim1</span> <span class="o">=</span> <span class="n">microanim</span><span class="o">.</span><span class="n">Microanim</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">image</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],::],</span>
+                               <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_magenta&#39;</span><span class="p">],</span> <span class="n">flip_map</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+                               <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">label_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">microanim2</span> <span class="o">=</span> <span class="n">microanim</span><span class="o">.</span><span class="n">Microanim</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">image</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">],::],</span>
+                               <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_cyan&#39;</span><span class="p">],</span> <span class="n">flip_map</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+                               <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="n">label_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+<span class="n">animpanel</span> <span class="o">=</span> <span class="n">microanim</span><span class="o">.</span><span class="n">Microanimpanel</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">animpanel</span><span class="o">.</span><span class="n">add_element</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">microanim</span><span class="o">=</span><span class="n">microanim1</span><span class="p">)</span>
+<span class="n">animpanel</span><span class="o">.</span><span class="n">add_element</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">microanim</span><span class="o">=</span><span class="n">microanim2</span><span class="p">)</span>
+
+<span class="n">animpanel</span><span class="o">.</span><span class="n">save_movie</span><span class="p">(</span><span class="s1">&#39;../illustrations/panel.gif&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img src="https://github.com/guiwitz/microfilm/raw/master/illustrations/panel.gif" alt="image" width="300">
+</section>
+<section id="additional-functionalities">
+<h2>Additional functionalities<a class="headerlink" href="#additional-functionalities" title="Permalink to this headline">¶</a></h2>
+<p>In addition to thes main plotting capabilities, the packages also offers:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">microfilm.dataset</span></code>: a module offering a simple common data structure to handle multi-channel time-lapse data from multipage tiffs, series of tiff files, Nikon ND2 files, H5 and Numpy arrays. Requirement to use this module are at the moment very constrained (e.g. dimension order of Numpy arrays, name of H5 content etc.) but might evolve in the future.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">microfilm.splitmasks</span></code>: a module to analyze the time-evolution of fluorescence intensity in images split into regions with various geometries like sectors, rings etc.</p></li>
+</ul>
 </section>
 <section id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>

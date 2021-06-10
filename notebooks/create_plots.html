@@ -23,8 +23,8 @@
       
 
     
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -34,17 +34,17 @@
     
   <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
+    <script>
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
         const thebe_selector_output = ".output"
@@ -102,6 +102,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="create_animations.html">
    Creating animations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="create_panels.html">
+   Creating multi-panel figures
   </a>
  </li>
 </ul>
@@ -276,7 +281,17 @@
      Relation to Matplotlib
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#copying-figures">
+     Copying figures
+    </a>
+   </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#micropanel">
+   Micropanel
+  </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#lower-level-functions">
@@ -370,7 +385,7 @@
 <p>This image has 30 time points and 3 channels. We take now just the time <code class="docutils literal notranslate"><span class="pre">t=10</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">multi_channel</span> <span class="o">=</span> <span class="n">image</span><span class="p">[:,</span><span class="mi">10</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">multi_channel</span> <span class="o">=</span> <span class="n">image</span><span class="p">[:,</span><span class="mi">10</span><span class="p">,:,:]</span>
 <span class="n">multi_channel</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
@@ -419,7 +434,7 @@ image type: uint16
 <img alt="../_images/create_plots_12_0.png" src="../_images/create_plots_12_0.png" />
 </div>
 </div>
-<p>However we can easily adjust the color maps or lookup tables with the <code class="docutils literal notranslate"><span class="pre">cmaps</span></code> option where we can use any Matplotlib colormap or additionally <code class="docutils literal notranslate"><span class="pre">pure_red</span></code>, <code class="docutils literal notranslate"><span class="pre">pure_green</span></code>, <code class="docutils literal notranslate"><span class="pre">pure_blue</span></code> which provide classic black-to-color color maps:</p>
+<p>However we can easily adjust the color maps or lookup tables with the <code class="docutils literal notranslate"><span class="pre">cmaps</span></code> option where we can use any Matplotlib colormap or additionally <code class="docutils literal notranslate"><span class="pre">pure_red</span></code>, <code class="docutils literal notranslate"><span class="pre">pure_green</span></code>, <code class="docutils literal notranslate"><span class="pre">pure_blue</span></code>, <code class="docutils literal notranslate"><span class="pre">pure_cyan</span></code> and <code class="docutils literal notranslate"><span class="pre">pure_magenta</span></code> which provide classic black-to-color color maps:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microim</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="n">multi_channel</span><span class="p">,</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_blue&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_red&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_green&#39;</span><span class="p">])</span>
@@ -448,10 +463,10 @@ image type: uint16
 </section>
 <section id="options-at-creation">
 <h3>Options at creation<a class="headerlink" href="#options-at-creation" title="Permalink to this headline">¶</a></h3>
-<p>When we create the image, we have a large set of options that we can use to adjust the plot. For example, in addition to selecting specific color maps with <code class="docutils literal notranslate"><span class="pre">cmaps</span></code>, we can also add a scale bar and a label:</p>
+<p>When we create the image, we have a large set of options that we can use to adjust the plot. For example, in addition to selecting specific color maps with <code class="docutils literal notranslate"><span class="pre">cmaps</span></code>, we can also choose a color projection type, add a scale bar and a label etc.:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microim</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_blue&#39;</span><span class="p">,</span><span class="s1">&#39;pure_green&#39;</span><span class="p">],</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microim</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_cyan&#39;</span><span class="p">,</span><span class="s1">&#39;pure_magenta&#39;</span><span class="p">],</span> <span class="n">proj_type</span><span class="o">=</span><span class="s1">&#39;sum&#39;</span><span class="p">,</span>
                               <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">scalebar_units</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
                               <span class="n">scale_text_centered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scale_font_size</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
                              <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">label_font_size</span><span class="o">=</span><span class="mi">30</span><span class="p">);</span>
@@ -532,6 +547,51 @@ image type: uint16
 </div>
 </div>
 </section>
+<section id="copying-figures">
+<h3>Copying figures<a class="headerlink" href="#copying-figures" title="Permalink to this headline">¶</a></h3>
+<p>Matplotlib makes it impossible to re-use a given plot in multiple figures. Once you have created a microplot with annotations you might however want to re-use it in another larger figure. The <code class="docutils literal notranslate"><span class="pre">microimage</span></code> object allows you to do that since it stores all the relevant information and can easily be recreated. For example let’s create a plot:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">micro1</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_blue&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_green&#39;</span><span class="p">],</span>
+                              <span class="n">unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">scalebar_units</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> 
+                    <span class="n">scale_text_centered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scale_font_size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">scale_color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/create_plots_29_0.png" src="../_images/create_plots_29_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig2</span><span class="p">,</span> <span class="n">ax2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">newmicro1</span> <span class="o">=</span> <span class="n">micro1</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">newmicro1</span><span class="o">.</span><span class="n">add_label</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/create_plots_30_0.png" src="../_images/create_plots_30_0.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="micropanel">
+<h2>Micropanel<a class="headerlink" href="#micropanel" title="Permalink to this headline">¶</a></h2>
+<p>As an alternative to creating subplots yourself, you can also create a <code class="docutils literal notranslate"><span class="pre">Micropanel</span></code> object and add to it a series of microimages. In that way, you can first design individually each subplot and then combine them together. For example we can combine <code class="docutils literal notranslate"><span class="pre">micro1</span></code> and <code class="docutils literal notranslate"><span class="pre">micro2</span></code> from above.</p>
+<p>When creating the <code class="docutils literal notranslate"><span class="pre">Micropanel</span></code> object you can use the same options as e.g. in <code class="docutils literal notranslate"><span class="pre">plt.subplots()</span></code> such as <code class="docutils literal notranslate"><span class="pre">figsize</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">micropanel</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">Micropanel</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">micropanel</span><span class="o">.</span><span class="n">add_element</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">microim</span><span class="o">=</span><span class="n">micro1</span><span class="p">)</span>
+<span class="n">micropanel</span><span class="o">.</span><span class="n">add_element</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">microim</span><span class="o">=</span><span class="n">micro2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/create_plots_32_0.png" src="../_images/create_plots_32_0.png" />
+</div>
+</div>
 </section>
 <section id="lower-level-functions">
 <h2>Lower level functions<a class="headerlink" href="#lower-level-functions" title="Permalink to this headline">¶</a></h2>
@@ -547,7 +607,7 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_30_0.png" src="../_images/create_plots_30_0.png" />
+<img alt="../_images/create_plots_35_0.png" src="../_images/create_plots_35_0.png" />
 </div>
 </div>
 <p>By default the image intensity is rescaled using the min-max values. This is often sub-optimal (e.g. if single pixels are way out of the distribution) and you can specify another rescaling. For example you can explicitly provide lower and upper limits:</p>
@@ -560,7 +620,7 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_32_0.png" src="../_images/create_plots_32_0.png" />
+<img alt="../_images/create_plots_37_0.png" src="../_images/create_plots_37_0.png" />
 </div>
 </div>
 </section>
@@ -575,13 +635,13 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_34_0.png" src="../_images/create_plots_34_0.png" />
+<img alt="../_images/create_plots_39_0.png" src="../_images/create_plots_39_0.png" />
 </div>
 </div>
 </section>
 <section id="combining-images">
 <h3>Combining images<a class="headerlink" href="#combining-images" title="Permalink to this headline">¶</a></h3>
-<p>After having converted images to a given colormap, you can combine them into a single image with overlayed colors (currently using a maximum projection in the RGB space). You can simply use the <code class="docutils literal notranslate"><span class="pre">combine_image</span></code> function for that:</p>
+<p>After having converted images to a given colormap, you can combine them into a single image with overlayed colors. Currently you can use a maximum projection (default) or a sum to replicate the Fiji behavior. You can simply use the <code class="docutils literal notranslate"><span class="pre">combine_image</span></code> function for that:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">im1_mapped</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">colorify_by_name</span><span class="p">(</span><span class="n">image1</span><span class="p">,</span> <span class="n">cmap_name</span><span class="o">=</span><span class="s1">&#39;pure_red&#39;</span><span class="p">)</span>
@@ -601,7 +661,26 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_36_0.png" src="../_images/create_plots_36_0.png" />
+<img alt="../_images/create_plots_41_0.png" src="../_images/create_plots_41_0.png" />
+</div>
+</div>
+<p>In the plots below, we compare the two available projections, maximum and sum. The difference is mostly visible when using colormaps that have large overlap, e.g. here with <code class="docutils literal notranslate"><span class="pre">summer</span></code> and <code class="docutils literal notranslate"><span class="pre">cool</span></code>. With <code class="docutils literal notranslate"><span class="pre">pure_green</span></code> and <code class="docutils literal notranslate"><span class="pre">pure_red</span></code> there would for example be no visual difference.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">im1_mapped_b</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">colorify_by_name</span><span class="p">(</span><span class="n">image1</span><span class="p">,</span> <span class="n">cmap_name</span><span class="o">=</span><span class="s1">&#39;cool&#39;</span><span class="p">)</span>
+<span class="n">im2_mapped_b</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">colorify_by_name</span><span class="p">(</span><span class="n">image2</span><span class="p">,</span> <span class="n">cmap_name</span><span class="o">=</span><span class="s1">&#39;summer&#39;</span><span class="p">)</span>
+
+<span class="n">combined</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">combine_image</span><span class="p">([</span><span class="n">im1_mapped_b</span><span class="p">,</span> <span class="n">im2_mapped_b</span><span class="p">],</span> <span class="n">proj_type</span><span class="o">=</span><span class="s1">&#39;max&#39;</span><span class="p">)</span>
+<span class="n">combined_b</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">combine_image</span><span class="p">([</span><span class="n">im1_mapped_b</span><span class="p">,</span> <span class="n">im2_mapped_b</span><span class="p">],</span> <span class="n">proj_type</span><span class="o">=</span><span class="s1">&#39;sum&#39;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">combined</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">combined_b</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/create_plots_43_0.png" src="../_images/create_plots_43_0.png" />
 </div>
 </div>
 </section>
@@ -616,7 +695,7 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_38_0.png" src="../_images/create_plots_38_0.png" />
+<img alt="../_images/create_plots_45_0.png" src="../_images/create_plots_45_0.png" />
 </div>
 </div>
 <p>Most of these functions also work directly with Numpy arrays:</p>
@@ -628,7 +707,7 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_40_0.png" src="../_images/create_plots_40_0.png" />
+<img alt="../_images/create_plots_47_0.png" src="../_images/create_plots_47_0.png" />
 </div>
 </div>
 </section>
@@ -645,24 +724,24 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_42_0.png" src="../_images/create_plots_42_0.png" />
+<img alt="../_images/create_plots_49_0.png" src="../_images/create_plots_49_0.png" />
 </div>
 </div>
 </section>
 <section id="export">
 <h2>Export<a class="headerlink" href="#export" title="Permalink to this headline">¶</a></h2>
-<p>As the figure is simply a Matplotlib figure, you can just use the regular <code class="docutils literal notranslate"><span class="pre">savefig</span></code> function (and use <a class="reference external" href="https://stackoverflow.com/a/27227718">this trick</a> to avoid white space around the plot). For a singe image we can access the figure from the axis itself:</p>
+<p>As the figure is simply a Matplotlib figure, you can just use the regular <code class="docutils literal notranslate"><span class="pre">savefig</span></code> function (and use <a class="reference external" href="https://stackoverflow.com/a/27227718">this trick</a> to avoid white space around the plot). You could access it via <code class="docutils literal notranslate"><span class="pre">microim.fig.savefig</span></code> but we also directly wrap it here in the microim object:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microim</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_blue&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_green&#39;</span><span class="p">],</span>
                               <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">scalebar_units</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
                               <span class="n">scale_text_centered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scale_color</span><span class="o">=</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">,</span> <span class="n">scale_font_size</span><span class="o">=</span><span class="mi">20</span><span class="p">);</span>
-<span class="n">microim</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;single.png&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span> <span class="o">=</span> <span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+<span class="n">microim</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;single.png&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span> <span class="o">=</span> <span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_44_0.png" src="../_images/create_plots_44_0.png" />
+<img alt="../_images/create_plots_51_0.png" src="../_images/create_plots_51_0.png" />
 </div>
 </div>
 <p>And for more complex plots, you can just use the regular figure creation:</p>
@@ -682,7 +761,7 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_46_0.png" src="../_images/create_plots_46_0.png" />
+<img alt="../_images/create_plots_53_0.png" src="../_images/create_plots_53_0.png" />
 </div>
 </div>
 <div class="cell docutils container">

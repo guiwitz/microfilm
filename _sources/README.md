@@ -1,9 +1,15 @@
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/guiwitz/microfilm/master?urlpath=lab)
 # microfilm
 
-This package is a collection of tools to handle 2D time-lapse microscopy images. Its focus is primarily on plotting such datasets. In particular it makes it easy to represents multi-channel datasets in *composite* mode where the color maps of multiple channels are combined into a single image. It also allows to easily complete such figures with standard annotations like labels and scale bars. In addition, these figures can be turned into animations if time-lapse data are provided. Animations are either interactive when run in a Jupyter notebook, or save in standard movie formats (mp4, gif etc.)
+This package is a collection of tools to display and analyze 2D and 2D time-lapse microscopy images. In particular it makes it straightforward to create figures of containing multi-channel images represented in a *composite* color mode as done in the popular image processing software Fiji. It also allows to easily complete such figures with standard annotations like *labels*, *scale bars* and *time counters*. In case of time-lapse data, the figures are turned into animations which can be interactively browsed from a Jupyter notebook and saved in standard movie formats (mp4, gif etc.). Finally, figures and animations can easily be combined into larger *panels*. These main functionalities are provided by the ```microfilm.microplot``` and ```microfilm.microanim``` modules.
 
-Following the model of packages like [seaborn](https://seaborn.pydata.org/index.html), ```microfilm``` offers tight integration with Matplotlib. Complete access is given to the structures like axis and figures underlying the ```microfilm``` objects, allowing thus for the creation of arbitrarily complex plots for users familiar with Matplotlib.
+Following the model of packages like [seaborn](https://seaborn.pydata.org/index.html), ```microfilm``` offers tight integration with Matplotlib. Complete access is given to structures like axis and figures underlying the ```microfilm``` objects, allowing thus for the creation of arbitrarily complex plots for users familiar with Matplotlib.
+
+**Note**: If you use the ````dataset``` module and encounter errors when trying to use the ND2 format because of errors related to unusual ROIs (non-square), you can try to install an alternative version with:
+
+```
+pip install git+https://github.com/guiwitz/nd2reader.git@master#egg=nd2reader -U
+```
 
 ## Installation
 
@@ -18,10 +24,9 @@ To test the package via the Jupyter interface and the notebooks available [here]
 ```
 conda env create -f environment.yml
 ```
+## Simple plot
 
-## Simple example
-
-It is very easy to create a ready-to-use plot of a multi-channel image dataset. In the following code snippet, we load a Numpy array, reshape it (input should by CTXY) and generate the figure below in a single line:
+It is straightforward to create a ready-to-use plot of a multi-channel image dataset. In the following code snippet, we load a Numpy array of a multi-channel time-lapse dataset with shape ```CTXY``` (three channels). The figure below showing the time-point ```t=10``` is generated in a single command with a few options and saved as a png:
 
 ```python
 import numpy as np
@@ -29,19 +34,20 @@ import skimage.io
 from microfilm.microplot import microshow
 
 image = skimage.io.imread('../demodata/coli_nucl_ori_ter.tif')
-image_t10 = image[:,10]
-microim = microshow(images=image_t10, fig_scaling=5,
-                 cmaps=['pure_blue','pure_red', 'pure_green'],
-                 unit='um', scalebar_units=2, unit_per_pix=0.065, scale_text_centered=True, scale_font_size=20,
-                 label_text='A', label_font_size=30)
+time = 10
 
-microim.ax.figure.savefig('../illustrations/composite.png', bbox_inches = 'tight', pad_inches = 0, dpi=600)
+microim = microshow(images=image[:, time, :, :], fig_scaling=5,
+                 cmaps=['pure_blue','pure_red', 'pure_green'],
+                 unit='um', scalebar_units=2, unit_per_pix=0.065, scale_text_centered=True, scale_font_size=20, label_text='A', label_font_size=30)
+
+microim.savefig('../illustrations/composite.png', bbox_inches = 'tight', pad_inches = 0, dpi=600)
 ```
 
 <img src="https://github.com/guiwitz/microfilm/raw/master/illustrations/composite.png" alt="image" width="300">
 
+## Animation
 
-It is then straightforward to extend a simple image into an animation as both objects take the same options. Additionally, a time-stamp can be added to the animation. This code generates the movie visible below:
+It is then easy to extend a simple figure into an animation as both objects take the same options. Additionally, a time-stamp can be added to the animation. This code generates the movie visible below:
 
 ```python
 import numpy as np
@@ -49,19 +55,75 @@ import skimage.io
 from microfilm.microanim import Microanim
 
 image = skimage.io.imread('../demodata/coli_nucl_ori_ter.tif')
+
 microanim = Microanim(data=image, cmaps=['pure_blue','pure_red', 'pure_green'], fig_scaling=5,
                       unit='um', scalebar_units=2, unit_per_pix=0.065,
-                      scale_text_centered=True, scale_font_size=20,)
+                      scale_text_centered=True, scale_font_size=20)
+
 microanim.microim.add_label('A', label_font_size=30)
 microanim.add_time_stamp('T', 10, location='lower left', timestamp_size=20)
+
 microanim.save_movie('../illustrations/composite_movie.gif')
 ```
 
 <img src="https://github.com/guiwitz/microfilm/raw/master/illustrations/composite_movie.gif" alt="image" width="300">
 
-## Features
+## Panels
 
-In addition to plotting and animation, ```microfilm``` currently provides two other modules: ```dataset```to handle time-lapse data of various formats and ```splitmasks``` which provides tools to analyze the evolution of intensity over time in complex regions. More documentation on those modules comes soon.
+Both simple figures and animations can be combined into larger panels via the ```microplot.Micropanel``` and ```microanim.Microanimpanel``` objects. For example we can first create two figures ```microim1``` and ```microim2``` and then combine them into ```micropanel```:
+
+```python
+from microfilm import microplot
+import skimage.io
+
+image = skimage.io.imread('../demodata/coli_nucl_ori_ter.tif')
+
+microim1 = microplot.microshow(images=[image[0, 10, :, :], image[1, 10, :, :]],
+                               cmaps=['gray', 'pure_magenta'], flip_map=[True, False],
+                               label_text='A', label_color='black')
+microim2 = microplot.microshow(images=[image[0, 10, :, :], image[2, 10, :, :]],
+                               cmaps=['gray', 'pure_cyan'], flip_map=[True, False],
+                               label_text='B', label_color='black')
+
+micropanel = microplot.Micropanel(rows=1, cols=2)
+
+micropanel.add_element(pos=0, microim=microim1)
+micropanel.add_element(pos=1, microim=microim2)
+
+micropanel.savefig('../illustrations/panel.png', bbox_inches = 'tight', pad_inches = 0, dpi=600)
+```
+
+<img src="https://github.com/guiwitz/microfilm/raw/master/illustrations/panel.png" alt="image" width="300">
+
+And similarly for animations:
+
+```python
+from microfilm import microplot
+import skimage.io
+
+image = skimage.io.imread('../demodata/coli_nucl_ori_ter.tif')
+
+microanim1 = microanim.Microanim(data=image[[0,1],::],
+                               cmaps=['gray', 'pure_magenta'], flip_map=[True, False],
+                               label_text='A', label_color='black')
+microanim2 = microanim.Microanim(data=image[[0,2],::],
+                               cmaps=['gray', 'pure_cyan'], flip_map=[True, False],
+                               label_text='B', label_color='black')
+
+animpanel = microanim.Microanimpanel(rows=1, cols=2)
+animpanel.add_element(pos=0, microanim=microanim1)
+animpanel.add_element(pos=1, microanim=microanim2)
+
+animpanel.save_movie('../illustrations/panel.gif')
+```
+
+<img src="https://github.com/guiwitz/microfilm/raw/master/illustrations/panel.gif" alt="image" width="300">
+
+## Additional functionalities
+
+In addition to thes main plotting capabilities, the packages also offers:
+- ```microfilm.dataset```: a module offering a simple common data structure to handle multi-channel time-lapse data from multipage tiffs, series of tiff files, Nikon ND2 files, H5 and Numpy arrays. Requirement to use this module are at the moment very constrained (e.g. dimension order of Numpy arrays, name of H5 content etc.) but might evolve in the future.
+- ```microfilm.splitmasks```: a module to analyze the time-evolution of fluorescence intensity in images split into regions with various geometries like sectors, rings etc.
 
 ## Authors
 

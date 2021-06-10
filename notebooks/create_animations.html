@@ -23,8 +23,8 @@
       
 
     
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -34,17 +34,17 @@
     
   <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
+    <script>
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
         const thebe_selector_output = ".output"
@@ -52,7 +52,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="microfilm package" href="../docs/source/microfilm.html" />
+    <link rel="next" title="Creating multi-panel figures" href="create_panels.html" />
     <link rel="prev" title="Producing figures with multi-channel images" href="create_plots.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -102,6 +102,11 @@
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Creating animations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="create_panels.html">
+   Creating multi-panel figures
   </a>
  </li>
 </ul>
@@ -262,6 +267,11 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#animation-panels">
+   Animation panels
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exporting-the-animation">
    Exporting the animation
   </a>
@@ -287,8 +297,8 @@
 <p>While the <code class="docutils literal notranslate"><span class="pre">microplot</span></code> module allows one to create single-frame multi-channel images with annotations, the <code class="docutils literal notranslate"><span class="pre">microanim</span></code> module allows one to create interactive plots and save animations of time-lapse versions of such plots. Both modules use an almost identical set of options to render the images and add annotations.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#%load_ext autoreload</span>
-<span class="c1">#%autoreload 2</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
 </pre></div>
 </div>
 </div>
@@ -331,7 +341,19 @@
 </div>
 </div>
 </div>
-<p>Now we can create the animation object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3, 30, 220, 169)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we can create the animation object. The animation object takes the same arguments as the <code class="docutils literal notranslate"><span class="pre">Microimage</span></code> object. The main difference is that you need to provide in addition a <code class="docutils literal notranslate"><span class="pre">data</span></code> parameter which represents your time-lapse images. The <code class="docutils literal notranslate"><span class="pre">data</span></code> can be either one of the <code class="docutils literal notranslate"><span class="pre">microfilm.dataset</span></code> objects or a simple Numpy array with dimensions <code class="docutils literal notranslate"><span class="pre">C</span> <span class="pre">x</span> <span class="pre">Z</span> <span class="pre">x</span> <span class="pre">X</span> <span class="pre">x</span> <span class="pre">Y</span></code> like <code class="docutils literal notranslate"><span class="pre">image</span></code> used here:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anim</span> <span class="o">=</span> <span class="n">Microanim</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">image</span><span class="p">,</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_blue&#39;</span><span class="p">,</span><span class="s1">&#39;pure_red&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_green&#39;</span><span class="p">])</span>
@@ -351,7 +373,7 @@
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "36fe1a0e4b124d7e826ee7e348010760", "version_major": 2, "version_minor": 0}
+{"model_id": "98164f62c0d543b2866db6b32f4ab032", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
 </section>
@@ -368,35 +390,35 @@
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "eb1e9d0371bc402d984267976a49c8ce", "version_major": 2, "version_minor": 0}
+{"model_id": "f83e97f53cbb41b59b1a34001a87a7b1", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
 <section id="access-to-microim">
 <h3>Access to microim<a class="headerlink" href="#access-to-microim" title="Permalink to this headline">¶</a></h3>
-<p>Within the animation object, you still get access to the <code class="docutils literal notranslate"><span class="pre">Microimage</span></code> object underlying it. This means that you can use the corresponding methods e.g. to add a label:</p>
+<p>As the animation object is very similar to the simple plot object, you get also access to the same underlying methods e.g. to add a label:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anim</span><span class="o">.</span><span class="n">microim</span><span class="o">.</span><span class="n">add_label</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anim</span><span class="o">.</span><span class="n">add_label</span><span class="p">(</span><span class="s1">&#39;a comment&#39;</span><span class="p">,</span> <span class="n">label_location</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">);</span>
 <span class="n">anim</span><span class="o">.</span><span class="n">ui</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "36fe1a0e4b124d7e826ee7e348010760", "version_major": 2, "version_minor": 0}
+{"model_id": "f83e97f53cbb41b59b1a34001a87a7b1", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
-<p>And of course via <code class="docutils literal notranslate"><span class="pre">self.microim</span></code> you also get access to the underlying axis object, so that you have full access to all Matplotlib customizations:</p>
+<p>And again, you also get access to the underlying Matplotlib objects like axis:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anim</span><span class="o">.</span><span class="n">microim</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="mf">0.7</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anim</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="mf">0.7</span><span class="p">)</span>
 <span class="n">anim</span><span class="o">.</span><span class="n">ui</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "36fe1a0e4b124d7e826ee7e348010760", "version_major": 2, "version_minor": 0}
+{"model_id": "f83e97f53cbb41b59b1a34001a87a7b1", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
 </section>
@@ -415,7 +437,67 @@
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "4ae48de6592f48e2b64145d979303e42", "version_major": 2, "version_minor": 0}
+{"model_id": "e4b8048ffe144882a72c9aa000ade806", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+</section>
+<section id="animation-panels">
+<h2>Animation panels<a class="headerlink" href="#animation-panels" title="Permalink to this headline">¶</a></h2>
+<p>Just like for regular plots, you may want to create animations with multiple panels. The principle here is the same as before: you create first all your separate animations and then combined them into a single multipanel object:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">microfilm.microanim</span> <span class="kn">import</span> <span class="n">Microanimpanel</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anim</span> <span class="o">=</span> <span class="n">Microanim</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">image</span><span class="p">,</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_blue&#39;</span><span class="p">,</span><span class="s1">&#39;pure_red&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_green&#39;</span><span class="p">],</span>
+                <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">scalebar_units</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">fig_scaling</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">anim</span><span class="o">.</span><span class="n">add_time_stamp</span><span class="p">(</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s1">&#39;lower left&#39;</span><span class="p">,</span> <span class="n">timestamp_color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">anim2</span> <span class="o">=</span> <span class="n">Microanim</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">image</span><span class="p">,</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_cyan&#39;</span><span class="p">,</span><span class="s1">&#39;pure_magenta&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_green&#39;</span><span class="p">],</span>
+                <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">scalebar_units</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">fig_scaling</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">anim2</span><span class="o">.</span><span class="n">add_time_stamp</span><span class="p">(</span><span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microanim_panel</span> <span class="o">=</span> <span class="n">Microanimpanel</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microanim_panel</span><span class="o">.</span><span class="n">add_element</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">microanim</span><span class="o">=</span><span class="n">anim</span><span class="p">)</span>
+<span class="n">microanim_panel</span><span class="o">.</span><span class="n">add_element</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">microanim</span><span class="o">=</span><span class="n">anim2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anim</span><span class="o">.</span><span class="n">ui</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "c491e5373a994abcbecb4c88cdcbeb64", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microanim_panel</span><span class="o">.</span><span class="n">ui</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "7b70c76c57074529a6cc7f70e7323abb", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
 </section>
@@ -424,12 +506,12 @@
 <p>Once you are satisfied with your movie, you may want to export it to integrate it e.g. in a presentation. You can do that easily using the <code class="docutils literal notranslate"><span class="pre">save_movie</span></code> method. You can specify the image quality and the frames per second for various movie formats (.mov, .avi, .mpg, .mpeg, .mp4, .mkv, .wmv) and the image format is simply recovered from the file name. You can also export as gif, but don’t have access to the <code class="docutils literal notranslate"><span class="pre">quality</span></code> option there:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anim</span><span class="o">.</span><span class="n">save_movie</span><span class="p">(</span><span class="s1">&#39;movie.mp4&#39;</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">quality</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anim</span><span class="o">.</span><span class="n">save_movie</span><span class="p">(</span><span class="s1">&#39;movie3.mp4&#39;</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">quality</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>IMAGEIO FFMPEG_WRITER WARNING: input image is not divisible by macro_block_size=16, resizing from (235, 269) to (240, 272) to ensure video compatibility with most codecs and players. To prevent resizing, make your input image divisible by the macro_block_size or set the macro_block_size to 1 (risking incompatibility).
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>IMAGEIO FFMPEG_WRITER WARNING: input image is not divisible by macro_block_size=16, resizing from (460, 600) to (464, 608) to ensure video compatibility with most codecs and players. To prevent resizing, make your input image divisible by the macro_block_size or set the macro_block_size to 1 (risking incompatibility).
 </pre></div>
 </div>
 </div>
@@ -437,6 +519,14 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anim</span><span class="o">.</span><span class="n">save_movie</span><span class="p">(</span><span class="s1">&#39;movie.gif&#39;</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Panels can be saved in the exact same way:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microanim_panel</span><span class="o">.</span><span class="n">save_movie</span><span class="p">(</span><span class="s1">&#39;movie4.mp4&#39;</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">quality</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -506,7 +596,7 @@
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="create_plots.html" title="previous page">Producing figures with multi-channel images</a>
-    <a class='right-next' id="next-link" href="../docs/source/microfilm.html" title="next page">microfilm package</a>
+    <a class='right-next' id="next-link" href="create_panels.html" title="next page">Creating multi-panel figures</a>
 
         </div>
         

@@ -23,8 +23,8 @@
       
 
     
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -34,17 +34,17 @@
     
   <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
+    <script>
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
         const thebe_selector_output = ".output"
@@ -100,6 +100,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="create_animations.html">
    Creating animations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="create_panels.html">
+   Creating multi-panel figures
   </a>
  </li>
 </ul>
@@ -246,6 +251,13 @@
   <a class="reference internal nav-link" href="#radial-sectors">
    Radial sectors
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#changing-the-image-colormap">
+     Changing the image colormap
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#angular-sectors">
@@ -253,9 +265,26 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#angular-and-radial-sectors">
+   Angular and radial sectors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#extracting-signals">
    Extracting signals
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#extracting-signal-from-multiple-channels">
+     Extracting signal from multiple channels
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#limited-time-points">
+     Limited time points
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#plotting">
@@ -412,6 +441,29 @@
 </div>
 </div>
 </div>
+<section id="changing-the-image-colormap">
+<h3>Changing the image colormap<a class="headerlink" href="#changing-the-image-colormap" title="Permalink to this headline">¶</a></h3>
+<p>You can also use the microfilm package to generate and use alternative colormaps for the image plot itself. For example if you want to have a gray-scale inverted colormap:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">microfilm.microplot</span>
+
+<span class="n">gray_invert</span> <span class="o">=</span> <span class="n">microfilm</span><span class="o">.</span><span class="n">microplot</span><span class="o">.</span><span class="n">cmaps_def</span><span class="p">(</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">flip_map</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">myplot</span> <span class="o">=</span> <span class="n">microfilm</span><span class="o">.</span><span class="n">splitmasks</span><span class="o">.</span><span class="n">plot_sectors</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">radius_labels</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap_rad</span><span class="p">,</span> <span class="n">im_cmap</span><span class="o">=</span><span class="n">gray_invert</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intensity_by_sector_19_0.png" src="../_images/Intensity_by_sector_19_0.png" />
+</div>
+</div>
+</section>
 </section>
 <section id="angular-sectors">
 <h2>Angular sectors<a class="headerlink" href="#angular-sectors" title="Permalink to this headline">¶</a></h2>
@@ -435,7 +487,28 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Intensity_by_sector_20_0.png" src="../_images/Intensity_by_sector_20_0.png" />
+<img alt="../_images/Intensity_by_sector_23_0.png" src="../_images/Intensity_by_sector_23_0.png" />
+</div>
+</div>
+</section>
+<section id="angular-and-radial-sectors">
+<h2>Angular and radial sectors<a class="headerlink" href="#angular-and-radial-sectors" title="Permalink to this headline">¶</a></h2>
+<p>We can also combine the radial and angular masks, to create only a ring with a given width. For that we use again the <code class="docutils literal notranslate"><span class="pre">create_sector_mask</span></code> function but use <strong>and additional parameter <code class="docutils literal notranslate"><span class="pre">radius</span></code> for the ring width</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">angular_width</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">max_rad</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">ring_width</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">sector_labels</span> <span class="o">=</span> <span class="n">microfilm</span><span class="o">.</span><span class="n">splitmasks</span><span class="o">.</span><span class="n">create_sector_mask</span><span class="p">(</span><span class="n">center</span><span class="o">=</span><span class="n">cm</span><span class="p">,</span> <span class="n">im_dims</span><span class="o">=</span><span class="n">image</span><span class="o">.</span><span class="n">dims</span><span class="p">,</span>
+                                                     <span class="n">angular_width</span><span class="o">=</span><span class="n">angular_width</span><span class="p">,</span> <span class="n">max_rad</span><span class="o">=</span><span class="n">max_rad</span><span class="p">,</span> <span class="n">ring_width</span><span class="o">=</span><span class="n">ring_width</span><span class="p">)</span>
+<span class="n">colors_angle</span><span class="p">,</span> <span class="n">cmap_angle</span> <span class="o">=</span> <span class="n">microfilm</span><span class="o">.</span><span class="n">splitmasks</span><span class="o">.</span><span class="n">get_cmap_labels</span><span class="p">(</span><span class="n">sector_labels</span><span class="p">,</span> <span class="n">cmap_name</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+
+<span class="n">microfilm</span><span class="o">.</span><span class="n">splitmasks</span><span class="o">.</span><span class="n">plot_sectors</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">sector_labels</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap_angle</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intensity_by_sector_25_0.png" src="../_images/Intensity_by_sector_25_0.png" />
 </div>
 </div>
 </section>
@@ -462,9 +535,82 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Intensity_by_sector_24_0.png" src="../_images/Intensity_by_sector_24_0.png" />
+<img alt="../_images/Intensity_by_sector_29_0.png" src="../_images/Intensity_by_sector_29_0.png" />
 </div>
 </div>
+<section id="extracting-signal-from-multiple-channels">
+<h3>Extracting signal from multiple channels<a class="headerlink" href="#extracting-signal-from-multiple-channels" title="Permalink to this headline">¶</a></h3>
+<p>Instead of a single channel, you can also provide a list of channels from where to extract the signal:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">channels</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">channel_name</span>
+<span class="n">channels</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;C2-MAX_mitosis.tif&#39;, &#39;C1-MAX_mitosis.tif&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">signal_radius_multi</span> <span class="o">=</span> <span class="n">microfilm</span><span class="o">.</span><span class="n">splitmasks</span><span class="o">.</span><span class="n">measure_intensities</span><span class="p">(</span>
+    <span class="n">time_image</span><span class="o">=</span><span class="n">image</span><span class="o">.</span><span class="n">frame_generator</span><span class="p">(</span><span class="n">channel</span><span class="o">=</span><span class="n">channels</span><span class="p">),</span> 
+    <span class="n">im_labels</span><span class="o">=</span><span class="n">radius_labels</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">signal_radius_multi</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(51, 10, 2)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now the output has an additional dimension corresponding to the number of channels, here 2. You can now plot them separately:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">microfilm</span><span class="o">.</span><span class="n">splitmasks</span><span class="o">.</span><span class="n">plot_signals</span><span class="p">(</span><span class="n">signal_radius_multi</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">color_array</span><span class="o">=</span><span class="n">colors_rad</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">microfilm</span><span class="o">.</span><span class="n">splitmasks</span><span class="o">.</span><span class="n">plot_signals</span><span class="p">(</span><span class="n">signal_radius_multi</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">color_array</span><span class="o">=</span><span class="n">colors_rad</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+                                  
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intensity_by_sector_35_0.png" src="../_images/Intensity_by_sector_35_0.png" />
+</div>
+</div>
+</section>
+<section id="limited-time-points">
+<h3>Limited time points<a class="headerlink" href="#limited-time-points" title="Permalink to this headline">¶</a></h3>
+<p>You can also limit your analyis to a given fraction of the time lapse using the <code class="docutils literal notranslate"><span class="pre">max_time</span></code>, <code class="docutils literal notranslate"><span class="pre">min_time</span></code> and <code class="docutils literal notranslate"><span class="pre">steps</span></code> parameters:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">signal_radius_multi</span> <span class="o">=</span> <span class="n">microfilm</span><span class="o">.</span><span class="n">splitmasks</span><span class="o">.</span><span class="n">measure_intensities</span><span class="p">(</span>
+    <span class="n">time_image</span><span class="o">=</span><span class="n">image</span><span class="o">.</span><span class="n">frame_generator</span><span class="p">(</span><span class="n">channel</span><span class="o">=</span><span class="n">channels</span><span class="p">),</span> 
+    <span class="n">im_labels</span><span class="o">=</span><span class="n">radius_labels</span><span class="p">,</span> <span class="n">min_time</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">max_time</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">microfilm</span><span class="o">.</span><span class="n">splitmasks</span><span class="o">.</span><span class="n">plot_signals</span><span class="p">(</span><span class="n">signal_radius_multi</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">color_array</span><span class="o">=</span><span class="n">colors_rad</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">microfilm</span><span class="o">.</span><span class="n">splitmasks</span><span class="o">.</span><span class="n">plot_signals</span><span class="p">(</span><span class="n">signal_radius_multi</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">color_array</span><span class="o">=</span><span class="n">colors_rad</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>    
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intensity_by_sector_37_0.png" src="../_images/Intensity_by_sector_37_0.png" />
+</div>
+</div>
+<p>Note that the time axis is not correct here and needs to be manually adjusted.</p>
+</section>
 </section>
 <section id="plotting">
 <h2>Plotting<a class="headerlink" href="#plotting" title="Permalink to this headline">¶</a></h2>
@@ -483,7 +629,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Intensity_by_sector_26_0.png" src="../_images/Intensity_by_sector_26_0.png" />
+<img alt="../_images/Intensity_by_sector_40_0.png" src="../_images/Intensity_by_sector_40_0.png" />
 </div>
 </div>
 </section>
@@ -499,7 +645,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Intensity_by_sector_28_0.png" src="../_images/Intensity_by_sector_28_0.png" />
+<img alt="../_images/Intensity_by_sector_42_0.png" src="../_images/Intensity_by_sector_42_0.png" />
 </div>
 </div>
 <p>To export the data as CSV file use the <code class="docutils literal notranslate"><span class="pre">save_signal</span></code> function. You can export in two different format, ‘long’ or ‘wide’. In long format you obtain a table with three columns - time, sector, intensity - while in ‘wide’ format the rows correspond to time and the columns to sectors.</p>
@@ -512,11 +658,20 @@
 </div>
 </div>
 </div>
+<p>When saving data for multiple channels, an additional column is added in long format containing the channel name which has to be provided via the <code class="docutils literal notranslate"><span class="pre">channels</span></code> parameter:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microfilm</span><span class="o">.</span><span class="n">splitmasks</span><span class="o">.</span><span class="n">save_signal</span><span class="p">(</span><span class="n">signal</span><span class="o">=</span><span class="n">signal_radius_multi</span><span class="p">,</span>
+                                 <span class="n">name</span><span class="o">=</span><span class="s1">&#39;signal_radius_long_multi.csv&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;long&#39;</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="n">channels</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 <p>To re-import the data you can just use the standard Pandas reader:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;signal_radius_long.csv&#39;</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;signal_radius_long_multi.csv&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -542,6 +697,7 @@
       <th>time</th>
       <th>sector</th>
       <th>intensity</th>
+      <th>channel</th>
     </tr>
   </thead>
   <tbody>
@@ -549,71 +705,82 @@
       <th>0</th>
       <td>0</td>
       <td>0</td>
-      <td>7348.579710</td>
+      <td>5471.478261</td>
+      <td>C2-MAX_mitosis.tif</td>
     </tr>
     <tr>
       <th>1</th>
       <td>1</td>
       <td>0</td>
-      <td>7095.826087</td>
+      <td>4650.130435</td>
+      <td>C2-MAX_mitosis.tif</td>
     </tr>
     <tr>
       <th>2</th>
       <td>2</td>
       <td>0</td>
-      <td>5644.507246</td>
+      <td>4235.275362</td>
+      <td>C2-MAX_mitosis.tif</td>
     </tr>
     <tr>
       <th>3</th>
       <td>3</td>
       <td>0</td>
-      <td>5671.275362</td>
+      <td>4900.014493</td>
+      <td>C2-MAX_mitosis.tif</td>
     </tr>
     <tr>
       <th>4</th>
       <td>4</td>
       <td>0</td>
-      <td>6026.623188</td>
+      <td>5463.028986</td>
+      <td>C2-MAX_mitosis.tif</td>
     </tr>
     <tr>
       <th>...</th>
       <td>...</td>
       <td>...</td>
       <td>...</td>
+      <td>...</td>
     </tr>
     <tr>
-      <th>505</th>
-      <td>46</td>
+      <th>295</th>
+      <td>10</td>
       <td>9</td>
-      <td>3624.617209</td>
+      <td>2697.925474</td>
+      <td>C1-MAX_mitosis.tif</td>
     </tr>
     <tr>
-      <th>506</th>
-      <td>47</td>
+      <th>296</th>
+      <td>11</td>
       <td>9</td>
-      <td>3583.294715</td>
+      <td>3001.896341</td>
+      <td>C1-MAX_mitosis.tif</td>
     </tr>
     <tr>
-      <th>507</th>
-      <td>48</td>
+      <th>297</th>
+      <td>12</td>
       <td>9</td>
-      <td>3653.734417</td>
+      <td>3097.431572</td>
+      <td>C1-MAX_mitosis.tif</td>
     </tr>
     <tr>
-      <th>508</th>
-      <td>49</td>
+      <th>298</th>
+      <td>13</td>
       <td>9</td>
-      <td>3763.945799</td>
+      <td>2977.772358</td>
+      <td>C1-MAX_mitosis.tif</td>
     </tr>
     <tr>
-      <th>509</th>
-      <td>50</td>
+      <th>299</th>
+      <td>14</td>
       <td>9</td>
-      <td>3657.179539</td>
+      <td>2916.318428</td>
+      <td>C1-MAX_mitosis.tif</td>
     </tr>
   </tbody>
 </table>
-<p>510 rows × 3 columns</p>
+<p>300 rows × 4 columns</p>
 </div></div></div>
 </div>
 </section>
@@ -652,9 +819,9 @@
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "5571721d04c2429ea7ca60d3fc62c851", "version_major": 2, "version_minor": 0}
+{"model_id": "86da76e1cddc4dbebed69d2c8bee66ba", "version_major": 2, "version_minor": 0}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "1d47d22237ec475993df607a086993fc", "version_major": 2, "version_minor": 0}
+{"model_id": "045ea6b550b849ddb4d5a27b6f6c8df1", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
 </section>
