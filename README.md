@@ -38,7 +38,7 @@ time = 10
 
 microim = microshow(images=image[:, time, :, :], fig_scaling=5,
                  cmaps=['pure_blue','pure_red', 'pure_green'],
-                 unit='um', scalebar_units=2, unit_per_pix=0.065, scale_text_centered=True, scale_font_size=20, label_text='A', label_font_size=30)
+                 unit='um', scalebar_size_in_units=2, scalebar_unit_per_pix=0.065, scalebar_text_centered=True, scalebar_font_size=20, label_text='A', label_font_size=30)
 
 microim.savefig('../illustrations/composite.png', bbox_inches = 'tight', pad_inches = 0, dpi=600)
 ```
@@ -57,8 +57,8 @@ from microfilm.microanim import Microanim
 image = skimage.io.imread('../demodata/coli_nucl_ori_ter.tif')
 
 microanim = Microanim(data=image, cmaps=['pure_blue','pure_red', 'pure_green'], fig_scaling=5,
-                      unit='um', scalebar_units=2, unit_per_pix=0.065,
-                      scale_text_centered=True, scale_font_size=20)
+                      unit='um', scalebar_size_in_units=2, scalebar_unit_per_pix=0.065,
+                      scalebar_text_centered=True, scalebar_font_size=20)
 
 microanim.microim.add_label('A', label_font_size=30)
 microanim.add_time_stamp('T', 10, location='lower left', timestamp_size=20)
