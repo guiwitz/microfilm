@@ -6,7 +6,7 @@ import pandas as pd
 import ipywidgets as ipw
 import imageio
 
-from .microplot import multichannel_to_rgb, check_rescale_type
+from .colorify import multichannel_to_rgb, check_rescale_type
 from .microplot import Microimage
 from .dataset import Nparray
 
