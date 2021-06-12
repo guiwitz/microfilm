@@ -5,12 +5,6 @@ This package is a collection of tools to display and analyze 2D and 2D time-laps
 
 Following the model of packages like [seaborn](https://seaborn.pydata.org/index.html), ```microfilm``` offers tight integration with Matplotlib. Complete access is given to structures like axis and figures underlying the ```microfilm``` objects, allowing thus for the creation of arbitrarily complex plots for users familiar with Matplotlib.
 
-**Note**: If you use the ````dataset``` module and encounter errors when trying to use the ND2 format because of errors related to unusual ROIs (non-square), you can try to install an alternative version with:
-
-```
-pip install git+https://github.com/guiwitz/nd2reader.git@master#egg=nd2reader -U
-```
-
 ## Installation
 
 You can install this package directly from Github using: 
@@ -23,6 +17,12 @@ To test the package via the Jupyter interface and the notebooks available [here]
 
 ```
 conda env create -f environment.yml
+```
+
+**Note**: If you use the ```dataset``` module and encounter errors when trying to use the ND2 format because of errors related to unusual ROIs (non-square), you can try to install an alternative version with:
+
+```
+pip install git+https://github.com/guiwitz/nd2reader.git@master#egg=nd2reader -U
 ```
 ## Simple plot
 
@@ -38,7 +38,7 @@ time = 10
 
 microim = microshow(images=image[:, time, :, :], fig_scaling=5,
                  cmaps=['pure_blue','pure_red', 'pure_green'],
-                 unit='um', scalebar_units=2, unit_per_pix=0.065, scale_text_centered=True, scale_font_size=20, label_text='A', label_font_size=30)
+                 unit='um', scalebar_size_in_units=2, scalebar_unit_per_pix=0.065, scalebar_text_centered=True, scalebar_font_size=20, label_text='A', label_font_size=30)
 
 microim.savefig('../illustrations/composite.png', bbox_inches = 'tight', pad_inches = 0, dpi=600)
 ```
@@ -57,8 +57,8 @@ from microfilm.microanim import Microanim
 image = skimage.io.imread('../demodata/coli_nucl_ori_ter.tif')
 
 microanim = Microanim(data=image, cmaps=['pure_blue','pure_red', 'pure_green'], fig_scaling=5,
-                      unit='um', scalebar_units=2, unit_per_pix=0.065,
-                      scale_text_centered=True, scale_font_size=20)
+                      unit='um', scalebar_size_in_units=2, scalebar_unit_per_pix=0.065,
+                      scalebar_text_centered=True, scalebar_font_size=20)
 
 microanim.microim.add_label('A', label_font_size=30)
 microanim.add_time_stamp('T', 10, location='lower left', timestamp_size=20)
@@ -103,12 +103,12 @@ import skimage.io
 
 image = skimage.io.imread('../demodata/coli_nucl_ori_ter.tif')
 
-microanim1 = microanim.Microanim(data=image[[0,1],::],
-                               cmaps=['gray', 'pure_magenta'], flip_map=[True, False],
-                               label_text='A', label_color='black')
-microanim2 = microanim.Microanim(data=image[[0,2],::],
-                               cmaps=['gray', 'pure_cyan'], flip_map=[True, False],
-                               label_text='B', label_color='black')
+microanim1 = microanim.Microanim(data=image[[0,1],::], cmaps=['gray', 'pure_magenta'],
+                                 flip_map=[True, False], label_text='A', label_color='black')
+microanim2 = microanim.Microanim(data=image[[0,2],::], cmaps=['gray', 'pure_cyan'],
+                                 flip_map=[True, False], label_text='B', label_color='black')
+
+microanim1.add_time_stamp(unit='T', unit_per_frame='3', location='lower-right', timestamp_color='black')
 
 animpanel = microanim.Microanimpanel(rows=1, cols=2)
 animpanel.add_element(pos=0, microanim=microanim1)
@@ -122,6 +122,7 @@ animpanel.save_movie('../illustrations/panel.gif')
 ## Additional functionalities
 
 In addition to thes main plotting capabilities, the packages also offers:
+- ```microfilm.colorify```: a series of utility functions used by the main functions to create the composite color images. It contains functions to create colormaps, to turn 2D arrays into 3D-RGB arrays with appropriate colormaps etc.
 - ```microfilm.dataset```: a module offering a simple common data structure to handle multi-channel time-lapse data from multipage tiffs, series of tiff files, Nikon ND2 files, H5 and Numpy arrays. Requirement to use this module are at the moment very constrained (e.g. dimension order of Numpy arrays, name of H5 content etc.) but might evolve in the future.
 - ```microfilm.splitmasks```: a module to analyze the time-evolution of fluorescence intensity in images split into regions with various geometries like sectors, rings etc.
 
