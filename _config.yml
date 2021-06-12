@@ -1,6 +1,6 @@
 # Book settings
 title: microfilm
-#logo: 'logo.png'
+logo: 'illustrations/microanim_logo.png'
 execute:
   execute_notebooks: "off"
 
