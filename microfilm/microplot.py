@@ -1,15 +1,18 @@
 import inspect
 
-from matplotlib.pyplot import savefig
+from matplotlib.pyplot import figure, savefig, text
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
+from numpy import dtype
+import numpy as np
 
 from . import colorify
 
    
 def microshow(images=None, cmaps=None, flip_map=False, rescale_type=None, limits=None, num_colors=256,
-              proj_type='max', scalebar_thickness=3, scalebar_unit_per_pix=None, scalebar_size_in_units=None, unit=None,
-              scalebar_ypos=0.05, scalebar_color='white', scalebar_font_size=12, scalebar_text_centered=False,
+              proj_type='max', channel_names=None, channel_label_show=False, channel_label_type='title',
+              channel_label_size=0.05, scalebar_thickness=3, scalebar_unit_per_pix=None, scalebar_size_in_units=None,
+              unit=None, scalebar_ypos=0.05, scalebar_color='white', scalebar_font_size=12, scalebar_text_centered=True,
               ax=None, fig_scaling=3, label_text=None, label_location='upper left',
               label_color='white', label_font_size=15, microim=None
              ):
@@ -37,6 +40,13 @@ def microshow(images=None, cmaps=None, flip_map=False, rescale_type=None, limits
         projection type of color combination
         max: maximum
         sum: sum projection, restricted to dtype range
+    channel_names: list
+        list of channel names
+    channel_label_show: bool
+    channel_label_type: str
+        'title', 'in_fig'
+    channel_label_size: int
+        font size for channel labels
     scalebar_thickness: int
         height of scale bar
     scalebar_unit_per_pix: float
@@ -79,7 +89,9 @@ def microshow(images=None, cmaps=None, flip_map=False, rescale_type=None, limits
             raise Exception(f"You need to provide at least images")
  
         microim = Microimage(images=images, cmaps=cmaps, flip_map=flip_map, rescale_type=rescale_type,
-        limits=limits, num_colors=num_colors, proj_type=proj_type, scalebar_thickness=scalebar_thickness, 
+        limits=limits, num_colors=num_colors, proj_type=proj_type, channel_names=channel_names,
+        channel_label_show=channel_label_show, channel_label_type=channel_label_type,
+        channel_label_size=channel_label_size, scalebar_thickness=scalebar_thickness, 
         scalebar_unit_per_pix=scalebar_unit_per_pix, scalebar_size_in_units=scalebar_size_in_units, unit=unit,
         scalebar_ypos=scalebar_ypos, scalebar_color=scalebar_color, scalebar_font_size=scalebar_font_size,
         scalebar_text_centered=scalebar_text_centered, ax=ax, fig_scaling=fig_scaling, label_text=label_text,
@@ -94,6 +106,10 @@ def microshow(images=None, cmaps=None, flip_map=False, rescale_type=None, limits
                                     rescale_type=microim.rescale_type, limits=microim.limits,
                                     num_colors=microim.num_colors, proj_type=microim.proj_type)
     
+    if microim.cmaps is None:
+            rgb = ['pure_red', 'pure_green', 'pure_blue']
+            microim.cmaps = [rgb[k] for k in range(len(microim.images))]
+    
     height = microim.images[0].shape[0]
     width = microim.images[0].shape[1]
     if height > width:
@@ -107,13 +123,18 @@ def microshow(images=None, cmaps=None, flip_map=False, rescale_type=None, limits
         # trick https://stackoverflow.com/a/63187965
         microim.fig = plt.figure(frameon=False)
         microim.fig.set_size_inches(width_scaled, height_scaled, forward=False)
-        microim.ax = plt.Axes(microim.fig, [0.0, 0.0, 1.0, 1.0])
+        microim.ax = plt.Axes(microim.fig, [0.0, 0.0, 1.0-0.0, 1.0])
         microim.ax.set_axis_off()
         microim.fig.add_axes(microim.ax)
     else:
         microim.fig = microim.ax.figure
     microim.ax.imshow(converted, interpolation='nearest')
     microim.ax.set_axis_off()
+ 
+    if microim.channel_names is None:
+        microim.channel_names = channel_names
+    if microim.channel_label_show:
+        microim.add_channel_labels(microim.channel_names, microim.channel_label_size)
     
     if microim.unit is not None:
     
@@ -162,6 +183,13 @@ class Microimage:
         projection type of color combination
         max: maximum
         sum: sum projection, restricted to dtype range
+    channel_names: list
+        list of channel names
+    channel_label_show: bool
+    channel_label_type: str
+        'title', 'in_fig'
+    channel_label_size: int
+        font size of channel label
     scalebar_thickness: int
         height of scale bar
     scalebar_unit_per_pix: float
@@ -196,10 +224,11 @@ class Microimage:
     """
 
     def __init__(self, images, cmaps=None, flip_map=False, rescale_type=None, limits=None, num_colors=256,
-              proj_type='max', scalebar_thickness=3, scalebar_unit_per_pix=None, scalebar_size_in_units=None, unit=None,
-              scalebar_ypos=0.05, scalebar_color='white', scalebar_font_size=12, scalebar_text_centered=False,
-              ax=None, fig_scaling=3, label_text=None, label_location='upper left',
-              label_color='white', label_font_size=15
+              proj_type='max', channel_names=None, channel_label_show=False,
+              channel_label_type='title', channel_label_size=0.05, scalebar_thickness=3, scalebar_unit_per_pix=None,
+              scalebar_size_in_units=None, unit=None, scalebar_ypos=0.05, scalebar_color='white',
+              scalebar_font_size=12, scalebar_text_centered=True, ax=None, fig_scaling=3, label_text=None,
+              label_location='upper left', label_color='white', label_font_size=15
              ):
         
         self.__dict__.update(locals())
@@ -222,6 +251,7 @@ class Microimage:
             self.label_location = None
             self.label_color = None
             self.label_font_size = None
+            
 
     def update(self, ax=None, copy=False):
         """
@@ -260,12 +290,16 @@ class Microimage:
 
     def savefig(self, *args, **kwargs):
 
+        kwargs['bbox_inches'] = 'tight'
+        kwargs['pad_inches'] = 0
+
         self.fig.savefig(*args, **kwargs)
+
     savefig.__doc__ = plt.savefig.__doc__
 
     
     def add_scalebar(self, unit, scalebar_size_in_units, scalebar_unit_per_pix, scalebar_thickness=3, scalebar_ypos=0.05,
-        scalebar_color='white', scalebar_font_size=12, scalebar_text_centered=False):
+        scalebar_color='white', scalebar_font_size=12, scalebar_text_centered=True):
         """
         Add scalebar to an image.
 
@@ -417,6 +451,59 @@ class Microimage:
 
         return label_text
 
+    def add_channel_labels(self, channel_names=None, channel_label_size=0.05):
+        """
+        Add the channel names color with the corresponding colormap as figure title
+
+        Parameters
+        ----------
+        channel_names: list
+            list of channel names, defaults to channel-1, channel-2 etc.
+        channel_label_size: int
+            font size of label
+
+        """
+        self.channel_names = channel_names
+        self.channel_label_size = channel_label_size
+
+        if self.channel_names is None:
+            self.channel_names = ['Channel-' + str(i) for i in range(len(self.images))]
+    
+        '''r = self.fig.canvas.get_renderer()
+        ch_lab = self.ax.text(
+            x=0.5, y=1.0, s=self.channel_names[0], ha="center",
+            transform=self.ax.transAxes,
+            fontdict={'color':colorify.color_translate(self.cmaps[0]),'size':self.channel_label_size}
+            )
+
+        image_height = self.ax.get_tightbbox(r).height
+        text_height = ch_lab.get_window_extent(renderer=r).height / image_height
+        ch_lab.set_y(y=1 + (len(self.channel_names)-1)*(1.1*text_height))
+
+        for ind in range(1, len(self.channel_names)):
+            self.ax.text(x=0.5, y=1.01+(len(self.channel_names)-ind-1)*(1.1*text_height),
+                s=self.channel_names[ind], ha="center", transform=self.ax.transAxes,
+                fontdict={'color':colorify.color_translate(self.cmaps[ind]),'size':self.channel_label_size}
+                )'''
+
+        figsize = self.fig.get_size_inches()[1]
+        fontsize = channel_label_size*figsize*100
+
+        line_space = 0.005 * figsize
+        nlines = len(self.channel_names)
+
+        tot_space = nlines * (channel_label_size+line_space)
+        self.ax.set_position([self.ax.get_position().bounds[0], self.ax.get_position().bounds[1],
+                 self.ax.get_position().bounds[2], self.ax.get_position().bounds[3]-tot_space])
+
+        for i in range(nlines):
+            # The factor (1-tot_space) is a rescaling of the y position to take into
+            # account that the axis only occupies that portion of the figure
+            self.ax.text(
+                x=0.5, y=1+line_space+i*(channel_label_size+line_space)/(1-tot_space),
+                s=self.channel_names[i], ha="center", transform=self.ax.transAxes,
+                fontdict={'color':colorify.color_translate(self.cmaps[i]),'size':fontsize}
+            )
 class Micropanel:
     """
     Class implementing a panel object of multiple Microimage
@@ -452,6 +539,106 @@ class Micropanel:
             microim.update(self.ax[pos])
         
         self.microplots.append(microim)
+
+    def savefig(self, *args, **kwargs):
+
+        self.fig.savefig(*args, **kwargs)
+    savefig.__doc__ = plt.savefig.__doc__
+
+
+class Micropanel2:
+    """
+    Class implementing a panel object of multiple Microimage
+    objects.
+
+    Parameters
+    ----------
+    rows: int
+        number of panel rows
+    cols: int
+        number of panel columns
+    fig_kwargs: parameters normally passed to plt.subplots()
+
+    Attributes
+    ----------
+    fig: Matplotlib figure object
+    ax: list
+        list of Matplotlib axis objects
+    microplots: list
+        list of Microimage objects
+
+    """
+    
+    def __init__(self, rows, cols, margin=0.01, figsize=2, channel_label_size=0.05, **fig_kwargs):
+
+        self.rows = rows
+        self.cols = cols
+        self.margin = margin
+        self.figsize = figsize
+        self.channel_label_size = channel_label_size
+
+        self.microplots = np.empty((rows, cols), dtype=object)
+        
+        ## grid params
+        margin = margin * figsize
+
+        ## part size
+        part_size_w = (1 - margin * (cols - 1))/cols
+        part_size_h = (1 - margin * (rows - 1))/rows
+
+        fig = plt.figure(frameon=False)
+        fig.set_size_inches(figsize*cols, figsize*rows, forward=False)
+
+        # add axes
+        ax = np.empty((rows, cols), dtype=object)
+        for j in range(rows):
+            for i in range(cols):
+                ax[j,i] = plt.Axes(fig,
+                                [i*(part_size_w+margin),
+                                    j*(part_size_h+margin),
+                                    part_size_w,
+                                    part_size_h])
+                fig.add_axes(ax[j,i])
+
+        self.ax = ax
+        self.fig = fig
+
+    def add_channel_label(self):
+
+        ## title params
+        line_space = 0.01
+        nlines = np.max([len(x.channel_names) for x in self.microplots.ravel() if x is not None])
+        tot_space = nlines * (self.channel_label_size+line_space)
+        fontsize = self.channel_label_size*self.figsize*self.rows*100
+
+        part_size_w = (1 - self.margin * (self.cols - 1))/self.cols
+        part_size_h = (1 - tot_space * (self.rows) - self.margin * (self.rows - 1))/self.rows
+
+        for j in range(self.rows):
+            for i in range(self.cols):
+
+                self.ax[j,i].set_position([self.ax[j,i].get_position().bounds[0], self.ax[j,i].get_position().bounds[1],
+                 self.ax[j,i].get_position().bounds[2], self.ax[j,i].get_position().bounds[3]-tot_space])
+
+        for j in range(self.rows):
+            for i in range(self.cols):
+                if self.microplots[j, i] is not None:
+                    for k in range(nlines):
+                    
+                        self.fig.text(
+                            x=(i+1)/self.cols-0.5/self.cols,
+                            y=part_size_h+line_space+j*(part_size_h+tot_space+self.margin)+k*(self.channel_label_size+line_space),
+                            s=self.microplots[j, i].channel_names[k], ha="center",
+                            transform=self.fig.transFigure,
+                            fontdict={'color':colorify.color_translate(self.microplots[j,i].cmaps[k]), 'size':fontsize}
+                        )
+
+    def add_element(self, pos, microim):
+        
+        microim.channel_label_show = False
+        microim.update(self.ax[pos[0], pos[1]])
+    
+        self.microplots[pos[0], pos[1]] = microim
 
     def savefig(self, *args, **kwargs):
 

@@ -19,14 +19,16 @@ class Microanim(Microimage):
 
     def __init__(
         self, data, channels=None, cmaps=None, flip_map=False, rescale_type=None, limits=None, num_colors=256,
-        proj_type='max', scalebar_thickness=3, scalebar_unit_per_pix=None, scalebar_size_in_units=None, unit=None,
+        proj_type='max', channel_names=None, channel_label_show=False, channel_label_type='title',
+        channel_label_size=12, scalebar_thickness=3, scalebar_unit_per_pix=None, scalebar_size_in_units=None, unit=None,
         scalebar_ypos=0.05, scalebar_color='white', scalebar_font_size=12, scalebar_text_centered=False,
         ax=None, fig_scaling=3, label_text=None, label_location='upper left',
         label_color='white', label_font_size=15, show_plot=True
     ):
         super().__init__(
             None, cmaps, flip_map, rescale_type, limits, num_colors,
-            proj_type, scalebar_thickness, scalebar_unit_per_pix, scalebar_size_in_units, unit,
+            proj_type, channel_names, channel_label_show, channel_label_type,
+            channel_label_size, scalebar_thickness, scalebar_unit_per_pix, scalebar_size_in_units, unit,
             scalebar_ypos, scalebar_color, scalebar_font_size, scalebar_text_centered,
             ax, fig_scaling, label_text, label_location,
             label_color, label_font_size
