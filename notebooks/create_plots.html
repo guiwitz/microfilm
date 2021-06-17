@@ -443,7 +443,7 @@ image type: uint16
 <img alt="../_images/create_plots_12_0.png" src="../_images/create_plots_12_0.png" />
 </div>
 </div>
-<p>However we can easily adjust the color maps or lookup tables with the <code class="docutils literal notranslate"><span class="pre">cmaps</span></code> option where we can use any Matplotlib colormap or additionally <code class="docutils literal notranslate"><span class="pre">pure_red</span></code>, <code class="docutils literal notranslate"><span class="pre">pure_green</span></code>, <code class="docutils literal notranslate"><span class="pre">pure_blue</span></code>, <code class="docutils literal notranslate"><span class="pre">pure_cyan</span></code> and <code class="docutils literal notranslate"><span class="pre">pure_magenta</span></code> which provide classic black-to-color color maps:</p>
+<p>However we can easily adjust the color maps or lookup tables with the <code class="docutils literal notranslate"><span class="pre">cmaps</span></code> option where we can use any Matplotlib colormap or additionally <code class="docutils literal notranslate"><span class="pre">pure_red</span></code>, <code class="docutils literal notranslate"><span class="pre">pure_green</span></code>, <code class="docutils literal notranslate"><span class="pre">pure_blue</span></code>, <code class="docutils literal notranslate"><span class="pre">pure_cyan</span></code>, <code class="docutils literal notranslate"><span class="pre">pure_yellow</span></code> and <code class="docutils literal notranslate"><span class="pre">pure_magenta</span></code> which provide classic black-to-color color maps:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microim</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="n">multi_channel</span><span class="p">,</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_blue&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_red&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_green&#39;</span><span class="p">])</span>
@@ -477,13 +477,26 @@ image type: uint16
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microim</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_cyan&#39;</span><span class="p">,</span><span class="s1">&#39;pure_magenta&#39;</span><span class="p">],</span> <span class="n">proj_type</span><span class="o">=</span><span class="s1">&#39;sum&#39;</span><span class="p">,</span>
                               <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
-                              <span class="n">scalebar_text_centered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scalebar_font_size</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+                              <span class="n">scalebar_text_centered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scalebar_font_size</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
                              <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">label_font_size</span><span class="o">=</span><span class="mi">30</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/create_plots_18_0.png" src="../_images/create_plots_18_0.png" />
+</div>
+</div>
+<p>We can also add the channel labels as titles:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microim</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_cyan&#39;</span><span class="p">,</span><span class="s1">&#39;pure_magenta&#39;</span><span class="p">],</span>
+                              <span class="n">channel_label_show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">channel_label_size</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+                              <span class="n">channel_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;CFP&#39;</span><span class="p">,</span> <span class="s1">&#39;RFP&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/create_plots_20_0.png" src="../_images/create_plots_20_0.png" />
 </div>
 </div>
 </section>
@@ -498,13 +511,13 @@ image type: uint16
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microim</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_red&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_green&#39;</span><span class="p">])</span>
 <span class="n">microim</span><span class="o">.</span><span class="n">add_scalebar</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
-                              <span class="n">scalebar_text_centered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scalebar_color</span><span class="o">=</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">,</span> <span class="n">scalebar_font_size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+                              <span class="n">scalebar_text_centered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scalebar_color</span><span class="o">=</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">,</span> <span class="n">scalebar_font_size</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
 <span class="n">microim</span><span class="o">.</span><span class="n">add_label</span><span class="p">(</span><span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">label_font_size</span><span class="o">=</span><span class="mi">30</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_21_0.png" src="../_images/create_plots_21_0.png" />
+<img alt="../_images/create_plots_23_0.png" src="../_images/create_plots_23_0.png" />
 </div>
 </div>
 </section>
@@ -520,7 +533,7 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_23_0.png" src="../_images/create_plots_23_0.png" />
+<img alt="../_images/create_plots_25_0.png" src="../_images/create_plots_25_0.png" />
 </div>
 </div>
 <p>Second, you can integrate and <code class="docutils literal notranslate"><span class="pre">microplot</span></code> in existing Matplotlib figures again by using the <code class="docutils literal notranslate"><span class="pre">axis</span></code>. For that you can for example first create a subplot and <strong>re-use</strong> the axis reference as parameter in <code class="docutils literal notranslate"><span class="pre">microshow</span></code> to integrate the plot in that figure:</p>
@@ -532,7 +545,7 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_25_0.png" src="../_images/create_plots_25_0.png" />
+<img alt="../_images/create_plots_27_0.png" src="../_images/create_plots_27_0.png" />
 </div>
 </div>
 <p>We can then of course use these approaches together. For example, we can first create Matplotlib <code class="docutils literal notranslate"><span class="pre">subplots</span></code>, add the <code class="docutils literal notranslate"><span class="pre">micrplot</span></code> in that figure, and then add labels to each <code class="docutils literal notranslate"><span class="pre">microplot</span></code>:</p>
@@ -541,7 +554,7 @@ image type: uint16
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">micro1</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_blue&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_green&#39;</span><span class="p">],</span>
                               <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> 
-                    <span class="n">scalebar_text_centered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scalebar_font_size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">scalebar_color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+                    <span class="n">scalebar_text_centered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scalebar_font_size</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">scalebar_color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
 <span class="n">micro2</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image3</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_blue&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_red&#39;</span><span class="p">],</span>
                               <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span>
                     <span class="n">scalebar_font_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scalebar_color</span><span class="o">=</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
@@ -552,7 +565,7 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_27_0.png" src="../_images/create_plots_27_0.png" />
+<img alt="../_images/create_plots_29_0.png" src="../_images/create_plots_29_0.png" />
 </div>
 </div>
 </section>
@@ -563,12 +576,12 @@ image type: uint16
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">micro1</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_blue&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_green&#39;</span><span class="p">],</span>
                               <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> 
-                    <span class="n">scalebar_text_centered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scalebar_font_size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">scalebar_color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">);</span>
+                    <span class="n">scalebar_text_centered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scalebar_font_size</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">scalebar_color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_29_0.png" src="../_images/create_plots_29_0.png" />
+<img alt="../_images/create_plots_31_0.png" src="../_images/create_plots_31_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -580,7 +593,7 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_30_0.png" src="../_images/create_plots_30_0.png" />
+<img alt="../_images/create_plots_32_0.png" src="../_images/create_plots_32_0.png" />
 </div>
 </div>
 <p>As an alternative to creating subplots yourself, you can also create a <code class="docutils literal notranslate"><span class="pre">Micropanel</span></code> object and add to it a series of microimages. Find more information in <a class="reference internal" href="create_panels.html"><span class="doc std std-doc">this section</span></a>.</p>
@@ -607,7 +620,7 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_35_0.png" src="../_images/create_plots_35_0.png" />
+<img alt="../_images/create_plots_37_0.png" src="../_images/create_plots_37_0.png" />
 </div>
 </div>
 <p>By default the image intensity is rescaled using the min-max values. This is often sub-optimal (e.g. if single pixels are way out of the distribution) and you can specify another rescaling. For example you can explicitly provide lower and upper limits:</p>
@@ -620,7 +633,7 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_37_0.png" src="../_images/create_plots_37_0.png" />
+<img alt="../_images/create_plots_39_0.png" src="../_images/create_plots_39_0.png" />
 </div>
 </div>
 </section>
@@ -635,7 +648,7 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_39_0.png" src="../_images/create_plots_39_0.png" />
+<img alt="../_images/create_plots_41_0.png" src="../_images/create_plots_41_0.png" />
 </div>
 </div>
 </section>
@@ -661,7 +674,7 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_41_0.png" src="../_images/create_plots_41_0.png" />
+<img alt="../_images/create_plots_43_0.png" src="../_images/create_plots_43_0.png" />
 </div>
 </div>
 <p>In the plots below, we compare the two available projections, maximum and sum. The difference is mostly visible when using colormaps that have large overlap, e.g. here with <code class="docutils literal notranslate"><span class="pre">summer</span></code> and <code class="docutils literal notranslate"><span class="pre">cool</span></code>. With <code class="docutils literal notranslate"><span class="pre">pure_green</span></code> and <code class="docutils literal notranslate"><span class="pre">pure_red</span></code> there would for example be no visual difference.</p>
@@ -680,7 +693,7 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_43_0.png" src="../_images/create_plots_43_0.png" />
+<img alt="../_images/create_plots_45_0.png" src="../_images/create_plots_45_0.png" />
 </div>
 </div>
 </section>
@@ -695,7 +708,7 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_45_0.png" src="../_images/create_plots_45_0.png" />
+<img alt="../_images/create_plots_47_0.png" src="../_images/create_plots_47_0.png" />
 </div>
 </div>
 <p>Most of these functions also work directly with Numpy arrays:</p>
@@ -707,7 +720,7 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_47_0.png" src="../_images/create_plots_47_0.png" />
+<img alt="../_images/create_plots_49_0.png" src="../_images/create_plots_49_0.png" />
 </div>
 </div>
 </section>
@@ -719,12 +732,12 @@ image type: uint16
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microim</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_blue&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_green&#39;</span><span class="p">],</span>
                               <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
-                              <span class="n">scalebar_text_centered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scalebar_color</span><span class="o">=</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">,</span> <span class="n">scalebar_font_size</span><span class="o">=</span><span class="mi">20</span><span class="p">);</span>
+                              <span class="n">scalebar_text_centered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scalebar_color</span><span class="o">=</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">,</span> <span class="n">scalebar_font_size</span><span class="o">=</span><span class="mf">0.05</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_49_0.png" src="../_images/create_plots_49_0.png" />
+<img alt="../_images/create_plots_51_0.png" src="../_images/create_plots_51_0.png" />
 </div>
 </div>
 </section>
@@ -735,13 +748,13 @@ image type: uint16
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microim</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_blue&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_green&#39;</span><span class="p">],</span>
                               <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
-                              <span class="n">scalebar_text_centered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scalebar_color</span><span class="o">=</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">,</span> <span class="n">scalebar_font_size</span><span class="o">=</span><span class="mi">20</span><span class="p">);</span>
+                              <span class="n">scalebar_text_centered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scalebar_color</span><span class="o">=</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">,</span> <span class="n">scalebar_font_size</span><span class="o">=</span><span class="mf">0.05</span><span class="p">);</span>
 <span class="n">microim</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;single.png&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span> <span class="o">=</span> <span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_51_0.png" src="../_images/create_plots_51_0.png" />
+<img alt="../_images/create_plots_53_0.png" src="../_images/create_plots_53_0.png" />
 </div>
 </div>
 <p>And for more complex plots, you can just use the regular figure creation:</p>
@@ -750,7 +763,7 @@ image type: uint16
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">micro1</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_green&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_blue&#39;</span><span class="p">],</span>
                               <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> 
-                    <span class="n">scalebar_text_centered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scalebar_font_size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">scalebar_color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+                    <span class="n">scalebar_text_centered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scalebar_font_size</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">scalebar_color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
 <span class="n">micro2</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_red&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_blue&#39;</span><span class="p">],</span>
                               <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span>
                     <span class="n">scalebar_font_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scalebar_color</span><span class="o">=</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
@@ -761,7 +774,7 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_53_0.png" src="../_images/create_plots_53_0.png" />
+<img alt="../_images/create_plots_55_0.png" src="../_images/create_plots_55_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
