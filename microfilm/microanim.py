@@ -6,8 +6,9 @@ import pandas as pd
 import ipywidgets as ipw
 import imageio
 
+from . import colorify
 from .colorify import multichannel_to_rgb, check_rescale_type
-from .microplot import Microimage
+from .microplot import Microimage, microshow
 from .dataset import Nparray
 
 class Microanim(Microimage):
@@ -20,8 +21,8 @@ class Microanim(Microimage):
     def __init__(
         self, data, channels=None, cmaps=None, flip_map=False, rescale_type=None, limits=None, num_colors=256,
         proj_type='max', channel_names=None, channel_label_show=False, channel_label_type='title',
-        channel_label_size=12, scalebar_thickness=3, scalebar_unit_per_pix=None, scalebar_size_in_units=None, unit=None,
-        scalebar_ypos=0.05, scalebar_color='white', scalebar_font_size=12, scalebar_text_centered=False,
+        channel_label_size=0.05, scalebar_thickness=3, scalebar_unit_per_pix=None, scalebar_size_in_units=None, unit=None,
+        scalebar_ypos=0.05, scalebar_color='white', scalebar_font_size=0.08, scalebar_text_centered=False,
         ax=None, fig_scaling=3, label_text=None, label_location='upper left',
         label_color='white', label_font_size=15, show_plot=True
     ):
@@ -131,8 +132,13 @@ class Microanimpanel:
         number of rows
     cols: int
         number of columns
-    fig_kwargs: kwargs
-        parameters that one can pass to plt.subplots() function
+    margin: float
+        fraction of figure size reserved for margins between plots
+    figsize: float or list
+        figure size, either square or rectangular
+    channel_label_size: float
+        font size for channel labels (fraction of figure)
+    fig_kwargs: parameters normally passed to plt.figure()
 
     Attributes
     ----------
@@ -152,10 +158,17 @@ class Microanimpanel:
         number of time points
 
     """
+    
+    def __init__(self, rows, cols, margin=0.01, figsize=2, channel_label_size=0.05, **fig_kwargs):
 
-    def __init__(self, rows, cols, **fig_kwargs):
+        if not isinstance(figsize, list):
+            figsize = [figsize, figsize]
 
-        self.microanims = []
+        self.rows = rows
+        self.cols = cols
+        self.margin = margin
+        self.figsize = figsize
+        self.channel_label_size = channel_label_size
 
         self.time_slider = ipw.IntSlider(
             description="Time", min=0, max=0, value=0, continuous_update=True
@@ -163,28 +176,92 @@ class Microanimpanel:
         self.time_slider.observe(self.update_timeslider, names="value")
 
         self.output = ipw.Output()
+
+        self.microanims = np.empty((rows, cols), dtype=object)
+        
+        ## grid params
+        margin = margin * np.max(figsize)
+
+        ## part size
+        part_size_w = (1 - margin * (cols - 1))/cols
+        part_size_h = (1 - margin * (rows - 1))/rows
+
         with self.output:
-            self.fig, self.ax = plt.subplots(rows, cols, **fig_kwargs)
+            fig = plt.figure(frameon=False)
+            fig.set_size_inches(figsize[1]*cols, figsize[0]*rows, forward=False)
+
+            # add axes
+            ax = np.empty((rows, cols), dtype=object)
+            for j in range(rows):
+                for i in range(cols):
+                    ax[rows-1-j,i] = plt.Axes(fig,
+                                    [i*(part_size_w+margin),
+                                        j*(part_size_h+margin),
+                                        part_size_w,
+                                        part_size_h])
+                    fig.add_axes(ax[rows-1-j,i])
+
+            self.ax = ax
+            self.fig = fig
+        
         self.ui = ipw.VBox([self.output, self.time_slider])
 
         self.debug = ipw.Output()
+
+    def add_channel_label(self, channel_label_size=None):
+        """Add channel labels to all plots and set their size"""
+        if channel_label_size is not None:
+            self.channel_label_size = channel_label_size
+        ## title params
+        line_space = 0.01
+        nlines = np.max([len(k) for k in [x.channel_names for x in self.microanims.ravel() if x is not None] if k is not None])
+        #nlines = np.max([len(x.channel_names) for x in self.microanims.ravel() if x is not None])
+        tot_space = nlines * (self.channel_label_size+line_space)
+        fontsize = self.channel_label_size*self.figsize[0]*self.rows*100
+
+        part_size_w = (1 - self.margin * (self.cols - 1))/self.cols
+        part_size_h = (1 - tot_space * (self.rows) - self.margin * (self.rows - 1))/self.rows
+
+        for j in range(self.rows):
+            for i in range(self.cols):
+
+                self.ax[j,i].set_position([self.ax[j,i].get_position().bounds[0], self.ax[j,i].get_position().bounds[1],
+                 self.ax[j,i].get_position().bounds[2], self.ax[j,i].get_position().bounds[3]-tot_space])
+
+        for j in range(self.rows):
+            for i in range(self.cols):
+                if self.microanims[j, i] is not None:
+                    if self.microanims[j, i].channel_names is not None:
+                        for k in range(nlines):
+                        
+                            self.fig.text(
+                                x=(i+1)/self.cols-0.5/self.cols,
+                                y=part_size_h+line_space+j*(part_size_h+tot_space+self.margin)+k*(self.channel_label_size+line_space),
+                                s=self.microanims[j, i].channel_names[k], ha="center",
+                                transform=self.fig.transFigure,
+                                fontdict={'color':colorify.color_translate(self.microanims[j,i].cmaps[k]), 'size':fontsize}
+                            )
+                        self.ax[j,i].cla()
+                        self.add_element(pos=[j,i], microanim=self.microanims[j, i])
+                        #self.microanims[j,i].update(self.ax[j,i])
 
     def add_element(self, pos, microanim):
         """Add an animation object to a panel
         
         Parameters
         ----------
-        pos: int
-            linear position where to place object
+        pos: list
+            i,j position of the plot in the panel
         microanim: Microanim object
             object to add to panel
 
         """
 
-        if isinstance(pos, list):
-            selaxis = self.ax[pos[0], pos[1]]
-        else:
-            selaxis = self.ax[pos]
+        has_label = microanim.channel_label_show
+
+        microanim.channel_label_show = False
+        selaxis = self.ax[pos[0], pos[1]]
+        
         newanim = Microanim(microanim.data, show_plot=False, ax=selaxis)
         
         micro_dict = microanim.__dict__
@@ -200,9 +277,11 @@ class Microanimpanel:
                 label_location=newanim.label_location['time_stamp'],
                 label_color=newanim.label_color['time_stamp'], label_font_size=newanim.label_font_size['time_stamp'])
 
-        self.microanims.append(newanim)
+        self.microanims[pos[0], pos[1]] = newanim
         self.max_time = newanim.data.K-1
         self.time_slider.max = newanim.data.K-1
+
+        microanim.channel_label_show = has_label
 
     def update_timeslider(self, change=None):
         """Update segmentation plot"""
@@ -213,14 +292,13 @@ class Microanimpanel:
     def update_animation(self, t):
         """Update all subplots"""
 
-        for a in self.microanims:
+        for a in self.microanims.ravel():
             a.update_animation(t)
             with self.debug:
                 print(a.timestamps)
 
     def save_movie(self, movie_name, fps=20, quality=5, format=None):
         save_movie(self, movie_name, fps=fps, quality=quality, format=format)
-
 
 def save_movie(anim_object, movie_name, fps=20, quality=5, format=None):
         """Save a movie
@@ -261,5 +339,4 @@ def save_movie(anim_object, movie_name, fps=20, quality=5, format=None):
             writer.append_data(buf)
             
         writer.close()
-
     
