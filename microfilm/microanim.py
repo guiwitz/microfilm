@@ -219,9 +219,6 @@ class Microanimpanel:
         tot_space = nlines * (self.channel_label_size+line_space)
         fontsize = self.channel_label_size*self.figsize[0]*self.rows*100
 
-        part_size_w = (1 - self.margin * (self.cols - 1))/self.cols
-        part_size_h = (1 - tot_space * (self.rows) - self.margin * (self.rows - 1))/self.rows
-
         for j in range(self.rows):
             for i in range(self.cols):
 
@@ -232,11 +229,15 @@ class Microanimpanel:
             for i in range(self.cols):
                 if self.microanims[j, i] is not None:
                     if self.microanims[j, i].channel_names is not None:
+
+                        xpos = self.ax[j,i].get_position().bounds[0]+0.5*self.ax[j,i].get_position().bounds[2]
+                        ypos = self.ax[j,i].get_position().bounds[1]+self.ax[j,i].get_position().bounds[3]
+
                         for k in range(nlines):
                         
                             self.fig.text(
-                                x=(i+1)/self.cols-0.5/self.cols,
-                                y=part_size_h+line_space+j*(part_size_h+tot_space+self.margin)+k*(self.channel_label_size+line_space),
+                                x=xpos,
+                                y=ypos+line_space+k*(self.channel_label_size+line_space),
                                 s=self.microanims[j, i].channel_names[k], ha="center",
                                 transform=self.fig.transFigure,
                                 fontdict={'color':colorify.color_translate(self.microanims[j,i].cmaps[k]), 'size':fontsize}

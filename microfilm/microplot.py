@@ -592,9 +592,6 @@ class Micropanel:
         tot_space = nlines * (self.channel_label_size+line_space)
         fontsize = self.channel_label_size*self.figsize[0]*self.rows*100
 
-        part_size_w = (1 - self.margin * (self.cols - 1))/self.cols
-        part_size_h = (1 - tot_space * (self.rows) - self.margin * (self.rows - 1))/self.rows
-
         for j in range(self.rows):
             for i in range(self.cols):
 
@@ -604,14 +601,18 @@ class Micropanel:
         for j in range(self.rows):
             for i in range(self.cols):
                 if self.microplots[j, i] is not None:
+
+                    xpos = self.ax[j,i].get_position().bounds[0]+0.5*self.ax[j,i].get_position().bounds[2]
+                    ypos = self.ax[j,i].get_position().bounds[1]+self.ax[j,i].get_position().bounds[3]
+
                     for k in range(nlines):
                         
                         text_to_plot = " "
                         if self.microplots[j, i].channel_names is not None:
                             text_to_plot = self.microplots[j, i].channel_names[k]
                         self.fig.text(
-                            x=(i+1)/self.cols-0.5/self.cols,
-                            y=part_size_h+line_space+j*(part_size_h+tot_space+self.margin)+k*(self.channel_label_size+line_space),
+                            x=xpos,
+                            y = ypos + line_space + +k*(self.channel_label_size+line_space),
                             s=text_to_plot, ha="center",
                             transform=self.fig.transFigure,
                             fontdict={'color':colorify.color_translate(self.microplots[j,i].cmaps[k]), 'size':fontsize}
