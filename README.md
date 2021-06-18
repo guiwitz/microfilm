@@ -38,7 +38,7 @@ time = 10
 
 microim = microshow(images=image[:, time, :, :], fig_scaling=5,
                  cmaps=['pure_blue','pure_red', 'pure_green'],
-                 unit='um', scalebar_size_in_units=2, scalebar_unit_per_pix=0.065, scalebar_text_centered=True, scalebar_font_size=20, label_text='A', label_font_size=30)
+                 unit='um', scalebar_size_in_units=3, scalebar_unit_per_pix=0.065, scalebar_text_centered=True, scalebar_font_size=0.04,label_text='A', label_font_size=0.04)
 
 microim.savefig('../illustrations/composite.png', bbox_inches = 'tight', pad_inches = 0, dpi=600)
 ```
@@ -57,13 +57,13 @@ from microfilm.microanim import Microanim
 image = skimage.io.imread('../demodata/coli_nucl_ori_ter.tif')
 
 microanim = Microanim(data=image, cmaps=['pure_blue','pure_red', 'pure_green'], fig_scaling=5,
-                      unit='um', scalebar_size_in_units=2, scalebar_unit_per_pix=0.065,
-                      scalebar_text_centered=True, scalebar_font_size=20)
+                      unit='um', scalebar_size_in_units=3, scalebar_unit_per_pix=0.065,
+                      scalebar_font_size=0.04)
 
-microanim.microim.add_label('A', label_font_size=30)
+microanim.add_label('A', label_font_size=30)
 microanim.add_time_stamp('T', 10, location='lower left', timestamp_size=20)
 
-microanim.save_movie('../illustrations/composite_movie.gif')
+microanim.save_movie('../illustrations/composite_movie.gif', fps=15)
 ```
 
 <img src="https://github.com/guiwitz/microfilm/raw/master/illustrations/composite_movie.gif" alt="image" width="300">
@@ -85,10 +85,10 @@ microim2 = microplot.microshow(images=[image[0, 10, :, :], image[2, 10, :, :]],
                                cmaps=['gray', 'pure_cyan'], flip_map=[True, False],
                                label_text='B', label_color='black')
 
-micropanel = microplot.Micropanel(rows=1, cols=2)
+micropanel = microplot.Micropanel(rows=1, cols=2, figsize=[4,3])
 
-micropanel.add_element(pos=0, microim=microim1)
-micropanel.add_element(pos=1, microim=microim2)
+micropanel.add_element(pos=[0,0], microim=microim1)
+micropanel.add_element(pos=[0,1], microim=microim2)
 
 micropanel.savefig('../illustrations/panel.png', bbox_inches = 'tight', pad_inches = 0, dpi=600)
 ```
@@ -98,7 +98,7 @@ micropanel.savefig('../illustrations/panel.png', bbox_inches = 'tight', pad_inch
 And similarly for animations:
 
 ```python
-from microfilm import microplot
+from microfilm import microanim
 import skimage.io
 
 image = skimage.io.imread('../demodata/coli_nucl_ori_ter.tif')
@@ -110,9 +110,9 @@ microanim2 = microanim.Microanim(data=image[[0,2],::], cmaps=['gray', 'pure_cyan
 
 microanim1.add_time_stamp(unit='T', unit_per_frame='3', location='lower-right', timestamp_color='black')
 
-animpanel = microanim.Microanimpanel(rows=1, cols=2)
-animpanel.add_element(pos=0, microanim=microanim1)
-animpanel.add_element(pos=1, microanim=microanim2)
+animpanel = microanim.Microanimpanel(rows=1, cols=2, figsize=[4,3])
+animpanel.add_element(pos=[0,0], microanim=microanim1)
+animpanel.add_element(pos=[0,1], microanim=microanim2)
 
 animpanel.save_movie('../illustrations/panel.gif')
 ```
