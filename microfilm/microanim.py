@@ -187,7 +187,14 @@ class Microanimpanel:
         part_size_h = (1 - margin * (rows - 1))/rows
 
         with self.output:
-            fig = plt.figure(frameon=False)
+            
+            self.fig, self.ax = plt.subplots(
+                nrows=self.rows, ncols=self.cols, figsize=(self.figsize[1]*self.cols, self.figsize[0]*self.rows),
+                squeeze=False, frameon=False,
+                gridspec_kw = {'left':0, 'right':1, 'bottom':0, 'top':1, 'wspace':self.margin, 'hspace':self.margin},
+                **fig_kwargs)
+
+            '''fig = plt.figure(frameon=False)
             fig.set_size_inches(figsize[1]*cols, figsize[0]*rows, forward=False)
 
             # add axes
@@ -202,7 +209,7 @@ class Microanimpanel:
                     fig.add_axes(ax[rows-1-j,i])
 
             self.ax = ax
-            self.fig = fig
+            self.fig = fig'''
         
         self.ui = ipw.VBox([self.output, self.time_slider])
 
@@ -210,12 +217,12 @@ class Microanimpanel:
 
     def add_channel_label(self, channel_label_size=None):
         """Add channel labels to all plots and set their size"""
+        
         if channel_label_size is not None:
             self.channel_label_size = channel_label_size
         ## title params
         line_space = 0.01
         nlines = np.max([len(k) for k in [x.channel_names for x in self.microanims.ravel() if x is not None] if k is not None])
-        #nlines = np.max([len(x.channel_names) for x in self.microanims.ravel() if x is not None])
         tot_space = nlines * (self.channel_label_size+line_space)
         fontsize = self.channel_label_size*self.figsize[0]*self.rows*100
 

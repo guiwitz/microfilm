@@ -359,7 +359,6 @@ class Microimage:
                    
             # turn font size into fraction of figure or axis
             fontsize = self.scalebar_font_size*self.ax.get_position().bounds[-1] * self.fig.get_size_inches()[1]*100
- 
 
             scale_text = self.ax.text(x=0, y=scalebar_ypos+scalebar_thickness+0.03, s=scale_text,
                          transform=self.ax.transAxes, fontdict={'color':scalebar_color, 'size':fontsize})
@@ -369,9 +368,7 @@ class Microimage:
             r = self.ax.figure.canvas.get_renderer()
 
             right_boundary = (self.ax.get_images()[0].get_window_extent().bounds[0]+self.ax.get_images()[0].get_window_extent().bounds[2])
-            #right_boundary = self.ax.get_tightbbox(r).bounds[0]+self.ax.get_tightbbox(r).bounds[2]
             axis_width = self.ax.get_images()[0].get_window_extent().bounds[2]
-            #axis_width = self.ax.get_tightbbox(r).bounds[2]
             if scalebar_text_centered:
                 bar_middle = 1-0.5*scale_width-bar_pad
                 text_start = bar_middle
@@ -380,25 +377,17 @@ class Microimage:
             scale_text.set_x(text_start)
 
             shift = scale_text.get_tightbbox(r).bounds[0]+scale_text.get_tightbbox(r).bounds[2]-right_boundary
-            shift = shift /(axis_width)
+            shift = shift /axis_width
             
+            # Check whether scalebar label is outside of figure and shift it if necessary
             if shift > 0:
 
-                shift = shift# + bar_pad
+                shift = shift
                 scale_bar = Rectangle((1-scale_width-bar_pad-shift, scalebar_ypos), width=scale_width, 
                                       height=scalebar_thickness, transform=self.ax.transAxes, facecolor=scalebar_color)
                 text_start -= shift
                 scale_text.set_x(text_start)
 
-            
-            '''# check if scale text outside image
-            if text_start + text_width > 0.98:
-                shift = text_start + text_width - 0.98
-                scale_bar = Rectangle((1-scale_width-bar_pad-shift, scalebar_ypos), width=scale_width, 
-                                      height=scalebar_thickness, transform=self.ax.transAxes, facecolor=scalebar_color)
-                text_start -= shift
-
-            scale_text.set_x(text_start)'''
         self.ax.add_patch(scale_bar)
                 
     def add_label(self, label_text, label_name='default', label_location='upper left', label_color='white',
@@ -556,35 +545,18 @@ class Micropanel:
     def construct_figure(self, **fig_kwargs):
         """Construct the figure"""
 
-        ## grid params
-        margin = self.margin * np.max(self.figsize)
-
-        ## part size
-        part_size_w = (1 - margin * (self.cols - 1))/self.cols
-        part_size_h = (1 - margin * (self.rows - 1))/self.rows
-
-        fig = plt.figure(frameon=False, **fig_kwargs)
-        fig.set_size_inches(self.figsize[1]*self.cols, self.figsize[0]*self.rows, forward=False)
-
-        # add axes
-        ax = np.empty((self.rows, self.cols), dtype=object)
-        for j in range(self.rows):
-            for i in range(self.cols):
-                ax[self.rows-1-j,i] = plt.Axes(fig,
-                                [i*(part_size_w+margin),
-                                    j*(part_size_h+margin),
-                                    part_size_w,
-                                    part_size_h])
-                fig.add_axes(ax[self.rows-1-j,i])
-
-        self.ax = ax
-        self.fig = fig
+        self.fig, self.ax = plt.subplots(
+            nrows=self.rows, ncols=self.cols, figsize=(self.figsize[1]*self.cols, self.figsize[0]*self.rows),
+            squeeze=False, frameon=False,
+            gridspec_kw = {'left':0, 'right':1, 'bottom':0, 'top':1, 'wspace':self.margin, 'hspace':self.margin},
+            **fig_kwargs)
 
     def add_channel_label(self, channel_label_size=None):
         """Add channel labels to all plots and set their size"""
 
         if channel_label_size is not None:
             self.channel_label_size = channel_label_size
+        
         ## title params
         line_space = 0.01
         nlines = np.max([len(k) for k in [x.channel_names for x in self.microplots.ravel() if x is not None] if k is not None])
