@@ -193,23 +193,6 @@ class Microanimpanel:
                 squeeze=False, frameon=False,
                 gridspec_kw = {'left':0, 'right':1, 'bottom':0, 'top':1, 'wspace':self.margin, 'hspace':self.margin},
                 **fig_kwargs)
-
-            '''fig = plt.figure(frameon=False)
-            fig.set_size_inches(figsize[1]*cols, figsize[0]*rows, forward=False)
-
-            # add axes
-            ax = np.empty((rows, cols), dtype=object)
-            for j in range(rows):
-                for i in range(cols):
-                    ax[rows-1-j,i] = plt.Axes(fig,
-                                    [i*(part_size_w+margin),
-                                        j*(part_size_h+margin),
-                                        part_size_w,
-                                        part_size_h])
-                    fig.add_axes(ax[rows-1-j,i])
-
-            self.ax = ax
-            self.fig = fig'''
         
         self.ui = ipw.VBox([self.output, self.time_slider])
 
