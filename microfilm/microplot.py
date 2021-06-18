@@ -516,7 +516,7 @@ class Micropanel:
         figure size, either square or rectangular
     channel_label_size: float
         font size for channel labels (fraction of figure)
-    fig_kwargs: parameters normally passed to plt.figure()
+    fig_kwargs: parameters normally passed to plt.subplots()
 
     Attributes
     ----------

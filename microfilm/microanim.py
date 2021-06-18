@@ -138,7 +138,7 @@ class Microanimpanel:
         figure size, either square or rectangular
     channel_label_size: float
         font size for channel labels (fraction of figure)
-    fig_kwargs: parameters normally passed to plt.figure()
+    fig_kwargs: parameters normally passed to plt.subplots()
 
     Attributes
     ----------
@@ -178,13 +178,6 @@ class Microanimpanel:
         self.output = ipw.Output()
 
         self.microanims = np.empty((rows, cols), dtype=object)
-        
-        ## grid params
-        margin = margin * np.max(figsize)
-
-        ## part size
-        part_size_w = (1 - margin * (cols - 1))/cols
-        part_size_h = (1 - margin * (rows - 1))/rows
 
         with self.output:
             
