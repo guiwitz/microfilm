@@ -12,6 +12,14 @@ Subpackages
 Submodules
 ----------
 
+microfilm.colorify module
+-------------------------
+
+.. automodule:: microfilm.colorify
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 microfilm.microanim module
 --------------------------
 
