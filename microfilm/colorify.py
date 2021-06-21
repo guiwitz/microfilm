@@ -63,7 +63,8 @@ def color_translate(cmap_name):
     if cmap_name in color_dict.keys():
         return color_dict[cmap_name]
     else:
-        return cmap_name
+        warnings.warn(f"No appropriate color found for your colormap. Using black.'")
+        return 'black'
 
 def random_cmap(alpha=0.5, num_colors=256):
     """Create random colormap for segmentation"""
