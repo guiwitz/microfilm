@@ -495,8 +495,8 @@ class Microimage:
             # account that the axis only occupies that portion of the figure
             self.ax.text(
                 x=0.5, y=1+line_space+i*(channel_label_size+line_space)/(1-tot_space),
-                s=self.channel_names[i], ha="center", transform=self.ax.transAxes,
-                fontdict={'color':colorify.color_translate(self.cmaps[i]),'size':fontsize}
+                s=self.channel_names[nlines-1-i], ha="center", transform=self.ax.transAxes,
+                fontdict={'color':colorify.color_translate(self.cmaps[nlines-1-i]),'size':fontsize}
             )
 
 class Micropanel:
@@ -581,13 +581,13 @@ class Micropanel:
                         
                         text_to_plot = " "
                         if self.microplots[j, i].channel_names is not None:
-                            text_to_plot = self.microplots[j, i].channel_names[k]
+                            text_to_plot = self.microplots[j, i].channel_names[nlines-1-k]
                         self.fig.text(
                             x=xpos,
                             y = ypos + line_space + +k*(self.channel_label_size+line_space),
                             s=text_to_plot, ha="center",
                             transform=self.fig.transFigure,
-                            fontdict={'color':colorify.color_translate(self.microplots[j,i].cmaps[k]), 'size':fontsize}
+                            fontdict={'color':colorify.color_translate(self.microplots[j,i].cmaps[nlines-1-k]), 'size':fontsize}
                         )
                     #self.ax[j,i].cla()
                     #has_label = self.microplots[j,i].channel_label_show
