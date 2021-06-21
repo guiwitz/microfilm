@@ -183,7 +183,7 @@ def rescale_image(image, rescale_type='min_max', limits=None):
         raise Exception(f"Image should be unsigned integer but yours is {image.dtype}")   
 
     max_of_dtype = np.iinfo(image.dtype).max
-    image = image.astype(np.float)
+    image = image.astype(np.float64)
     
     if rescale_type == 'min_max':
         min_val = np.min(image[image>0])
