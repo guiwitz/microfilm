@@ -556,6 +556,11 @@ class Micropanel:
 
         if channel_label_size is not None:
             self.channel_label_size = channel_label_size
+
+        for i in range(self.rows):
+            for j in range(self.cols):
+                if self.microplots[i,j].channel_names is None:
+                    self.microplots[i,j].channel_names = ['Channel-' + str(i) for i in range(len(self.microplots[i,j].images))]
         
         ## title params
         line_space = 0.01
