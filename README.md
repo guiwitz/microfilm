@@ -1,4 +1,6 @@
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/guiwitz/microfilm/master?urlpath=lab)
+![example workflow](https://github.com/guiwitz/microfilm/actions/workflows/tests.yml/badge.svg)
+![GitHub](https://img.shields.io/github/license/guiwitz/microfilm)
 # microfilm
 
 This package is a collection of tools to display and analyze 2D and 2D time-lapse microscopy images. In particular it makes it straightforward to create figures of containing multi-channel images represented in a *composite* color mode as done in the popular image processing software Fiji. It also allows to easily complete such figures with standard annotations like *labels*, *scale bars* and *time counters*. In case of time-lapse data, the figures are turned into animations which can be interactively browsed from a Jupyter notebook and saved in standard movie formats (mp4, gif etc.). Finally, figures and animations can easily be combined into larger *panels*. These main functionalities are provided by the ```microfilm.microplot``` and ```microfilm.microanim``` modules.
