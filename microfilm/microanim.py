@@ -196,6 +196,12 @@ class Microanimpanel:
         
         if channel_label_size is not None:
             self.channel_label_size = channel_label_size
+
+        for i in range(self.rows):
+            for j in range(self.cols):
+                if self.microanims[i,j].channel_names is None:
+                    self.microanims[i,j].channel_names = ['Channel-' + str(i) for i in range(len(self.microanims[i,j].images))]
+        
         ## title params
         line_space = 0.01
         nlines = np.max([len(k) for k in [x.channel_names for x in self.microanims.ravel() if x is not None] if k is not None])
