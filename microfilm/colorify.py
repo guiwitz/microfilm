@@ -185,7 +185,9 @@ def rescale_image(image, rescale_type='min_max', limits=None):
     max_of_dtype = np.iinfo(image.dtype).max
     image = image.astype(np.float64)
     
-    if rescale_type == 'min_max':
+    if not np.any(image > 0):
+        image_rescaled = image
+    elif rescale_type == 'min_max':
         min_val = np.min(image[image>0])
         image_rescaled = (image-min_val)/(image.max()-min_val)
         image_rescaled[image_rescaled<0] = 0
