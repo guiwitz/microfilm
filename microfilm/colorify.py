@@ -185,10 +185,12 @@ def rescale_image(image, rescale_type='min_max', limits=None):
     max_of_dtype = np.iinfo(image.dtype).max
     image = image.astype(np.float64)
     
-    if not np.any(image > 0):
+    if not np.any(image > 0):#blank image
         image_rescaled = image
+    elif image.min() == image.max():#all pixels have same value
+        image_rescaled = np.ones_like(image)
     elif rescale_type == 'min_max':
-        min_val = np.min(image[image>0])
+        min_val = np.min(image)#np.min(image[image>0])
         image_rescaled = (image-min_val)/(image.max()-min_val)
         image_rescaled[image_rescaled<0] = 0
     elif rescale_type == 'dtype':
