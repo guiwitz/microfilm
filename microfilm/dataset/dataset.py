@@ -3,7 +3,7 @@ import re
 from pathlib import Path
 import warnings
 
-from aicsimageio import AICSImage
+from aicsimageio import AICSImage, readers
 from nd2reader import ND2Reader
 import h5py
 import skimage.io
@@ -249,12 +249,12 @@ class MultipageTIFF(Data):
         self.channelfile = self.channel_name
 
         self.channel_imobj = [
-            AICSImage(os.path.join(self.expdir, x), known_dims="TYX")
+            AICSImage(os.path.join(self.expdir, x), dim_order="TYX", reader=readers.TiffReader)
             for x in self.channel_name
         ]
 
         if self.max_time is None:
-            self.max_time = self.channel_imobj[0].size_t
+            self.max_time = self.channel_imobj[0].dims.T
 
         self.set_valid_frames()
 
