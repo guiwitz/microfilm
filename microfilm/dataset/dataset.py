@@ -86,29 +86,25 @@ class Data:
         self.valid_frames = self.valid_frames[:: self.step]
         self.K = len(self.valid_frames)
 
-    def find_files(self, folderpath):
+    def find_files(self, folderpath, check_time=True):
         """Given a folder, find all tif files contained in it and try to sort as time-lapse"""
 
-        image_names = os.listdir(folderpath)
-        image_names = np.array([x for x in image_names if x[0] != "."])
+        image_names = np.array(findfiles('*.tif', folderpath) + findfiles('*.tiff', folderpath))
         if len(image_names) > 0:
+            
             # check if xxx_t0.tif structure is found
-            times = [re.findall(".*\_t*(\d+)\.(?:tif|TIF|tiff)", x) for x in image_names]
+            times = [re.findall(".*\_t*(\d+)\.(?:tif|TIF|tiff|TIFF)", x) for x in image_names]
             
             # if any element doesn't have xxx_t0.tif structure, find tif files and use natsort
             if any([len(x)==0 for x in times]):
-                image_names = [re.findall(".*\.(?:tif|TIF|tiff)", x) for x in image_names]
-                image_names = [t[0] for t in image_names if len(t)>0]
-                if len(image_names) > 0:
-                    image_names = natsort.natsorted(image_names)
+                image_names = natsort.natsorted(image_names)
+                if check_time:
                     warnings.warn(f"No times detected, using natural name sorting")
-                else:
-                    raise Exception(f"Sorry, no tif/tiff/TIF files could be found")
             else:
                 times = [int(x[0]) for x in times if len(x) > 0]
                 image_names = image_names[np.argsort(times)]
         else:
-            raise Exception(f"Sorry, files found in {folderpath}")
+            raise Exception(f"Sorry, no files found in {folderpath}")
         return image_names
 
     def update_params(self, params):
@@ -189,7 +185,6 @@ class TIFFSeries(Data):
 
         if self.max_time is None:
             self.max_time = len(self.channelfile[0])
-            # print(self.max_time)
 
         self.set_valid_frames()
 
@@ -238,13 +233,9 @@ class MultipageTIFF(Data):
         
         # if no channel names are provided, consider all folders as channel
         if self.channel_name is None:
-            self.channel_name = []
-            for ext in ('*.tif', '*.TIFF', '*.tiff'):
-                files = self.expdir.glob(ext)
-                for f in files:
-                    self.channel_name.append(f.name)
+            self.channel_name = self.find_files(self.expdir, check_time=False)
         if len(self.channel_name) == 0:
-            raise Exception(f"Sorry, no tif/tiff/TIFF files found in {self.expdir}")
+            raise Exception(f"Sorry, no tif/tiff/TIF/TIFF files found in {self.expdir}")
 
         self.channelfile = self.channel_name
 
@@ -357,13 +348,14 @@ class H5(Data):
     def initialize(self):
 
         if self.channel_name is None:
-            self.channel_name = []
-            for ext in ('*.h5','*.H5'):
-                files = self.expdir.glob(ext)
-                for f in files:
-                    self.channel_name.append(f.name)
+            #self.channel_name = []
+            #for ext in ('*.h5','*.H5'):
+            #    files = self.expdir.glob(ext)
+            #    for f in files:
+            #        self.channel_name.append(f.name)
+            self.channel_name = findfiles('*.h5', where=self.expdir)
         if len(self.channel_name) == 0:
-            raise Exception(f"Sorry, no tif/tiff/TIFF files found in {self.expdir}")
+            raise Exception(f"Sorry, no h5 files found in {self.expdir}")
 
         self.channelfile = self.channel_name
         
@@ -449,3 +441,20 @@ class Nparray(Data):
 
         time = self.valid_frames[frame]
         return self.nparray[ch_index, time]
+
+
+# snippet is placed into public domain by
+# anatoly techtonik <techtonik@gmail.com>
+# http://stackoverflow.com/questions/8151300/ignore-case-in-glob-on-linux
+
+import fnmatch
+import os
+import re
+
+def findfiles(which, where='.'):
+    '''Returns list of filenames from `where` path matched by 'which'
+       shell pattern. Matching is case-insensitive.'''
+    
+    # TODO: recursive param with walk() filtering
+    rule = re.compile(fnmatch.translate(which), re.IGNORECASE)
+    return [name for name in os.listdir(where) if rule.match(name)]
