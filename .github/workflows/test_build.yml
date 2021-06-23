@@ -1,14 +1,14 @@
 name: build
 
 on:
-  push:
-    branches:
-      - master
-    tags:
-      - "v*" # Push events to matching v*, i.e. v1.0, v20.15.10
-  pull_request:
-    branches:
-      - master
+  #push:
+  #  branches:
+  #    - master
+  #  tags:
+  #    - "v*" # Push events to matching v*, i.e. v1.0, v20.15.10
+  #pull_request:
+  #  branches:
+  #    - master
   workflow_dispatch:
 
 jobs:
@@ -46,11 +46,11 @@ jobs:
     # github secrets (see readme for details)
     needs: [ test ]
     runs-on: ubuntu-latest
-    if: contains(github.ref, 'tags')
+    if: contains(github.ref, 'tags/v')
     steps:
     - uses: actions/checkout@v2
       with:
-          fetch-depth: 0
+        fetch-depth: 0
     - name: Set up Python 3.9
       uses: actions/setup-python@v2
       with:
