@@ -1,9 +1,11 @@
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/guiwitz/microfilm/master?urlpath=lab)
+![example workflow](https://github.com/guiwitz/microfilm/actions/workflows/tests.yml/badge.svg)
+![GitHub](https://img.shields.io/github/license/guiwitz/microfilm)
 # microfilm
 
-This package is a collection of tools to display and analyze 2D and 2D time-lapse microscopy images. In particular it makes it straightforward to create figures of containing multi-channel images represented in a *composite* color mode as done in the popular image processing software Fiji. It also allows to easily complete such figures with standard annotations like *labels*, *scale bars* and *time counters*. In case of time-lapse data, the figures are turned into animations which can be interactively browsed from a Jupyter notebook and saved in standard movie formats (mp4, gif etc.). Finally, figures and animations can easily be combined into larger *panels*. These main functionalities are provided by the ```microfilm.microplot``` and ```microfilm.microanim``` modules.
+This package is a collection of tools to display and analyze 2D and 2D time-lapse microscopy images. In particular it makes it straightforward to create figures containing multi-channel images represented in a *composite* color mode as done in the popular image processing software [Fiji](https://imagej.net/software/fiji/). It also allows to easily complete such figures with standard annotations like **labels** and **scale bars**. In case of time-lapse data, the figures are turned into **animations** which can be interactively browsed from a Jupyter notebook, saved in standard movie formats (mp4, gif etc.) and completed with **time counters**. Finally, figures and animations can easily be combined into larger **panels**. These main functionalities are provided by the ```microfilm.microplot``` and ```microfilm.microanim``` modules.
 
-Following the model of packages like [seaborn](https://seaborn.pydata.org/index.html), ```microfilm``` offers tight integration with Matplotlib. Complete access is given to structures like axis and figures underlying the ```microfilm``` objects, allowing thus for the creation of arbitrarily complex plots for users familiar with Matplotlib.
+Following the model of [seaborn](https://seaborn.pydata.org/index.html), ```microfilm``` is entirely based on [Matplotlib](https://matplotlib.org/) and tries to provide good defaults to produce good microcopy figures *out.of-the-box*. It however also offers complete access to the Matplotlib structures like axis and figures underlying the ```microfilm``` objects, allowing thus for the creation of arbitrarily complex plots.
 
 ## Installation
 
@@ -38,7 +40,7 @@ time = 10
 
 microim = microshow(images=image[:, time, :, :], fig_scaling=5,
                  cmaps=['pure_blue','pure_red', 'pure_green'],
-                 unit='um', scalebar_size_in_units=2, scalebar_unit_per_pix=0.065, scalebar_text_centered=True, scalebar_font_size=20, label_text='A', label_font_size=30)
+                 unit='um', scalebar_size_in_units=3, scalebar_unit_per_pix=0.065, scalebar_text_centered=True, scalebar_font_size=0.04,label_text='A', label_font_size=0.04)
 
 microim.savefig('../illustrations/composite.png', bbox_inches = 'tight', pad_inches = 0, dpi=600)
 ```
@@ -57,13 +59,13 @@ from microfilm.microanim import Microanim
 image = skimage.io.imread('../demodata/coli_nucl_ori_ter.tif')
 
 microanim = Microanim(data=image, cmaps=['pure_blue','pure_red', 'pure_green'], fig_scaling=5,
-                      unit='um', scalebar_size_in_units=2, scalebar_unit_per_pix=0.065,
-                      scalebar_text_centered=True, scalebar_font_size=20)
+                      unit='um', scalebar_size_in_units=3, scalebar_unit_per_pix=0.065,
+                      scalebar_font_size=0.04)
 
-microanim.microim.add_label('A', label_font_size=30)
+microanim.add_label('A', label_font_size=30)
 microanim.add_time_stamp('T', 10, location='lower left', timestamp_size=20)
 
-microanim.save_movie('../illustrations/composite_movie.gif')
+microanim.save_movie('../illustrations/composite_movie.gif', fps=15)
 ```
 
 <img src="https://github.com/guiwitz/microfilm/raw/master/illustrations/composite_movie.gif" alt="image" width="300">
@@ -85,10 +87,10 @@ microim2 = microplot.microshow(images=[image[0, 10, :, :], image[2, 10, :, :]],
                                cmaps=['gray', 'pure_cyan'], flip_map=[True, False],
                                label_text='B', label_color='black')
 
-micropanel = microplot.Micropanel(rows=1, cols=2)
+micropanel = microplot.Micropanel(rows=1, cols=2, figsize=[4,3])
 
-micropanel.add_element(pos=0, microim=microim1)
-micropanel.add_element(pos=1, microim=microim2)
+micropanel.add_element(pos=[0,0], microim=microim1)
+micropanel.add_element(pos=[0,1], microim=microim2)
 
 micropanel.savefig('../illustrations/panel.png', bbox_inches = 'tight', pad_inches = 0, dpi=600)
 ```
@@ -98,7 +100,7 @@ micropanel.savefig('../illustrations/panel.png', bbox_inches = 'tight', pad_inch
 And similarly for animations:
 
 ```python
-from microfilm import microplot
+from microfilm import microanim
 import skimage.io
 
 image = skimage.io.imread('../demodata/coli_nucl_ori_ter.tif')
@@ -110,9 +112,9 @@ microanim2 = microanim.Microanim(data=image[[0,2],::], cmaps=['gray', 'pure_cyan
 
 microanim1.add_time_stamp(unit='T', unit_per_frame='3', location='lower-right', timestamp_color='black')
 
-animpanel = microanim.Microanimpanel(rows=1, cols=2)
-animpanel.add_element(pos=0, microanim=microanim1)
-animpanel.add_element(pos=1, microanim=microanim2)
+animpanel = microanim.Microanimpanel(rows=1, cols=2, figsize=[4,3])
+animpanel.add_element(pos=[0,0], microanim=microanim1)
+animpanel.add_element(pos=[0,1], microanim=microanim2)
 
 animpanel.save_movie('../illustrations/panel.gif')
 ```

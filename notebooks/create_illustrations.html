@@ -250,39 +250,24 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image</span><span class="o">.</span><span class="n">shape</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(30, 220, 169, 3)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image</span> <span class="o">=</span> <span class="n">skimage</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;../demodata/coli_nucl_ori_ter.tif&#39;</span><span class="p">)</span>
-<span class="c1">#image = np.moveaxis(image, 3, 0)</span>
-<span class="n">image_t10</span> <span class="o">=</span> <span class="n">image</span><span class="p">[:,</span><span class="mi">10</span><span class="p">]</span>
-<span class="n">microim</span> <span class="o">=</span> <span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="n">image_t10</span><span class="p">,</span> <span class="n">fig_scaling</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-                 <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_blue&#39;</span><span class="p">,</span><span class="s1">&#39;pure_red&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_green&#39;</span><span class="p">],</span>
-                 <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">scalebar_text_centered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scalebar_font_size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
-                 <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">label_font_size</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">skimage.io</span>
+<span class="kn">from</span> <span class="nn">microfilm.microplot</span> <span class="kn">import</span> <span class="n">microshow</span>
 
-<span class="n">microim</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;../illustrations/composite.png&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span> <span class="o">=</span> <span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">skimage</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;../demodata/coli_nucl_ori_ter.tif&#39;</span><span class="p">)</span>
+<span class="n">time</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="n">microim</span> <span class="o">=</span> <span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="n">image</span><span class="p">[:,</span> <span class="n">time</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">fig_scaling</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                 <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_blue&#39;</span><span class="p">,</span><span class="s1">&#39;pure_red&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_green&#39;</span><span class="p">],</span>
+                 <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">scalebar_text_centered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scalebar_font_size</span><span class="o">=</span><span class="mf">0.04</span><span class="p">,</span>
+                    <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">label_font_size</span><span class="o">=</span><span class="mf">0.04</span><span class="p">)</span>
+
+<span class="n">microim</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;../illustrations/composite.png&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span> <span class="o">=</span> <span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_illustrations_4_0.png" src="../_images/create_illustrations_4_0.png" />
+<img alt="../_images/create_illustrations_2_0.png" src="../_images/create_illustrations_2_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -291,35 +276,85 @@
 <span class="kn">import</span> <span class="nn">skimage.io</span>
 <span class="kn">from</span> <span class="nn">microfilm.microanim</span> <span class="kn">import</span> <span class="n">Microanim</span>
 
+<span class="n">image</span> <span class="o">=</span> <span class="n">skimage</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;../demodata/coli_nucl_ori_ter.tif&#39;</span><span class="p">)</span>
+
 <span class="n">microanim</span> <span class="o">=</span> <span class="n">Microanim</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">image</span><span class="p">,</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_blue&#39;</span><span class="p">,</span><span class="s1">&#39;pure_red&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_green&#39;</span><span class="p">],</span> <span class="n">fig_scaling</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-                      <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span>
-                      <span class="n">scalebar_text_centered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scalebar_font_size</span><span class="o">=</span><span class="mi">20</span><span class="p">,)</span>
-<span class="n">microanim</span><span class="o">.</span><span class="n">microim</span><span class="o">.</span><span class="n">add_label</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">label_font_size</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+                      <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span>
+                      <span class="n">scalebar_font_size</span><span class="o">=</span><span class="mf">0.04</span><span class="p">)</span>
+
+<span class="n">microanim</span><span class="o">.</span><span class="n">add_label</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">label_font_size</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
 <span class="n">microanim</span><span class="o">.</span><span class="n">add_time_stamp</span><span class="p">(</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s1">&#39;lower left&#39;</span><span class="p">,</span> <span class="n">timestamp_size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="n">microanim</span><span class="o">.</span><span class="n">save_movie</span><span class="p">(</span><span class="s1">&#39;../illustrations/composite_movie.gif&#39;</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/create_illustrations_3_0.png" src="../_images/create_illustrations_3_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#microanim.save_movie(&#39;../illustrations/composite_movie.mp4&#39;, fps=10, quality=9)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">microfilm</span> <span class="kn">import</span> <span class="n">microplot</span>
+<span class="kn">import</span> <span class="nn">skimage.io</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">skimage</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;../demodata/coli_nucl_ori_ter.tif&#39;</span><span class="p">)</span>
+
+<span class="n">microim1</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">image</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]],</span>
+                               <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_magenta&#39;</span><span class="p">],</span> <span class="n">flip_map</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+                               <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">label_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">microim2</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">image</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]],</span>
+                               <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_cyan&#39;</span><span class="p">],</span> <span class="n">flip_map</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+                               <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="n">label_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+<span class="n">micropanel</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">Micropanel</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">micropanel</span><span class="o">.</span><span class="n">add_element</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">microim</span><span class="o">=</span><span class="n">microim1</span><span class="p">)</span>
+<span class="n">micropanel</span><span class="o">.</span><span class="n">add_element</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">microim</span><span class="o">=</span><span class="n">microim2</span><span class="p">)</span>
+
+<span class="n">micropanel</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;../illustrations/panel.png&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span> <span class="o">=</span> <span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/create_illustrations_5_0.png" src="../_images/create_illustrations_5_0.png" />
+<img alt="../_images/create_illustrations_5_1.png" src="../_images/create_illustrations_5_1.png" />
+<img alt="../_images/create_illustrations_5_2.png" src="../_images/create_illustrations_5_2.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microanim</span><span class="o">.</span><span class="n">save_movie</span><span class="p">(</span><span class="s1">&#39;../illustrations/composite_movie.gif&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microanim</span><span class="o">.</span><span class="n">save_movie</span><span class="p">(</span><span class="s1">&#39;../illustrations/composite_movie.mp4&#39;</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">quality</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">microfilm</span> <span class="kn">import</span> <span class="n">microanim</span>
+<span class="kn">import</span> <span class="nn">skimage.io</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">skimage</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;../demodata/coli_nucl_ori_ter.tif&#39;</span><span class="p">)</span>
+
+<span class="n">microanim1</span> <span class="o">=</span> <span class="n">microanim</span><span class="o">.</span><span class="n">Microanim</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">image</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],::],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_magenta&#39;</span><span class="p">],</span>
+                                 <span class="n">flip_map</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">label_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">microanim2</span> <span class="o">=</span> <span class="n">microanim</span><span class="o">.</span><span class="n">Microanim</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">image</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">],::],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_cyan&#39;</span><span class="p">],</span>
+                                 <span class="n">flip_map</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="n">label_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+<span class="n">microanim1</span><span class="o">.</span><span class="n">add_time_stamp</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="n">unit_per_frame</span><span class="o">=</span><span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s1">&#39;lower-right&#39;</span><span class="p">,</span> <span class="n">timestamp_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+<span class="n">animpanel</span> <span class="o">=</span> <span class="n">microanim</span><span class="o">.</span><span class="n">Microanimpanel</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">animpanel</span><span class="o">.</span><span class="n">add_element</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">microanim</span><span class="o">=</span><span class="n">microanim1</span><span class="p">)</span>
+<span class="n">animpanel</span><span class="o">.</span><span class="n">add_element</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">microanim</span><span class="o">=</span><span class="n">microanim2</span><span class="p">)</span>
+
+<span class="n">animpanel</span><span class="o">.</span><span class="n">save_movie</span><span class="p">(</span><span class="s1">&#39;../illustrations/panel.gif&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>IMAGEIO FFMPEG_WRITER WARNING: input image is not divisible by macro_block_size=16, resizing from (276, 360) to (288, 368) to ensure video compatibility with most codecs and players. To prevent resizing, make your input image divisible by the macro_block_size or set the macro_block_size to 1 (risking incompatibility).
-</pre></div>
-</div>
+<img alt="../_images/create_illustrations_6_0.png" src="../_images/create_illustrations_6_0.png" />
+<img alt="../_images/create_illustrations_6_1.png" src="../_images/create_illustrations_6_1.png" />
+<img alt="../_images/create_illustrations_6_2.png" src="../_images/create_illustrations_6_2.png" />
 </div>
 </div>
 </section>

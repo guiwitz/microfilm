@@ -311,10 +311,10 @@
 <img alt="../_images/create_panels_6_0.png" src="../_images/create_panels_6_0.png" />
 </div>
 </div>
-<p>Then we create a Micropanel object as aa grid and just add our two microimages. Those are then exactly reproduced, including annotations in the panels. Note that we can use any option used in <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot.subplots()</span></code> when creating the figure. Also the indices used to place the plots (e.g.g <code class="docutils literal notranslate"><span class="pre">pos=0</span></code>) are <em>linear</em> indices from top left to bottom right.</p>
+<p>Then we create a Micropanel object as aa grid and just add our two microimages. Those are then exactly reproduced, including annotations in the panels. Note that we can use any option used in <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot.subplots()</span></code> when creating the figure. Also the indices used to place the plots (e.g.g <code class="docutils literal notranslate"><span class="pre">pos=[0,0]</span></code>) correspond to the xy position in the grid.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">micropanel</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">Micropanel</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">micropanel</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">Micropanel</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figscaling</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 
 <span class="n">micropanel</span><span class="o">.</span><span class="n">add_element</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">microim</span><span class="o">=</span><span class="n">microim1</span><span class="p">)</span>
 <span class="n">micropanel</span><span class="o">.</span><span class="n">add_element</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">microim</span><span class="o">=</span><span class="n">microim2</span><span class="p">)</span>
@@ -323,6 +323,20 @@
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/create_panels_8_0.png" src="../_images/create_panels_8_0.png" />
+</div>
+</div>
+<p>By default, the panel size is adjusted to optimall fit the image size. <strong>Note that for this adjustment we assume that all images in the panel of the same size.</strong> As shown above, you can adjust the general size of the image with the <code class="docutils literal notranslate"><span class="pre">figscaling</span></code> paramter. If you want, you can also explicitly specify a figure size in which case no adjustments are done:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">micropanel_size</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">Micropanel</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="n">figscaling</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">micropanel_size</span><span class="o">.</span><span class="n">add_element</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">microim</span><span class="o">=</span><span class="n">microim1</span><span class="p">)</span>
+<span class="n">micropanel_size</span><span class="o">.</span><span class="n">add_element</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">microim</span><span class="o">=</span><span class="n">microim2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/create_panels_10_0.png" src="../_images/create_panels_10_0.png" />
 </div>
 </div>
 <p>In the end you can save the panel with the regular <code class="docutils literal notranslate"><span class="pre">savefig</span></code> method:</p>
@@ -339,14 +353,17 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microim1</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">image</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]],</span>
                                <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_magenta&#39;</span><span class="p">],</span> <span class="n">flip_map</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
                                <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">label_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">channel_label_show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                <span class="n">channel_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nucleoid&#39;</span><span class="p">,</span> <span class="s1">&#39;ori&#39;</span><span class="p">],</span>
-                               <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                               <span class="n">channel_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nucleoid&#39;</span><span class="p">,</span> <span class="s1">&#39;ori&#39;</span><span class="p">],</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
                               <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">scalebar_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">fig_scaling</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_panels_12_0.png" src="../_images/create_panels_12_0.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/gw18g940/GoogleDrive/BernMIC/Projects/microfilm/microfilm/colorify.py:66: UserWarning: No appropriate color found for your colormap. Using black.&#39;
+  warnings.warn(f&quot;No appropriate color found for your colormap. Using black.&#39;&quot;)
+</pre></div>
+</div>
+<img alt="../_images/create_panels_14_1.png" src="../_images/create_panels_14_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -355,17 +372,17 @@
                                <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_cyan&#39;</span><span class="p">],</span> <span class="n">flip_map</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
                                <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="n">label_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">channel_label_show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                               <span class="n">channel_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nucleoid&#39;</span><span class="p">,</span> <span class="s1">&#39;ter&#39;</span><span class="p">],</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-                              <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">scalebar_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">fig_scaling</span><span class="o">=</span><span class="mi">4</span><span class="p">,)</span>
+                              <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">scalebar_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">fig_scaling</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_panels_13_0.png" src="../_images/create_panels_13_0.png" />
+<img alt="../_images/create_panels_15_0.png" src="../_images/create_panels_15_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">micropanel</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">Micropanel</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="mf">1.3</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">margin</span><span class="o">=</span><span class="mf">0.00</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">micropanel</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">Micropanel</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">margin</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
 
 <span class="n">micropanel</span><span class="o">.</span><span class="n">add_element</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">microim</span><span class="o">=</span><span class="n">microim1</span><span class="p">)</span>
 <span class="n">micropanel</span><span class="o">.</span><span class="n">add_element</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">microim</span><span class="o">=</span><span class="n">microim2</span><span class="p">)</span>
@@ -375,7 +392,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_panels_14_0.png" src="../_images/create_panels_14_0.png" />
+<img alt="../_images/create_panels_16_0.png" src="../_images/create_panels_16_0.png" />
 </div>
 </div>
 </section>
@@ -411,7 +428,7 @@
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "3bc46b6e3d294d2cb4bf4737c706080c", "version_major": 2, "version_minor": 0}
+{"model_id": "62ec139a2507464e8b3362b7f2dc4de2", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
 <div class="cell docutils container">
@@ -422,12 +439,12 @@
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "a52383f944bc48edab3c24f6e7adc681", "version_major": 2, "version_minor": 0}
+{"model_id": "153db0362e1d4e9f837f5e8fecbd891d", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">animpanel</span> <span class="o">=</span> <span class="n">microanim</span><span class="o">.</span><span class="n">Microanimpanel</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mf">2.6</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">animpanel</span> <span class="o">=</span> <span class="n">microanim</span><span class="o">.</span><span class="n">Microanimpanel</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">animpanel</span><span class="o">.</span><span class="n">add_element</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">microanim</span><span class="o">=</span><span class="n">microanim1</span><span class="p">)</span>
 <span class="n">animpanel</span><span class="o">.</span><span class="n">add_element</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">microanim</span><span class="o">=</span><span class="n">microanim2</span><span class="p">)</span>
 
@@ -435,6 +452,10 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "0694d76aaab04edca9351023af504243", "version_major": 2, "version_minor": 0}
+</script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -444,7 +465,7 @@
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "fdbfa02630804061940b8d68de63c39b", "version_major": 2, "version_minor": 0}
+{"model_id": "57a6808818634d928da51381a3a9a709", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
 <p>Exporting the panel works the same way as for the simple animations. For example the above animation can be saved with:</p>

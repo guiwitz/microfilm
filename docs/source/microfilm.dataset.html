@@ -334,7 +334,7 @@ metadata information</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="microfilm.dataset.dataset.Data.find_files">
-<span class="sig-name descname"><span class="pre">find_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folderpath</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.Data.find_files" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">find_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folderpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.Data.find_files" title="Permalink to this definition">¶</a></dt>
 <dd><p>Given a folder, find all tif files contained in it and try to sort as time-lapse</p>
 </dd></dl>
 
@@ -465,6 +465,13 @@ frames are sorted using natsort.</p>
 <dd><p>Load index k of valid frames of channel index m in self.channelfile</p>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="microfilm.dataset.dataset.findfiles">
+<span class="sig-prename descclassname"><span class="pre">microfilm.dataset.dataset.</span></span><span class="sig-name descname"><span class="pre">findfiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">which</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">where</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.findfiles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns list of filenames from <cite>where</cite> path matched by ‘which’
+shell pattern. Matching is case-insensitive.</p>
 </dd></dl>
 
 </section>
