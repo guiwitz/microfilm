@@ -581,6 +581,8 @@ class Micropanel:
 
         # adjust figure size with label
         self.fig.clf()
+        self.fig.set_size_inches([self.fig.get_size_inches()[0]*(1-tot_space),
+                    self.fig.get_size_inches()[1]])
         self.fig, self.ax = plt.subplots(
                 nrows=self.rows, ncols=self.cols,
                 figsize=[self.fig.get_size_inches()[0]*(1-tot_space),
