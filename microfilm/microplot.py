@@ -512,8 +512,11 @@ class Micropanel:
         number of panel columns
     margin: float
         fraction of figure size reserved for margins between plots
-    figsize: float or list
-        figure size, either square or rectangular
+    figscaling: float
+        adjust the size of the figure without providing
+        explicit size
+    figsize: list
+        figure size [x, y]
     channel_label_size: float
         font size for channel labels (fraction of figure)
     fig_kwargs: parameters normally passed to plt.subplots()
@@ -528,34 +531,41 @@ class Micropanel:
 
     """
     
-    def __init__(self, rows, cols, margin=0.01, figsize=2, channel_label_size=0.05, **fig_kwargs):
-
-        if not isinstance(figsize, list):
-            figsize = [figsize, figsize]
+    def __init__(
+        self, rows, cols, margin=0.01, figscaling=5, figsize=None,
+        channel_label_size=0.05, label_line_space=0.2, **fig_kwargs):
 
         self.rows = rows
         self.cols = cols
         self.margin = margin
         self.figsize = figsize
+        self.figscaling = figscaling
         self.channel_label_size = channel_label_size
+        self.label_line_space = label_line_space
+        self.fig_kwargs = fig_kwargs
 
         self.microplots = np.empty((rows, cols), dtype=object)
-        self.construct_figure(**fig_kwargs)
+        self.construct_figure()
         
-    def construct_figure(self, **fig_kwargs):
+    def construct_figure(self):
         """Construct the figure"""
+        
+        if 'frameon' not in self.fig_kwargs.keys():
+            self.fig_kwargs['frameon'] = False
 
         self.fig, self.ax = plt.subplots(
-            nrows=self.rows, ncols=self.cols, figsize=(self.figsize[1]*self.cols, self.figsize[0]*self.rows),
-            squeeze=False, frameon=False,
+            nrows=self.rows, ncols=self.cols, figsize=self.figsize,
+            squeeze=False,
             gridspec_kw = {'left':0, 'right':1, 'bottom':0, 'top':1, 'wspace':self.margin, 'hspace':self.margin},
-            **fig_kwargs)
+            **self.fig_kwargs)
 
-    def add_channel_label(self, channel_label_size=None):
+    def add_channel_label(self, channel_label_size=None, label_line_space=None):
         """Add channel labels to all plots and set their size"""
 
         if channel_label_size is not None:
             self.channel_label_size = channel_label_size
+        if label_line_space is not None:
+            self.label_line_space = label_line_space
 
         for i in range(self.rows):
             for j in range(self.cols):
@@ -563,11 +573,21 @@ class Micropanel:
                     self.microplots[i,j].channel_names = ['Channel-' + str(i) for i in range(len(self.microplots[i,j].images))]
         
         ## title params
-        line_space = 0.01
+        line_space = self.label_line_space * self.channel_label_size
         nlines = np.max([len(k) for k in [x.channel_names for x in self.microplots.ravel() if x is not None] if k is not None])
 
         tot_space = nlines * (self.channel_label_size+line_space)
-        fontsize = self.channel_label_size*self.figsize[0]*self.rows*100
+        fontsize = self.channel_label_size*self.fig.get_size_inches()[1]*self.rows*100
+
+        # adjust figure size with label
+        self.fig.clf()
+        self.fig, self.ax = plt.subplots(
+                nrows=self.rows, ncols=self.cols,
+                figsize=[self.fig.get_size_inches()[0]*(1-tot_space),
+                    self.fig.get_size_inches()[1]],
+                squeeze=False, num=self.fig.number,
+                gridspec_kw = {'left':0, 'right':1, 'bottom':0, 'top':1, 'wspace':self.margin, 'hspace':self.margin},
+                **self.fig_kwargs)
 
         for j in range(self.rows):
             for i in range(self.cols):
@@ -594,11 +614,11 @@ class Micropanel:
                             transform=self.fig.transFigure,
                             fontdict={'color':colorify.color_translate(self.microplots[j,i].cmaps[nlines-1-k]), 'size':fontsize}
                         )
-                    #self.ax[j,i].cla()
-                    #has_label = self.microplots[j,i].channel_label_show
-                    #self.microplots[j,i].channel_label_show = False
-                    #self.microplots[j,i].update(self.ax[j,i])
-                    #self.microplots[j,i].channel_label_show = has_label
+                    self.ax[j,i].cla()
+                    has_label = self.microplots[j,i].channel_label_show
+                    self.microplots[j,i].channel_label_show = False
+                    self.microplots[j,i].update(self.ax[j,i])
+                    self.microplots[j,i].channel_label_show = has_label
 
     def add_element(self, pos, microim):
         """Add a microimage object to a panel
@@ -612,10 +632,19 @@ class Micropanel:
 
         """
 
+        if isinstance(microim.images, list):
+            im_dim = microim.images[0].shape
+        else:
+            im_dim = microim.images.shape[1:3]
+        if self.figsize is None:
+            self.fig.set_size_inches(
+                w=self.cols*im_dim[1]/np.max(im_dim)*self.figscaling,
+                h=self.rows*im_dim[0]/np.max(im_dim)*self.figscaling
+            )
+
         has_label = microim.channel_label_show
 
         microim.channel_label_show = False
-        microim.fig_scaling = self.figsize[0]
         microim.update(self.ax[pos[0], pos[1]])
     
         self.microplots[pos[0], pos[1]] = microim
