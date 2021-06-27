@@ -43,11 +43,13 @@
     <script src="../_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -222,6 +224,9 @@
         
         
         
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
         
     </div>
 </div>
@@ -303,7 +308,7 @@
 <section id="dataset">
 <h2>Dataset<a class="headerlink" href="#dataset" title="Permalink to this headline">¶</a></h2>
 <p>To create an animation, you need a dataset containing multiple frames. As dataset, you can either use a Numpy array with shape CTXY or use one of the <code class="docutils literal notranslate"><span class="pre">dataset</span></code> classes. We start with the simplest case of an array and load a complete stack that we reshape:</p>
-<div class="cell docutils container">
+<div class="cell tag_thebe-init docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -312,7 +317,7 @@
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_thebe-init docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image</span> <span class="o">=</span> <span class="n">skimage</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;../demodata/coli_nucl_ori_ter.tif&#39;</span><span class="p">)</span>
 </pre></div>
@@ -324,14 +329,14 @@
 <h2>Create the animation object<a class="headerlink" href="#create-the-animation-object" title="Permalink to this headline">¶</a></h2>
 <p>Now we can use default settings to create an animation object. For that we only need the dataset, here in the form of a Numpy array. <strong>If you use such a Numpy array, by default all channels are plotted. If you don’t want that either create a dataset object (see later) or slice your array</strong>.</p>
 <p>We will have access to some interactivity to scroll through the frames. So before we start we need to activate Matplotlib’s interactive widget mode:</p>
-<div class="cell docutils container">
+<div class="cell tag_thebe-init docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> widget
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_thebe-init docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">microfilm.microanim</span> <span class="kn">import</span> <span class="n">Microanim</span>
 </pre></div>
@@ -351,7 +356,7 @@
 </div>
 </div>
 <p>Now we can create the animation object. The animation object takes the same arguments as the <code class="docutils literal notranslate"><span class="pre">Microimage</span></code> object. The main difference is that you need to provide in addition a <code class="docutils literal notranslate"><span class="pre">data</span></code> parameter which represents your time-lapse images. The <code class="docutils literal notranslate"><span class="pre">data</span></code> can be either one of the <code class="docutils literal notranslate"><span class="pre">microfilm.dataset</span></code> objects or a simple Numpy array with dimensions <code class="docutils literal notranslate"><span class="pre">C</span> <span class="pre">x</span> <span class="pre">Z</span> <span class="pre">x</span> <span class="pre">X</span> <span class="pre">x</span> <span class="pre">Y</span></code> like <code class="docutils literal notranslate"><span class="pre">image</span></code> used here:</p>
-<div class="cell docutils container">
+<div class="cell tag_thebe-init docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anim</span> <span class="o">=</span> <span class="n">Microanim</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">image</span><span class="p">,</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_blue&#39;</span><span class="p">,</span><span class="s1">&#39;pure_red&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_green&#39;</span><span class="p">])</span>
 </pre></div>
@@ -362,7 +367,7 @@
 <section id="interactive-object">
 <h2>Interactive object<a class="headerlink" href="#interactive-object" title="Permalink to this headline">¶</a></h2>
 <p>To display our time-lapse image and browse through it, we the simply call the <code class="docutils literal notranslate"><span class="pre">ui</span></code> of the object:</p>
-<div class="cell docutils container">
+<div class="cell tag_thebe-init docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anim</span><span class="o">.</span><span class="n">ui</span>
 </pre></div>
@@ -370,7 +375,7 @@
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "95b36ccac64d474fa717a97728d4b681", "version_major": 2, "version_minor": 0}
+{"model_id": "44b436be73974f5593826b2d9b0e6c87", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
 </section>
@@ -387,7 +392,7 @@
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "e3eb786a21784ffda223418271f4b9ef", "version_major": 2, "version_minor": 0}
+{"model_id": "3dc230c4f67c48ee87eeb57cbd8df013", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
 <section id="access-to-microim">
@@ -402,7 +407,7 @@
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "e3eb786a21784ffda223418271f4b9ef", "version_major": 2, "version_minor": 0}
+{"model_id": "3dc230c4f67c48ee87eeb57cbd8df013", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
 <p>And again, you also get access to the underlying Matplotlib objects like axis:</p>
@@ -415,7 +420,7 @@
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "e3eb786a21784ffda223418271f4b9ef", "version_major": 2, "version_minor": 0}
+{"model_id": "3dc230c4f67c48ee87eeb57cbd8df013", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
 </section>
@@ -434,7 +439,7 @@
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "a36c8bc22fb14072b76147dc30c2ae8e", "version_major": 2, "version_minor": 0}
+{"model_id": "a7035668b7f544b2a83db6405fc01806", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
 <p>Just like for regular plots, you may want to create animations with multiple panels. This is done in the same way as for figures, by assembling pre-made single animations. Find more information in <a class="reference internal" href="create_panels.html"><span class="doc std std-doc">this section</span></a>.</p>
@@ -449,7 +454,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[WARNING: _io: 411 2021-06-27 01:15:20,828] IMAGEIO FFMPEG_WRITER WARNING: input image is not divisible by macro_block_size=16, resizing from (230, 300) to (240, 304) to ensure video compatibility with most codecs and players. To prevent resizing, make your input image divisible by the macro_block_size or set the macro_block_size to 1 (risking incompatibility).
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[WARNING: _io: 411 2021-06-27 15:54:26,865] IMAGEIO FFMPEG_WRITER WARNING: input image is not divisible by macro_block_size=16, resizing from (230, 300) to (240, 304) to ensure video compatibility with most codecs and players. To prevent resizing, make your input image divisible by the macro_block_size or set the macro_block_size to 1 (risking incompatibility).
 </pre></div>
 </div>
 </div>
@@ -494,17 +499,23 @@
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "bf4a6e9d01324de4b7a8c2a2ff654c7b", "version_major": 2, "version_minor": 0}
+{"model_id": "617bed81957c4fde86e25f29827f16e6", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
 </section>
 </section>
 
+
+<script type="application/vnd.jupyter.widget-state+json">
+{"state": {"0521ce64eb094899b6544f8d7ff44a2b": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "0cac0b767df24930898b44824502a05a": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "1053b928f3d543e18289050e25693e34": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"layout": "IPY_MODEL_652342ff6cc2461a9da15cda56e23a0f", "outputs": [{"data": {"application/vnd.jupyter.widget-view+json": {"model_id": "c89c2be9180e4a36b864273155c04ca7", "version_major": 2, "version_minor": 0}, "text/plain": "Canvas(toolbar=Toolbar(toolitems=[('Home', 'Reset original view', 'home', 'home'), ('Back', 'Back to previous \u2026"}, "metadata": {}, "output_type": "display_data"}]}}, "1585891688194fbeaffcde101d743020": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "194b74a2efed415d95454f756638b20a": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "ToolbarModel", "state": {"layout": "IPY_MODEL_7e49d223114c496e87a79b784f142625", "toolitems": [["Home", "Reset original view", "home", "home"], ["Back", "Back to previous view", "arrow-left", "back"], ["Forward", "Forward to next view", "arrow-right", "forward"], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "arrows", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis, CTRL fixes aspect", "square-o", "zoom"], ["Download", "Download plot", "floppy-o", "save_figure"]]}}, "1a4e0c1471ee431f9a43b69dbc8f7e33": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "235bd3247bb842cbaa8412c4e85527e5": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "MPLCanvasModel", "state": {"_cursor": "default", "_figure_label": "Figure 2", "_height": 200, "_width": 153, "layout": "IPY_MODEL_dfafb8860e9a44b5b575c39bbbc75bbf", "toolbar": "IPY_MODEL_a11baabbac19414daeed515ba7ca867a", "toolbar_position": "left"}}, "25ede7cddaf84493a3120698c85a62df": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "ToolbarModel", "state": {"layout": "IPY_MODEL_1a4e0c1471ee431f9a43b69dbc8f7e33", "toolitems": [["Home", "Reset original view", "home", "home"], ["Back", "Back to previous view", "arrow-left", "back"], ["Forward", "Forward to next view", "arrow-right", "forward"], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "arrows", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis, CTRL fixes aspect", "square-o", "zoom"], ["Download", "Download plot", "floppy-o", "save_figure"]]}}, "26fb6a7706884233b3650f58acd06ee1": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"layout": "IPY_MODEL_0521ce64eb094899b6544f8d7ff44a2b", "outputs": [{"data": {"application/vnd.jupyter.widget-view+json": {"model_id": "6226320a69cd4c729bbb927c12225693", "version_major": 2, "version_minor": 0}, "text/plain": "Canvas(toolbar=Toolbar(toolitems=[('Home', 'Reset original view', 'home', 'home'), ('Back', 'Back to previous \u2026"}, "metadata": {}, "output_type": "display_data"}]}}, "2953dedc91c540f39255f6d381a11b71": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "2e1b34d38db64c94be67a33fd93a5c73": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "3657957d50c34df08fcbc461c42dcf5a": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "MPLCanvasModel", "state": {"_cursor": "default", "_figure_label": "Figure 3", "_height": 300, "_message": "x=100. y=214.3\n[0.0549, 0.0588, 0.0392, 1]", "_width": 230, "layout": "IPY_MODEL_c8e4ae4562f742e29456bbe799ab5dff", "toolbar": "IPY_MODEL_194b74a2efed415d95454f756638b20a", "toolbar_position": "left"}}, "3dc230c4f67c48ee87eeb57cbd8df013": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "VBoxModel", "state": {"children": ["IPY_MODEL_9e8f208d1b654697a0684f9c0df7cee2", "IPY_MODEL_3f6c8deb9cd94b81acf503ff50f67ff7"], "layout": "IPY_MODEL_9c8ff027221341b9b032986f024e8466"}}, "3f6c8deb9cd94b81acf503ff50f67ff7": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "IntSliderModel", "state": {"description": "Time", "layout": "IPY_MODEL_c0b9df303cb24239b0d2e874703e4593", "max": 29, "style": "IPY_MODEL_684cdb29b5d54f06a50e2bb64c31ed08"}}, "401c645ad9634ed6b1cce291cd4ab2b8": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"layout": "IPY_MODEL_2953dedc91c540f39255f6d381a11b71", "outputs": [{"data": {"application/vnd.jupyter.widget-view+json": {"model_id": "3657957d50c34df08fcbc461c42dcf5a", "version_major": 2, "version_minor": 0}, "text/plain": "Canvas(toolbar=Toolbar(toolitems=[('Home', 'Reset original view', 'home', 'home'), ('Back', 'Back to previous \u2026"}, "metadata": {}, "output_type": "display_data"}]}}, "44b0e62ec34a4b3fae47efe928e7a4f6": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "SliderStyleModel", "state": {"description_width": ""}}, "44b436be73974f5593826b2d9b0e6c87": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "VBoxModel", "state": {"children": ["IPY_MODEL_26fb6a7706884233b3650f58acd06ee1", "IPY_MODEL_942968cb4a1c42d59378ae00c41e3759"], "layout": "IPY_MODEL_9f8e63063dc6481da4735c9ebb3d604d"}}, "46a3cbdd4fd447bdbf1a690da0f966f8": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "617bed81957c4fde86e25f29827f16e6": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "VBoxModel", "state": {"children": ["IPY_MODEL_1053b928f3d543e18289050e25693e34", "IPY_MODEL_ab095a757dfe4fd39240ecb04518df71"], "layout": "IPY_MODEL_b34c1aa9cad54611a269e9f124b094e4"}}, "6226320a69cd4c729bbb927c12225693": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "MPLCanvasModel", "state": {"_cursor": "default", "_figure_label": "Figure 1", "_height": 300, "_message": "x=144.0 y=192.3\n[0.0667, 0.0784, 0.0235, 1]", "_width": 230, "layout": "IPY_MODEL_1585891688194fbeaffcde101d743020", "toolbar": "IPY_MODEL_780edda37bed48df8e52b232b59e5ea1", "toolbar_position": "left"}}, "62aadaac2c5c4ac8bf589d9fc7d15f75": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "SliderStyleModel", "state": {"description_width": ""}}, "651e05db0cc94e09981cb13019e3b61d": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "652342ff6cc2461a9da15cda56e23a0f": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "684cdb29b5d54f06a50e2bb64c31ed08": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "SliderStyleModel", "state": {"description_width": ""}}, "780edda37bed48df8e52b232b59e5ea1": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "ToolbarModel", "state": {"layout": "IPY_MODEL_2e1b34d38db64c94be67a33fd93a5c73", "toolitems": [["Home", "Reset original view", "home", "home"], ["Back", "Back to previous view", "arrow-left", "back"], ["Forward", "Forward to next view", "arrow-right", "forward"], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "arrows", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis, CTRL fixes aspect", "square-o", "zoom"], ["Download", "Download plot", "floppy-o", "save_figure"]]}}, "7bfdec8754d84645a8675e420512487f": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "SliderStyleModel", "state": {"description_width": ""}}, "7ca03af6f4144b8b9b8912865cd86992": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "7e49d223114c496e87a79b784f142625": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "898f432aa864491ba027ee94073ce101": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "942968cb4a1c42d59378ae00c41e3759": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "IntSliderModel", "state": {"description": "Time", "layout": "IPY_MODEL_0cac0b767df24930898b44824502a05a", "max": 29, "style": "IPY_MODEL_44b0e62ec34a4b3fae47efe928e7a4f6"}}, "9c8ff027221341b9b032986f024e8466": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "9e8f208d1b654697a0684f9c0df7cee2": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"layout": "IPY_MODEL_e6e7389989fe4553b6eeb1d19216a3c4", "outputs": [{"data": {"application/vnd.jupyter.widget-view+json": {"model_id": "235bd3247bb842cbaa8412c4e85527e5", "version_major": 2, "version_minor": 0}, "text/plain": "Canvas(toolbar=Toolbar(toolitems=[('Home', 'Reset original view', 'home', 'home'), ('Back', 'Back to previous \u2026"}, "metadata": {}, "output_type": "display_data"}]}}, "9f8e63063dc6481da4735c9ebb3d604d": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "a11baabbac19414daeed515ba7ca867a": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "ToolbarModel", "state": {"layout": "IPY_MODEL_898f432aa864491ba027ee94073ce101", "toolitems": [["Home", "Reset original view", "home", "home"], ["Back", "Back to previous view", "arrow-left", "back"], ["Forward", "Forward to next view", "arrow-right", "forward"], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "arrows", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis, CTRL fixes aspect", "square-o", "zoom"], ["Download", "Download plot", "floppy-o", "save_figure"]]}}, "a7035668b7f544b2a83db6405fc01806": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "VBoxModel", "state": {"children": ["IPY_MODEL_401c645ad9634ed6b1cce291cd4ab2b8", "IPY_MODEL_cd3b694cadc54ecb8c655fab2c461390"], "layout": "IPY_MODEL_46a3cbdd4fd447bdbf1a690da0f966f8"}}, "ab095a757dfe4fd39240ecb04518df71": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "IntSliderModel", "state": {"description": "Time", "layout": "IPY_MODEL_7ca03af6f4144b8b9b8912865cd86992", "max": 29, "style": "IPY_MODEL_62aadaac2c5c4ac8bf589d9fc7d15f75"}}, "b34c1aa9cad54611a269e9f124b094e4": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "b39ebbb3849f4b53ad823eeb7f6eb856": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "c0b9df303cb24239b0d2e874703e4593": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "c89c2be9180e4a36b864273155c04ca7": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "MPLCanvasModel", "state": {"_cursor": "default", "_figure_label": "Figure 4", "_height": 500, "_message": "x=80.9 y=29.1\n[0.0235, 0.0667, 0, 1]", "_width": 384, "layout": "IPY_MODEL_b39ebbb3849f4b53ad823eeb7f6eb856", "toolbar": "IPY_MODEL_25ede7cddaf84493a3120698c85a62df", "toolbar_position": "left"}}, "c8e4ae4562f742e29456bbe799ab5dff": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "cd3b694cadc54ecb8c655fab2c461390": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "IntSliderModel", "state": {"description": "Time", "layout": "IPY_MODEL_651e05db0cc94e09981cb13019e3b61d", "max": 29, "style": "IPY_MODEL_7bfdec8754d84645a8675e420512487f"}}, "dfafb8860e9a44b5b575c39bbbc75bbf": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "e6e7389989fe4553b6eeb1d19216a3c4": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}}, "version_major": 2, "version_minor": 0}
+</script>
+
+
     <script type="text/x-thebe-config">
     {
         requestKernel: true,
         binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
+            repo: "guiwitz/microfilm",
             ref: "master",
         },
         codeMirrorConfig: {
