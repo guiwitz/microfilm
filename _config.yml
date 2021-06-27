@@ -4,6 +4,10 @@ logo: 'illustrations/microanim_logo.png'
 execute:
   execute_notebooks: "off"
 
+launch_buttons:
+  thebe: true
+  binderhub_url: "https://mybinder.org"  # The URL for your BinderHub (e.g., https://mybinder.org)
+
 # Information about where the book exists on the web
 repository:
   url: https://github.com/guiwitz/microfilm
