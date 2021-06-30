@@ -188,13 +188,13 @@ class Microanimpanel:
 
         self.microanims = np.empty((rows, cols), dtype=object)
 
-        #with self.output:
+        with self.output:
             
-        self.fig, self.ax = plt.subplots(
-            nrows=self.rows, ncols=self.cols, figsize=self.figsize,
-            squeeze=False,
-            gridspec_kw = {'left':0, 'right':1, 'bottom':0, 'top':1, 'wspace':self.margin, 'hspace':self.margin},
-            **self.fig_kwargs)
+            self.fig, self.ax = plt.subplots(
+                nrows=self.rows, ncols=self.cols, figsize=self.figsize,
+                squeeze=False,
+                gridspec_kw = {'left':0, 'right':1, 'bottom':0, 'top':1, 'wspace':self.margin, 'hspace':self.margin},
+                **self.fig_kwargs)
         
         self.ui = ipw.VBox([self.output, self.time_slider])
 
