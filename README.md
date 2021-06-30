@@ -1,6 +1,9 @@
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/guiwitz/microfilm/master?urlpath=lab)
-![example workflow](https://github.com/guiwitz/microfilm/actions/workflows/tests.yml/badge.svg)
-![GitHub](https://img.shields.io/github/license/guiwitz/microfilm)
+![example workflow](https://github.com/guiwitz/microfilm/actions/workflows/tests_build.yml/badge.svg)
+![PyPI - License](https://img.shields.io/pypi/l/microfilm)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/microfilm)
+![PyPI](https://img.shields.io/pypi/v/microfilm)
+![PyPI - Status](https://img.shields.io/pypi/status/microfilm)
 # microfilm
 
 This package is a collection of tools to display and analyze 2D and 2D time-lapse microscopy images. In particular it makes it straightforward to create figures containing multi-channel images represented in a *composite* color mode as done in the popular image processing software [Fiji](https://imagej.net/software/fiji/). It also allows to easily complete such figures with standard annotations like **labels** and **scale bars**. In case of time-lapse data, the figures are turned into **animations** which can be interactively browsed from a Jupyter notebook, saved in standard movie formats (mp4, gif etc.) and completed with **time counters**. Finally, figures and animations can easily be combined into larger **panels**. These main functionalities are provided by the ```microfilm.microplot``` and ```microfilm.microanim``` modules.
@@ -12,7 +15,7 @@ Following the model of [seaborn](https://seaborn.pydata.org/index.html), ```micr
 You can install this package directly from Github using: 
 
 ```
-pip install git+https://github.com/guiwitz/microfilm.git@master#egg=microfilm
+pip install microfilm
 ```
 
 To test the package via the Jupyter interface and the notebooks available [here](notebooks) you can create a conda environment using the [environment.yml](binder/environment.yml) file:
