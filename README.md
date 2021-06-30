@@ -1,5 +1,5 @@
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/guiwitz/microfilm/master?urlpath=lab)
-![example workflow](https://github.com/guiwitz/microfilm/actions/workflows/tests_build.yml/badge.svg)
+[![build](https://github.com/guiwitz/microfilm/actions/workflows/test_build.yml/badge.svg)](https://github.com/guiwitz/microfilm/actions/workflows/test_build.yml)
 ![PyPI - License](https://img.shields.io/pypi/l/microfilm)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/microfilm)
 ![PyPI](https://img.shields.io/pypi/v/microfilm)
