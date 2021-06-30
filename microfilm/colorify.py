@@ -58,7 +58,8 @@ def color_translate(cmap_name):
         'pure_blue': 'blue',
         'pure_magenta': 'magenta',
         'pure_cyan': 'cyan',
-        'pure_yellow': 'yellow'
+        'pure_yellow': 'yellow',
+        'gray': 'gray'
     }
     if cmap_name in color_dict.keys():
         return color_dict[cmap_name]
