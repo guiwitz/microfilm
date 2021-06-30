@@ -270,13 +270,7 @@
   <section id="creating-multi-panel-figures">
 <h1>Creating multi-panel figures<a class="headerlink" href="#creating-multi-panel-figures" title="Permalink to this headline">¶</a></h1>
 <p>You can create yourself multi-panel figures by directly using the underlying Matplotlib objects. We however also provide a simplified way to create such panels by assembling multiple plot or animation objects. This is particularly helpful to create complex animations.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#%load_ext autoreload</span>
-<span class="c1">#%autoreload 2</span>
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -369,11 +363,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/gw18g940/GoogleDrive/BernMIC/Projects/microfilm/microfilm/colorify.py:66: UserWarning: No appropriate color found for your colormap. Using black.&#39;
-  warnings.warn(f&quot;No appropriate color found for your colormap. Using black.&#39;&quot;)
-</pre></div>
-</div>
-<img alt="../_images/create_panels_14_1.png" src="../_images/create_panels_14_1.png" />
+<img alt="../_images/create_panels_14_0.png" src="../_images/create_panels_14_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -430,7 +420,7 @@
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microanim1</span><span class="o">.</span><span class="n">ui</span>
 </pre></div>
@@ -438,10 +428,20 @@
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "62ec139a2507464e8b3362b7f2dc4de2", "version_major": 2, "version_minor": 0}
+{"model_id": "768f9aec6dad4f1a83f6ccd6e276e1f0", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="n">Image</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://github.com/guiwitz/microfilm/raw/master/illustrations/create_panels_1.png&#39;</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><img src="https://github.com/guiwitz/microfilm/raw/master/illustrations/create_panels_1.png" width="300"/></div></div>
+</div>
+<div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microanim2</span><span class="o">.</span><span class="n">ui</span>
 </pre></div>
@@ -449,12 +449,21 @@
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "153db0362e1d4e9f837f5e8fecbd891d", "version_major": 2, "version_minor": 0}
+{"model_id": "125b3c32a66444a6aa87d0995abd5a97", "version_major": 2, "version_minor": 0}
 </script></div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://github.com/guiwitz/microfilm/raw/master/illustrations/create_panels_2.png&#39;</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><img src="https://github.com/guiwitz/microfilm/raw/master/illustrations/create_panels_2.png" width="300"/></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">animpanel</span> <span class="o">=</span> <span class="n">microanim</span><span class="o">.</span><span class="n">Microanimpanel</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">animpanel</span> <span class="o">=</span> <span class="n">microanim</span><span class="o">.</span><span class="n">Microanimpanel</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">2</span><span class="p">,)</span>
 <span class="n">animpanel</span><span class="o">.</span><span class="n">add_element</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">microanim</span><span class="o">=</span><span class="n">microanim1</span><span class="p">)</span>
 <span class="n">animpanel</span><span class="o">.</span><span class="n">add_element</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">microanim</span><span class="o">=</span><span class="n">microanim2</span><span class="p">)</span>
 
@@ -462,12 +471,8 @@
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "0694d76aaab04edca9351023af504243", "version_major": 2, "version_minor": 0}
-</script></div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">animpanel</span><span class="o">.</span><span class="n">ui</span>
 </pre></div>
@@ -475,8 +480,17 @@
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "57a6808818634d928da51381a3a9a709", "version_major": 2, "version_minor": 0}
+{"model_id": "4bfee7ded764465081a56b7672daf0f5", "version_major": 2, "version_minor": 0}
 </script></div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://github.com/guiwitz/microfilm/raw/master/illustrations/create_panels_3.gif&#39;</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="mi">750</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><img src="https://github.com/guiwitz/microfilm/raw/master/illustrations/create_panels_3.gif" width="750"/></div></div>
 </div>
 <p>Exporting the panel works the same way as for the simple animations. For example the above animation can be saved with:</p>
 <div class="cell docutils container">
@@ -493,6 +507,26 @@
 </pre></div>
 </div>
 </div>
+</div>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">animpanel</span><span class="o">.</span><span class="n">ui</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "4bfee7ded764465081a56b7672daf0f5", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://github.com/guiwitz/microfilm/raw/master/illustrations/create_panels_4.png&#39;</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="mi">750</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><img src="https://github.com/guiwitz/microfilm/raw/master/illustrations/create_panels_4.png" width="750"/></div></div>
 </div>
 </section>
 </section>
