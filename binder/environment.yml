@@ -11,4 +11,4 @@ dependencies:
   - ipympl
   - pip:
     - tqdm
-    - git+https://github.com/guiwitz/microfilm.git@master#egg=microfilm
+    - microfilm
