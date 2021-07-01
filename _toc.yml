@@ -1,12 +1,18 @@
-- file: README
-
-- part: Documentation
+format: jb-book
+root: README
+parts:
+- caption: Getting started
+  chapters:
+  - file: docs/overview
+  - file: docs/installation
+  - file: docs/first_plot
+    
+- caption: Topic guides
   chapters:
   - file: notebooks/create_plots
   - file: notebooks/create_animations
   - file: notebooks/create_panels
   
-
-- part: Reference
+- caption: API Reference
   chapters:
   - file: docs/source/microfilm
