@@ -4,8 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Creating animations &#8212; microfilm</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
@@ -94,7 +93,29 @@
 </ul>
 <p class="caption">
  <span class="caption-text">
-  Documentation
+  Getting started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../docs/overview.html">
+   Overview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../docs/installation.html">
+   Installation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../docs/first_plot.html">
+   Create your first plots
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Topic guides
  </span>
 </p>
 <ul class="current nav bd-sidenav">
@@ -116,7 +137,7 @@
 </ul>
 <p class="caption">
  <span class="caption-text">
-  Reference
+  API Reference
  </span>
 </p>
 <ul class="nav bd-sidenav">
@@ -299,7 +320,7 @@
         
               <div>
                 
-  <section id="creating-animations">
+  <div class="section" id="creating-animations">
 <h1>Creating animations<a class="headerlink" href="#creating-animations" title="Permalink to this headline">¶</a></h1>
 <p>While the <code class="docutils literal notranslate"><span class="pre">microplot</span></code> module allows one to create single-frame multi-channel images with annotations, the <code class="docutils literal notranslate"><span class="pre">microanim</span></code> module allows one to create interactive plots and save animations of time-lapse versions of such plots. Both modules use an almost identical set of options to render the images and add annotations.</p>
 <div class="cell docutils container">
@@ -310,7 +331,7 @@
 </div>
 </div>
 </div>
-<section id="dataset">
+<div class="section" id="dataset">
 <h2>Dataset<a class="headerlink" href="#dataset" title="Permalink to this headline">¶</a></h2>
 <p>To create an animation, you need a dataset containing multiple frames. As dataset, you can either use a Numpy array with shape CTXY or use one of the <code class="docutils literal notranslate"><span class="pre">dataset</span></code> classes. We start with the simplest case of an array and load a complete stack that we reshape:</p>
 <div class="cell tag_thebe-init docutils container">
@@ -329,8 +350,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="create-the-animation-object">
+</div>
+<div class="section" id="create-the-animation-object">
 <h2>Create the animation object<a class="headerlink" href="#create-the-animation-object" title="Permalink to this headline">¶</a></h2>
 <p>Now we can use default settings to create an animation object. For that we only need the dataset, here in the form of a Numpy array. <strong>If you use such a Numpy array, by default all channels are plotted. If you don’t want that either create a dataset object (see later) or slice your array</strong>.</p>
 <p>We will have access to some interactivity to scroll through the frames. So before we start we need to activate Matplotlib’s interactive widget mode:</p>
@@ -368,8 +389,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="interactive-object">
+</div>
+<div class="section" id="interactive-object">
 <h2>Interactive object<a class="headerlink" href="#interactive-object" title="Permalink to this headline">¶</a></h2>
 <p>To display our time-lapse image and browse through it, we the simply call the <code class="docutils literal notranslate"><span class="pre">ui</span></code> of the object:</p>
 <div class="cell tag_thebe-init tag_hide-output docutils container">
@@ -393,8 +414,8 @@
 <div class="cell_output docutils container">
 <div class="output text_html"><img src="https://github.com/guiwitz/microfilm/raw/master/illustrations/create_animations_1.gif" width="300"/></div></div>
 </div>
-</section>
-<section id="customizing-the-plot">
+</div>
+<div class="section" id="customizing-the-plot">
 <h2>Customizing the plot<a class="headerlink" href="#customizing-the-plot" title="Permalink to this headline">¶</a></h2>
 <p>As mentioned before, you have access to almost all options that you can use in <code class="docutils literal notranslate"><span class="pre">microshow</span></code> for the animation. Here’s an example where we add a scale bar, a label and adjust the plot size:</p>
 <div class="cell tag_hide-output docutils container">
@@ -422,7 +443,7 @@
 <div class="cell_output docutils container">
 <div class="output text_html"><img src="https://github.com/guiwitz/microfilm/raw/master/illustrations/create_animations_2.png" width="300"/></div></div>
 </div>
-<section id="access-to-microim">
+<div class="section" id="access-to-microim">
 <h3>Access to microim<a class="headerlink" href="#access-to-microim" title="Permalink to this headline">¶</a></h3>
 <p>As the animation object is very similar to the simple plot object, you get also access to the same underlying methods e.g. to add a label:</p>
 <div class="cell tag_hide-output docutils container">
@@ -468,9 +489,9 @@
 <div class="cell_output docutils container">
 <div class="output text_html"><img src="https://github.com/guiwitz/microfilm/raw/master/illustrations/create_animations_4.png" width="300"/></div></div>
 </div>
-</section>
-</section>
-<section id="adding-a-time-stamp">
+</div>
+</div>
+<div class="section" id="adding-a-time-stamp">
 <h2>Adding a time-stamp<a class="headerlink" href="#adding-a-time-stamp" title="Permalink to this headline">¶</a></h2>
 <p>As a specific feature for animations, you can add a specific label which is a time stamp. At the moment you are limited to use a <code class="docutils literal notranslate"><span class="pre">HH:MM:SS</span></code> format. To add it to your plot, you just specify the unit (e.g. <code class="docutils literal notranslate"><span class="pre">T</span></code> for minutes, abbreviations are from Pandas), and the number of units per time frame e.g. here 5min:</p>
 <div class="cell tag_hide-output docutils container">
@@ -497,8 +518,8 @@
 <div class="output text_html"><img src="https://github.com/guiwitz/microfilm/raw/master/illustrations/create_animations_5.gif" width="300"/></div></div>
 </div>
 <p>Just like for regular plots, you may want to create animations with multiple panels. This is done in the same way as for figures, by assembling pre-made single animations. Find more information in <a class="reference internal" href="create_panels.html"><span class="doc std std-doc">this section</span></a>.</p>
-</section>
-<section id="exporting-the-animation">
+</div>
+<div class="section" id="exporting-the-animation">
 <h2>Exporting the animation<a class="headerlink" href="#exporting-the-animation" title="Permalink to this headline">¶</a></h2>
 <p>Once you are satisfied with your movie, you may want to export it to integrate it e.g. in a presentation. You can do that easily using the <code class="docutils literal notranslate"><span class="pre">save_movie</span></code> method. You can specify the image quality and the frames per second for various movie formats (.mov, .avi, .mpg, .mpeg, .mp4, .mkv, .wmv) and the image format is simply recovered from the file name. You can also export as gif, but don’t have access to the <code class="docutils literal notranslate"><span class="pre">quality</span></code> option there:</p>
 <div class="cell docutils container">
@@ -520,8 +541,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="using-the-dataset-class">
+</div>
+<div class="section" id="using-the-dataset-class">
 <h2>Using the dataset class<a class="headerlink" href="#using-the-dataset-class" title="Permalink to this headline">¶</a></h2>
 <p>Instead of a plain Numpy array you can pass one of the <code class="docutils literal notranslate"><span class="pre">dataset</span></code> objects to the animation constructor. You have here the additional flexibility of choosing which channels to plot for example. Also, if you deal with large images, it is favorable to use a format such as H5 where not the full dataset is loaded into memory.</p>
 <p>We keep our simple example, and transform our Numpy array into a <code class="docutils literal notranslate"><span class="pre">dataset</span></code>. We can specify a name for each channel. Here again, the array format <strong>has to be CTXY</strong>.</p>
@@ -565,8 +586,8 @@
 <div class="cell_output docutils container">
 <div class="output text_html"><img src="https://github.com/guiwitz/microfilm/raw/master/illustrations/create_animations_6.png" width="450"/></div></div>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
 <script type="application/vnd.jupyter.widget-state+json">
@@ -612,7 +633,7 @@
         
           By The Jupyter Book community<br/>
         
-            &copy; Copyright 2020.<br/>
+            &copy; Copyright 2021.<br/>
       </p>
     </div>
   </footer>

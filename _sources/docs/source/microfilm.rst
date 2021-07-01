@@ -36,14 +36,6 @@ microfilm.microplot module
    :undoc-members:
    :show-inheritance:
 
-microfilm.splitmasks module
----------------------------
-
-.. automodule:: microfilm.splitmasks
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 Module contents
 ---------------
 

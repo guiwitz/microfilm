@@ -4,8 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>microfilm package &#8212; microfilm</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
@@ -94,7 +93,29 @@
 </ul>
 <p class="caption">
  <span class="caption-text">
-  Documentation
+  Getting started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../overview.html">
+   Overview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../installation.html">
+   Installation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../first_plot.html">
+   Create your first plots
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Topic guides
  </span>
 </p>
 <ul class="nav bd-sidenav">
@@ -116,7 +137,7 @@
 </ul>
 <p class="caption">
  <span class="caption-text">
-  Reference
+  API Reference
  </span>
 </p>
 <ul class="current nav bd-sidenav">
@@ -247,11 +268,6 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-microfilm.splitmasks">
-   microfilm.splitmasks module
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#module-microfilm">
    Module contents
   </a>
@@ -267,9 +283,9 @@
         
               <div>
                 
-  <section id="microfilm-package">
+  <div class="section" id="microfilm-package">
 <h1>microfilm package<a class="headerlink" href="#microfilm-package" title="Permalink to this headline">¶</a></h1>
-<section id="subpackages">
+<div class="section" id="subpackages">
 <h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
@@ -281,11 +297,11 @@
 </li>
 </ul>
 </div>
-</section>
-<section id="submodules">
+</div>
+<div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-</section>
-<section id="module-microfilm.colorify">
+</div>
+<div class="section" id="module-microfilm.colorify">
 <span id="microfilm-colorify-module"></span><h2>microfilm.colorify module<a class="headerlink" href="#module-microfilm.colorify" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="microfilm.colorify.check_input">
@@ -465,8 +481,8 @@ sum: sum projection, restricted to dtype range</p></li>
 </dl>
 </dd></dl>
 
-</section>
-<section id="module-microfilm.microanim">
+</div>
+<div class="section" id="module-microfilm.microanim">
 <span id="microfilm-microanim-module"></span><h2>microfilm.microanim module<a class="headerlink" href="#module-microfilm.microanim" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="microfilm.microanim.Microanim">
@@ -672,8 +688,8 @@ explicit size</p></li>
 </dl>
 </dd></dl>
 
-</section>
-<section id="module-microfilm.microplot">
+</div>
+<div class="section" id="module-microfilm.microplot">
 <span id="microfilm-microplot-module"></span><h2>microfilm.microplot module<a class="headerlink" href="#module-microfilm.microplot" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="microfilm.microplot.Microimage">
@@ -1110,184 +1126,11 @@ a list with xy coordinates [xpos, ypos] where 0 &lt; xpos, ypos &lt; 1</p></li>
 </dl>
 </dd></dl>
 
-</section>
-<section id="module-microfilm.splitmasks">
-<span id="microfilm-splitmasks-module"></span><h2>microfilm.splitmasks module<a class="headerlink" href="#module-microfilm.splitmasks" title="Permalink to this headline">¶</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="microfilm.splitmasks.create_concentric_mask">
-<span class="sig-prename descclassname"><span class="pre">microfilm.splitmasks.</span></span><span class="sig-name descname"><span class="pre">create_concentric_mask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">center</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">im_dims</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sector_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_sectors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.splitmasks.create_concentric_mask" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a labelled mask of disk split in concentric rings.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>center</strong> (<em>list</em>) – 2d position of center of disk</p></li>
-<li><p><strong>im_dims</strong> (<em>list</em>) – image size</p></li>
-<li><p><strong>sector_width</strong> (<em>int</em>) – ring thickness</p></li>
-<li><p><strong>num_sectors</strong> (<em>int</em>) – number of rings to define</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>concentric_labels</strong> – labelled image with concentric rings</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>2d array</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="microfilm.splitmasks.create_sector_mask">
-<span class="sig-prename descclassname"><span class="pre">microfilm.splitmasks.</span></span><span class="sig-name descname"><span class="pre">create_sector_mask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">center</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">im_dims</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angular_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_rad</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ring_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.splitmasks.create_sector_mask" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a labelled mask of a disk or ring split in angular sectors. If radius is
-provided, the mask is a ring otherwise a disk.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>center</strong> (<em>list</em>) – 2d position of center of disk</p></li>
-<li><p><strong>im_dims</strong> (<em>list</em>) – image size</p></li>
-<li><p><strong>angular_width</strong> (<em>int</em>) – size of angular sectors in degrees</p></li>
-<li><p><strong>max_rad</strong> (<em>float</em>) – disk radius</p></li>
-<li><p><strong>ring_width</strong> (<em>int</em>) – ring width</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>sector_labels</strong> – labelled image with disk split in sectors</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>2d array</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="microfilm.splitmasks.get_cmap_labels">
-<span class="sig-prename descclassname"><span class="pre">microfilm.splitmasks.</span></span><span class="sig-name descname"><span class="pre">get_cmap_labels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im_label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cool'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.splitmasks.get_cmap_labels" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create list of L colors where L is the number of labels in the image</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="microfilm.splitmasks.get_roi_cm">
-<span class="sig-prename descclassname"><span class="pre">microfilm.splitmasks.</span></span><span class="sig-name descname"><span class="pre">get_roi_cm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">roi_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">roi_im</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.splitmasks.get_roi_cm" title="Permalink to this definition">¶</a></dt>
-<dd><p>Find the center of mass of a roi defined as a single label in an image.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>roi_path</strong> (<em>str</em>) – path to roi image</p></li>
-<li><p><strong>= 2d array</strong> (<em>roi_im</em>) – image containing roi</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>cm</strong> – center of mass of roi</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>1d array</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="microfilm.splitmasks.measure_intensities">
-<span class="sig-prename descclassname"><span class="pre">microfilm.splitmasks.</span></span><span class="sig-name descname"><span class="pre">measure_intensities</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">im_labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.splitmasks.measure_intensities" title="Permalink to this definition">¶</a></dt>
-<dd><p>Measure average intensity in a time-lapse image using a labelled image</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>time_image</strong> (<em>iterable 2d array</em>) – can be a TxHxW numpy array or iterable generating HxW numpy arrays</p></li>
-<li><p><strong>im_labels</strong> (<em>2d array</em>) – labelled image</p></li>
-<li><p><strong>max_time</strong> (<em>int</em>) – last time point to consider</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>signal</strong> – TxL array with mean intensity for each time point T in each labelled
-region L</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>2d array</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="microfilm.splitmasks.nan_labels">
-<span class="sig-prename descclassname"><span class="pre">microfilm.splitmasks.</span></span><span class="sig-name descname"><span class="pre">nan_labels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im_label</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.splitmasks.nan_labels" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a label image where background is set to nan for transparency</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="microfilm.splitmasks.plot_sectors">
-<span class="sig-prename descclassname"><span class="pre">microfilm.splitmasks.</span></span><span class="sig-name descname"><span class="pre">plot_sectors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sectors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">im_cmap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.splitmasks.plot_sectors" title="Permalink to this definition">¶</a></dt>
-<dd><p>Plot image and overlayed sectors with a given colormap</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>image</strong> (<em>dataset object</em>) – image to be plotted</p></li>
-<li><p><strong>sectors</strong> (<em>2d array</em>) – labelled image of sectors</p></li>
-<li><p><strong>channel</strong> (<em>str</em>) – name of channel to plot</p></li>
-<li><p><strong>time</strong> (<em>int</em>) – frame to plot</p></li>
-<li><p><strong>cmap</strong> (<em>Matplotlib colormap</em>) – colormap for split mask</p></li>
-<li><p><strong>im_cmap</strong> (<em>Matplotlib colormap</em>) – colormap for image</p></li>
-<li><p><strong>ax</strong> (<em>Matplotlib axis</em>) – </p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>ax if ax passed as input otherwise fig</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="microfilm.splitmasks.plot_signals">
-<span class="sig-prename descclassname"><span class="pre">microfilm.splitmasks.</span></span><span class="sig-name descname"><span class="pre">plot_signals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_array</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.splitmasks.plot_signals" title="Permalink to this definition">¶</a></dt>
-<dd><p>Plot extracted signal with specific colormap</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>signal</strong> (<em>2d array</em>) – signal array with rows as time points and columns as sectors</p></li>
-<li><p><strong>color_array</strong> (<em>2d array</em>) – N x 4 array of RGBA colors where N &gt;= sectors</p></li>
-<li><p><strong>ax</strong> (<em>Matplotlib axis</em>) – </p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>ax if ax passed as input otherwise fig</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="microfilm.splitmasks.save_signal">
-<span class="sig-prename descclassname"><span class="pre">microfilm.splitmasks.</span></span><span class="sig-name descname"><span class="pre">save_signal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mycsv.csv'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'long'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.splitmasks.save_signal" title="Permalink to this definition">¶</a></dt>
-<dd><p>Save the sector signal in a CSV file with a given name</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>signal</strong> (<em>array</em>) – signal array with rows as time points and columns as sectors
-a third dimension indicates multiple channels</p></li>
-<li><p><strong>name</strong> (<em>str</em>) – file name for export (should end in .csv)</p></li>
-<li><p><strong>format</strong> (<em>str</em>) – ‘long’ or ‘wide’
-in ‘long’ format, the table has three columns, time/sector/intensity
-in ‘wide’ format, rows correspond to time and columns to sectors</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>ax if ax passed as input otherwise fig</p>
-</dd>
-</dl>
-</dd></dl>
-
-</section>
-<section id="module-microfilm">
+</div>
+<div class="section" id="module-microfilm">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-microfilm" title="Permalink to this headline">¶</a></h2>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -1327,7 +1170,7 @@ in ‘wide’ format, rows correspond to time and columns to sectors</p></li>
         
           By The Jupyter Book community<br/>
         
-            &copy; Copyright 2020.<br/>
+            &copy; Copyright 2021.<br/>
       </p>
     </div>
   </footer>

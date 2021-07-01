@@ -91,7 +91,29 @@
 </ul>
 <p class="caption">
  <span class="caption-text">
-  Documentation
+  Getting started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="docs/overview.html">
+   Overview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="docs/installation.html">
+   Installation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="docs/first_plot.html">
+   Create your first plots
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Topic guides
  </span>
 </p>
 <ul class="nav bd-sidenav">
@@ -113,7 +135,7 @@
 </ul>
 <p class="caption">
  <span class="caption-text">
-  Reference
+  API Reference
  </span>
 </p>
 <ul class="nav bd-sidenav">
@@ -220,7 +242,6 @@
  | <a href="#M"><strong>M</strong></a>
  | <a href="#N"><strong>N</strong></a>
  | <a href="#O"><strong>O</strong></a>
- | <a href="#P"><strong>P</strong></a>
  | <a href="#R"><strong>R</strong></a>
  | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
@@ -275,10 +296,10 @@
 </li>
       <li><a href="docs/source/microfilm.html#microfilm.colorify.cmaps_def">cmaps_def() (in module microfilm.colorify)</a>
 </li>
-      <li><a href="docs/source/microfilm.html#microfilm.colorify.color_translate">color_translate() (in module microfilm.colorify)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="docs/source/microfilm.html#microfilm.colorify.color_translate">color_translate() (in module microfilm.colorify)</a>
+</li>
       <li><a href="docs/source/microfilm.html#microfilm.colorify.colorify_by_hex">colorify_by_hex() (in module microfilm.colorify)</a>
 </li>
       <li><a href="docs/source/microfilm.html#microfilm.colorify.colorify_by_name">colorify_by_name() (in module microfilm.colorify)</a>
@@ -286,10 +307,6 @@
       <li><a href="docs/source/microfilm.html#microfilm.colorify.combine_image">combine_image() (in module microfilm.colorify)</a>
 </li>
       <li><a href="docs/source/microfilm.html#microfilm.microplot.Micropanel.construct_figure">construct_figure() (microfilm.microplot.Micropanel method)</a>
-</li>
-      <li><a href="docs/source/microfilm.html#microfilm.splitmasks.create_concentric_mask">create_concentric_mask() (in module microfilm.splitmasks)</a>
-</li>
-      <li><a href="docs/source/microfilm.html#microfilm.splitmasks.create_sector_mask">create_sector_mask() (in module microfilm.splitmasks)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -330,12 +347,6 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="docs/source/microfilm.dataset.html#microfilm.dataset.dataset.Data.get_channel_name">get_channel_name() (microfilm.dataset.dataset.Data method)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="docs/source/microfilm.html#microfilm.splitmasks.get_cmap_labels">get_cmap_labels() (in module microfilm.splitmasks)</a>
-</li>
-      <li><a href="docs/source/microfilm.html#microfilm.splitmasks.get_roi_cm">get_roi_cm() (in module microfilm.splitmasks)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -399,8 +410,6 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="docs/source/microfilm.html#microfilm.microanim.Microanimpanel.max_time">max_time (microfilm.microanim.Microanimpanel attribute)</a>
 </li>
-      <li><a href="docs/source/microfilm.html#microfilm.splitmasks.measure_intensities">measure_intensities() (in module microfilm.splitmasks)</a>
-</li>
       <li><a href="docs/source/microfilm.html#microfilm.microanim.Microanim">Microanim (class in microfilm.microanim)</a>
 </li>
       <li><a href="docs/source/microfilm.html#microfilm.microanim.Microanimpanel">Microanimpanel (class in microfilm.microanim)</a>
@@ -442,20 +451,13 @@
         <li><a href="docs/source/microfilm.html#module-microfilm.microanim">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     microfilm.microplot
 
       <ul>
         <li><a href="docs/source/microfilm.html#module-microfilm.microplot">module</a>
-</li>
-      </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li>
-    microfilm.splitmasks
-
-      <ul>
-        <li><a href="docs/source/microfilm.html#module-microfilm.splitmasks">module</a>
 </li>
       </ul></li>
       <li><a href="docs/source/microfilm.html#microfilm.microplot.Microimage">Microimage (class in microfilm.microplot)</a>
@@ -482,8 +484,6 @@
 </li>
         <li><a href="docs/source/microfilm.html#module-microfilm.microplot">microfilm.microplot</a>
 </li>
-        <li><a href="docs/source/microfilm.html#module-microfilm.splitmasks">microfilm.splitmasks</a>
-</li>
       </ul></li>
       <li><a href="docs/source/microfilm.html#microfilm.colorify.multichannel_to_rgb">multichannel_to_rgb() (in module microfilm.colorify)</a>
 </li>
@@ -495,12 +495,10 @@
 <h2 id="N">N</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="docs/source/microfilm.html#microfilm.splitmasks.nan_labels">nan_labels() (in module microfilm.splitmasks)</a>
+      <li><a href="docs/source/microfilm.dataset.html#microfilm.dataset.dataset.ND2">ND2 (class in microfilm.dataset.dataset)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="docs/source/microfilm.dataset.html#microfilm.dataset.dataset.ND2">ND2 (class in microfilm.dataset.dataset)</a>
-</li>
       <li><a href="docs/source/microfilm.dataset.html#microfilm.dataset.dataset.Nparray">Nparray (class in microfilm.dataset.dataset)</a>
 </li>
   </ul></td>
@@ -510,18 +508,6 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="docs/source/microfilm.html#microfilm.microanim.Microanimpanel.output">output (microfilm.microanim.Microanimpanel attribute)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="P">P</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="docs/source/microfilm.html#microfilm.splitmasks.plot_sectors">plot_sectors() (in module microfilm.splitmasks)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="docs/source/microfilm.html#microfilm.splitmasks.plot_signals">plot_signals() (in module microfilm.splitmasks)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -549,8 +535,6 @@
         <li><a href="docs/source/microfilm.html#microfilm.microanim.Microanimpanel.save_movie">(microfilm.microanim.Microanimpanel method)</a>
 </li>
       </ul></li>
-      <li><a href="docs/source/microfilm.html#microfilm.splitmasks.save_signal">save_signal() (in module microfilm.splitmasks)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="docs/source/microfilm.html#microfilm.microplot.Microimage.savefig">savefig() (microfilm.microplot.Microimage method)</a>
@@ -630,7 +614,7 @@
         
           By The Jupyter Book community<br/>
         
-            &copy; Copyright 2020.<br/>
+            &copy; Copyright 2021.<br/>
       </p>
     </div>
   </footer>

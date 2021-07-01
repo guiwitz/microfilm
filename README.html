@@ -4,8 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>microfilm &#8212; microfilm</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
@@ -54,7 +53,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Producing figures with multi-channel images" href="notebooks/create_plots.html" />
+    <link rel="next" title="Overview" href="docs/overview.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -93,7 +92,29 @@
 </ul>
 <p class="caption">
  <span class="caption-text">
-  Documentation
+  Getting started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="docs/overview.html">
+   Overview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="docs/installation.html">
+   Installation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="docs/first_plot.html">
+   Create your first plots
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Topic guides
  </span>
 </p>
 <ul class="nav bd-sidenav">
@@ -115,7 +136,7 @@
 </ul>
 <p class="caption">
  <span class="caption-text">
-  Reference
+  API Reference
  </span>
 </p>
 <ul class="nav bd-sidenav">
@@ -249,8 +270,6 @@
   <a class="reference internal nav-link" href="#authors">
    Authors
   </a>
-  <ul class="nav section-nav flex-column">
-  </ul>
  </li>
 </ul>
 
@@ -264,28 +283,27 @@
               <div>
                 
   <p><a class="reference external" href="https://mybinder.org/v2/gh/guiwitz/microfilm/master?urlpath=lab"><img alt="Binder" src="https://mybinder.org/badge_logo.svg" /></a>
-<img alt="example workflow" src="https://github.com/guiwitz/microfilm/actions/workflows/tests.yml/badge.svg" />
-<img alt="GitHub" src="https://img.shields.io/github/license/guiwitz/microfilm" /></p>
-<section id="microfilm">
+<a class="reference external" href="https://github.com/guiwitz/microfilm/actions/workflows/test_build.yml"><img alt="build" src="https://github.com/guiwitz/microfilm/actions/workflows/test_build.yml/badge.svg" /></a>
+<img alt="PyPI - License" src="https://img.shields.io/pypi/l/microfilm" />
+<img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/microfilm" />
+<img alt="PyPI" src="https://img.shields.io/pypi/v/microfilm" />
+<img alt="PyPI - Status" src="https://img.shields.io/pypi/status/microfilm" /></p>
+<div class="section" id="microfilm">
 <h1>microfilm<a class="headerlink" href="#microfilm" title="Permalink to this headline">¶</a></h1>
 <p>This package is a collection of tools to display and analyze 2D and 2D time-lapse microscopy images. In particular it makes it straightforward to create figures containing multi-channel images represented in a <em>composite</em> color mode as done in the popular image processing software <a class="reference external" href="https://imagej.net/software/fiji/">Fiji</a>. It also allows to easily complete such figures with standard annotations like <strong>labels</strong> and <strong>scale bars</strong>. In case of time-lapse data, the figures are turned into <strong>animations</strong> which can be interactively browsed from a Jupyter notebook, saved in standard movie formats (mp4, gif etc.) and completed with <strong>time counters</strong>. Finally, figures and animations can easily be combined into larger <strong>panels</strong>. These main functionalities are provided by the <code class="docutils literal notranslate"><span class="pre">microfilm.microplot</span></code> and <code class="docutils literal notranslate"><span class="pre">microfilm.microanim</span></code> modules.</p>
-<p>Following the model of <a class="reference external" href="https://seaborn.pydata.org/index.html">seaborn</a>, <code class="docutils literal notranslate"><span class="pre">microfilm</span></code> is entirely based on <a class="reference external" href="https://matplotlib.org/">Matplotlib</a> and tries to provide good defaults to produce good microcopy figures <em>out.of-the-box</em>. It however also offers complete access to the Matplotlib structures like axis and figures underlying the <code class="docutils literal notranslate"><span class="pre">microfilm</span></code> objects, allowing thus for the creation of arbitrarily complex plots.</p>
-<section id="installation">
+<p>Following the model of <a class="reference external" href="https://seaborn.pydata.org/index.html">seaborn</a>, <code class="docutils literal notranslate"><span class="pre">microfilm</span></code> is entirely based on <a class="reference external" href="https://matplotlib.org/">Matplotlib</a> and tries to provide good defaults to produce good microcopy figures <em>out-of-the-box</em>. It however also offers complete access to the Matplotlib structures like axis and figures underlying the <code class="docutils literal notranslate"><span class="pre">microfilm</span></code> objects, allowing thus for the creation of arbitrarily complex plots.</p>
+<div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <p>You can install this package directly from Github using:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">guiwitz</span><span class="o">/</span><span class="n">microfilm</span><span class="o">.</span><span class="n">git</span><span class="nd">@master</span><span class="c1">#egg=microfilm</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">microfilm</span>
 </pre></div>
 </div>
 <p>To test the package via the Jupyter interface and the notebooks available <span class="xref myst">here</span> you can create a conda environment using the <span class="xref myst">environment.yml</span> file:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">env</span> <span class="n">create</span> <span class="o">-</span><span class="n">f</span> <span class="n">environment</span><span class="o">.</span><span class="n">yml</span>
 </pre></div>
 </div>
-<p><strong>Note</strong>: If you use the <code class="docutils literal notranslate"><span class="pre">dataset</span></code> module and encounter errors when trying to use the ND2 format because of errors related to unusual ROIs (non-square), you can try to install an alternative version with:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">guiwitz</span><span class="o">/</span><span class="n">nd2reader</span><span class="o">.</span><span class="n">git</span><span class="nd">@master</span><span class="c1">#egg=nd2reader -U</span>
-</pre></div>
 </div>
-</section>
-<section id="simple-plot">
+<div class="section" id="simple-plot">
 <h2>Simple plot<a class="headerlink" href="#simple-plot" title="Permalink to this headline">¶</a></h2>
 <p>It is straightforward to create a ready-to-use plot of a multi-channel image dataset. In the following code snippet, we load a Numpy array of a multi-channel time-lapse dataset with shape <code class="docutils literal notranslate"><span class="pre">CTXY</span></code> (three channels). The figure below showing the time-point <code class="docutils literal notranslate"><span class="pre">t=10</span></code> is generated in a single command with a few options and saved as a png:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -303,8 +321,8 @@
 </pre></div>
 </div>
 <img src="https://github.com/guiwitz/microfilm/raw/master/illustrations/composite.png" alt="image" width="300">
-</section>
-<section id="animation">
+</div>
+<div class="section" id="animation">
 <h2>Animation<a class="headerlink" href="#animation" title="Permalink to this headline">¶</a></h2>
 <p>It is then easy to extend a simple figure into an animation as both objects take the same options. Additionally, a time-stamp can be added to the animation. This code generates the movie visible below:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -324,8 +342,8 @@
 </pre></div>
 </div>
 <img src="https://github.com/guiwitz/microfilm/raw/master/illustrations/composite_movie.gif" alt="image" width="300">
-</section>
-<section id="panels">
+</div>
+<div class="section" id="panels">
 <h2>Panels<a class="headerlink" href="#panels" title="Permalink to this headline">¶</a></h2>
 <p>Both simple figures and animations can be combined into larger panels via the <code class="docutils literal notranslate"><span class="pre">microplot.Micropanel</span></code> and <code class="docutils literal notranslate"><span class="pre">microanim.Microanimpanel</span></code> objects. For example we can first create two figures <code class="docutils literal notranslate"><span class="pre">microim1</span></code> and <code class="docutils literal notranslate"><span class="pre">microim2</span></code> and then combine them into <code class="docutils literal notranslate"><span class="pre">micropanel</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">microfilm</span> <span class="kn">import</span> <span class="n">microplot</span>
@@ -370,25 +388,26 @@
 </pre></div>
 </div>
 <img src="https://github.com/guiwitz/microfilm/raw/master/illustrations/panel.gif" alt="image" width="300">
-</section>
-<section id="additional-functionalities">
+</div>
+<div class="section" id="additional-functionalities">
 <h2>Additional functionalities<a class="headerlink" href="#additional-functionalities" title="Permalink to this headline">¶</a></h2>
 <p>In addition to thes main plotting capabilities, the packages also offers:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">microfilm.colorify</span></code>: a series of utility functions used by the main functions to create the composite color images. It contains functions to create colormaps, to turn 2D arrays into 3D-RGB arrays with appropriate colormaps etc.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">microfilm.dataset</span></code>: a module offering a simple common data structure to handle multi-channel time-lapse data from multipage tiffs, series of tiff files, Nikon ND2 files, H5 and Numpy arrays. Requirement to use this module are at the moment very constrained (e.g. dimension order of Numpy arrays, name of H5 content etc.) but might evolve in the future.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">microfilm.splitmasks</span></code>: a module to analyze the time-evolution of fluorescence intensity in images split into regions with various geometries like sectors, rings etc.</p></li>
 </ul>
-</section>
-<section id="authors">
+</div>
+<div class="section" id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
 <p>This package has been created by Guillaume Witz, Micorscopy Imaging Center and Science IT Support, Bern University.</p>
+</div>
+<div class="toctree-wrapper compound">
+</div>
 <div class="toctree-wrapper compound">
 </div>
 <div class="toctree-wrapper compound">
 </div>
-</section>
-</section>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -415,7 +434,7 @@
         
         <div class='prev-next-bottom'>
             
-    <a class='right-next' id="next-link" href="notebooks/create_plots.html" title="next page">Producing figures with multi-channel images</a>
+    <a class='right-next' id="next-link" href="docs/overview.html" title="next page">Overview</a>
 
         </div>
         
@@ -427,7 +446,7 @@
         
           By The Jupyter Book community<br/>
         
-            &copy; Copyright 2020.<br/>
+            &copy; Copyright 2021.<br/>
       </p>
     </div>
   </footer>

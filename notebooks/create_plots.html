@@ -4,8 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Producing figures with multi-channel images &#8212; microfilm</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
@@ -55,7 +54,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Creating animations" href="create_animations.html" />
-    <link rel="prev" title="microfilm" href="../README.html" />
+    <link rel="prev" title="Create your first plots" href="../docs/first_plot.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -94,7 +93,29 @@
 </ul>
 <p class="caption">
  <span class="caption-text">
-  Documentation
+  Getting started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../docs/overview.html">
+   Overview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../docs/installation.html">
+   Installation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../docs/first_plot.html">
+   Create your first plots
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Topic guides
  </span>
 </p>
 <ul class="current nav bd-sidenav">
@@ -116,7 +137,7 @@
 </ul>
 <p class="caption">
  <span class="caption-text">
-  Reference
+  API Reference
  </span>
 </p>
 <ul class="nav bd-sidenav">
@@ -348,7 +369,7 @@
         
               <div>
                 
-  <section id="producing-figures-with-multi-channel-images">
+  <div class="section" id="producing-figures-with-multi-channel-images">
 <h1>Producing figures with multi-channel images<a class="headerlink" href="#producing-figures-with-multi-channel-images" title="Permalink to this headline">¶</a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">microplot</span></code> module contains tools to create figures containing multi-channel images. It offers basic tools to turn 2D images into RGB images using specific color maps, combine multiple channels, create figures, adding labels and scale bars.</p>
 <div class="cell docutils container">
@@ -370,10 +391,10 @@
 </div>
 </div>
 </div>
-<section id="basic-plotting-with-microshow">
+<div class="section" id="basic-plotting-with-microshow">
 <h2>Basic plotting with <code class="docutils literal notranslate"><span class="pre">microshow</span></code><a class="headerlink" href="#basic-plotting-with-microshow" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">microshow</span></code> function should be seen as an “enhanced” version of the Matplotlib <code class="docutils literal notranslate"><span class="pre">imshow</span></code> function which specifically deals with representing multi-channel images. In this first section, we see how to use that function and apply basic customizations.</p>
-<section id="load-images">
+<div class="section" id="load-images">
 <h3>Load images<a class="headerlink" href="#load-images" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">microshow</span></code> can take as input a Numpy array or a list of images (more on input format in the <a class="reference external" href="#Image-inputs">Image inputs</a> section). Here we load a multi-dimensional image as a Numpy array, and also extract each channel as an individual stack:</p>
 <div class="cell docutils container">
@@ -427,8 +448,8 @@ image type: uint16
 </div>
 </div>
 </div>
-</section>
-<section id="creating-a-default-plot">
+</div>
+<div class="section" id="creating-a-default-plot">
 <h3>Creating a default plot<a class="headerlink" href="#creating-a-default-plot" title="Permalink to this headline">¶</a></h3>
 <p>We can use the <code class="docutils literal notranslate"><span class="pre">microshow</span></code> function to plot our multi-channel image. If no options are passed, by default the image will be represented using the RGB color scheme:</p>
 <div class="cell docutils container">
@@ -452,8 +473,8 @@ image type: uint16
 <img alt="../_images/create_plots_14_0.png" src="../_images/create_plots_14_0.png" />
 </div>
 </div>
-</section>
-<section id="image-inputs">
+</div>
+<div class="section" id="image-inputs">
 <h3>Image inputs<a class="headerlink" href="#image-inputs" title="Permalink to this headline">¶</a></h3>
 <p>As shown above, we can use a simple Numpy array as input. The dimension ordering is expected to be <code class="docutils literal notranslate"><span class="pre">CTXY</span></code> i.e. <code class="docutils literal notranslate"><span class="pre">Channel/Time/X/Y</span></code>. You can use <code class="docutils literal notranslate"><span class="pre">np.swapaxis</span></code> or <code class="docutils literal notranslate"><span class="pre">np.moveaxis</span></code> for example to change the dimensions to match this requirement. If you pass a Numpy array, <strong>all channels</strong> are plotted and therefore you need to provide the corresponding number of color maps (if not using default RG).</p>
 <p>Alternatively you can also pass <strong>lists of images</strong>. This is useful if for example you don’t want to plot all channels of a Numpy array. For example you could use the following to only plot two out of the three channels:</p>
@@ -467,8 +488,8 @@ image type: uint16
 <img alt="../_images/create_plots_16_0.png" src="../_images/create_plots_16_0.png" />
 </div>
 </div>
-</section>
-<section id="options-at-creation">
+</div>
+<div class="section" id="options-at-creation">
 <h3>Options at creation<a class="headerlink" href="#options-at-creation" title="Permalink to this headline">¶</a></h3>
 <p>When we create the image, we have a large set of options that we can use to adjust the plot. For example, in addition to selecting specific color maps with <code class="docutils literal notranslate"><span class="pre">cmaps</span></code>, we can also choose a color projection type, add a scale bar and a label etc.:</p>
 <div class="cell docutils container">
@@ -497,12 +518,12 @@ image type: uint16
 <img alt="../_images/create_plots_20_0.png" src="../_images/create_plots_20_0.png" />
 </div>
 </div>
-</section>
-</section>
-<section id="microimage-object">
+</div>
+</div>
+<div class="section" id="microimage-object">
 <h2>Microimage object<a class="headerlink" href="#microimage-object" title="Permalink to this headline">¶</a></h2>
 <p>When calling <code class="docutils literal notranslate"><span class="pre">microshow</span></code>, actually a <code class="docutils literal notranslate"><span class="pre">Microimage</span></code> instance is returned, which gives access to both specific functions of that instance as well as to the underlying Matplotlib objects.</p>
-<section id="microimage-methods">
+<div class="section" id="microimage-methods">
 <h3>Microimage methods<a class="headerlink" href="#microimage-methods" title="Permalink to this headline">¶</a></h3>
 <p>In the examples above, we always passed <em>all</em> inputs at time of figure creation. Alternatively to this, one can also <em>first</em> create a <code class="docutils literal notranslate"><span class="pre">Microimage</span></code> object and <em>then</em> use its attached methods such as <code class="docutils literal notranslate"><span class="pre">add_label</span></code>  and <code class="docutils literal notranslate"><span class="pre">add_scalebar</span></code> to modify the plot. This can make the code slightly more readable:</p>
 <div class="cell docutils container">
@@ -518,8 +539,8 @@ image type: uint16
 <img alt="../_images/create_plots_23_0.png" src="../_images/create_plots_23_0.png" />
 </div>
 </div>
-</section>
-<section id="relation-to-matplotlib">
+</div>
+<div class="section" id="relation-to-matplotlib">
 <h3>Relation to Matplotlib<a class="headerlink" href="#relation-to-matplotlib" title="Permalink to this headline">¶</a></h3>
 <p>In the same spirit as e.g. the seaborn library, the <code class="docutils literal notranslate"><span class="pre">microplot</span></code> module stays very close to Matplotlib, so that you can integrate the image plots into larger figures. There are two ways in which <code class="docutils literal notranslate"><span class="pre">microplot</span></code> and Matplotlib are related.</p>
 <p>First, the <code class="docutils literal notranslate"><span class="pre">Microimage</span></code> object gives access to the <code class="docutils literal notranslate"><span class="pre">axis</span></code> of the figure which allows you to use <em>any</em> Matplotlib customization on your plot. For example, you can turn the axes back on:</p>
@@ -566,8 +587,8 @@ image type: uint16
 <img alt="../_images/create_plots_29_0.png" src="../_images/create_plots_29_0.png" />
 </div>
 </div>
-</section>
-<section id="copying-figures">
+</div>
+<div class="section" id="copying-figures">
 <h3>Copying figures<a class="headerlink" href="#copying-figures" title="Permalink to this headline">¶</a></h3>
 <p>Matplotlib makes it impossible to re-use a given plot in multiple figures. Once you have created a microplot with annotations you might however want to re-use it in another larger figure. The <code class="docutils literal notranslate"><span class="pre">microimage</span></code> object allows you to do that since it stores all the relevant information and can easily be recreated. For example let’s create a plot:</p>
 <div class="cell docutils container">
@@ -596,9 +617,9 @@ image type: uint16
 </div>
 </div>
 <p>As an alternative to creating subplots yourself, you can also create a <code class="docutils literal notranslate"><span class="pre">Micropanel</span></code> object and add to it a series of microimages. Find more information in <a class="reference internal" href="create_panels.html"><span class="doc std std-doc">this section</span></a>.</p>
-</section>
-</section>
-<section id="lower-level-functions">
+</div>
+</div>
+<div class="section" id="lower-level-functions">
 <h2>Lower level functions<a class="headerlink" href="#lower-level-functions" title="Permalink to this headline">¶</a></h2>
 <p>When calling <code class="docutils literal notranslate"><span class="pre">microshow</span></code>, several internal functions are used, e.g. to rescale the image intensity, combined multiple colormaps etc. You also have access to these functions individually from the <code class="docutils literal notranslate"><span class="pre">colorify</span></code> module.</p>
 <div class="cell docutils container">
@@ -608,7 +629,7 @@ image type: uint16
 </div>
 </div>
 </div>
-<section id="convert-image-to-display-with-chosen-colormap">
+<div class="section" id="convert-image-to-display-with-chosen-colormap">
 <h3>Convert image to display with chosen colormap<a class="headerlink" href="#convert-image-to-display-with-chosen-colormap" title="Permalink to this headline">¶</a></h3>
 <p>Using the <code class="docutils literal notranslate"><span class="pre">colorify_by_name</span></code> function, you can turn a single 2D array into a RGB image with a certain colormap. You can use any colormap from Matplotlib. Additionally, since Matplotlib doesn’t offer plain colormaps from black to a given color (used very often in microcopy), you can also specify one of <code class="docutils literal notranslate"><span class="pre">pure_green</span></code>, <code class="docutils literal notranslate"><span class="pre">pure_red</span></code>, <code class="docutils literal notranslate"><span class="pre">pure_blue</span></code>, <code class="docutils literal notranslate"><span class="pre">pure_cyan</span></code>, <code class="docutils literal notranslate"><span class="pre">pure_magenta</span></code>, <code class="docutils literal notranslate"><span class="pre">pure_yellow</span></code>:</p>
 <div class="cell docutils container">
@@ -635,8 +656,8 @@ image type: uint16
 <img alt="../_images/create_plots_40_0.png" src="../_images/create_plots_40_0.png" />
 </div>
 </div>
-</section>
-<section id="colormap-hex">
+</div>
+<div class="section" id="colormap-hex">
 <h3>colormap hex<a class="headerlink" href="#colormap-hex" title="Permalink to this headline">¶</a></h3>
 <p>Alternatively to the keyword based map, you can also use a hexadecimal encoding of a color to create an colormap ranging from black to that color. This gives more flexibility:</p>
 <div class="cell docutils container">
@@ -650,8 +671,8 @@ image type: uint16
 <img alt="../_images/create_plots_42_0.png" src="../_images/create_plots_42_0.png" />
 </div>
 </div>
-</section>
-<section id="combining-images">
+</div>
+<div class="section" id="combining-images">
 <h3>Combining images<a class="headerlink" href="#combining-images" title="Permalink to this headline">¶</a></h3>
 <p>After having converted images to a given colormap, you can combine them into a single image with overlayed colors. Currently you can use a maximum projection (default) or a sum to replicate the Fiji behavior. You can simply use the <code class="docutils literal notranslate"><span class="pre">combine_image</span></code> function for that:</p>
 <div class="cell docutils container">
@@ -695,8 +716,8 @@ image type: uint16
 <img alt="../_images/create_plots_46_0.png" src="../_images/create_plots_46_0.png" />
 </div>
 </div>
-</section>
-<section id="direct-conversion">
+</div>
+<div class="section" id="direct-conversion">
 <h3>Direct conversion<a class="headerlink" href="#direct-conversion" title="Permalink to this headline">¶</a></h3>
 <p>To save some steps you can also directly use a list of images and of colormaps to create a combined image:</p>
 <div class="cell docutils container">
@@ -722,9 +743,9 @@ image type: uint16
 <img alt="../_images/create_plots_50_0.png" src="../_images/create_plots_50_0.png" />
 </div>
 </div>
-</section>
-</section>
-<section id="the-scalebar">
+</div>
+</div>
+<div class="section" id="the-scalebar">
 <h2>The scalebar<a class="headerlink" href="#the-scalebar" title="Permalink to this headline">¶</a></h2>
 <p>We have seen above, that you could add a scalebar to the image. For that you only need to defined the <code class="docutils literal notranslate"><span class="pre">unit</span></code> you use e.g. um, the size per pixel <code class="docutils literal notranslate"><span class="pre">unit_per_pixel</span></code> e.g. 0.5um/pixels, and the size of the scale bar <code class="docutils literal notranslate"><span class="pre">scalebar_size_in_units</span></code> in your unit e.g. 40um:</p>
 <div class="cell docutils container">
@@ -739,8 +760,8 @@ image type: uint16
 <img alt="../_images/create_plots_52_0.png" src="../_images/create_plots_52_0.png" />
 </div>
 </div>
-</section>
-<section id="export">
+</div>
+<div class="section" id="export">
 <h2>Export<a class="headerlink" href="#export" title="Permalink to this headline">¶</a></h2>
 <p>As the figure is simply a Matplotlib figure, you can just use the regular <code class="docutils literal notranslate"><span class="pre">savefig</span></code> function (and use <a class="reference external" href="https://stackoverflow.com/a/27227718">this trick</a> to avoid white space around the plot). You could access it via <code class="docutils literal notranslate"><span class="pre">microim.fig.savefig</span></code> but we also directly wrap it here in the microim object:</p>
 <div class="cell docutils container">
@@ -790,8 +811,8 @@ image type: uint16
 </div>
 </div>
 </div>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -818,7 +839,7 @@ image type: uint16
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="../README.html" title="previous page">microfilm</a>
+    <a class='left-prev' id="prev-link" href="../docs/first_plot.html" title="previous page">Create your first plots</a>
     <a class='right-next' id="next-link" href="create_animations.html" title="next page">Creating animations</a>
 
         </div>
@@ -831,7 +852,7 @@ image type: uint16
         
           By The Jupyter Book community<br/>
         
-            &copy; Copyright 2020.<br/>
+            &copy; Copyright 2021.<br/>
       </p>
     </div>
   </footer>

@@ -1,18 +1,21 @@
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/guiwitz/microfilm/master?urlpath=lab)
-![example workflow](https://github.com/guiwitz/microfilm/actions/workflows/tests.yml/badge.svg)
-![GitHub](https://img.shields.io/github/license/guiwitz/microfilm)
+[![build](https://github.com/guiwitz/microfilm/actions/workflows/test_build.yml/badge.svg)](https://github.com/guiwitz/microfilm/actions/workflows/test_build.yml)
+![PyPI - License](https://img.shields.io/pypi/l/microfilm)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/microfilm)
+![PyPI](https://img.shields.io/pypi/v/microfilm)
+![PyPI - Status](https://img.shields.io/pypi/status/microfilm)
 # microfilm
 
 This package is a collection of tools to display and analyze 2D and 2D time-lapse microscopy images. In particular it makes it straightforward to create figures containing multi-channel images represented in a *composite* color mode as done in the popular image processing software [Fiji](https://imagej.net/software/fiji/). It also allows to easily complete such figures with standard annotations like **labels** and **scale bars**. In case of time-lapse data, the figures are turned into **animations** which can be interactively browsed from a Jupyter notebook, saved in standard movie formats (mp4, gif etc.) and completed with **time counters**. Finally, figures and animations can easily be combined into larger **panels**. These main functionalities are provided by the ```microfilm.microplot``` and ```microfilm.microanim``` modules.
 
-Following the model of [seaborn](https://seaborn.pydata.org/index.html), ```microfilm``` is entirely based on [Matplotlib](https://matplotlib.org/) and tries to provide good defaults to produce good microcopy figures *out.of-the-box*. It however also offers complete access to the Matplotlib structures like axis and figures underlying the ```microfilm``` objects, allowing thus for the creation of arbitrarily complex plots.
+Following the model of [seaborn](https://seaborn.pydata.org/index.html), ```microfilm``` is entirely based on [Matplotlib](https://matplotlib.org/) and tries to provide good defaults to produce good microcopy figures *out-of-the-box*. It however also offers complete access to the Matplotlib structures like axis and figures underlying the ```microfilm``` objects, allowing thus for the creation of arbitrarily complex plots.
 
 ## Installation
 
 You can install this package directly from Github using: 
 
 ```
-pip install git+https://github.com/guiwitz/microfilm.git@master#egg=microfilm
+pip install microfilm
 ```
 
 To test the package via the Jupyter interface and the notebooks available [here](notebooks) you can create a conda environment using the [environment.yml](binder/environment.yml) file:
@@ -21,11 +24,6 @@ To test the package via the Jupyter interface and the notebooks available [here]
 conda env create -f environment.yml
 ```
 
-**Note**: If you use the ```dataset``` module and encounter errors when trying to use the ND2 format because of errors related to unusual ROIs (non-square), you can try to install an alternative version with:
-
-```
-pip install git+https://github.com/guiwitz/nd2reader.git@master#egg=nd2reader -U
-```
 ## Simple plot
 
 It is straightforward to create a ready-to-use plot of a multi-channel image dataset. In the following code snippet, we load a Numpy array of a multi-channel time-lapse dataset with shape ```CTXY``` (three channels). The figure below showing the time-point ```t=10``` is generated in a single command with a few options and saved as a png:
@@ -126,7 +124,6 @@ animpanel.save_movie('../illustrations/panel.gif')
 In addition to thes main plotting capabilities, the packages also offers:
 - ```microfilm.colorify```: a series of utility functions used by the main functions to create the composite color images. It contains functions to create colormaps, to turn 2D arrays into 3D-RGB arrays with appropriate colormaps etc.
 - ```microfilm.dataset```: a module offering a simple common data structure to handle multi-channel time-lapse data from multipage tiffs, series of tiff files, Nikon ND2 files, H5 and Numpy arrays. Requirement to use this module are at the moment very constrained (e.g. dimension order of Numpy arrays, name of H5 content etc.) but might evolve in the future.
-- ```microfilm.splitmasks```: a module to analyze the time-evolution of fluorescence intensity in images split into regions with various geometries like sectors, rings etc.
 
 ## Authors
 
