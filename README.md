@@ -24,11 +24,6 @@ To test the package via the Jupyter interface and the notebooks available [here]
 conda env create -f environment.yml
 ```
 
-**Note**: If you use the ```dataset``` module and encounter errors when trying to use the ND2 format because of errors related to unusual ROIs (non-square), you can try to install an alternative version with:
-
-```
-pip install git+https://github.com/guiwitz/nd2reader.git@master#egg=nd2reader -U
-```
 ## Simple plot
 
 It is straightforward to create a ready-to-use plot of a multi-channel image dataset. In the following code snippet, we load a Numpy array of a multi-channel time-lapse dataset with shape ```CTXY``` (three channels). The figure below showing the time-point ```t=10``` is generated in a single command with a few options and saved as a png:
