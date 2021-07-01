@@ -98,7 +98,7 @@ def microshow(images=None, cmaps=None, flip_map=False, rescale_type=None, limits
         label_location=label_location, label_color=label_color, label_font_size=label_font_size
         )
     
-    microim.images = colorify.check_input(microim.images)
+    #microim.images = colorify.check_input(microim.images)
 
     microim.rescale_type = colorify.check_rescale_type(microim.rescale_type, microim.limits)
 
@@ -251,6 +251,9 @@ class Microimage:
             self.label_location = None
             self.label_color = None
             self.label_font_size = None
+
+        # check input
+        self.images = colorify.check_input(self.images)
             
 
     def update(self, ax=None, copy=False):
