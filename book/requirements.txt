@@ -1,2 +1,2 @@
-jupyter-book==0.11
+jupyter-book==0.11.*
 sphinx
