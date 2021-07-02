@@ -23,7 +23,7 @@ class Microanim(Microimage):
         proj_type='max', channel_names=None, channel_label_show=False, channel_label_type='title',
         channel_label_size=0.05, scalebar_thickness=5, scalebar_unit_per_pix=None, scalebar_size_in_units=None, unit=None,
         scalebar_ypos=0.05, scalebar_color='white', scalebar_font_size=0.08, scalebar_text_centered=True,
-        ax=None, fig_scaling=3, label_text=None, label_location='upper left',
+        ax=None, fig_scaling=3, dpi=72, label_text=None, label_location='upper left',
         label_color='white', label_font_size=15, show_plot=True
     ):
         super().__init__(
@@ -31,7 +31,7 @@ class Microanim(Microimage):
             proj_type, channel_names, channel_label_show, channel_label_type,
             channel_label_size, scalebar_thickness, scalebar_unit_per_pix, scalebar_size_in_units, unit,
             scalebar_ypos, scalebar_color, scalebar_font_size, scalebar_text_centered,
-            ax, fig_scaling, label_text, label_location,
+            ax, fig_scaling, dpi, label_text, label_location,
             label_color, label_font_size
         )
 
@@ -139,6 +139,8 @@ class Microanimpanel:
         explicit size
     figsize: float or list
         figure size, either square or rectangular
+    dpi: int
+        dots per inches passed to plt.figure
     channel_label_size: float
         font size for channel labels (fraction of figure)
     label_line_space: float
