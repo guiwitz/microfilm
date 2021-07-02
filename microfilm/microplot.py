@@ -13,7 +13,7 @@ def microshow(images=None, cmaps=None, flip_map=False, rescale_type=None, limits
               proj_type='max', channel_names=None, channel_label_show=False, channel_label_type='title',
               channel_label_size=0.05, scalebar_thickness=5, scalebar_unit_per_pix=None, scalebar_size_in_units=None,
               unit=None, scalebar_ypos=0.05, scalebar_color='white', scalebar_font_size=0.08, scalebar_text_centered=True,
-              ax=None, fig_scaling=3, label_text=None, label_location='upper left',
+              ax=None, fig_scaling=3, dpi=72, label_text=None, label_location='upper left',
               label_color='white', label_font_size=15, microim=None
              ):
     """
@@ -23,8 +23,8 @@ def microshow(images=None, cmaps=None, flip_map=False, rescale_type=None, limits
     ----------
     images: list or array
         list of 2d arrays or DxMxN array D<4
-    cmaps: list of str
-        colormap names
+    cmaps: str of list of str
+        colormap names. For single image you can pass a str
     flip_map: bool or list of bool
         invert colormap or not
     rescale_type: str or list of str
@@ -67,6 +67,8 @@ def microshow(images=None, cmaps=None, flip_map=False, rescale_type=None, limits
         provide existing axis
     fig_scaling: int
         control figure scaling
+    dpi: int
+        dots per inches passed to plt.figure
     label_text: str
         image label
     label_location: str or list
@@ -94,7 +96,7 @@ def microshow(images=None, cmaps=None, flip_map=False, rescale_type=None, limits
         channel_label_size=channel_label_size, scalebar_thickness=scalebar_thickness, 
         scalebar_unit_per_pix=scalebar_unit_per_pix, scalebar_size_in_units=scalebar_size_in_units, unit=unit,
         scalebar_ypos=scalebar_ypos, scalebar_color=scalebar_color, scalebar_font_size=scalebar_font_size,
-        scalebar_text_centered=scalebar_text_centered, ax=ax, fig_scaling=fig_scaling, label_text=label_text,
+        scalebar_text_centered=scalebar_text_centered, ax=ax, fig_scaling=fig_scaling, dpi=dpi, label_text=label_text,
         label_location=label_location, label_color=label_color, label_font_size=label_font_size
         )
     
@@ -121,7 +123,7 @@ def microshow(images=None, cmaps=None, flip_map=False, rescale_type=None, limits
     
     if microim.ax is None:
         # trick https://stackoverflow.com/a/63187965
-        microim.fig = plt.figure(frameon=False)
+        microim.fig = plt.figure(frameon=False, dpi=microim.dpi)
         microim.fig.set_size_inches(width_scaled, height_scaled, forward=False)
         microim.ax = plt.Axes(microim.fig, [0.0, 0.0, 1.0-0.0, 1.0])
         microim.ax.set_axis_off()
@@ -166,8 +168,8 @@ class Microimage:
     ----------
     images: list or array
         list of 2d arrays or DxMxN array D<4
-    cmaps: list of str
-        colormap names
+    cmaps: str or list of str
+        colormap names. For a single image you can pass as str
     flip_map: bool or list of bool
         invert colormap or not
     rescale_type: str or list of str
@@ -210,6 +212,8 @@ class Microimage:
         provide existing axis
     fig_scaling: int
         control figure scaling
+    dpi: int
+        dots per inches passed to plt.figure
     label_text: str
         image label
     label_location: str or list
@@ -227,7 +231,7 @@ class Microimage:
               proj_type='max', channel_names=None, channel_label_show=False,
               channel_label_type='title', channel_label_size=0.05, scalebar_thickness=5, scalebar_unit_per_pix=None,
               scalebar_size_in_units=None, unit=None, scalebar_ypos=0.05, scalebar_color='white',
-              scalebar_font_size=0.08, scalebar_text_centered=True, ax=None, fig_scaling=3, label_text=None,
+              scalebar_font_size=0.08, scalebar_text_centered=True, ax=None, fig_scaling=3, dpi=72, label_text=None,
               label_location='upper left', label_color='white', label_font_size=15
              ):
         
@@ -254,6 +258,10 @@ class Microimage:
 
         # check input
         self.images = colorify.check_input(self.images)
+        if isinstance(self.cmaps, str):
+            self.cmaps = [self.cmaps]
+        if isinstance(self.channel_names, str):
+            self.channel_names = [self.channel_names]
             
 
     def update(self, ax=None, copy=False):
