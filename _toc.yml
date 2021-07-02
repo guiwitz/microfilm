@@ -1,5 +1,5 @@
 format: jb-book
-root: README
+root: landing
 parts:
 - caption: Getting started
   chapters:
