@@ -121,10 +121,10 @@ animpanel.save_movie('../illustrations/panel.gif')
 
 ## Additional functionalities
 
-In addition to thes main plotting capabilities, the packages also offers:
+In addition to these main plotting capabilities, the packages also offers:
 - ```microfilm.colorify```: a series of utility functions used by the main functions to create the composite color images. It contains functions to create colormaps, to turn 2D arrays into 3D-RGB arrays with appropriate colormaps etc.
 - ```microfilm.dataset```: a module offering a simple common data structure to handle multi-channel time-lapse data from multipage tiffs, series of tiff files, Nikon ND2 files, H5 and Numpy arrays. Requirement to use this module are at the moment very constrained (e.g. dimension order of Numpy arrays, name of H5 content etc.) but might evolve in the future.
 
 ## Authors
 
-This package has been created by Guillaume Witz, Micorscopy Imaging Center and Science IT Support, Bern University.
+This package has been created by Guillaume Witz, Microscopy Imaging Center and Science IT Support, University of Bern.
