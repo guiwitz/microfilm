@@ -86,8 +86,8 @@ def test_add_channel_labels():
     microim.add_channel_labels(channel_names=['a', 'b'])
     verify_label(microim)
     
-    assert microim.ax.texts[1].get_color() == (0.0, 0.0, 1.0), "Wrong label color"
-    assert microim.ax.texts[0].get_color() == (0.0, 1.0, 0.0), "Wrong label color"
+    assert microim.ax.texts[1].get_color() == (0.0, 0.0, 1.0, 1.0), "Wrong label color"
+    assert microim.ax.texts[0].get_color() == (0.0, 1.0, 0.0, 1.0), "Wrong label color"
     
 def test_update():
     

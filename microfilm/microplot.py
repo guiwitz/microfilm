@@ -273,6 +273,9 @@ class Microimage:
             self.cmaps = [self.cmaps]
         if isinstance(self.channel_names, str):
             self.channel_names = [self.channel_names]
+        if not isinstance(self.flip_map, list):
+            if self.images is not None:
+                self.flip_map = [self.flip_map for i in range(len(self.images))]
             
 
     def update(self, ax=None, copy=False):
@@ -516,12 +519,15 @@ class Microimage:
         for i in range(nlines):
             # The factor (1-tot_space) is a rescaling of the y position to take into
             # account that the axis only occupies that portion of the figure
+            if self.flip_map[nlines-1-i] is False:
+                text_color = self.cmap_objects[nlines-1-i](self.cmap_objects[nlines-1-i].N)
+            else:
+                text_color = self.cmap_objects[nlines-1-i](0)
             self.ax.text(
                 x=0.5, y=1+line_space+i*(channel_label_size+line_space)/(1-tot_space),
                 s=self.channel_names[nlines-1-i], ha="center", transform=self.ax.transAxes,
-                fontdict={'color': self.cmap_objects[nlines-1-i].colors[-1],'size':fontsize}
+                fontdict={'color': text_color,'size':fontsize}
             )
-
 class Micropanel:
     """
     Class implementing a panel object of multiple Microimage
@@ -629,6 +635,12 @@ class Micropanel:
 
                     for k in range(nlines):
                         
+                        # find text color
+                        if self.microplots[j,i].flip_map[nlines-1-k] is False:
+                            text_color = self.microplots[j,i].cmap_objects[nlines-1-k](self.microplots[j,i].cmap_objects[nlines-1-k].N)
+                        else:
+                            text_color = self.microplots[j,i].cmap_objects[nlines-1-k](0)
+
                         text_to_plot = " "
                         if self.microplots[j, i].channel_names is not None:
                             text_to_plot = self.microplots[j, i].channel_names[nlines-1-k]
@@ -637,7 +649,7 @@ class Micropanel:
                             y = ypos + line_space + +k*(self.channel_label_size+line_space),
                             s=text_to_plot, ha="center",
                             transform=self.fig.transFigure,
-                            fontdict={'color': self.microplots[j,i].cmap_objects[nlines-1-k].colors[-1], 'size':fontsize}
+                            fontdict={'color': text_color, 'size':fontsize}
                         )
                     self.ax[j,i].cla()
                     has_label = self.microplots[j,i].channel_label_show

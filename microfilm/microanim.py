@@ -40,6 +40,9 @@ class Microanim(Microimage):
 
         self.data = data
         self.max_time = self.data.K-1
+
+        if not isinstance(self.flip_map, list):
+            self.flip_map = [self.flip_map for i in range(len(self.data.channel_name))]
         
         if channels is None:
             self.channels = self.data.channel_name
@@ -248,13 +251,18 @@ class Microanimpanel:
                         ypos = self.ax[j,i].get_position().bounds[1]+self.ax[j,i].get_position().bounds[3]
 
                         for k in range(nlines):
-                        
+                            # find text color
+                            if self.microanims[j,i].flip_map[nlines-1-k] is False:
+                                text_color = self.microanims[j,i].cmap_objects[nlines-1-k](self.microanims[j,i].cmap_objects[nlines-1-k].N)
+                            else:
+                                text_color = self.microanims[j,i].cmap_objects[nlines-1-k](0)
+                            
                             self.fig.text(
                                 x=xpos,
                                 y=ypos+line_space+k*(self.channel_label_size+line_space),
                                 s=self.microanims[j, i].channel_names[nlines-1-k], ha="center",
                                 transform=self.fig.transFigure,
-                                fontdict={'color': self.microanims[j,i].cmap_objects[nlines-1-k].colors[-1], 'size':fontsize}
+                                fontdict={'color': text_color, 'size':fontsize}
                             )
                         self.ax[j,i].cla()
                         self.add_element(pos=[j,i], microanim=self.microanims[j, i], fig_update=False)
