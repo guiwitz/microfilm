@@ -149,6 +149,8 @@ def colorify_by_name(image, cmap_name, flip_map=False, rescale_type='min_max', l
     -------
     image_colored: array
         3D RGB float array
+    cmap: Matplotlib colormap object
+        Generated colormap from name
 
     """
     
@@ -188,6 +190,8 @@ def colorify_by_hex(image, cmap_hex='#ff6600', flip_map=False, rescale_type='min
     -------
     image_colored: array
         3D RGB float array
+    cmap: Matplotlib colormap object
+        Generated colormap from name
 
     """
     
@@ -338,7 +342,10 @@ def multichannel_to_rgb(images, cmaps=None, flip_map=False, rescale_type='min_ma
         
     Returns
     -------
-    image_rescaled: 2d array
+    converted: 2d array
+        multi-channel RGB image
+    cmap_objects: list
+        list of Matplotlib cmaps generated for each channel
         
     """
     
