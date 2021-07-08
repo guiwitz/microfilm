@@ -92,6 +92,37 @@ def random_grandient_cmap(num_colors, seed=42):
         ])
     return cmap
 
+def colorify_by_cmap(image, cmap, rescale_type='min_max', limits=None):
+    """
+    Directly use an existing colormap cmap to colorize an image
+
+    Parameters
+    ----------
+    image: 2d array
+        image to convert to RGB
+    cmap: Matplotlib cmap
+        colormap to use for coloring
+    rescale_type: str
+        'min_max': between extrema values of image
+        'dtype': full range of image dtype
+        'zero_max': between zero and image max
+        'limits': between limits given by parameter limits
+    limits: list
+        [min, max] limits to use for rescaling
+
+    Returns
+    -------
+    image_colored: array
+        3D RGB float array
+
+    """
+
+    image = rescale_image(image, rescale_type=rescale_type, limits=limits)
+                
+    image_colored = cmap(image)
+    
+    return image_colored
+
 def colorify_by_name(image, cmap_name, flip_map=False, rescale_type='min_max', limits=None, num_colors=256):
     """
     Return 2D image as 3D RGB stack colored with a given colormap.
@@ -127,7 +158,7 @@ def colorify_by_name(image, cmap_name, flip_map=False, rescale_type='min_max', l
             
     image_colored = cmap(image)
     
-    return image_colored
+    return image_colored, cmap
 
 
 def colorify_by_hex(image, cmap_hex='#ff6600', flip_map=False, rescale_type='min_max',
@@ -170,7 +201,7 @@ def colorify_by_hex(image, cmap_hex='#ff6600', flip_map=False, rescale_type='min
         cmap = cmap.reversed()
     image_colored = cmap(image)
     
-    return image_colored
+    return image_colored, cmap
 
 def rescale_image(image, rescale_type='min_max', limits=None):
     """
@@ -274,7 +305,7 @@ def combine_image(images, proj_type='max'):
 
 
 def multichannel_to_rgb(images, cmaps=None, flip_map=False, rescale_type='min_max',
-                        limits=None, num_colors=256, proj_type='max'):
+                        limits=None, num_colors=256, proj_type='max', cmap_objects=None):
     """
     Convert a list of images to a single RGB image. Options can be passed
     as lists, one per channel, or as single element in which case the same value is used
@@ -301,6 +332,9 @@ def multichannel_to_rgb(images, cmaps=None, flip_map=False, rescale_type='min_ma
         projection type of color combination
         max: maximum
         sum: sum projection, restricted to dtype range
+    cmap_objects: list
+        list of Matplotlib cmaps, one per channel to use for coloring
+        if provided, no colormaps are computed and cmap names are ignored
         
     Returns
     -------
@@ -308,36 +342,50 @@ def multichannel_to_rgb(images, cmaps=None, flip_map=False, rescale_type='min_ma
         
     """
     
+    # checks
     images = check_input(images)
-    
-    if cmaps is not None:
-        if len(images) != len(cmaps):
-            raise Exception(f"You have {len(images)} images but only provided {len(cmaps)} color maps.")    
-     
-    # if no colormap is provided use true RGB for d<4
-    if cmaps is None:
-        if len(images) < 4:
-            cmaps = ['pure_red','pure_green','pure_blue']
-        else:
-            cmaps = ['ran_gradient' for x in images]
-        
-    if not isinstance(flip_map, list):
-        flip_map = [flip_map for i in range(len(images))]
+
     if not isinstance(rescale_type, list):
-        rescale_type = [rescale_type for i in range(len(images))]
+            rescale_type = [rescale_type for i in range(len(images))]
     if (limits is None) or (not any(isinstance(i, list) for i in limits)):
         limits = [limits for i in range(len(images))]
-    
-    converted = combine_image(
-        [colorify_by_name(
-            im, cmap_name=cmaps[ind],
-            flip_map=flip_map[ind],
+
+    # if colormaps are provided, use them, otherwise compute them
+    if cmap_objects is not None:
+        colorified = [colorify_by_cmap(
+            im, cmap=cmap_objects[ind],
             rescale_type=rescale_type[ind],
-            limits=limits[ind],
-            num_colors=num_colors) for ind, im in enumerate(images)
-        ], proj_type=proj_type)
+            limits=limits[ind]) for ind, im in enumerate(images)
+        ]
+        converted = combine_image(colorified, proj_type=proj_type)
+
+    else:
+        if cmaps is not None:
+            if len(images) != len(cmaps):
+                raise Exception(f"You have {len(images)} images but only provided {len(cmaps)} color maps.")    
+        
+        # if no colormap is provided use true RGB for d<4
+        if cmaps is None:
+            if len(images) < 4:
+                cmaps = ['pure_red','pure_green','pure_blue']
+            else:
+                cmaps = ['ran_gradient' for x in images]
+            
+        if not isinstance(flip_map, list):
+            flip_map = [flip_map for i in range(len(images))]
+        
+        colorified = [colorify_by_name(
+                im, cmap_name=cmaps[ind],
+                flip_map=flip_map[ind],
+                rescale_type=rescale_type[ind],
+                limits=limits[ind],
+                num_colors=num_colors) for ind, im in enumerate(images)
+            ]
+
+        converted = combine_image([x[0] for x in colorified], proj_type=proj_type)
+        cmap_objects = [x[1] for x in colorified]
     
-    return converted
+    return converted, cmap_objects
 
 
 def check_input(images):

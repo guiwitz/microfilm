@@ -14,7 +14,7 @@ def microshow(images=None, cmaps=None, flip_map=False, rescale_type=None, limits
               channel_label_size=0.05, scalebar_thickness=5, scalebar_unit_per_pix=None, scalebar_size_in_units=None,
               unit=None, scalebar_ypos=0.05, scalebar_color='white', scalebar_font_size=0.08, scalebar_text_centered=True,
               ax=None, fig_scaling=3, dpi=72, label_text=None, label_location='upper left',
-              label_color='white', label_font_size=15, microim=None
+              label_color='white', label_font_size=15, cmap_objects=None, microim=None
              ):
     """
     Plot image
@@ -79,6 +79,11 @@ def microshow(images=None, cmaps=None, flip_map=False, rescale_type=None, limits
         color of label
     label_font_size: int
         size of label
+    cmap_objects: list
+        list of Matplotlib colormaps to use for coloring
+        if provided, the cmap names are ignored
+    microim: Microimage object
+        object to re-use
             
     Returns
     -------
@@ -97,17 +102,17 @@ def microshow(images=None, cmaps=None, flip_map=False, rescale_type=None, limits
         scalebar_unit_per_pix=scalebar_unit_per_pix, scalebar_size_in_units=scalebar_size_in_units, unit=unit,
         scalebar_ypos=scalebar_ypos, scalebar_color=scalebar_color, scalebar_font_size=scalebar_font_size,
         scalebar_text_centered=scalebar_text_centered, ax=ax, fig_scaling=fig_scaling, dpi=dpi, label_text=label_text,
-        label_location=label_location, label_color=label_color, label_font_size=label_font_size
+        label_location=label_location, label_color=label_color, label_font_size=label_font_size, cmap_objects=cmap_objects
         )
     
-    #microim.images = colorify.check_input(microim.images)
-
     microim.rescale_type = colorify.check_rescale_type(microim.rescale_type, microim.limits)
 
-    converted = colorify.multichannel_to_rgb(microim.images, cmaps=microim.cmaps, flip_map=microim.flip_map,
+    converted, cmap_objects = colorify.multichannel_to_rgb(microim.images, cmaps=microim.cmaps, flip_map=microim.flip_map,
                                     rescale_type=microim.rescale_type, limits=microim.limits,
-                                    num_colors=microim.num_colors, proj_type=microim.proj_type)
-    
+                                    num_colors=microim.num_colors, proj_type=microim.proj_type,
+                                    cmap_objects=microim.cmap_objects)
+    microim.cmap_objects = cmap_objects
+
     if microim.cmaps is None:
         if len(microim.images) < 4:
             rgb = ['pure_red', 'pure_green', 'pure_blue']
@@ -227,6 +232,9 @@ class Microimage:
         color of label
     label_font_size: int
         size of label
+    cmaps_object: list
+        list of cmap objects for each channel 
+        if provided, cmap names are ignored
 
     """
 
@@ -235,7 +243,7 @@ class Microimage:
               channel_label_type='title', channel_label_size=0.05, scalebar_thickness=5, scalebar_unit_per_pix=None,
               scalebar_size_in_units=None, unit=None, scalebar_ypos=0.05, scalebar_color='white',
               scalebar_font_size=0.08, scalebar_text_centered=True, ax=None, fig_scaling=3, dpi=72, label_text=None,
-              label_location='upper left', label_color='white', label_font_size=15
+              label_location='upper left', label_color='white', label_font_size=15, cmap_objects=None,
              ):
         
         self.__dict__.update(locals())
@@ -284,7 +292,7 @@ class Microimage:
         microim: if a new plot object is created (copy==True), the
                 object is returned
         """
-        
+
         if copy is False:
             self.ax = ax
             if self.ax is not None:
@@ -294,6 +302,7 @@ class Microimage:
             params = self.__dict__
             params_copy = params.copy()
             param_needed = list(inspect.signature(microshow).parameters)
+
             for k in params.keys():
                 if k not in param_needed:
                     params_copy.pop(k, None)
