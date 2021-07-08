@@ -519,7 +519,7 @@ class Microimage:
             self.ax.text(
                 x=0.5, y=1+line_space+i*(channel_label_size+line_space)/(1-tot_space),
                 s=self.channel_names[nlines-1-i], ha="center", transform=self.ax.transAxes,
-                fontdict={'color':colorify.color_translate(self.cmaps[nlines-1-i]),'size':fontsize}
+                fontdict={'color': self.cmap_objects[nlines-1-i].colors[-1],'size':fontsize}
             )
 
 class Micropanel:
@@ -637,7 +637,7 @@ class Micropanel:
                             y = ypos + line_space + +k*(self.channel_label_size+line_space),
                             s=text_to_plot, ha="center",
                             transform=self.fig.transFigure,
-                            fontdict={'color':colorify.color_translate(self.microplots[j,i].cmaps[nlines-1-k]), 'size':fontsize}
+                            fontdict={'color': self.microplots[j,i].cmap_objects[nlines-1-k].colors[-1], 'size':fontsize}
                         )
                     self.ax[j,i].cla()
                     has_label = self.microplots[j,i].channel_label_show

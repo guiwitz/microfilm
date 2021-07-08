@@ -254,7 +254,7 @@ class Microanimpanel:
                                 y=ypos+line_space+k*(self.channel_label_size+line_space),
                                 s=self.microanims[j, i].channel_names[nlines-1-k], ha="center",
                                 transform=self.fig.transFigure,
-                                fontdict={'color':colorify.color_translate(self.microanims[j,i].cmaps[nlines-1-k]), 'size':fontsize}
+                                fontdict={'color': self.microanims[j,i].cmap_objects[nlines-1-k].colors[-1], 'size':fontsize}
                             )
                         self.ax[j,i].cla()
                         self.add_element(pos=[j,i], microanim=self.microanims[j, i], fig_update=False)
