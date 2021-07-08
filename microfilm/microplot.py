@@ -109,8 +109,11 @@ def microshow(images=None, cmaps=None, flip_map=False, rescale_type=None, limits
                                     num_colors=microim.num_colors, proj_type=microim.proj_type)
     
     if microim.cmaps is None:
+        if len(microim.images) < 4:
             rgb = ['pure_red', 'pure_green', 'pure_blue']
             microim.cmaps = [rgb[k] for k in range(len(microim.images))]
+        else:
+            microim.cmaps = ['ran_gradient' for x in microim.images]
     
     height = microim.images[0].shape[0]
     width = microim.images[0].shape[1]

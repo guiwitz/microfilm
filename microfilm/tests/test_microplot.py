@@ -8,15 +8,12 @@ image[0,0] = 200
 image2 = 100*np.ones((3,3), dtype=np.uint8)
 image2[0,1] = 180
 
-rgb1 = np.zeros((3,3,3), dtype=np.float16)
-rgb1[0,0,0] = 0.1
-rgb1[0,1,0] = 0.3
-rgb1[0,2,0] = 0.3
-
-rgb2 = np.zeros((3,3,3), dtype=np.float16)
-rgb2[0,0,0] = 0.2
-rgb2[0,1,0] = 0.8
-rgb2[0,2,1] = 0.8
+more_than_3d = np.zeros((5,3,3), dtype=np.uint8)
+more_than_3d[0,0,0] = 1
+more_than_3d[1,1,0] = 1
+more_than_3d[2,2,0] = 1
+more_than_3d[3,1,1] = 1
+more_than_3d[4,2,1] = 1
 
 
 def verify_image(microim):
@@ -54,6 +51,11 @@ def test_microshow():
     # check label
     assert microim.ax.texts[3].get_text() == 'A', "Wrong label"
     assert microim.ax.texts[3].get_color() == 'pink', "Wrong label color"
+
+def test_default_random_gradient():
+    # test that images with > 3 channels use random gradient by default
+    microim = microplot.microshow(more_than_3d)
+    assert microim.cmaps[4] == "ran_gradient", "Random gradient not select for d>3"
 
 def test_add_scalebar():
     
@@ -102,8 +104,6 @@ def test_save():
     microimage.savefig('test_saveimage.png')
     os.path.isfile('test_saveimage.png')
     os.remove('test_saveimage.png')
-    
-
     
 def test_micropanel():
     

@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib
 from matplotlib.colors import ListedColormap
-
+from skimage.color import hsv2rgb
 
 def cmaps_def(cmap_name, num_colors=256, flip_map=False):
     """
@@ -42,6 +42,8 @@ def cmaps_def(cmap_name, num_colors=256, flip_map=False):
         cmap = ListedColormap(np.c_[np.linspace(0,1,num_colors), np.linspace(0,1,num_colors), np.zeros(num_colors)])
     elif cmap_name == 'segmentation':
         cmap = random_cmap(num_colors=num_colors)
+    elif cmap_name == 'ran_gradient':
+        cmap = random_grandient_cmap(num_colors=num_colors)
     else:
         raise Exception(f"Your colormap {cmap_name} doesn't exist either in Matplotlib or microfilm.")
             
@@ -77,6 +79,18 @@ def random_cmap(alpha=0.5, num_colors=256):
 
     return cmap
 
+def random_grandient_cmap(num_colors, seed=42):
+    
+    #rng = np.random.default_rng(2021)
+    num_colors = 256
+    rgb = hsv2rgb([np.random.random(1)[0], 0.95, 0.95])
+
+    cmap = ListedColormap(np.c_[
+        np.linspace(0,rgb[0],num_colors),
+        np.linspace(0,rgb[1],num_colors), 
+        np.linspace(0,rgb[2],num_colors)
+        ])
+    return cmap
 
 def colorify_by_name(image, cmap_name, flip_map=False, rescale_type='min_max', limits=None, num_colors=256):
     """
@@ -300,9 +314,12 @@ def multichannel_to_rgb(images, cmaps=None, flip_map=False, rescale_type='min_ma
         if len(images) != len(cmaps):
             raise Exception(f"You have {len(images)} images but only provided {len(cmaps)} color maps.")    
      
-    # if no colormap is provided use true RGB
+    # if no colormap is provided use true RGB for d<4
     if cmaps is None:
-        cmaps = ['pure_red','pure_green','pure_blue']
+        if len(images) < 4:
+            cmaps = ['pure_red','pure_green','pure_blue']
+        else:
+            cmaps = ['ran_gradient' for x in images]
         
     if not isinstance(flip_map, list):
         flip_map = [flip_map for i in range(len(images))]
@@ -328,17 +345,15 @@ def check_input(images):
     to list of 2D arrays."""
     
     if isinstance(images, np.ndarray):
-        if len(images.shape)==2:
+        if images.ndim == 2:
             images = [images]
-        elif len(images.shape)==3:
-            if images.shape[0]>3:
-                warnings.warn(f"Only the three first channels are considered. You have {images.shape[0]} channels.")
-            images = [images[x] for x in range(np.min([3,images.shape[0]]))]
+        elif images.ndim == 3:
+            images = [x for x in images]
     elif isinstance(images, list):
         if not isinstance(images[0], np.ndarray):
             raise Exception(f"You need to pass a list of 2D arrays.")
-        elif len(images[0].shape) !=2:
-            raise Exception(f"Are should be 2D. You passed {len(images[0].shape)}D array.")
+        elif images[0].ndim !=2:
+            raise Exception(f"Array should be 2D. You passed {len(images[0].shape)}D array.")
     
     return images
 
