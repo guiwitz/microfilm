@@ -23,8 +23,10 @@ def microshow(images=None, cmaps=None, flip_map=False, rescale_type=None, limits
     ----------
     images: list or array
         list of 2d arrays or DxMxN array D<4
-    cmaps: str of list of str
-        colormap names. For single image you can pass a str
+    cmaps: list of str / Matplotlib colormaps or single str
+        colormap can be provided as names (e.g. 'pure_red' as specified
+        in cmaps_def) or directly as Matplotlib colormaps (e.g. as returned by cmaps_def)
+        for single channel images, you can pass a single str instead of a list
     flip_map: bool or list of bool
         invert colormap or not
     rescale_type: str or list of str
@@ -176,8 +178,10 @@ class Microimage:
     ----------
     images: list or array
         list of 2d arrays or DxMxN array D<4
-    cmaps: str or list of str
-        colormap names. For a single image you can pass as str
+    cmaps: list of str / Matplotlib colormaps or single str
+        colormap can be provided as names (e.g. 'pure_red' as specified
+        in cmaps_def) or directly as Matplotlib colormaps (e.g. as returned by cmaps_def)
+        for single channel images, you can pass a single str instead of a list
     flip_map: bool or list of bool
         invert colormap or not
     rescale_type: str or list of str
@@ -269,7 +273,7 @@ class Microimage:
 
         # check input
         self.images = colorify.check_input(self.images)
-        if isinstance(self.cmaps, str):
+        if (not isinstance(self.cmaps, list)) and self.cmaps is not None:
             self.cmaps = [self.cmaps]
         if isinstance(self.channel_names, str):
             self.channel_names = [self.channel_names]

@@ -48,7 +48,7 @@ def cmaps_def(cmap_name, num_colors=256, flip_map=False):
         raise Exception(f"Your colormap {cmap_name} doesn't exist either in Matplotlib or microfilm.")
             
     if flip_map:
-            cmap = cmap.reversed()
+        cmap = cmap.reversed()
     
     return cmap
     
@@ -319,8 +319,9 @@ def multichannel_to_rgb(images, cmaps=None, flip_map=False, rescale_type='min_ma
     ----------
     images: list or array
         list of 2d arrays or DxMxN array where D<4
-    cmaps: list of str
-        colormap names
+    cmaps: list of str / Matplotlib colormaps
+        colormap as names (e.g. 'pure_red' as specified in cmaps_def) or
+        directly as Matplotlib colormaps (e.g. as returned by cmaps_def)
     flip_map: bool or list of bool
         invert colormap or not
     rescale_type: str or list of str
@@ -381,16 +382,28 @@ def multichannel_to_rgb(images, cmaps=None, flip_map=False, rescale_type='min_ma
         if not isinstance(flip_map, list):
             flip_map = [flip_map for i in range(len(images))]
         
-        colorified = [colorify_by_name(
-                im, cmap_name=cmaps[ind],
-                flip_map=flip_map[ind],
-                rescale_type=rescale_type[ind],
-                limits=limits[ind],
-                num_colors=num_colors) for ind, im in enumerate(images)
-            ]
+        colorified = []
+        cmap_objects = []
+        for ind, im in enumerate(images):
+            if isinstance(cmaps[ind], str):
+                col_by_name = colorify_by_name(
+                    im, cmap_name=cmaps[ind],
+                    flip_map=flip_map[ind],
+                    rescale_type=rescale_type[ind],
+                    limits=limits[ind],
+                    num_colors=num_colors)
+                colorified.append(col_by_name[0])
+                cmap_objects.append(col_by_name[1])
+            else:
+                col_by_cmap = colorify_by_cmap(
+                    im, cmap=cmaps[ind],
+                    rescale_type=rescale_type[ind],
+                    limits=limits[ind])
+                colorified.append(col_by_cmap)
+                cmap_objects.append(cmaps[ind])
 
-        converted = combine_image([x[0] for x in colorified], proj_type=proj_type)
-        cmap_objects = [x[1] for x in colorified]
+
+        converted = combine_image(colorified, proj_type=proj_type)
     
     return converted, cmap_objects
 

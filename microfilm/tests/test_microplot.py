@@ -1,7 +1,8 @@
 import os
 import matplotlib.pyplot as plt
+import matplotlib
 import numpy as np
-from microfilm import microplot
+from microfilm import microplot, colorify
 
 image = 100*np.ones((3,3), dtype=np.uint8)
 image[0,0] = 200
@@ -56,6 +57,15 @@ def test_default_random_gradient():
     # test that images with > 3 channels use random gradient by default
     microim = microplot.microshow(more_than_3d)
     assert microim.cmaps[4] == "ran_gradient", "Random gradient not select for d>3"
+
+def test_mixed_cmaps():
+    # test that "name" cmaps and "object" cmaps can be mixed
+    summer_cmap = colorify.cmaps_def(cmap_name='summer')
+    microim = microplot.microshow(
+        images=[image, image2], cmaps=[summer_cmap, 'pure_blue'])
+    
+    assert isinstance(microim.cmap_objects[0], matplotlib.colors.LinearSegmentedColormap), "Wrong colormap for summer cmap"
+    assert isinstance(microim.cmap_objects[1], matplotlib.colors.ListedColormap), "Wrong colormap for pure_blue cmap"
 
 def test_add_scalebar():
     
