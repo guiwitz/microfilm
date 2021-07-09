@@ -10,7 +10,7 @@ from . import colorify
 
    
 def microshow(images=None, cmaps=None, flip_map=False, rescale_type=None, limits=None, num_colors=256,
-              proj_type='max', channel_names=None, channel_label_show=False, channel_label_type='title',
+              proj_type='max', alpha=0.5, channel_names=None, channel_label_show=False, channel_label_type='title',
               channel_label_size=0.05, scalebar_thickness=5, scalebar_unit_per_pix=None, scalebar_size_in_units=None,
               unit=None, scalebar_ypos=0.05, scalebar_color='white', scalebar_font_size=0.08, scalebar_text_centered=True,
               ax=None, fig_scaling=3, dpi=72, label_text=None, label_location='upper left',
@@ -42,6 +42,9 @@ def microshow(images=None, cmaps=None, flip_map=False, rescale_type=None, limits
         projection type of color combination
         max: maximum
         sum: sum projection, restricted to dtype range
+    alpha: float
+        transparency in range [0,1] of overlayed image for
+        proj_type == alpha
     channel_names: list
         list of channel names
     channel_label_show: bool
@@ -98,7 +101,7 @@ def microshow(images=None, cmaps=None, flip_map=False, rescale_type=None, limits
             raise Exception(f"You need to provide at least images")
  
         microim = Microimage(images=images, cmaps=cmaps, flip_map=flip_map, rescale_type=rescale_type,
-        limits=limits, num_colors=num_colors, proj_type=proj_type, channel_names=channel_names,
+        limits=limits, num_colors=num_colors, proj_type=proj_type, alpha=alpha, channel_names=channel_names,
         channel_label_show=channel_label_show, channel_label_type=channel_label_type,
         channel_label_size=channel_label_size, scalebar_thickness=scalebar_thickness, 
         scalebar_unit_per_pix=scalebar_unit_per_pix, scalebar_size_in_units=scalebar_size_in_units, unit=unit,
@@ -112,7 +115,7 @@ def microshow(images=None, cmaps=None, flip_map=False, rescale_type=None, limits
     converted, cmap_objects = colorify.multichannel_to_rgb(microim.images, cmaps=microim.cmaps, flip_map=microim.flip_map,
                                     rescale_type=microim.rescale_type, limits=microim.limits,
                                     num_colors=microim.num_colors, proj_type=microim.proj_type,
-                                    cmap_objects=microim.cmap_objects)
+                                    alpha=microim.alpha, cmap_objects=microim.cmap_objects)
     microim.cmap_objects = cmap_objects
 
     if microim.cmaps is None:
@@ -197,6 +200,9 @@ class Microimage:
         projection type of color combination
         max: maximum
         sum: sum projection, restricted to dtype range
+    alpha: float
+        transparency in range [0,1] of overlayed image for
+        proj_type == alpha
     channel_names: list
         list of channel names
     channel_label_show: bool
@@ -243,7 +249,7 @@ class Microimage:
     """
 
     def __init__(self, images, cmaps=None, flip_map=False, rescale_type=None, limits=None, num_colors=256,
-              proj_type='max', channel_names=None, channel_label_show=False,
+              proj_type='max', alpha=0.5, channel_names=None, channel_label_show=False,
               channel_label_type='title', channel_label_size=0.05, scalebar_thickness=5, scalebar_unit_per_pix=None,
               scalebar_size_in_units=None, unit=None, scalebar_ypos=0.05, scalebar_color='white',
               scalebar_font_size=0.08, scalebar_text_centered=True, ax=None, fig_scaling=3, dpi=72, label_text=None,

@@ -278,18 +278,21 @@ def check_rescale_type(rescale_type, limits):
     return rescale_type
 
 
-def combine_image(images, proj_type='max'):
+def combine_image(images, proj_type='max', alpha=0.5):
     """
     Combine a list of 3D RGB arrays by max projection
     
     Parameters
     ----------
     images: list of arrays
-        list of 2d arrays
+        list of 3d rgb(a) arrays
     proj_type: str
         projection type of color combination
         max: maximum
         sum: sum projection, restricted to dtype range
+    alpha: float
+        transparency in range [0,1] of overlayed image for
+        proj_type == alpha
 
     Returns
     -------
@@ -302,6 +305,17 @@ def combine_image(images, proj_type='max'):
     elif proj_type == 'sum':
         im_combined = np.sum(np.stack(images,axis = 3),axis = 3)
         im_combined[im_combined > 1] = 1
+    elif proj_type == 'alpha':
+        if len(images) != 2:
+            raise Exception(f"Alpha blending only available for two images")
+        # keep already transparent values and replace opaque by alpha
+        # taken from https://en.wikipedia.org/wiki/Alpha_compositing
+        alpha_a = images[1][:,:,3][:,:, np.newaxis]
+        alpha_a[alpha_a > 0] = alpha
+        alpha_b = images[0][:,:,3][:,:, np.newaxis]
+        alpha_0 = alpha_a + alpha_b * (1 - alpha_a)
+        im_combined = np.ones_like(images[0])
+        im_combined[:,:,0:3] = (images[1][:,:,0:3] * alpha_a + images[0][:,:,0:3] * alpha_b * (1 - alpha_a)) / alpha_0
     else:
         raise Exception(f"Your projection type {proj_type} is not implemented.")
     
@@ -309,7 +323,7 @@ def combine_image(images, proj_type='max'):
 
 
 def multichannel_to_rgb(images, cmaps=None, flip_map=False, rescale_type='min_max',
-                        limits=None, num_colors=256, proj_type='max', cmap_objects=None):
+                        limits=None, num_colors=256, proj_type='max', alpha=0.5, cmap_objects=None):
     """
     Convert a list of images to a single RGB image. Options can be passed
     as lists, one per channel, or as single element in which case the same value is used
@@ -337,6 +351,9 @@ def multichannel_to_rgb(images, cmaps=None, flip_map=False, rescale_type='min_ma
         projection type of color combination
         max: maximum
         sum: sum projection, restricted to dtype range
+    alpha: float
+        transparency in range [0,1] of overlayed image for
+        proj_type == alpha
     cmap_objects: list
         list of Matplotlib cmaps, one per channel to use for coloring
         if provided, no colormaps are computed and cmap names are ignored
@@ -365,7 +382,7 @@ def multichannel_to_rgb(images, cmaps=None, flip_map=False, rescale_type='min_ma
             rescale_type=rescale_type[ind],
             limits=limits[ind]) for ind, im in enumerate(images)
         ]
-        converted = combine_image(colorified, proj_type=proj_type)
+        converted = combine_image(colorified, proj_type=proj_type, alpha=alpha)
 
     else:
         if cmaps is not None:
@@ -402,8 +419,7 @@ def multichannel_to_rgb(images, cmaps=None, flip_map=False, rescale_type='min_ma
                 colorified.append(col_by_cmap)
                 cmap_objects.append(cmaps[ind])
 
-
-        converted = combine_image(colorified, proj_type=proj_type)
+        converted = combine_image(colorified, proj_type=proj_type, alpha=alpha)
     
     return converted, cmap_objects
 
