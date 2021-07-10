@@ -280,7 +280,9 @@ def check_rescale_type(rescale_type, limits):
 
 def combine_image(images, proj_type='max', alpha=0.5):
     """
-    Combine a list of 3D RGB arrays by max projection
+    Combine a list of 3D RGB arrays into a single RGB image.
+    The combination is done via maximum or a sum projection
+    or via alpha blending.
     
     Parameters
     ----------
@@ -290,8 +292,9 @@ def combine_image(images, proj_type='max', alpha=0.5):
         projection type of color combination
         max: maximum
         sum: sum projection, restricted to dtype range
+        alpha: alpha blending
     alpha: float
-        transparency in range [0,1] of overlayed image for
+        transparency in range [0,1] of overlayed image(s) for
         proj_type == alpha
 
     Returns
@@ -306,16 +309,20 @@ def combine_image(images, proj_type='max', alpha=0.5):
         im_combined = np.sum(np.stack(images,axis = 3),axis = 3)
         im_combined[im_combined > 1] = 1
     elif proj_type == 'alpha':
-        if len(images) != 2:
-            raise Exception(f"Alpha blending only available for two images")
+
+        # take first image and successively overlay all next ones
         # keep already transparent values and replace opaque by alpha
         # taken from https://en.wikipedia.org/wiki/Alpha_compositing
-        alpha_a = images[1][:,:,3][:,:, np.newaxis]
-        alpha_a[alpha_a > 0] = alpha
-        alpha_b = images[0][:,:,3][:,:, np.newaxis]
-        alpha_0 = alpha_a + alpha_b * (1 - alpha_a)
-        im_combined = np.ones_like(images[0])
-        im_combined[:,:,0:3] = (images[1][:,:,0:3] * alpha_a + images[0][:,:,0:3] * alpha_b * (1 - alpha_a)) / alpha_0
+        im_base = images[0].copy()
+        for i in range(1, len(images)):
+            alpha_a = images[i][:,:,3][:,:, np.newaxis]
+            alpha_a[alpha_a > 0] = alpha
+            alpha_b = im_base[:,:,3][:,:, np.newaxis]
+            alpha_0 = alpha_a + alpha_b * (1 - alpha_a)
+            im_combined = np.ones_like(images[0])
+            im_combined[:,:,0:3] = (images[i][:,:,0:3] * alpha_a + im_base[:,:,0:3] * alpha_b * (1 - alpha_a)) / alpha_0
+            im_base = im_combined
+    
     else:
         raise Exception(f"Your projection type {proj_type} is not implemented.")
     
