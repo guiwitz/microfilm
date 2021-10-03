@@ -14,7 +14,7 @@ def microshow(images=None, cmaps=None, flip_map=False, rescale_type=None, limits
               channel_label_size=0.05, scalebar_thickness=5, scalebar_unit_per_pix=None, scalebar_size_in_units=None,
               unit=None, scalebar_ypos=0.05, scalebar_color='white', scalebar_font_size=0.08, scalebar_text_centered=True,
               ax=None, fig_scaling=3, dpi=72, label_text=None, label_location='upper left',
-              label_color='white', label_font_size=15, cmap_objects=None, microim=None
+              label_color='white', label_font_size=15, label_kwargs={}, cmap_objects=None, microim=None
              ):
     """
     Plot image
@@ -84,6 +84,9 @@ def microshow(images=None, cmaps=None, flip_map=False, rescale_type=None, limits
         color of label
     label_font_size: int
         size of label
+    label_kwargs: dict
+        additional options for label formatting passed
+        to Matplotlib text object
     cmap_objects: list
         list of Matplotlib colormaps to use for coloring
         if provided, the cmap names are ignored
@@ -107,7 +110,8 @@ def microshow(images=None, cmaps=None, flip_map=False, rescale_type=None, limits
         scalebar_unit_per_pix=scalebar_unit_per_pix, scalebar_size_in_units=scalebar_size_in_units, unit=unit,
         scalebar_ypos=scalebar_ypos, scalebar_color=scalebar_color, scalebar_font_size=scalebar_font_size,
         scalebar_text_centered=scalebar_text_centered, ax=ax, fig_scaling=fig_scaling, dpi=dpi, label_text=label_text,
-        label_location=label_location, label_color=label_color, label_font_size=label_font_size, cmap_objects=cmap_objects
+        label_location=label_location, label_color=label_color, label_font_size=label_font_size,
+        label_kwargs=label_kwargs, cmap_objects=cmap_objects
         )
     
     microim.rescale_type = colorify.check_rescale_type(microim.rescale_type, microim.limits)
@@ -167,7 +171,8 @@ def microshow(images=None, cmaps=None, flip_map=False, rescale_type=None, limits
                 if key != 'time_stamp':
                     microim.add_label(label_text=microim.label_text[key],
                     label_name=key, label_location=microim.label_location[key],
-                    label_color=microim.label_color[key], label_font_size=microim.label_font_size[key])
+                    label_color=microim.label_color[key], label_font_size=microim.label_font_size[key],
+                    label_kwargs=microim.label_kwargs[key])
 
     return microim
     
@@ -242,6 +247,9 @@ class Microimage:
         color of label
     label_font_size: int
         size of label
+    label_kwargs: dict
+        additional options for label formatting passed
+        to Matplotlib text object
     cmaps_object: list
         list of cmap objects for each channel 
         if provided, cmap names are ignored
@@ -253,7 +261,8 @@ class Microimage:
               channel_label_type='title', channel_label_size=0.05, scalebar_thickness=5, scalebar_unit_per_pix=None,
               scalebar_size_in_units=None, unit=None, scalebar_ypos=0.05, scalebar_color='white',
               scalebar_font_size=0.08, scalebar_text_centered=True, ax=None, fig_scaling=3, dpi=72, label_text=None,
-              label_location='upper left', label_color='white', label_font_size=15, cmap_objects=None,
+              label_location='upper left', label_color='white', label_font_size=15, label_kwargs={},
+              cmap_objects=None,
              ):
         
         self.__dict__.update(locals())
@@ -265,17 +274,20 @@ class Microimage:
             self.label_location = label_location
             self.label_color = label_color
             self.label_font_size = label_font_size
+            self.label_kwargs = label_kwargs
 
         elif self.label_text is not None:
             self.label_text = {'label': label_text}
             self.label_location = {'label': label_location}
             self.label_color = {'label': label_color}
             self.label_font_size = {'label': label_font_size}
+            self.label_kwargs = {'label': label_kwargs}
         else:
             self.label_text = None
             self.label_location = None
             self.label_color = None
             self.label_font_size = None
+            self.label_kwargs = None
 
         # check input
         self.images = colorify.check_input(self.images)
@@ -427,7 +439,7 @@ class Microimage:
         self.ax.add_patch(scale_bar)
                 
     def add_label(self, label_text, label_name='default', label_location='upper left', label_color='white',
-                 label_font_size=15):
+                 label_font_size=15, label_kwargs={}):
         """
         Add a figure label to an image.
 
@@ -443,6 +455,9 @@ class Microimage:
             color of label
         label_font_size: int
             size of label
+        label_kwargs: dict
+            additional options for label formatting passed
+            to Matplotlib text object
 
         """
         
@@ -451,15 +466,20 @@ class Microimage:
             self.label_location = {}
             self.label_color = {}
             self.label_font_size = {}
+            self.label_kwargs = {}
 
         self.label_text[label_name] = label_text
         self.label_location[label_name] = label_location
         self.label_color[label_name] = label_color
         self.label_font_size[label_name] = label_font_size
+        self.label_kwargs[label_name] = label_kwargs
 
         r = self.ax.figure.canvas.get_renderer()
+        # combine explicit options with Matplotlib kwargs
+        fontdict = {'color':label_color, 'size':label_font_size}
+        fontdict = {**fontdict, **label_kwargs}
         label_text = self.ax.text(x=0.05, y=0.05, s=label_text,
-                         transform=self.ax.transAxes, fontdict={'color':label_color, 'size':label_font_size})
+                         transform=self.ax.transAxes, fontdict=fontdict)
 
         # label seems far from top but accomodates e.g. accents/trema
         image_height = self.ax.get_tightbbox(r).height
