@@ -8,6 +8,12 @@ image[0,0] = 200
 image2 = 100*np.ones((3,3), dtype=np.uint8)
 image2[0,0] = 180
 
+image3 = np.zeros((2,2), dtype=np.int16)
+image3[0,0] = -10
+image3[0,1] = 280
+image3[1,0] = 10
+image3[1,1] = 100
+
 rgb1 = np.zeros((3,3,3), dtype=np.float16)
 rgb1[0,0,0] = 0.1
 rgb1[0,1,0] = 0.3
@@ -64,13 +70,24 @@ def test_colorify_by_hex():
 def test_rescale_image():
     
     im_resc = colorify.rescale_image(image)
-    np.testing.assert_array_equal(im_resc[0], np.array([1,0,0]))
+    np.testing.assert_array_equal(im_resc[0], np.array([1,0,0]), "Bad rescaling for uint8 default")
     
     im_resc = colorify.rescale_image(image, rescale_type='dtype')
-    np.testing.assert_array_equal(im_resc[0], np.array([200/255,100/255,100/255]))
+    np.testing.assert_array_equal(im_resc[0], np.array([200/255,100/255,100/255]), "Bad rescaling for uint8 dtype")
     
     im_resc = colorify.rescale_image(image, limits=[110, 230], rescale_type='limits')
-    np.testing.assert_array_equal(im_resc[0], np.array([(200-110)/(230-110),0,0]))
+    np.testing.assert_array_equal(im_resc[0], np.array([(200-110)/(230-110),0,0]), "Bad rescaling for uint8 limits")
+    
+    out = colorify.rescale_image(image3, rescale_type='min_max')
+    check = (image3+10)/290
+    np.testing.assert_array_equal(out,check, "Bad rescaling for int16 min_max")
+    
+    im_bool = image3 > 60
+    out = colorify.rescale_image(im_bool, rescale_type='min_max')
+    check = np.zeros((2,2), dtype=np.float64)
+    check[0,1] = 1
+    check[1,1] = 1
+    np.testing.assert_array_equal(out,check, "Bad rescaling for boolean")
 
 def test_check_rescale_type():
     assert colorify.check_rescale_type(rescale_type='limits', limits=None) == 'min_max', "Wrong rescaling"
