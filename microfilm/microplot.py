@@ -287,7 +287,7 @@ class Microimage:
             self.label_location = None
             self.label_color = None
             self.label_font_size = None
-            self.label_kwargs = None
+            self.label_kwargs = {}
 
         # check input
         self.images = colorify.check_input(self.images)

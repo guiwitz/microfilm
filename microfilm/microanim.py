@@ -24,7 +24,7 @@ class Microanim(Microimage):
         channel_label_size=0.05, scalebar_thickness=5, scalebar_unit_per_pix=None, scalebar_size_in_units=None, unit=None,
         scalebar_ypos=0.05, scalebar_color='white', scalebar_font_size=0.08, scalebar_text_centered=True,
         ax=None, fig_scaling=3, dpi=72, label_text=None, label_location='upper left',
-        label_color='white', label_font_size=15, cmap_objects=None, show_plot=True
+        label_color='white', label_font_size=15, label_kwarg={}, cmap_objects=None, show_plot=True
     ):
         super().__init__(
             None, cmaps, flip_map, rescale_type, limits, num_colors,
@@ -32,7 +32,7 @@ class Microanim(Microimage):
             channel_label_size, scalebar_thickness, scalebar_unit_per_pix, scalebar_size_in_units, unit,
             scalebar_ypos, scalebar_color, scalebar_font_size, scalebar_text_centered,
             ax, fig_scaling, dpi, label_text, label_location,
-            label_color, label_font_size, cmap_objects
+            label_color, label_font_size, label_kwarg, cmap_objects
         )
 
         if isinstance(data, np.ndarray):
@@ -94,7 +94,7 @@ class Microanim(Microimage):
                 self.timestamps.set_text(self.times[t])
 
     def add_time_stamp(self, unit, unit_per_frame, location='upper left',
-        timestamp_size=15, timestamp_color='white'):
+        timestamp_size=15, timestamp_color='white', time_stamp_kwargs={}):
         """
         Add time-stamp to movie
         
@@ -112,6 +112,9 @@ class Microanim(Microimage):
             size of timestamp font
         timestamp_color: str
             color of label
+        time_stamp_kwargs: dict
+            additional options for label formatting passed
+            to Matplotlib text object
 
         """
 
@@ -120,7 +123,7 @@ class Microanim(Microimage):
         self.times = times.strftime('%H:%M:%S')
 
         self.timestamps = self.add_label(self.times[0], 'time_stamp', label_location=location,
-        label_font_size=timestamp_size, label_color=timestamp_color)
+        label_font_size=timestamp_size, label_color=timestamp_color, label_kwargs=time_stamp_kwargs)
     
     def save_movie(self, movie_name, fps=20, quality=5, format=None):
         save_movie(self, movie_name, fps=fps, quality=quality, format=format)
@@ -304,7 +307,9 @@ class Microanimpanel:
             if 'time_stamp' in newanim.label_text.keys():
                 newanim.timestamps = newanim.add_label(newanim.times[0], 'time_stamp',
                 label_location=newanim.label_location['time_stamp'],
-                label_color=newanim.label_color['time_stamp'], label_font_size=newanim.label_font_size['time_stamp'])
+                label_color=newanim.label_color['time_stamp'],
+                label_font_size=newanim.label_font_size['time_stamp'],
+                label_kwargs=newanim.label_kwargs['time_stamp'])
 
         self.microanims[pos[0], pos[1]] = newanim
         self.max_time = newanim.data.K-1
