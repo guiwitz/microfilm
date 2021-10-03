@@ -94,14 +94,14 @@ class Microanim(Microimage):
                 self.timestamps.set_text(self.times[t])
 
     def add_time_stamp(self, unit, unit_per_frame, location='upper left',
-        timestamp_size=15, timestamp_color='white', time_stamp_kwargs={}):
+        timestamp_size=15, timestamp_color='white', time_format='HH:MM:SS', time_stamp_kwargs={}):
         """
         Add time-stamp to movie
         
         Parameters
         ----------
         unit: str
-            unit of time 'S' seconds, 'T' minute, 'H' hours
+            unit of time 'mmm' millisecond, 'SS' seconds, 'MM' minute, 'HH' hours
         unit_per_frame: int
             number of units per frame e.g. 5 for 5s steps
         location: str or list
@@ -112,6 +112,9 @@ class Microanim(Microimage):
             size of timestamp font
         timestamp_color: str
             color of label
+        time_format: str
+            How the time stamp should be represented. The string should contain
+            the 'HH' for hours, 'MM' for minutes, 'SS' for seconds and 'mmm' for milliseconds
         time_stamp_kwargs: dict
             additional options for label formatting passed
             to Matplotlib text object
@@ -119,11 +122,65 @@ class Microanim(Microimage):
         """
 
         periods = self.data.K
-        times = pd.date_range(start=0, periods=periods, freq=str(unit_per_frame)+unit)
-        self.times = times.strftime('%H:%M:%S')
+        #times = pd.date_range(start=0, periods=periods, freq=str(unit_per_frame)+unit)
+        #self.times = times.strftime('%H:%M:%S')
+        _, self.times = self.time_range(unit=unit, unit_per_frame=unit_per_frame, num_step=periods, time_format=time_format)
 
         self.timestamps = self.add_label(self.times[0], 'time_stamp', label_location=location,
         label_font_size=timestamp_size, label_color=timestamp_color, label_kwargs=time_stamp_kwargs)
+
+
+    def time_range(self, unit, unit_per_frame, num_step, time_format = 'HH:MM:SS:mmm'):
+        """
+        Create string time-stamps with arbitrary formatting.
+        
+        Parameters
+        ----------
+        unit: str
+            unit of time 'mmm' millisecond, 'SS' seconds, 'MM' minute, 'HH' hours
+        unit_per_frame: int
+            number of units per frame e.g. 5 for 5s steps
+        num_steps: int
+            number of steps
+        time_format: str
+            How the time stamp should be represented. The string should contain
+            the 'HH' for hours, 'MM' for minutes, 'SS' for seconds and 'mmm' for milliseconds
+
+        """
+        times = np.zeros((num_step, 4), dtype=np.uint16)
+
+        pos_increment = 0
+        if unit == 'MM':
+            pos_increment = 1
+        elif unit == 'SS':
+            pos_increment = 2
+        elif unit == 'mmm':
+            pos_increment = 3
+        for i in range(1, num_step):
+            times[i, :] = times[i-1, :].copy()
+            times[i, pos_increment] = times[i, pos_increment] + unit_per_frame
+            if times[i, 3] >= 1000:
+                times[i, 3] = 0
+                times[i,2]+=1
+            if times[i, 2] >= 60:
+                times[i, 2] = 0
+                times[i, 1] = times[i,1].copy()+1
+            if times[i, 1] >= 60:
+                times[i, 1] = 0
+                times[i, 0] = times[i,0].copy()+1
+                
+        maxH = len(str(times[-1,0]))
+        
+        times_text = []
+        for i in range(num_step):
+            current_text = time_format
+            current_text = current_text.replace('mmm', str(times[i,3]).zfill(4))
+            current_text = current_text.replace('HH', str(times[i,0]).zfill(maxH))
+            current_text = current_text.replace('MM', str(times[i,1]).zfill(2))
+            current_text = current_text.replace('SS', str(times[i,2]).zfill(2))
+            times_text.append(current_text)
+        
+        return times, times_text
     
     def save_movie(self, movie_name, fps=20, quality=5, format=None):
         save_movie(self, movie_name, fps=fps, quality=quality, format=format)

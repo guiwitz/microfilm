@@ -48,8 +48,8 @@ def test_microanim_obj():
 
 def test_add_time_stamp():
     
-    anim.add_time_stamp(unit='T', unit_per_frame='3', location='lower left')
-    assert anim.ax.texts[0].get_text() == '00:00:00', "Timer not properly set initially"
+    anim.add_time_stamp(unit='MM', unit_per_frame=3, location='lower left')
+    assert anim.ax.texts[0].get_text() == '0:00:00', "Timer not properly set initially"
     
 def test_update_animation():
     
@@ -58,7 +58,7 @@ def test_update_animation():
 
     anim.update_animation(1)
     # check that timer gets updated
-    assert anim.ax.texts[0].get_text() == '00:03:00', "Timer not properly updating"
+    assert anim.ax.texts[0].get_text() == '0:03:00', "Timer not properly updating"
     
     verify_colors(anim, 'green', 1)
 
@@ -66,7 +66,7 @@ def test_update_animation():
 def test_time_slider():
     
     anim.time_slider.value = 2
-    assert anim.ax.texts[0].get_text() == '00:06:00', "Timer not properly updating when time slider updates"
+    assert anim.ax.texts[0].get_text() == '0:06:00', "Timer not properly updating when time slider updates"
 
     verify_colors(anim, 'blue', 2)
     
@@ -116,10 +116,10 @@ def test_animationpanel_add_channel_label():
     
 def test_animationpanel_time_slider():
 
-    anim_panel.microanims[0,0].add_time_stamp(unit='T', unit_per_frame='3', location='lower left')
+    anim_panel.microanims[0,0].add_time_stamp(unit='MM', unit_per_frame=3, location='lower left')
 
     anim_panel.time_slider.value = 2
-    assert anim_panel.microanims[0,0].ax.texts[0].get_text() == '00:06:00', "Panel Timer not properly updating when time slider updates"
+    assert anim_panel.microanims[0,0].ax.texts[0].get_text() == '0:06:00', "Panel Timer not properly updating when time slider updates"
 
     verify_colors(anim_panel.microanims[0,0], 'blue', 2)
     verify_colors(anim_panel.microanims[0,1], 'yellow', 2)
