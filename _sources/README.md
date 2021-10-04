@@ -79,10 +79,10 @@ import skimage.io
 image = skimage.io.imread('../demodata/coli_nucl_ori_ter.tif')
 
 microim1 = microplot.microshow(images=[image[0, 10, :, :], image[1, 10, :, :]],
-                               cmaps=['gray', 'pure_magenta'], flip_map=[True, False],
+                               cmaps=['Greys', 'pure_magenta'], flip_map=[False, False],
                                label_text='A', label_color='black')
 microim2 = microplot.microshow(images=[image[0, 10, :, :], image[2, 10, :, :]],
-                               cmaps=['gray', 'pure_cyan'], flip_map=[True, False],
+                               cmaps=['Greys', 'pure_cyan'], flip_map=[False, False],
                                label_text='B', label_color='black')
 
 micropanel = microplot.Micropanel(rows=1, cols=2, figsize=[4,3])
@@ -103,10 +103,10 @@ import skimage.io
 
 image = skimage.io.imread('../demodata/coli_nucl_ori_ter.tif')
 
-microanim1 = microanim.Microanim(data=image[[0,1],::], cmaps=['gray', 'pure_magenta'],
-                                 flip_map=[True, False], label_text='A', label_color='black')
-microanim2 = microanim.Microanim(data=image[[0,2],::], cmaps=['gray', 'pure_cyan'],
-                                 flip_map=[True, False], label_text='B', label_color='black')
+microanim1 = microanim.Microanim(data=image[[0,1],::], cmaps=['Greys', 'pure_magenta'],
+                                 flip_map=[False, False], label_text='A', label_color='black')
+microanim2 = microanim.Microanim(data=image[[0,2],::], cmaps=['Greys', 'pure_cyan'],
+                                 flip_map=[False, False], label_text='B', label_color='black')
 
 microanim1.add_time_stamp(unit='T', unit_per_frame='3', location='lower-right', timestamp_color='black')
 
@@ -121,10 +121,10 @@ animpanel.save_movie('../illustrations/panel.gif')
 
 ## Additional functionalities
 
-In addition to thes main plotting capabilities, the packages also offers:
+In addition to these main plotting capabilities, the packages also offers:
 - ```microfilm.colorify```: a series of utility functions used by the main functions to create the composite color images. It contains functions to create colormaps, to turn 2D arrays into 3D-RGB arrays with appropriate colormaps etc.
 - ```microfilm.dataset```: a module offering a simple common data structure to handle multi-channel time-lapse data from multipage tiffs, series of tiff files, Nikon ND2 files, H5 and Numpy arrays. Requirement to use this module are at the moment very constrained (e.g. dimension order of Numpy arrays, name of H5 content etc.) but might evolve in the future.
 
 ## Authors
 
-This package has been created by Guillaume Witz, Micorscopy Imaging Center and Science IT Support, Bern University.
+This package has been created by Guillaume Witz, Microscopy Imaging Center and Science IT Support, University of Bern.

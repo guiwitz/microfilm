@@ -22,8 +22,8 @@
       
 
     
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -33,19 +33,19 @@
     
   <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
         const thebe_selector = ".thebe,.cell"
         const thebe_selector_input = "pre,.cell_input div.highlight"
         const thebe_selector_output = ".output,.cell_output"
@@ -73,6 +73,10 @@
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
       <img src="../_static/microanim_logo.png" class="logo" alt="logo">
       
       
@@ -82,7 +86,7 @@
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
@@ -265,7 +269,7 @@
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
             </div>
-            <nav id="bd-toc-nav">
+            <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#next-steps">
@@ -336,7 +340,7 @@
 <p>With a few options more we can change the colormaps and add information on the figure:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microshow</span><span class="p">(</span><span class="n">image_t0</span><span class="p">,</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span><span class="s1">&#39;pure_cyan&#39;</span><span class="p">,</span><span class="s1">&#39;pure_magenta&#39;</span><span class="p">],</span> <span class="n">flip_map</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microshow</span><span class="p">(</span><span class="n">image_t0</span><span class="p">,</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Greys&#39;</span><span class="p">,</span><span class="s1">&#39;pure_cyan&#39;</span><span class="p">,</span><span class="s1">&#39;pure_magenta&#39;</span><span class="p">],</span> <span class="n">flip_map</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                               <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">label_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">channel_label_show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">channel_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;TFP&#39;</span><span class="p">,</span><span class="s1">&#39;CFP&#39;</span><span class="p">,</span><span class="s1">&#39;mCherry&#39;</span><span class="p">],</span>
                               <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.06</span><span class="p">,</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">scalebar_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">scalebar_font_size</span><span class="o">=</span><span class="mf">0.05</span><span class="p">);</span>
 </pre></div>
@@ -409,7 +413,7 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anim</span> <span class="o">=</span> <span class="n">Microanim</span><span class="p">(</span>
     <span class="n">image</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],:,</span> <span class="p">:,:],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_cyan&#39;</span><span class="p">,</span><span class="s1">&#39;pure_magenta&#39;</span><span class="p">],</span> <span class="n">flip_map</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fig_scaling</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
     <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">scalebar_font_size</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
-<span class="n">anim</span><span class="o">.</span><span class="n">add_time_stamp</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="n">unit_per_frame</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+<span class="n">anim</span><span class="o">.</span><span class="n">add_time_stamp</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="s1">&#39;MM&#39;</span><span class="p">,</span> <span class="n">unit_per_frame</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
 <span class="n">anim</span><span class="o">.</span><span class="n">save_movie</span><span class="p">(</span><span class="s1">&#39;first_anim.mp4&#39;</span><span class="p">,</span> <span class="n">quality</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -434,7 +438,7 @@
 
 
 <script type="application/vnd.jupyter.widget-state+json">
-{"state": {"26bd63f99dd14685a2004fbf17ecf745": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "6dbde6ba9eba4ed9a6d4459665f909b5": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "IntSliderModel", "state": {"description": "Time", "layout": "IPY_MODEL_26bd63f99dd14685a2004fbf17ecf745", "max": 29, "style": "IPY_MODEL_89defa97f1e04730b092ccf87c4860ff"}}, "7793850dcb434be8aba0c6ae7bcb9f3d": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "84892ea6df5f4e1081e9403caa731352": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"layout": "IPY_MODEL_c58dbbf2038b49c481b822a3e14a8d89"}}, "89defa97f1e04730b092ccf87c4860ff": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "SliderStyleModel", "state": {"description_width": ""}}, "8bbe6863ba8547cc875e0f89fdaa9957": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "VBoxModel", "state": {"children": ["IPY_MODEL_84892ea6df5f4e1081e9403caa731352", "IPY_MODEL_6dbde6ba9eba4ed9a6d4459665f909b5"], "layout": "IPY_MODEL_7793850dcb434be8aba0c6ae7bcb9f3d"}}, "c58dbbf2038b49c481b822a3e14a8d89": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}}, "version_major": 2, "version_minor": 0}
+{"state": {"298633b1a5da48948937bfe8dd203216": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "IntSliderModel", "state": {"description": "Time", "layout": "IPY_MODEL_3ddaf84a7b0f4c1487aed98694b01ef2", "max": 29, "style": "IPY_MODEL_37201091b44d4eada5331b4e75a6fdb9"}}, "37201091b44d4eada5331b4e75a6fdb9": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "SliderStyleModel", "state": {"description_width": ""}}, "3ddaf84a7b0f4c1487aed98694b01ef2": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "3e67d996a7594d47908bb0fb6e915cd1": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "434164d00dc8404c927d99097b26c2f4": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"layout": "IPY_MODEL_ed7d17218aee4778a56e1aff798ab66f"}}, "61a700e0fc3643c9b0d58d1a2b25524c": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "64f4aa0025dc48179d4db8b3f9ff00a8": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "VBoxModel", "state": {"children": ["IPY_MODEL_434164d00dc8404c927d99097b26c2f4", "IPY_MODEL_298633b1a5da48948937bfe8dd203216"], "layout": "IPY_MODEL_70aeb29241e14db9af84215f2e63c941"}}, "70aeb29241e14db9af84215f2e63c941": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "747f6a94a1bd41288bbb463bb255c5d2": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "SliderStyleModel", "state": {"description_width": ""}}, "a24d627163f94e4e893f9713f0eb6f27": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "a99c7a3776d7416cb196a3552a76ec17": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"layout": "IPY_MODEL_3e67d996a7594d47908bb0fb6e915cd1"}}, "c34a80a4d7de4821b7c08daee5b4ef39": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "VBoxModel", "state": {"children": ["IPY_MODEL_a99c7a3776d7416cb196a3552a76ec17", "IPY_MODEL_c78dd7b0c35f466cb9d222e32acef1b5"], "layout": "IPY_MODEL_61a700e0fc3643c9b0d58d1a2b25524c"}}, "c78dd7b0c35f466cb9d222e32acef1b5": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "IntSliderModel", "state": {"description": "Time", "layout": "IPY_MODEL_a24d627163f94e4e893f9713f0eb6f27", "max": 29, "style": "IPY_MODEL_747f6a94a1bd41288bbb463bb255c5d2"}}, "ed7d17218aee4778a56e1aff798ab66f": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}}, "version_major": 2, "version_minor": 0}
 </script>
 
 
@@ -461,16 +465,36 @@
               </div>
               
         
-        <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="installation.html" title="previous page">Installation</a>
-    <a class='right-next' id="next-link" href="../notebooks/create_plots.html" title="next page">Producing figures with multi-channel images</a>
 
-        </div>
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="installation.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Installation</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="../notebooks/create_plots.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Producing figures with multi-channel images</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
         
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
+    <footer class="footer">
     <div class="container">
       <p>
         

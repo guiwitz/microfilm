@@ -22,8 +22,8 @@
       
 
     
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -33,19 +33,19 @@
     
   <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
         const thebe_selector = ".thebe,.cell"
         const thebe_selector_input = "pre,.cell_input div.highlight"
         const thebe_selector_output = ".output,.cell_output"
@@ -71,6 +71,10 @@
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
       <img src="../_static/microanim_logo.png" class="logo" alt="logo">
       
       
@@ -80,7 +84,7 @@
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
@@ -339,10 +343,10 @@
 <span class="n">image</span> <span class="o">=</span> <span class="n">skimage</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;../demodata/coli_nucl_ori_ter.tif&#39;</span><span class="p">)</span>
 
 <span class="n">microim1</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">image</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]],</span>
-                               <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_magenta&#39;</span><span class="p">],</span> <span class="n">flip_map</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+                               <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Greys&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_magenta&#39;</span><span class="p">],</span> <span class="n">flip_map</span><span class="o">=</span><span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
                                <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">label_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
 <span class="n">microim2</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">image</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]],</span>
-                               <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_cyan&#39;</span><span class="p">],</span> <span class="n">flip_map</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+                               <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Greys&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_cyan&#39;</span><span class="p">],</span> <span class="n">flip_map</span><span class="o">=</span><span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
                                <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="n">label_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
 
 <span class="n">micropanel</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">Micropanel</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
@@ -367,10 +371,10 @@
 
 <span class="n">image</span> <span class="o">=</span> <span class="n">skimage</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;../demodata/coli_nucl_ori_ter.tif&#39;</span><span class="p">)</span>
 
-<span class="n">microanim1</span> <span class="o">=</span> <span class="n">microanim</span><span class="o">.</span><span class="n">Microanim</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">image</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],::],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_magenta&#39;</span><span class="p">],</span>
-                                 <span class="n">flip_map</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">label_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
-<span class="n">microanim2</span> <span class="o">=</span> <span class="n">microanim</span><span class="o">.</span><span class="n">Microanim</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">image</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">],::],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_cyan&#39;</span><span class="p">],</span>
-                                 <span class="n">flip_map</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="n">label_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">microanim1</span> <span class="o">=</span> <span class="n">microanim</span><span class="o">.</span><span class="n">Microanim</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">image</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],::],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Greys&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_magenta&#39;</span><span class="p">],</span>
+                                 <span class="n">flip_map</span><span class="o">=</span><span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">label_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">microanim2</span> <span class="o">=</span> <span class="n">microanim</span><span class="o">.</span><span class="n">Microanim</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">image</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">],::],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Greys&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_cyan&#39;</span><span class="p">],</span>
+                                 <span class="n">flip_map</span><span class="o">=</span><span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="n">label_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
 
 <span class="n">microanim1</span><span class="o">.</span><span class="n">add_time_stamp</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="n">unit_per_frame</span><span class="o">=</span><span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s1">&#39;lower-right&#39;</span><span class="p">,</span> <span class="n">timestamp_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
 
@@ -389,6 +393,12 @@
 </div>
 </div>
 </div>
+
+
+<script type="application/vnd.jupyter.widget-state+json">
+{"state": {"03352665078c4a649225bece123c10dd": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"layout": "IPY_MODEL_ce060d701ff44d1baf49353e061e92e9"}}, "0da0922bdc4b44daadb6096cc0cfc239": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "117c17a87b23403cade9e5986447b02d": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "1d57fdcfb4994acb89befd762d21d566": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "1dfd2b5e85e5472d9a641d8d48203dfe": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "IntSliderModel", "state": {"description": "Time", "layout": "IPY_MODEL_2c8f881da6f148e2b64294d749195e4c", "max": 29, "style": "IPY_MODEL_fad94b4fe164449d81c65ff4ceb874b9"}}, "1f99567983b24400a362c24463be5616": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "SliderStyleModel", "state": {"description_width": ""}}, "241167578f63439ca684d22eb63448c2": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"layout": "IPY_MODEL_c13c27155bc8478eb2d6054f50dddf74"}}, "27bd10d2a1ef411daaed59928d614422": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "295fe0732d064cd2aae35aa69ebe7201": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "SliderStyleModel", "state": {"description_width": ""}}, "2a02e1af9c354534bf078e237998dd67": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "2c8f881da6f148e2b64294d749195e4c": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "3811545201544140801261cec02b88da": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "3de3c37159b8467a9a5bb252e14ce7be": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "VBoxModel", "state": {"children": ["IPY_MODEL_241167578f63439ca684d22eb63448c2", "IPY_MODEL_930f96cb1ac0479b8a9caa4498526fdc"], "layout": "IPY_MODEL_70672b8a9da646d7ab06d645795ed700"}}, "459fd2a99f4641069508691b8363b137": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"layout": "IPY_MODEL_117c17a87b23403cade9e5986447b02d"}}, "46227c712b0c4564b747e1adab2ebd44": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "55533c152abb4b91ab26b431b172cc43": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "5570511b713e420189d841dd086f19c2": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "55baade71c2040039c78320cc4efa8c0": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "VBoxModel", "state": {"children": ["IPY_MODEL_aa58f8a597614c0ebfdb4047c2632c7e", "IPY_MODEL_bca3cb026cc5418d9db54bcfcd195f22"], "layout": "IPY_MODEL_55533c152abb4b91ab26b431b172cc43"}}, "56524ce24625410581bf62c9444a24e0": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "IntSliderModel", "state": {"description": "Time", "layout": "IPY_MODEL_8dc2fbc6c3724b10b1d3f8ff70821b19", "max": 29, "style": "IPY_MODEL_1f99567983b24400a362c24463be5616"}}, "5f461e3eee4b418f9e821accbe70988c": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"layout": "IPY_MODEL_d1e4d3112a13436f8a09881dca029f02"}}, "6893e07603da46848db6a52284acb547": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "IntSliderModel", "state": {"description": "Time", "layout": "IPY_MODEL_1d57fdcfb4994acb89befd762d21d566", "max": 29, "style": "IPY_MODEL_f861af1731ba46fc85248c81a803ef51"}}, "70672b8a9da646d7ab06d645795ed700": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "83e4752a31ec4531b9be4c70dfa86662": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "VBoxModel", "state": {"children": ["IPY_MODEL_03352665078c4a649225bece123c10dd", "IPY_MODEL_6893e07603da46848db6a52284acb547"], "layout": "IPY_MODEL_5570511b713e420189d841dd086f19c2"}}, "8dc2fbc6c3724b10b1d3f8ff70821b19": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "930f96cb1ac0479b8a9caa4498526fdc": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "IntSliderModel", "state": {"description": "Time", "layout": "IPY_MODEL_b52f615ae1b044cdb74ae241be1e7b7a", "max": 29, "style": "IPY_MODEL_295fe0732d064cd2aae35aa69ebe7201"}}, "991f189cff85416cb35a46fdf17fcfb2": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "VBoxModel", "state": {"children": ["IPY_MODEL_ad437e73224e40188c7eaca32c50fc5b", "IPY_MODEL_56524ce24625410581bf62c9444a24e0"], "layout": "IPY_MODEL_46227c712b0c4564b747e1adab2ebd44"}}, "aa58f8a597614c0ebfdb4047c2632c7e": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"layout": "IPY_MODEL_2a02e1af9c354534bf078e237998dd67"}}, "ab7a1c217dda4035a6269a0211267ad7": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "ad437e73224e40188c7eaca32c50fc5b": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"layout": "IPY_MODEL_dfc224fd6b124100929aadc85c03156e"}}, "b52f615ae1b044cdb74ae241be1e7b7a": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "bca3cb026cc5418d9db54bcfcd195f22": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "IntSliderModel", "state": {"description": "Time", "layout": "IPY_MODEL_27bd10d2a1ef411daaed59928d614422", "max": 29, "style": "IPY_MODEL_c24dca0bf7c0451b84e227f8c5d54e88"}}, "c13c27155bc8478eb2d6054f50dddf74": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "c24dca0bf7c0451b84e227f8c5d54e88": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "SliderStyleModel", "state": {"description_width": ""}}, "c4104acd782a4e00bbd65a033d4d8978": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "IntSliderModel", "state": {"description": "Time", "layout": "IPY_MODEL_3811545201544140801261cec02b88da", "max": 29, "style": "IPY_MODEL_d92e2fccefd24ca29d8f0d10aefd159d"}}, "ce060d701ff44d1baf49353e061e92e9": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "d14c6c1a41144b9181f10cad159b4ea0": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"layout": "IPY_MODEL_0da0922bdc4b44daadb6096cc0cfc239"}}, "d1e4d3112a13436f8a09881dca029f02": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "d92e2fccefd24ca29d8f0d10aefd159d": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "SliderStyleModel", "state": {"description_width": ""}}, "dc1bb1f63bf8478cba4f3ae21dcd226b": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "VBoxModel", "state": {"children": ["IPY_MODEL_d14c6c1a41144b9181f10cad159b4ea0", "IPY_MODEL_1dfd2b5e85e5472d9a641d8d48203dfe"], "layout": "IPY_MODEL_ab7a1c217dda4035a6269a0211267ad7"}}, "dc5d1d099038446f8770be7d5867ff3c": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "dfc224fd6b124100929aadc85c03156e": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "efc52f16c5b14a6eab509b4dc233b7e6": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "VBoxModel", "state": {"children": ["IPY_MODEL_459fd2a99f4641069508691b8363b137", "IPY_MODEL_c4104acd782a4e00bbd65a033d4d8978"], "layout": "IPY_MODEL_dc5d1d099038446f8770be7d5867ff3c"}}, "f861af1731ba46fc85248c81a803ef51": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "SliderStyleModel", "state": {"description_width": ""}}, "fad94b4fe164449d81c65ff4ceb874b9": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "SliderStyleModel", "state": {"description_width": ""}}}, "version_major": 2, "version_minor": 0}
+</script>
+
 
     <script type="text/x-thebe-config">
     {
@@ -413,14 +423,18 @@
               </div>
               
         
-        <div class='prev-next-bottom'>
             
 
-        </div>
+
+
+<div class='prev-next-bottom'>
+    
+
+</div>
         
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
+    <footer class="footer">
     <div class="container">
       <p>
         

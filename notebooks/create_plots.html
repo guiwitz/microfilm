@@ -22,8 +22,8 @@
       
 
     
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -33,19 +33,19 @@
     
   <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
         const thebe_selector = ".thebe,.cell"
         const thebe_selector_input = "pre,.cell_input div.highlight"
         const thebe_selector_output = ".output,.cell_output"
@@ -73,6 +73,10 @@
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
       <img src="../_static/microanim_logo.png" class="logo" alt="logo">
       
       
@@ -82,7 +86,7 @@
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
@@ -265,7 +269,7 @@
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
             </div>
-            <nav id="bd-toc-nav">
+            <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#basic-plotting-with-microshow">
@@ -634,26 +638,44 @@ image type: uint16
 <p>Using the <code class="docutils literal notranslate"><span class="pre">colorify_by_name</span></code> function, you can turn a single 2D array into a RGB image with a certain colormap. You can use any colormap from Matplotlib. Additionally, since Matplotlib doesn’t offer plain colormaps from black to a given color (used very often in microcopy), you can also specify one of <code class="docutils literal notranslate"><span class="pre">pure_green</span></code>, <code class="docutils literal notranslate"><span class="pre">pure_red</span></code>, <code class="docutils literal notranslate"><span class="pre">pure_blue</span></code>, <code class="docutils literal notranslate"><span class="pre">pure_cyan</span></code>, <code class="docutils literal notranslate"><span class="pre">pure_magenta</span></code>, <code class="docutils literal notranslate"><span class="pre">pure_yellow</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">im_green</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">colorify_by_name</span><span class="p">(</span><span class="n">image2</span><span class="p">,</span> <span class="n">cmap_name</span><span class="o">=</span><span class="s1">&#39;pure_green&#39;</span><span class="p">,</span> <span class="n">flip_map</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">rescale_type</span><span class="o">=</span><span class="s1">&#39;min_max&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 98,  99, 100, ..., 100, 100, 100],
+       [ 99,  99,  99, ..., 100,  99,  99],
+       [ 99,  98,  99, ...,  99,  99,  99],
+       ...,
+       [100, 100, 100, ...,  99,  99,  99],
+       [100,  99,  99, ...,  99,  99,  99],
+       [ 99,  99,  99, ...,  99, 100, 100]], dtype=uint16)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">im_green</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">colorify_by_name</span><span class="p">(</span><span class="n">image2</span><span class="p">,</span> <span class="n">cmap_name</span><span class="o">=</span><span class="s1">&#39;pure_green&#39;</span><span class="p">,</span> <span class="n">flip_map</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">rescale_type</span><span class="o">=</span><span class="s1">&#39;min_max&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im_green</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_38_0.png" src="../_images/create_plots_38_0.png" />
+<img alt="../_images/create_plots_39_0.png" src="../_images/create_plots_39_0.png" />
 </div>
 </div>
 <p>By default the image intensity is rescaled using the min-max values. This is often sub-optimal (e.g. if single pixels are way out of the distribution) and you can specify another rescaling. For example you can explicitly provide lower and upper limits:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">im_green</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">colorify_by_name</span><span class="p">(</span><span class="n">image2</span><span class="p">,</span> <span class="n">cmap_name</span><span class="o">=</span><span class="s1">&#39;pure_green&#39;</span><span class="p">,</span> <span class="n">flip_map</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">rescale_type</span><span class="o">=</span><span class="s1">&#39;limits&#39;</span><span class="p">,</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">im_green</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">colorify_by_name</span><span class="p">(</span><span class="n">image2</span><span class="p">,</span> <span class="n">cmap_name</span><span class="o">=</span><span class="s1">&#39;pure_green&#39;</span><span class="p">,</span> <span class="n">flip_map</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">rescale_type</span><span class="o">=</span><span class="s1">&#39;limits&#39;</span><span class="p">,</span>
                                        <span class="n">limits</span><span class="o">=</span><span class="p">[</span><span class="mi">100</span><span class="p">,</span><span class="mi">105</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im_green</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_40_0.png" src="../_images/create_plots_40_0.png" />
+<img alt="../_images/create_plots_41_0.png" src="../_images/create_plots_41_0.png" />
 </div>
 </div>
 </div>
@@ -662,13 +684,13 @@ image type: uint16
 <p>Alternatively to the keyword based map, you can also use a hexadecimal encoding of a color to create an colormap ranging from black to that color. This gives more flexibility:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">heximage</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">colorify_by_hex</span><span class="p">(</span><span class="n">image1</span><span class="p">,</span> <span class="n">cmap_hex</span><span class="o">=</span><span class="s1">&#39;#00ffff&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">heximage</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">colorify_by_hex</span><span class="p">(</span><span class="n">image1</span><span class="p">,</span> <span class="n">cmap_hex</span><span class="o">=</span><span class="s1">&#39;#00ffff&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">heximage</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_42_0.png" src="../_images/create_plots_42_0.png" />
+<img alt="../_images/create_plots_43_0.png" src="../_images/create_plots_43_0.png" />
 </div>
 </div>
 </div>
@@ -677,12 +699,12 @@ image type: uint16
 <p>After having converted images to a given colormap, you can combine them into a single image with overlayed colors. Currently you can use a maximum projection (default) or a sum to replicate the Fiji behavior. You can simply use the <code class="docutils literal notranslate"><span class="pre">combine_image</span></code> function for that:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">im1_mapped</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">colorify_by_name</span><span class="p">(</span><span class="n">image1</span><span class="p">,</span> <span class="n">cmap_name</span><span class="o">=</span><span class="s1">&#39;pure_red&#39;</span><span class="p">)</span>
-<span class="n">im2_mapped</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">colorify_by_hex</span><span class="p">(</span><span class="n">image2</span><span class="p">,</span> <span class="n">cmap_hex</span><span class="o">=</span><span class="s1">&#39;#00ffff&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">im1_mapped</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">colorify_by_name</span><span class="p">(</span><span class="n">image1</span><span class="p">,</span> <span class="n">cmap_name</span><span class="o">=</span><span class="s1">&#39;pure_red&#39;</span><span class="p">)</span>
+<span class="n">im2_mapped</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">colorify_by_hex</span><span class="p">(</span><span class="n">image2</span><span class="p">,</span> <span class="n">cmap_hex</span><span class="o">=</span><span class="s1">&#39;#00ffff&#39;</span><span class="p">)</span>
 
 
-<span class="n">im1_mapped_b</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">colorify_by_name</span><span class="p">(</span><span class="n">image1</span><span class="p">,</span> <span class="n">cmap_name</span><span class="o">=</span><span class="s1">&#39;pure_red&#39;</span><span class="p">)</span>
-<span class="n">im2_mapped_b</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">colorify_by_name</span><span class="p">(</span><span class="n">image2</span><span class="p">,</span> <span class="n">cmap_name</span><span class="o">=</span><span class="s1">&#39;pure_green&#39;</span><span class="p">)</span>
+<span class="n">im1_mapped_b</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">colorify_by_name</span><span class="p">(</span><span class="n">image1</span><span class="p">,</span> <span class="n">cmap_name</span><span class="o">=</span><span class="s1">&#39;pure_red&#39;</span><span class="p">)</span>
+<span class="n">im2_mapped_b</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">colorify_by_name</span><span class="p">(</span><span class="n">image2</span><span class="p">,</span> <span class="n">cmap_name</span><span class="o">=</span><span class="s1">&#39;pure_green&#39;</span><span class="p">)</span>
 
 <span class="n">combined</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">combine_image</span><span class="p">([</span><span class="n">im1_mapped</span><span class="p">,</span> <span class="n">im2_mapped</span><span class="p">])</span>
 <span class="n">combined_b</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">combine_image</span><span class="p">([</span><span class="n">im1_mapped_b</span><span class="p">,</span> <span class="n">im2_mapped_b</span><span class="p">])</span>
@@ -694,14 +716,14 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_44_0.png" src="../_images/create_plots_44_0.png" />
+<img alt="../_images/create_plots_45_0.png" src="../_images/create_plots_45_0.png" />
 </div>
 </div>
 <p>In the plots below, we compare the two available projections, maximum and sum. The difference is mostly visible when using colormaps that have large overlap, e.g. here with <code class="docutils literal notranslate"><span class="pre">summer</span></code> and <code class="docutils literal notranslate"><span class="pre">cool</span></code>. With <code class="docutils literal notranslate"><span class="pre">pure_green</span></code> and <code class="docutils literal notranslate"><span class="pre">pure_red</span></code> there would for example be no visual difference.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">im1_mapped_b</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">colorify_by_name</span><span class="p">(</span><span class="n">image1</span><span class="p">,</span> <span class="n">cmap_name</span><span class="o">=</span><span class="s1">&#39;cool&#39;</span><span class="p">)</span>
-<span class="n">im2_mapped_b</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">colorify_by_name</span><span class="p">(</span><span class="n">image2</span><span class="p">,</span> <span class="n">cmap_name</span><span class="o">=</span><span class="s1">&#39;summer&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">im1_mapped_b</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">colorify_by_name</span><span class="p">(</span><span class="n">image1</span><span class="p">,</span> <span class="n">cmap_name</span><span class="o">=</span><span class="s1">&#39;cool&#39;</span><span class="p">)</span>
+<span class="n">im2_mapped_b</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">colorify_by_name</span><span class="p">(</span><span class="n">image2</span><span class="p">,</span> <span class="n">cmap_name</span><span class="o">=</span><span class="s1">&#39;summer&#39;</span><span class="p">)</span>
 
 <span class="n">combined</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">combine_image</span><span class="p">([</span><span class="n">im1_mapped_b</span><span class="p">,</span> <span class="n">im2_mapped_b</span><span class="p">],</span> <span class="n">proj_type</span><span class="o">=</span><span class="s1">&#39;max&#39;</span><span class="p">)</span>
 <span class="n">combined_b</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">combine_image</span><span class="p">([</span><span class="n">im1_mapped_b</span><span class="p">,</span> <span class="n">im2_mapped_b</span><span class="p">],</span> <span class="n">proj_type</span><span class="o">=</span><span class="s1">&#39;sum&#39;</span><span class="p">)</span>
@@ -713,7 +735,7 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_46_0.png" src="../_images/create_plots_46_0.png" />
+<img alt="../_images/create_plots_47_0.png" src="../_images/create_plots_47_0.png" />
 </div>
 </div>
 </div>
@@ -722,25 +744,25 @@ image type: uint16
 <p>To save some steps you can also directly use a list of images and of colormaps to create a combined image:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">converted</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">multichannel_to_rgb</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_red&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_green&#39;</span><span class="p">],</span> <span class="n">flip_map</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">converted</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">multichannel_to_rgb</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_red&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_green&#39;</span><span class="p">],</span> <span class="n">flip_map</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">converted</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_48_0.png" src="../_images/create_plots_48_0.png" />
+<img alt="../_images/create_plots_49_0.png" src="../_images/create_plots_49_0.png" />
 </div>
 </div>
 <p>Most of these functions also work directly with Numpy arrays:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">converted</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">multichannel_to_rgb</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;magma&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_green&#39;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">converted</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">multichannel_to_rgb</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;magma&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_green&#39;</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">converted</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_50_0.png" src="../_images/create_plots_50_0.png" />
+<img alt="../_images/create_plots_51_0.png" src="../_images/create_plots_51_0.png" />
 </div>
 </div>
 </div>
@@ -757,7 +779,7 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_52_0.png" src="../_images/create_plots_52_0.png" />
+<img alt="../_images/create_plots_53_0.png" src="../_images/create_plots_53_0.png" />
 </div>
 </div>
 </div>
@@ -774,7 +796,7 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_54_0.png" src="../_images/create_plots_54_0.png" />
+<img alt="../_images/create_plots_55_0.png" src="../_images/create_plots_55_0.png" />
 </div>
 </div>
 <p>And for more complex plots, you can just use the regular figure creation:</p>
@@ -794,7 +816,7 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_56_0.png" src="../_images/create_plots_56_0.png" />
+<img alt="../_images/create_plots_57_0.png" src="../_images/create_plots_57_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -837,16 +859,36 @@ image type: uint16
               </div>
               
         
-        <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="../docs/first_plot.html" title="previous page">Create your first plots</a>
-    <a class='right-next' id="next-link" href="create_animations.html" title="next page">Creating animations</a>
 
-        </div>
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="../docs/first_plot.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Create your first plots</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="create_animations.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Creating animations</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
         
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
+    <footer class="footer">
     <div class="container">
       <p>
         

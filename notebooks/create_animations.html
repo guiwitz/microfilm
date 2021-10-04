@@ -22,8 +22,8 @@
       
 
     
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -33,19 +33,19 @@
     
   <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
         const thebe_selector = ".thebe,.cell"
         const thebe_selector_input = "pre,.cell_input div.highlight"
         const thebe_selector_output = ".output,.cell_output"
@@ -73,6 +73,10 @@
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
       <img src="../_static/microanim_logo.png" class="logo" alt="logo">
       
       
@@ -82,7 +86,7 @@
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
@@ -265,7 +269,7 @@
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
             </div>
-            <nav id="bd-toc-nav">
+            <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#dataset">
@@ -401,7 +405,7 @@
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "d81a1f61882f42598eeff38119e8e02a", "version_major": 2, "version_minor": 0}
+{"model_id": "0f05da003b61479fbb7d7144250e390b", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
 <div class="cell tag_hide_input tag_hide-input docutils container">
@@ -431,7 +435,7 @@
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "4654a2088c4d4c5582469344930a704e", "version_major": 2, "version_minor": 0}
+{"model_id": "60648225dc0b4a40b3345fed2b497830", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
 <div class="cell tag_hide_input docutils container">
@@ -455,7 +459,7 @@
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "4654a2088c4d4c5582469344930a704e", "version_major": 2, "version_minor": 0}
+{"model_id": "60648225dc0b4a40b3345fed2b497830", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
 <div class="cell tag_hide_input docutils container">
@@ -477,7 +481,7 @@
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "4654a2088c4d4c5582469344930a704e", "version_major": 2, "version_minor": 0}
+{"model_id": "60648225dc0b4a40b3345fed2b497830", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
 <div class="cell tag_hide_input docutils container">
@@ -493,19 +497,19 @@
 </div>
 <div class="section" id="adding-a-time-stamp">
 <h2>Adding a time-stamp<a class="headerlink" href="#adding-a-time-stamp" title="Permalink to this headline">¶</a></h2>
-<p>As a specific feature for animations, you can add a specific label which is a time stamp. At the moment you are limited to use a <code class="docutils literal notranslate"><span class="pre">HH:MM:SS</span></code> format. To add it to your plot, you just specify the unit (e.g. <code class="docutils literal notranslate"><span class="pre">T</span></code> for minutes, abbreviations are from Pandas), and the number of units per time frame e.g. here 5min:</p>
+<p>As a specific feature for animations, you can add a specific label which is a time stamp. At the moment it can contain hours <code class="docutils literal notranslate"><span class="pre">HH</span></code>, minutes <code class="docutils literal notranslate"><span class="pre">MM</span></code>, seconds <code class="docutils literal notranslate"><span class="pre">SS</span></code> and milliseconds <code class="docutils literal notranslate"><span class="pre">mmm</span></code>. To add it to your plot, you just specify the unit (e.g. <code class="docutils literal notranslate"><span class="pre">MM</span></code> for minutes), and the number of units per time frame e.g. here 10 min. You can also specify the exact format of your time-stamp with the <code class="docutils literal notranslate"><span class="pre">time_format</span></code> option which should be a string containing the abbreviations mentioned above e.g. <code class="docutils literal notranslate"><span class="pre">HH,</span> <span class="pre">MM</span></code></p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anim</span> <span class="o">=</span> <span class="n">Microanim</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">image</span><span class="p">,</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_blue&#39;</span><span class="p">,</span><span class="s1">&#39;pure_red&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_green&#39;</span><span class="p">],</span>
                 <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">fig_scaling</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">anim</span><span class="o">.</span><span class="n">add_time_stamp</span><span class="p">(</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s1">&#39;lower left&#39;</span><span class="p">)</span>
+<span class="n">anim</span><span class="o">.</span><span class="n">add_time_stamp</span><span class="p">(</span><span class="s1">&#39;MM&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s1">&#39;lower left&#39;</span><span class="p">)</span>
 <span class="n">anim</span><span class="o">.</span><span class="n">ui</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "8d00286ef31b4dd7b17f5fc485c635c7", "version_major": 2, "version_minor": 0}
+{"model_id": "b6cf3baca35a4015b3d27e9ebcae7fd5", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
 <div class="cell tag_hide-input docutils container">
@@ -529,7 +533,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[WARNING: _io: 411 2021-06-29 22:05:53,462] IMAGEIO FFMPEG_WRITER WARNING: input image is not divisible by macro_block_size=16, resizing from (230, 300) to (240, 304) to ensure video compatibility with most codecs and players. To prevent resizing, make your input image divisible by the macro_block_size or set the macro_block_size to 1 (risking incompatibility).
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[WARNING: _io: 411 2021-07-09 01:12:44,106] IMAGEIO FFMPEG_WRITER WARNING: input image is not divisible by macro_block_size=16, resizing from (165, 216) to (176, 224) to ensure video compatibility with most codecs and players. To prevent resizing, make your input image divisible by the macro_block_size or set the macro_block_size to 1 (risking incompatibility).
 </pre></div>
 </div>
 </div>
@@ -555,13 +559,13 @@
 </div>
 </div>
 </div>
-<p>Now we can explicitly specify which channels to plot. For example if you just want a single channel:</p>
+<p>Now we can explicitly specify which channels to plot. For example if you just want a two channels:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anim</span> <span class="o">=</span> <span class="n">Microanim</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nucleoid&#39;</span><span class="p">,</span><span class="s1">&#39;ori&#39;</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_red&#39;</span><span class="p">,</span><span class="s1">&#39;pure_green&#39;</span><span class="p">],</span>
                 <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">fig_scaling</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">anim</span><span class="o">.</span><span class="n">add_label</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">)</span>
-<span class="n">anim</span><span class="o">.</span><span class="n">add_time_stamp</span><span class="p">(</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s1">&#39;lower left&#39;</span><span class="p">)</span>
+<span class="n">anim</span><span class="o">.</span><span class="n">add_time_stamp</span><span class="p">(</span><span class="s1">&#39;MM&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s1">&#39;lower left&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -574,7 +578,7 @@
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "e1626757eeec47e586e2a38475969956", "version_major": 2, "version_minor": 0}
+{"model_id": "34a99dfebaf14d9d909532f8057ce28e", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
 <div class="cell tag_hide_input docutils container">
@@ -591,7 +595,7 @@
 
 
 <script type="application/vnd.jupyter.widget-state+json">
-{"state": {"14adb47e96c144f6a2c15aceeab28ddf": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "IntSliderModel", "state": {"description": "Time", "layout": "IPY_MODEL_497fdc8bae074c178cd227308f357561", "max": 29, "style": "IPY_MODEL_3b29620ac2b14a6784a6b0106fc736b9"}}, "1c84da464c2e48758a37b7b21d14e01c": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "MPLCanvasModel", "state": {"_cursor": "default", "_figure_label": "Figure 1", "_height": 300, "_message": "x=53.8 y=190.1\n[0.098, 0.0784, 0.0235, 1]", "_width": 230, "layout": "IPY_MODEL_464429cdadc247779227d99ee1e1b292", "toolbar": "IPY_MODEL_9eed8172fd4d46ab8fc99281b94a8742", "toolbar_position": "left"}}, "1cc6a71b29b9412f884a0673bf9cab96": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "34959289bdd14094810d6ed67f762313": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "3b29620ac2b14a6784a6b0106fc736b9": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "SliderStyleModel", "state": {"description_width": ""}}, "464429cdadc247779227d99ee1e1b292": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "497fdc8bae074c178cd227308f357561": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "654aa6c835c848bbb97dcb43e08026f0": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"layout": "IPY_MODEL_34959289bdd14094810d6ed67f762313", "outputs": [{"data": {"application/vnd.jupyter.widget-view+json": {"model_id": "1c84da464c2e48758a37b7b21d14e01c", "version_major": 2, "version_minor": 0}, "text/plain": "Canvas(toolbar=Toolbar(toolitems=[('Home', 'Reset original view', 'home', 'home'), ('Back', 'Back to previous \u2026"}, "metadata": {}, "output_type": "display_data"}]}}, "925e4b514a7146d7a3b09790dc10305d": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "9eed8172fd4d46ab8fc99281b94a8742": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "ToolbarModel", "state": {"layout": "IPY_MODEL_1cc6a71b29b9412f884a0673bf9cab96", "toolitems": [["Home", "Reset original view", "home", "home"], ["Back", "Back to previous view", "arrow-left", "back"], ["Forward", "Forward to next view", "arrow-right", "forward"], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "arrows", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis, CTRL fixes aspect", "square-o", "zoom"], ["Download", "Download plot", "floppy-o", "save_figure"]]}}, "c6927d364d714cbd82c5731db5592ad5": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "VBoxModel", "state": {"children": ["IPY_MODEL_654aa6c835c848bbb97dcb43e08026f0", "IPY_MODEL_14adb47e96c144f6a2c15aceeab28ddf"], "layout": "IPY_MODEL_925e4b514a7146d7a3b09790dc10305d"}}}, "version_major": 2, "version_minor": 0}
+{"state": {"00508c3fc6c14266bfee54ba5ba742f9": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "IntSliderModel", "state": {"description": "Time", "layout": "IPY_MODEL_51af6274cb00456495719c538f95c72a", "max": 29, "style": "IPY_MODEL_f0e1fb4099c64378a7f77ea02119b299"}}, "00ad5d90575b4acba0734b5c29e8f61a": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "SliderStyleModel", "state": {"description_width": ""}}, "0f05da003b61479fbb7d7144250e390b": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "VBoxModel", "state": {"children": ["IPY_MODEL_9a1a38deef8146d685b6de9cad583f95", "IPY_MODEL_ce64b429c1624ce2ba6a62e5a73c4765"], "layout": "IPY_MODEL_f33a1028262b4c5a88de203831030e39"}}, "12d8eabd4a174ccf9da0db27142d6003": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"layout": "IPY_MODEL_2b0a6b88363d41cd83a0d7f694fa31c3", "outputs": [{"data": {"application/vnd.jupyter.widget-view+json": {"model_id": "", "version_major": 2, "version_minor": 0}, "text/plain": "Canvas(toolbar=Toolbar(toolitems=[('Home', 'Reset original view', 'home', 'home'), ('Back', 'Back to previous \u2026"}, "metadata": {}, "output_type": "display_data"}]}}, "1afc92b97b964f0cb2f27ebcc3a5a9cd": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "1fb4d8660fd44742bbdc31e3fef14b80": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "26b34a756c004bbc8194d7dc7c99188a": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "2b0a6b88363d41cd83a0d7f694fa31c3": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "33f99940e1fa42c6b8a53452d12248ab": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "34a99dfebaf14d9d909532f8057ce28e": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "VBoxModel", "state": {"children": ["IPY_MODEL_5f25aafa6a294ef2ad93cfc3a2d836ab", "IPY_MODEL_d21aa2e510174e9d9b4c78963cde750c"], "layout": "IPY_MODEL_26b34a756c004bbc8194d7dc7c99188a"}}, "35aa24f1868c4ee7aceb3e0d5c915638": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "MPLCanvasModel", "state": {"_cursor": "default", "_figure_label": "Figure 3", "_height": 216, "_image_mode": "diff", "_width": 165, "layout": "IPY_MODEL_8836d28efeb1437e8059cc90e01f00b8", "toolbar": "IPY_MODEL_a5b6ad93569b4c9991c6508235b1df67", "toolbar_position": "left"}}, "42daedeb07dd415096cdfbc9b183c69f": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "51af6274cb00456495719c538f95c72a": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "52b767840b924aeb856dbcf03fb38150": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "5764ec5616c543ef9543a973bedb452a": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "SliderStyleModel", "state": {"description_width": ""}}, "57dc8b4a04bd4b2faafd0fb87d9ab03e": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "58bb15a7c40d4e59b9cf3cd3f35050da": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "599b74a2958d49d3a63423d3c6edfc0b": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "SliderStyleModel", "state": {"description_width": ""}}, "5e35a3428ac04768b881bda845cd5e4a": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "ToolbarModel", "state": {"layout": "IPY_MODEL_1afc92b97b964f0cb2f27ebcc3a5a9cd", "toolitems": [["Home", "Reset original view", "home", "home"], ["Back", "Back to previous view", "arrow-left", "back"], ["Forward", "Forward to next view", "arrow-right", "forward"], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "arrows", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis, CTRL fixes aspect", "square-o", "zoom"], ["Download", "Download plot", "floppy-o", "save_figure"]]}}, "5f25aafa6a294ef2ad93cfc3a2d836ab": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"layout": "IPY_MODEL_c6474243b12a4e59958bf5c40173e45e", "outputs": [{"data": {"application/vnd.jupyter.widget-view+json": {"model_id": "ef3865754b2945a8b8e94646bd08476d", "version_major": 2, "version_minor": 0}, "text/plain": "Canvas(toolbar=Toolbar(toolitems=[('Home', 'Reset original view', 'home', 'home'), ('Back', 'Back to previous \u2026"}, "metadata": {}, "output_type": "display_data"}]}}, "60648225dc0b4a40b3345fed2b497830": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "VBoxModel", "state": {"children": ["IPY_MODEL_e302f6e386ac4a44aad192b330c1a33d", "IPY_MODEL_00508c3fc6c14266bfee54ba5ba742f9"], "layout": "IPY_MODEL_52b767840b924aeb856dbcf03fb38150"}}, "65aba4aef7234550968f36d91f4d0be7": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "IntSliderModel", "state": {"description": "Time", "layout": "IPY_MODEL_763ad595915f43e9a7b9703db7da2c09", "max": 29, "style": "IPY_MODEL_6a1e854325d044fda664b2379d449f5e"}}, "66f257a90ea24c4685bbdef06eadfdcd": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "6a1e854325d044fda664b2379d449f5e": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "SliderStyleModel", "state": {"description_width": ""}}, "7013ccf1fcda4a2183648ee56bff5d84": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "MPLCanvasModel", "state": {"_cursor": "default", "_figure_label": "Figure 2", "_height": 72, "_width": 55, "layout": "IPY_MODEL_edf22eef1c304f0994d1ca3ded472952", "toolbar": "IPY_MODEL_e434ba9c1eb14d62a094e27dac86ac42", "toolbar_position": "left"}}, "763ad595915f43e9a7b9703db7da2c09": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "819ab1c08a51434b99fcf7893f355d4e": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "MPLCanvasModel", "state": {"_cursor": "default", "_figure_label": "Figure 1", "_height": 216, "_width": 165, "layout": "IPY_MODEL_c8a303e96e6944608b041e39d7bb9887", "toolbar": "IPY_MODEL_d74c76ef36014ea387d7a1b35bc7c21f", "toolbar_position": "left"}}, "81d9c5a12c864e409c3decd4b29eb4b1": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "VBoxModel", "state": {"children": ["IPY_MODEL_12d8eabd4a174ccf9da0db27142d6003", "IPY_MODEL_65aba4aef7234550968f36d91f4d0be7"], "layout": "IPY_MODEL_66f257a90ea24c4685bbdef06eadfdcd"}}, "87295088f6e04c588bf8fa82d2d6a6b5": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "8836d28efeb1437e8059cc90e01f00b8": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "8e0947c2ccfc471aabc73936a2d74a06": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "9a1a38deef8146d685b6de9cad583f95": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"layout": "IPY_MODEL_e4f76eaa8937426182c8a1a02a561059", "outputs": [{"data": {"application/vnd.jupyter.widget-view+json": {"model_id": "819ab1c08a51434b99fcf7893f355d4e", "version_major": 2, "version_minor": 0}, "text/plain": "Canvas(toolbar=Toolbar(toolitems=[('Home', 'Reset original view', 'home', 'home'), ('Back', 'Back to previous \u2026"}, "metadata": {}, "output_type": "display_data"}]}}, "a335f32478904199891e2bd809baf771": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "IntSliderModel", "state": {"description": "Time", "layout": "IPY_MODEL_a78442409b68476cbd907344de86958a", "max": 29, "style": "IPY_MODEL_5764ec5616c543ef9543a973bedb452a"}}, "a5731a05281543fbad8ba43dc6cd4e28": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"layout": "IPY_MODEL_e597bc0b4fe24eef82c8a9be850e59d7", "outputs": [{"data": {"application/vnd.jupyter.widget-view+json": {"model_id": "35aa24f1868c4ee7aceb3e0d5c915638", "version_major": 2, "version_minor": 0}, "text/plain": "Canvas(toolbar=Toolbar(toolitems=[('Home', 'Reset original view', 'home', 'home'), ('Back', 'Back to previous \u2026"}, "metadata": {}, "output_type": "display_data"}]}}, "a5b6ad93569b4c9991c6508235b1df67": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "ToolbarModel", "state": {"layout": "IPY_MODEL_58bb15a7c40d4e59b9cf3cd3f35050da", "toolitems": [["Home", "Reset original view", "home", "home"], ["Back", "Back to previous view", "arrow-left", "back"], ["Forward", "Forward to next view", "arrow-right", "forward"], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "arrows", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis, CTRL fixes aspect", "square-o", "zoom"], ["Download", "Download plot", "floppy-o", "save_figure"]]}}, "a78442409b68476cbd907344de86958a": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "b6cf3baca35a4015b3d27e9ebcae7fd5": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "VBoxModel", "state": {"children": ["IPY_MODEL_a5731a05281543fbad8ba43dc6cd4e28", "IPY_MODEL_a335f32478904199891e2bd809baf771"], "layout": "IPY_MODEL_1fb4d8660fd44742bbdc31e3fef14b80"}}, "ba2aedb34a7343caad8165dcc770354d": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "bb98a6e2de6c4f2a99899076cbe7b084": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "MPLCanvasModel", "state": {"_cursor": "default", "_figure_label": "Figure 4", "_height": 360, "_image_mode": "diff", "_width": 276, "layout": "IPY_MODEL_57dc8b4a04bd4b2faafd0fb87d9ab03e", "toolbar": "IPY_MODEL_fc1d955d867243e687638cccc093a0b7", "toolbar_position": "left"}}, "c6474243b12a4e59958bf5c40173e45e": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "c8a303e96e6944608b041e39d7bb9887": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "ce64b429c1624ce2ba6a62e5a73c4765": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "IntSliderModel", "state": {"description": "Time", "layout": "IPY_MODEL_8e0947c2ccfc471aabc73936a2d74a06", "max": 29, "style": "IPY_MODEL_599b74a2958d49d3a63423d3c6edfc0b"}}, "d21aa2e510174e9d9b4c78963cde750c": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "IntSliderModel", "state": {"description": "Time", "layout": "IPY_MODEL_ba2aedb34a7343caad8165dcc770354d", "max": 29, "style": "IPY_MODEL_00ad5d90575b4acba0734b5c29e8f61a"}}, "d74c76ef36014ea387d7a1b35bc7c21f": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "ToolbarModel", "state": {"layout": "IPY_MODEL_d8a6279d452e4b7a93f31197af0c1537", "toolitems": [["Home", "Reset original view", "home", "home"], ["Back", "Back to previous view", "arrow-left", "back"], ["Forward", "Forward to next view", "arrow-right", "forward"], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "arrows", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis, CTRL fixes aspect", "square-o", "zoom"], ["Download", "Download plot", "floppy-o", "save_figure"]]}}, "d8a6279d452e4b7a93f31197af0c1537": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "e302f6e386ac4a44aad192b330c1a33d": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"layout": "IPY_MODEL_e3f8749da566418dacad33cc6098af1f", "outputs": [{"data": {"application/vnd.jupyter.widget-view+json": {"model_id": "7013ccf1fcda4a2183648ee56bff5d84", "version_major": 2, "version_minor": 0}, "text/plain": "Canvas(toolbar=Toolbar(toolitems=[('Home', 'Reset original view', 'home', 'home'), ('Back', 'Back to previous \u2026"}, "metadata": {}, "output_type": "display_data"}]}}, "e3f8749da566418dacad33cc6098af1f": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "e434ba9c1eb14d62a094e27dac86ac42": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "ToolbarModel", "state": {"layout": "IPY_MODEL_33f99940e1fa42c6b8a53452d12248ab", "toolitems": [["Home", "Reset original view", "home", "home"], ["Back", "Back to previous view", "arrow-left", "back"], ["Forward", "Forward to next view", "arrow-right", "forward"], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "arrows", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis, CTRL fixes aspect", "square-o", "zoom"], ["Download", "Download plot", "floppy-o", "save_figure"]]}}, "e4f76eaa8937426182c8a1a02a561059": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "e597bc0b4fe24eef82c8a9be850e59d7": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "edf22eef1c304f0994d1ca3ded472952": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "ef3865754b2945a8b8e94646bd08476d": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "MPLCanvasModel", "state": {"_cursor": "default", "_figure_label": "Figure 5", "_height": 360, "_image_mode": "diff", "_message": "x=14.8 y=20.1\n[0.0235, 0.0667, 0, 1]", "_width": 276, "layout": "IPY_MODEL_87295088f6e04c588bf8fa82d2d6a6b5", "toolbar": "IPY_MODEL_5e35a3428ac04768b881bda845cd5e4a", "toolbar_position": "left"}}, "f0e1fb4099c64378a7f77ea02119b299": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "SliderStyleModel", "state": {"description_width": ""}}, "f33a1028262b4c5a88de203831030e39": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "fc1d955d867243e687638cccc093a0b7": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "ToolbarModel", "state": {"layout": "IPY_MODEL_42daedeb07dd415096cdfbc9b183c69f", "toolitems": [["Home", "Reset original view", "home", "home"], ["Back", "Back to previous view", "arrow-left", "back"], ["Forward", "Forward to next view", "arrow-right", "forward"], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "arrows", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis, CTRL fixes aspect", "square-o", "zoom"], ["Download", "Download plot", "floppy-o", "save_figure"]]}}}, "version_major": 2, "version_minor": 0}
 </script>
 
 
@@ -618,16 +622,36 @@
               </div>
               
         
-        <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="create_plots.html" title="previous page">Producing figures with multi-channel images</a>
-    <a class='right-next' id="next-link" href="create_panels.html" title="next page">Creating multi-panel figures</a>
 
-        </div>
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="create_plots.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Producing figures with multi-channel images</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="create_panels.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Creating multi-panel figures</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
         
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
+    <footer class="footer">
     <div class="container">
       <p>
         

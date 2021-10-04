@@ -22,8 +22,8 @@
       
 
     
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
@@ -33,19 +33,19 @@
     
   <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/togglebutton.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
         const thebe_selector = ".thebe,.cell"
         const thebe_selector_input = "pre,.cell_input div.highlight"
         const thebe_selector_output = ".output,.cell_output"
@@ -72,6 +72,10 @@
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
       <img src="../../_static/microanim_logo.png" class="logo" alt="logo">
       
       
@@ -81,7 +85,7 @@
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
@@ -239,7 +243,7 @@
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
             </div>
-            <nav id="bd-toc-nav">
+            <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#submodules">
@@ -275,8 +279,8 @@
 <div class="section" id="module-microfilm.dataset.dataset">
 <span id="microfilm-dataset-dataset-module"></span><h2>microfilm.dataset.dataset module<a class="headerlink" href="#module-microfilm.dataset.dataset" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt class="sig sig-object py" id="microfilm.dataset.dataset.Data">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">microfilm.dataset.dataset.</span></span><span class="sig-name descname"><span class="pre">Data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expdir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bad_frames</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.Data" title="Permalink to this definition">¶</a></dt>
+<dt id="microfilm.dataset.dataset.Data">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">microfilm.dataset.dataset.</span></code><code class="sig-name descname"><span class="pre">Data</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expdir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bad_frames</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.Data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Class defining and handling datasets of 2D multi-channel time-lapse images.
 Given an experiment directory (tiff files or stacks) or a a file (ND2, H5)
@@ -295,8 +299,8 @@ run such as bad frame indices or the time steps are also stored in the Data obje
 </dd>
 </dl>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="microfilm.dataset.dataset.Data.K">
-<span class="sig-name descname"><span class="pre">K</span></span><a class="headerlink" href="#microfilm.dataset.dataset.Data.K" title="Permalink to this definition">¶</a></dt>
+<dt id="microfilm.dataset.dataset.Data.K">
+<code class="sig-name descname"><span class="pre">K</span></code><a class="headerlink" href="#microfilm.dataset.dataset.Data.K" title="Permalink to this definition">¶</a></dt>
 <dd><p>Number of frames considered (including steps, bad frames)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -306,8 +310,8 @@ run such as bad frame indices or the time steps are also stored in the Data obje
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="microfilm.dataset.dataset.Data.dims">
-<span class="sig-name descname"><span class="pre">dims</span></span><a class="headerlink" href="#microfilm.dataset.dataset.Data.dims" title="Permalink to this definition">¶</a></dt>
+<dt id="microfilm.dataset.dataset.Data.dims">
+<code class="sig-name descname"><span class="pre">dims</span></code><a class="headerlink" href="#microfilm.dataset.dataset.Data.dims" title="Permalink to this definition">¶</a></dt>
 <dd><p>XY image dimensions</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -317,8 +321,8 @@ run such as bad frame indices or the time steps are also stored in the Data obje
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="microfilm.dataset.dataset.Data.valid_frames">
-<span class="sig-name descname"><span class="pre">valid_frames</span></span><a class="headerlink" href="#microfilm.dataset.dataset.Data.valid_frames" title="Permalink to this definition">¶</a></dt>
+<dt id="microfilm.dataset.dataset.Data.valid_frames">
+<code class="sig-name descname"><span class="pre">valid_frames</span></code><a class="headerlink" href="#microfilm.dataset.dataset.Data.valid_frames" title="Permalink to this definition">¶</a></dt>
 <dd><p>indices of considered frames</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -328,8 +332,8 @@ run such as bad frame indices or the time steps are also stored in the Data obje
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="microfilm.dataset.dataset.Data.channelfile">
-<span class="sig-name descname"><span class="pre">channelfile</span></span><a class="headerlink" href="#microfilm.dataset.dataset.Data.channelfile" title="Permalink to this definition">¶</a></dt>
+<dt id="microfilm.dataset.dataset.Data.channelfile">
+<code class="sig-name descname"><span class="pre">channelfile</span></code><a class="headerlink" href="#microfilm.dataset.dataset.Data.channelfile" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="simple">
 <dt>‘series’:</dt><dd><p>list of list of str, each element is a filename,
 files are grouped in a list for each channel, and
@@ -350,149 +354,149 @@ metadata information</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="microfilm.dataset.dataset.Data.check_channel_time_available">
-<span class="sig-name descname"><span class="pre">check_channel_time_available</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.Data.check_channel_time_available" title="Permalink to this definition">¶</a></dt>
+<dt id="microfilm.dataset.dataset.Data.check_channel_time_available">
+<code class="sig-name descname"><span class="pre">check_channel_time_available</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.Data.check_channel_time_available" title="Permalink to this definition">¶</a></dt>
 <dd><p>Given a channel and frame index, check that they exist</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="microfilm.dataset.dataset.Data.find_files">
-<span class="sig-name descname"><span class="pre">find_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folderpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.Data.find_files" title="Permalink to this definition">¶</a></dt>
+<dt id="microfilm.dataset.dataset.Data.find_files">
+<code class="sig-name descname"><span class="pre">find_files</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folderpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.Data.find_files" title="Permalink to this definition">¶</a></dt>
 <dd><p>Given a folder, find all tif files contained in it and try to sort as time-lapse</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="microfilm.dataset.dataset.Data.frame_generator">
-<span class="sig-name descname"><span class="pre">frame_generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.Data.frame_generator" title="Permalink to this definition">¶</a></dt>
+<dt id="microfilm.dataset.dataset.Data.frame_generator">
+<code class="sig-name descname"><span class="pre">frame_generator</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.Data.frame_generator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a generator returning successive frames of a given channel.
 The channel parameter can be either a channel name or a list of those.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="microfilm.dataset.dataset.Data.get_channel_name">
-<span class="sig-name descname"><span class="pre">get_channel_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.Data.get_channel_name" title="Permalink to this definition">¶</a></dt>
+<dt id="microfilm.dataset.dataset.Data.get_channel_name">
+<code class="sig-name descname"><span class="pre">get_channel_name</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.Data.get_channel_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get name of channel index m</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="microfilm.dataset.dataset.Data.load_frame">
-<span class="sig-name descname"><span class="pre">load_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.Data.load_frame" title="Permalink to this definition">¶</a></dt>
+<dt id="microfilm.dataset.dataset.Data.load_frame">
+<code class="sig-name descname"><span class="pre">load_frame</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.Data.load_frame" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load index k of valid frames of channel index m in self.channelfile</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="microfilm.dataset.dataset.Data.set_valid_frames">
-<span class="sig-name descname"><span class="pre">set_valid_frames</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.Data.set_valid_frames" title="Permalink to this definition">¶</a></dt>
+<dt id="microfilm.dataset.dataset.Data.set_valid_frames">
+<code class="sig-name descname"><span class="pre">set_valid_frames</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.Data.set_valid_frames" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a list of indices of valid frames given a set of bad frames</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="microfilm.dataset.dataset.Data.update_params">
-<span class="sig-name descname"><span class="pre">update_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.Data.update_params" title="Permalink to this definition">¶</a></dt>
+<dt id="microfilm.dataset.dataset.Data.update_params">
+<code class="sig-name descname"><span class="pre">update_params</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.Data.update_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update frame parameters</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="microfilm.dataset.dataset.H5">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">microfilm.dataset.dataset.</span></span><span class="sig-name descname"><span class="pre">H5</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expdir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bad_frames</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'h5'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.H5" title="Permalink to this definition">¶</a></dt>
+<dt id="microfilm.dataset.dataset.H5">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">microfilm.dataset.dataset.</span></code><code class="sig-name descname"><span class="pre">H5</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expdir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bad_frames</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'h5'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.H5" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#microfilm.dataset.dataset.Data" title="microfilm.dataset.dataset.Data"><code class="xref py py-class docutils literal notranslate"><span class="pre">microfilm.dataset.dataset.Data</span></code></a></p>
 <p>Data class for digesting H5 data. The h5 file is expected to contain a
 “volume” object of dimension TXY. A folder should contain on h5 file per channel.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="microfilm.dataset.dataset.H5.initialize">
-<span class="sig-name descname"><span class="pre">initialize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.H5.initialize" title="Permalink to this definition">¶</a></dt>
+<dt id="microfilm.dataset.dataset.H5.initialize">
+<code class="sig-name descname"><span class="pre">initialize</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.H5.initialize" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="microfilm.dataset.dataset.H5.load_frame">
-<span class="sig-name descname"><span class="pre">load_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.H5.load_frame" title="Permalink to this definition">¶</a></dt>
+<dt id="microfilm.dataset.dataset.H5.load_frame">
+<code class="sig-name descname"><span class="pre">load_frame</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.H5.load_frame" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load index k of valid frames of channel index m in self.channelfile</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="microfilm.dataset.dataset.MultipageTIFF">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">microfilm.dataset.dataset.</span></span><span class="sig-name descname"><span class="pre">MultipageTIFF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expdir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bad_frames</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'multi'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.MultipageTIFF" title="Permalink to this definition">¶</a></dt>
+<dt id="microfilm.dataset.dataset.MultipageTIFF">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">microfilm.dataset.dataset.</span></code><code class="sig-name descname"><span class="pre">MultipageTIFF</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expdir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bad_frames</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'multi'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.MultipageTIFF" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#microfilm.dataset.dataset.Data" title="microfilm.dataset.dataset.Data"><code class="xref py py-class docutils literal notranslate"><span class="pre">microfilm.dataset.dataset.Data</span></code></a></p>
 <p>Data class to ingest multipage tiff files. A folder should contain multiple
 single-plane multi-page tif files, one for each channel.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="microfilm.dataset.dataset.MultipageTIFF.initialize">
-<span class="sig-name descname"><span class="pre">initialize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.MultipageTIFF.initialize" title="Permalink to this definition">¶</a></dt>
+<dt id="microfilm.dataset.dataset.MultipageTIFF.initialize">
+<code class="sig-name descname"><span class="pre">initialize</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.MultipageTIFF.initialize" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="microfilm.dataset.dataset.MultipageTIFF.load_frame">
-<span class="sig-name descname"><span class="pre">load_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.MultipageTIFF.load_frame" title="Permalink to this definition">¶</a></dt>
+<dt id="microfilm.dataset.dataset.MultipageTIFF.load_frame">
+<code class="sig-name descname"><span class="pre">load_frame</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.MultipageTIFF.load_frame" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load index k of valid frames of channel index m in self.channelfile</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="microfilm.dataset.dataset.ND2">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">microfilm.dataset.dataset.</span></span><span class="sig-name descname"><span class="pre">ND2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expdir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bad_frames</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nd2'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.ND2" title="Permalink to this definition">¶</a></dt>
+<dt id="microfilm.dataset.dataset.ND2">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">microfilm.dataset.dataset.</span></code><code class="sig-name descname"><span class="pre">ND2</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expdir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bad_frames</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nd2'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.ND2" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#microfilm.dataset.dataset.Data" title="microfilm.dataset.dataset.Data"><code class="xref py py-class docutils literal notranslate"><span class="pre">microfilm.dataset.dataset.Data</span></code></a></p>
 <p>Data class for digesting ND2 files containing multi-channel time-lapse data.
 This class is very brittle and highly dependent on the version of NIS Elements used.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="microfilm.dataset.dataset.ND2.initialize">
-<span class="sig-name descname"><span class="pre">initialize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.ND2.initialize" title="Permalink to this definition">¶</a></dt>
+<dt id="microfilm.dataset.dataset.ND2.initialize">
+<code class="sig-name descname"><span class="pre">initialize</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.ND2.initialize" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="microfilm.dataset.dataset.ND2.load_frame">
-<span class="sig-name descname"><span class="pre">load_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.ND2.load_frame" title="Permalink to this definition">¶</a></dt>
+<dt id="microfilm.dataset.dataset.ND2.load_frame">
+<code class="sig-name descname"><span class="pre">load_frame</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.ND2.load_frame" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load index k of valid frames of channel index m in self.channelfile</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="microfilm.dataset.dataset.Nparray">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">microfilm.dataset.dataset.</span></span><span class="sig-name descname"><span class="pre">Nparray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nparray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bad_frames</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'np'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.Nparray" title="Permalink to this definition">¶</a></dt>
+<dt id="microfilm.dataset.dataset.Nparray">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">microfilm.dataset.dataset.</span></code><code class="sig-name descname"><span class="pre">Nparray</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nparray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bad_frames</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'np'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.Nparray" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#microfilm.dataset.dataset.Data" title="microfilm.dataset.dataset.Data"><code class="xref py py-class docutils literal notranslate"><span class="pre">microfilm.dataset.dataset.Data</span></code></a></p>
 <p>Data class for digesting numpy arrays. The expected dimensions of the
 input array are CTXY</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="microfilm.dataset.dataset.Nparray.initialize">
-<span class="sig-name descname"><span class="pre">initialize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.Nparray.initialize" title="Permalink to this definition">¶</a></dt>
+<dt id="microfilm.dataset.dataset.Nparray.initialize">
+<code class="sig-name descname"><span class="pre">initialize</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.Nparray.initialize" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="microfilm.dataset.dataset.Nparray.load_frame">
-<span class="sig-name descname"><span class="pre">load_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.Nparray.load_frame" title="Permalink to this definition">¶</a></dt>
+<dt id="microfilm.dataset.dataset.Nparray.load_frame">
+<code class="sig-name descname"><span class="pre">load_frame</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.Nparray.load_frame" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load index k of valid frames of channel index m in self.channelfile</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="microfilm.dataset.dataset.TIFFSeries">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">microfilm.dataset.dataset.</span></span><span class="sig-name descname"><span class="pre">TIFFSeries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expdir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bad_frames</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'series'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.TIFFSeries" title="Permalink to this definition">¶</a></dt>
+<dt id="microfilm.dataset.dataset.TIFFSeries">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">microfilm.dataset.dataset.</span></code><code class="sig-name descname"><span class="pre">TIFFSeries</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expdir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bad_frames</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'series'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.TIFFSeries" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#microfilm.dataset.dataset.Data" title="microfilm.dataset.dataset.Data"><code class="xref py py-class docutils literal notranslate"><span class="pre">microfilm.dataset.dataset.Data</span></code></a></p>
 <p>Data class to ingest series of single tif files. Channels are organised
 by folder and frames ideally denoted as xxxx_t1.tif, xxxx_t2.tif etc. Otherwise
 frames are sorted using natsort.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="microfilm.dataset.dataset.TIFFSeries.initialize">
-<span class="sig-name descname"><span class="pre">initialize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.TIFFSeries.initialize" title="Permalink to this definition">¶</a></dt>
+<dt id="microfilm.dataset.dataset.TIFFSeries.initialize">
+<code class="sig-name descname"><span class="pre">initialize</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.TIFFSeries.initialize" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="microfilm.dataset.dataset.TIFFSeries.load_frame">
-<span class="sig-name descname"><span class="pre">load_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.TIFFSeries.load_frame" title="Permalink to this definition">¶</a></dt>
+<dt id="microfilm.dataset.dataset.TIFFSeries.load_frame">
+<code class="sig-name descname"><span class="pre">load_frame</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.TIFFSeries.load_frame" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load index k of valid frames of channel index m in self.channelfile</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="microfilm.dataset.dataset.findfiles">
-<span class="sig-prename descclassname"><span class="pre">microfilm.dataset.dataset.</span></span><span class="sig-name descname"><span class="pre">findfiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">which</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">where</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.findfiles" title="Permalink to this definition">¶</a></dt>
+<dt id="microfilm.dataset.dataset.findfiles">
+<code class="sig-prename descclassname"><span class="pre">microfilm.dataset.dataset.</span></code><code class="sig-name descname"><span class="pre">findfiles</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">which</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">where</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.dataset.dataset.findfiles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns list of filenames from <cite>where</cite> path matched by ‘which’
 shell pattern. Matching is case-insensitive.</p>
 </dd></dl>
@@ -526,15 +530,27 @@ shell pattern. Matching is case-insensitive.</p>
               </div>
               
         
-        <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="microfilm.html" title="previous page">microfilm package</a>
 
-        </div>
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="microfilm.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">microfilm package</p>
+            </div>
+        </a>
+    </div>
+
+</div>
         
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
+    <footer class="footer">
     <div class="container">
       <p>
         
