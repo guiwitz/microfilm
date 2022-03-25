@@ -24,7 +24,8 @@ class Microanim(Microimage):
         channel_label_size=0.05, scalebar_thickness=5, scalebar_unit_per_pix=None, scalebar_size_in_units=None, unit=None,
         scalebar_ypos=0.05, scalebar_color='white', scalebar_font_size=0.08, scalebar_text_centered=True,
         ax=None, fig_scaling=3, dpi=72, label_text=None, label_location='upper left',
-        label_color='white', label_font_size=15, label_kwarg={}, cmap_objects=None, show_plot=True
+        label_color='white', label_font_size=15, label_kwarg={}, cmap_objects=None, 
+        show_colorbar=False, show_plot=True
     ):
         super().__init__(
             None, cmaps, flip_map, rescale_type, limits, num_colors,
@@ -32,7 +33,7 @@ class Microanim(Microimage):
             channel_label_size, scalebar_thickness, scalebar_unit_per_pix, scalebar_size_in_units, unit,
             scalebar_ypos, scalebar_color, scalebar_font_size, scalebar_text_centered,
             ax, fig_scaling, dpi, label_text, label_location,
-            label_color, label_font_size, label_kwarg, cmap_objects
+            label_color, label_font_size, label_kwarg, cmap_objects, show_colorbar
         )
 
         if isinstance(data, np.ndarray):
