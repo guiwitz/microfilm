@@ -3,7 +3,8 @@ import inspect
 from matplotlib.pyplot import figure, savefig, text
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
-from numpy import dtype
+import matplotlib as mpl
+from mpl_toolkits.axes_grid1.axes_divider import make_axes_locatable
 import numpy as np
 
 from . import colorify
@@ -14,7 +15,8 @@ def microshow(images=None, cmaps=None, flip_map=False, rescale_type=None, limits
               channel_label_size=0.05, scalebar_thickness=5, scalebar_unit_per_pix=None, scalebar_size_in_units=None,
               unit=None, scalebar_ypos=0.05, scalebar_color='white', scalebar_font_size=0.08, scalebar_text_centered=True,
               ax=None, fig_scaling=3, dpi=72, label_text=None, label_location='upper left',
-              label_color='white', label_font_size=15, label_kwargs={}, cmap_objects=None, microim=None
+              label_color='white', label_font_size=15, label_kwargs={}, cmap_objects=None,
+              show_colorbar=False, microim=None
              ):
     """
     Plot image
@@ -90,6 +92,8 @@ def microshow(images=None, cmaps=None, flip_map=False, rescale_type=None, limits
     cmap_objects: list
         list of Matplotlib colormaps to use for coloring
         if provided, the cmap names are ignored
+    show_colorbar: bool
+        show colorbar
     microim: Microimage object
         object to re-use
             
@@ -111,16 +115,17 @@ def microshow(images=None, cmaps=None, flip_map=False, rescale_type=None, limits
         scalebar_ypos=scalebar_ypos, scalebar_color=scalebar_color, scalebar_font_size=scalebar_font_size,
         scalebar_text_centered=scalebar_text_centered, ax=ax, fig_scaling=fig_scaling, dpi=dpi, label_text=label_text,
         label_location=label_location, label_color=label_color, label_font_size=label_font_size,
-        label_kwargs=label_kwargs, cmap_objects=cmap_objects
+        label_kwargs=label_kwargs, cmap_objects=cmap_objects, show_colorbar=show_colorbar
         )
     
     microim.rescale_type = colorify.check_rescale_type(microim.rescale_type, microim.limits)
 
-    converted, cmap_objects = colorify.multichannel_to_rgb(microim.images, cmaps=microim.cmaps, flip_map=microim.flip_map,
+    converted, cmap_objects, image_min_max = colorify.multichannel_to_rgb(microim.images, cmaps=microim.cmaps, flip_map=microim.flip_map,
                                     rescale_type=microim.rescale_type, limits=microim.limits,
                                     num_colors=microim.num_colors, proj_type=microim.proj_type,
                                     alpha=microim.alpha, cmap_objects=microim.cmap_objects)
     microim.cmap_objects = cmap_objects
+    microim.image_min_max = image_min_max
 
     if microim.cmaps is None:
         if len(microim.images) < 4:
@@ -173,6 +178,9 @@ def microshow(images=None, cmaps=None, flip_map=False, rescale_type=None, limits
                     label_name=key, label_location=microim.label_location[key],
                     label_color=microim.label_color[key], label_font_size=microim.label_font_size[key],
                     label_kwargs=microim.label_kwargs[key])
+
+    if microim.show_colorbar:
+        microim.add_colorbar()
 
     return microim
     
@@ -253,6 +261,8 @@ class Microimage:
     cmaps_object: list
         list of cmap objects for each channel 
         if provided, cmap names are ignored
+    show_colorbar: bool
+        show colorbar
 
     """
 
@@ -262,7 +272,7 @@ class Microimage:
               scalebar_size_in_units=None, unit=None, scalebar_ypos=0.05, scalebar_color='white',
               scalebar_font_size=0.08, scalebar_text_centered=True, ax=None, fig_scaling=3, dpi=72, label_text=None,
               label_location='upper left', label_color='white', label_font_size=15, label_kwargs={},
-              cmap_objects=None,
+              cmap_objects=None, show_colorbar=False
              ):
         
         self.__dict__.update(locals())
@@ -558,6 +568,19 @@ class Microimage:
                 s=self.channel_names[nlines-1-i], ha="center", transform=self.ax.transAxes,
                 fontdict={'color': text_color,'size':fontsize}
             )
+
+    def add_colorbar(self):
+        """Add colorbar"""
+
+        if len(self.cmaps) > 1:
+            raise Exception("You can only add one colorbar.")
+
+        divider = make_axes_locatable(self.ax)
+        ax_cb = divider.new_horizontal(size="5%", pad=0.05)
+        self.fig.add_axes(ax_cb)
+        for_mapping = mpl.cm.ScalarMappable(cmap=self.cmap_objects[0])
+        for_mapping.set_clim(self.image_min_max[0][0],self.image_min_max[0][1])
+        self.fig.colorbar(for_mapping, cax=ax_cb)
 class Micropanel:
     """
     Class implementing a panel object of multiple Microimage

@@ -82,7 +82,7 @@ class Microanim(Microimage):
 
         self.images = [self.data.load_frame(x, t) for x in self.channels]
 
-        converted, cmap_objects = multichannel_to_rgb(self.images, cmaps=self.cmaps, flip_map=self.flip_map,
+        converted, _, _ = multichannel_to_rgb(self.images, cmaps=self.cmaps, flip_map=self.flip_map,
                                     rescale_type=self.rescale_type, limits=self.limits, num_colors=self.num_colors,
                                     cmap_objects=self.cmap_objects)
 

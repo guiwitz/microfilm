@@ -51,39 +51,39 @@ def test_random_cmap():
     
 def test_colorify_by_name():
 
-    im1, cmap = colorify.colorify_by_name(image, 'pure_red')
+    im1, cmap, min_max = colorify.colorify_by_name(image, 'pure_red')
     np.testing.assert_array_equal(im1[0][0], np.array([1,0,0,1]))
     
-    im1, cmap = colorify.colorify_by_name(image, 'pure_red', rescale_type='dtype')
+    im1, cmap, min_max = colorify.colorify_by_name(image, 'pure_red', rescale_type='dtype')
     np.testing.assert_array_equal(im1[0][0], np.array([200/255,0,0,1]))
     np.testing.assert_array_equal(im1[0][1], np.array([100/255,0,0,1]))
     
-    im1, cmap = colorify.colorify_by_name(image, 'pure_red', rescale_type='limits', limits=[100,200])
+    im1, cmap, min_max = colorify.colorify_by_name(image, 'pure_red', rescale_type='limits', limits=[100,200])
     np.testing.assert_array_equal(im1[0][0], np.array([1,0,0,1]))
     np.testing.assert_array_equal(im1[0][1], np.array([0,0,0,1]))
 
 def test_colorify_by_hex():
     
-    im1, cmap = colorify.colorify_by_hex(image, cmap_hex='#D53CE7')
+    im1, cmap, min_max = colorify.colorify_by_hex(image, cmap_hex='#D53CE7')
     np.testing.assert_array_equal(im1[0][0,0:3], np.array([213, 60, 231])/255, "Not correct color returned for #D53CE7")
     
 def test_rescale_image():
     
-    im_resc = colorify.rescale_image(image)
+    im_resc, min_max = colorify.rescale_image(image)
     np.testing.assert_array_equal(im_resc[0], np.array([1,0,0]), "Bad rescaling for uint8 default")
     
-    im_resc = colorify.rescale_image(image, rescale_type='dtype')
+    im_resc, min_max = colorify.rescale_image(image, rescale_type='dtype')
     np.testing.assert_array_equal(im_resc[0], np.array([200/255,100/255,100/255]), "Bad rescaling for uint8 dtype")
     
-    im_resc = colorify.rescale_image(image, limits=[110, 230], rescale_type='limits')
+    im_resc, min_max = colorify.rescale_image(image, limits=[110, 230], rescale_type='limits')
     np.testing.assert_array_equal(im_resc[0], np.array([(200-110)/(230-110),0,0]), "Bad rescaling for uint8 limits")
     
-    out = colorify.rescale_image(image3, rescale_type='min_max')
+    out, min_max = colorify.rescale_image(image3, rescale_type='min_max')
     check = (image3+10)/290
     np.testing.assert_array_equal(out,check, "Bad rescaling for int16 min_max")
     
     im_bool = image3 > 60
-    out = colorify.rescale_image(im_bool, rescale_type='min_max')
+    out, min_max = colorify.rescale_image(im_bool, rescale_type='min_max')
     check = np.zeros((2,2), dtype=np.float64)
     check[0,1] = 1
     check[1,1] = 1
@@ -102,7 +102,7 @@ def test_combine_image():
 
 def test_multichannel_to_rgb():
     
-    multic, cmap_objects = colorify.multichannel_to_rgb(images=[image, image2], cmaps=['pure_blue', 'pure_red'],
+    multic, _, _ = colorify.multichannel_to_rgb(images=[image, image2], cmaps=['pure_blue', 'pure_red'],
                                           rescale_type='limits', limits=[130, 190], num_colors=1000)
     assert multic.ndim == 3, "Wrong dimensions, not RGB image"
     np.testing.assert_almost_equal(multic[:,:,0][0], np.array([(180-130)/(190-130), 0, 0]), decimal=3)
