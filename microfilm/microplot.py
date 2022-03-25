@@ -573,7 +573,7 @@ class Microimage:
         """Add colorbar"""
 
         if len(self.cmaps) > 1:
-            raise Exception("You can only add one colorbar.")
+            raise Exception("You can only add a colorbar for single channel images.")
 
         divider = make_axes_locatable(self.ax)
         ax_cb = divider.new_horizontal(size="5%", pad=0.05)
