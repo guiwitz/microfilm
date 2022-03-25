@@ -80,10 +80,9 @@ def random_cmap(alpha=0.5, num_colors=256):
 
     return cmap
 
-def random_grandient_cmap(num_colors, seed=42):
-    
-    #rng = np.random.default_rng(2021)
-    num_colors = 256
+def random_grandient_cmap(num_colors=25, seed=42):
+    """Create a colormap as the gradient of a given random color"""
+
     rgb = hsv2rgb([np.random.random(1)[0], 0.95, 0.95])
 
     cmap = ListedColormap(np.c_[
@@ -115,6 +114,8 @@ def colorify_by_cmap(image, cmap, rescale_type='min_max', limits=None):
     -------
     image_colored: array
         3D RGB float array
+    min_max: tuple
+        actual min and max values used for rescaling
 
     """
 
@@ -152,6 +153,8 @@ def colorify_by_name(image, cmap_name, flip_map=False, rescale_type='min_max', l
         3D RGB float array
     cmap: Matplotlib colormap object
         Generated colormap from name
+    min_max: tuple
+        actual min and max values used for rescaling
 
     """
     
@@ -193,6 +196,8 @@ def colorify_by_hex(image, cmap_hex='#ff6600', flip_map=False, rescale_type='min
         3D RGB float array
     cmap: Matplotlib colormap object
         Generated colormap from name
+    min_max: tuple
+        actual min and max values used for rescaling
 
     """
     
