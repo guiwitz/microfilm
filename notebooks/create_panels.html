@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Creating multi-panel figures &#8212; microfilm</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet" />
-  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -22,8 +22,8 @@
       
 
     
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -31,32 +31,37 @@
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script >
-        const thebe_selector = ".thebe,.cell"
-        const thebe_selector_input = "pre,.cell_input div.highlight"
-        const thebe_selector_output = ".output,.cell_output"
-    </script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="microfilm package" href="../docs/source/microfilm.html" />
     <link rel="prev" title="Creating animations" href="create_animations.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -95,7 +100,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Getting started
  </span>
@@ -117,7 +122,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Topic guides
  </span>
@@ -139,7 +144,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   API Reference
  </span>
@@ -208,7 +213,7 @@
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -264,7 +269,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -289,10 +294,38 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Creating multi-panel figures</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#micropanel">
+   Micropanel
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#micropanel-animations">
+   Micropanel animations
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
-  <div class="section" id="creating-multi-panel-figures">
+  <div class="tex2jax_ignore mathjax_ignore section" id="creating-multi-panel-figures">
 <h1>Creating multi-panel figures<a class="headerlink" href="#creating-multi-panel-figures" title="Permalink to this headline">¶</a></h1>
 <p>You can create yourself multi-panel figures by directly using the underlying Matplotlib objects. We however also provide a simplified way to create such panels by assembling multiple plot or animation objects. This is particularly helpful to create complex animations.</p>
 <div class="cell tag_remove-input docutils container">
@@ -354,7 +387,7 @@
 <img alt="../_images/create_panels_8_0.png" src="../_images/create_panels_8_0.png" />
 </div>
 </div>
-<p>By default, the panel size is adjusted to optimall fit the image size. <strong>Note that for this adjustment we assume that all images in the panel of the same size.</strong> As shown above, you can adjust the general size of the image with the <code class="docutils literal notranslate"><span class="pre">figscaling</span></code> paramter. If you want, you can also explicitly specify a figure size in which case no adjustments are done:</p>
+<p>By default, the panel size is adjusted to optimall fit the image size. <strong>Note that for this adjustment we assume that all images in the panel of the same size.</strong> As shown above, you can adjust the general size of the image with the <code class="docutils literal notranslate"><span class="pre">figscaling</span></code> parameter. If you want, you can also explicitly specify a figure size in which case no adjustments are done:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">micropanel_size</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">Micropanel</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="n">figscaling</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
@@ -407,7 +440,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">micropanel</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">Micropanel</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">margin</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">micropanel</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">Micropanel</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
 <span class="n">micropanel</span><span class="o">.</span><span class="n">add_element</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">microim</span><span class="o">=</span><span class="n">microim1</span><span class="p">)</span>
 <span class="n">micropanel</span><span class="o">.</span><span class="n">add_element</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">microim</span><span class="o">=</span><span class="n">microim2</span><span class="p">)</span>
@@ -418,6 +451,36 @@
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/create_panels_16_0.png" src="../_images/create_panels_16_0.png" />
+</div>
+</div>
+<p>Note that in certain cases, you may want to control the space between plots. You can do this with the <code class="docutils literal notranslate"><span class="pre">margin</span></code>option which represents the fraction of the figure to use for that space. This is particularly useful if your images have colorbars, which are not fully visible with the default margin:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microim1</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]],</span> <span class="n">show_colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                               <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_magenta&#39;</span><span class="p">],</span> <span class="n">flip_map</span><span class="o">=</span><span class="p">[</span><span class="kc">False</span><span class="p">],</span>
+                               <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">label_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">channel_label_show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                               <span class="n">channel_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ori&#39;</span><span class="p">],</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                              <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">scalebar_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">fig_scaling</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">microim2</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]],</span> <span class="n">show_colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                               <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_cyan&#39;</span><span class="p">],</span> <span class="n">flip_map</span><span class="o">=</span><span class="p">[</span><span class="kc">False</span><span class="p">],</span>
+                               <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="n">label_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">channel_label_show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                              <span class="n">channel_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ter&#39;</span><span class="p">],</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                              <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">scalebar_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">fig_scaling</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">micropanel</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">Micropanel</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">margin</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+
+<span class="n">micropanel</span><span class="o">.</span><span class="n">add_element</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">microim</span><span class="o">=</span><span class="n">microim1</span><span class="p">)</span>
+<span class="n">micropanel</span><span class="o">.</span><span class="n">add_element</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">microim</span><span class="o">=</span><span class="n">microim2</span><span class="p">)</span>
+
+<span class="n">micropanel</span><span class="o">.</span><span class="n">add_channel_label</span><span class="p">(</span><span class="n">channel_label_size</span><span class="o">=</span><span class="mf">0.04</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/create_panels_18_0.png" src="../_images/create_panels_18_0.png" />
+<img alt="../_images/create_panels_18_1.png" src="../_images/create_panels_18_1.png" />
+<img alt="../_images/create_panels_18_2.png" src="../_images/create_panels_18_2.png" />
 </div>
 </div>
 </div>
@@ -584,54 +647,42 @@
 
               </div>
               
-        
             
-
-
-
-<div class='prev-next-bottom'>
-    
-    <div id="prev">
-        <a class="left-prev" href="create_animations.html" title="previous page">
-            <i class="prevnext-label fas fa-angle-left"></i>
-            <div class="prevnext-info">
-                <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Creating animations</p>
-            </div>
-        </a>
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="create_animations.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Creating animations</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../docs/source/microfilm.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">microfilm package</p>
     </div>
-     <div id="next">
-        <a class="right-next" href="../docs/source/microfilm.html" title="next page">
-            <div class="prevnext-info">
-                <p class="prevnext-label">next</p>
-                <p class="prevnext-title">microfilm package</p>
-            </div>
-            <i class="prevnext-label fas fa-angle-right"></i>
-        </a>
-     </div>
-
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
-        
+            
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By The Jupyter Book community<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By The Jupyter Book community<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 
       </div>
     </div>
   
-  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-  
   </body>
 </html>

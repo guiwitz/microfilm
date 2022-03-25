@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>microfilm package &#8212; microfilm</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet" />
-  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -22,8 +22,8 @@
       
 
     
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
@@ -31,32 +31,37 @@
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/togglebutton.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script >
-        const thebe_selector = ".thebe,.cell"
-        const thebe_selector_input = "pre,.cell_input div.highlight"
-        const thebe_selector_output = ".output,.cell_output"
-    </script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="microfilm.dataset package" href="microfilm.dataset.html" />
     <link rel="prev" title="Creating multi-panel figures" href="../../notebooks/create_panels.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -95,7 +100,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Getting started
  </span>
@@ -117,7 +122,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Topic guides
  </span>
@@ -139,7 +144,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   API Reference
  </span>
@@ -208,7 +213,7 @@
                 data-placement="left">.rst</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -239,7 +244,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -272,6 +277,11 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-microfilm.version">
+   microfilm.version module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#module-microfilm">
    Module contents
   </a>
@@ -284,7 +294,60 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>microfilm package</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#subpackages">
+   Subpackages
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#submodules">
+   Submodules
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-microfilm.colorify">
+   microfilm.colorify module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-microfilm.microanim">
+   microfilm.microanim module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-microfilm.microplot">
+   microfilm.microplot module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-microfilm.version">
+   microfilm.version module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-microfilm">
+   Module contents
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
   <div class="section" id="microfilm-package">
@@ -308,21 +371,21 @@
 <div class="section" id="module-microfilm.colorify">
 <span id="microfilm-colorify-module"></span><h2>microfilm.colorify module<a class="headerlink" href="#module-microfilm.colorify" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
-<dt id="microfilm.colorify.check_input">
-<code class="sig-prename descclassname"><span class="pre">microfilm.colorify.</span></code><code class="sig-name descname"><span class="pre">check_input</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">images</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.colorify.check_input" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.colorify.check_input">
+<span class="sig-prename descclassname"><span class="pre">microfilm.colorify.</span></span><span class="sig-name descname"><span class="pre">check_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">images</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.colorify.check_input" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts input, either 2D array, list of 2D arrays or 3D array of size DxNxM where D&lt;4
 to list of 2D arrays.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="microfilm.colorify.check_rescale_type">
-<code class="sig-prename descclassname"><span class="pre">microfilm.colorify.</span></code><code class="sig-name descname"><span class="pre">check_rescale_type</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rescale_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limits</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.colorify.check_rescale_type" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.colorify.check_rescale_type">
+<span class="sig-prename descclassname"><span class="pre">microfilm.colorify.</span></span><span class="sig-name descname"><span class="pre">check_rescale_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rescale_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limits</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.colorify.check_rescale_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adjust rescale_type depending on its own value and that of limits</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="microfilm.colorify.cmaps_def">
-<code class="sig-prename descclassname"><span class="pre">microfilm.colorify.</span></code><code class="sig-name descname"><span class="pre">cmaps_def</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmap_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_colors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">256</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flip_map</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.colorify.cmaps_def" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.colorify.cmaps_def">
+<span class="sig-prename descclassname"><span class="pre">microfilm.colorify.</span></span><span class="sig-name descname"><span class="pre">cmaps_def</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmap_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_colors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">256</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flip_map</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.colorify.cmaps_def" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a colormap defined by its name</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -343,13 +406,13 @@ to list of 2D arrays.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="microfilm.colorify.color_translate">
-<code class="sig-prename descclassname"><span class="pre">microfilm.colorify.</span></code><code class="sig-name descname"><span class="pre">color_translate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmap_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.colorify.color_translate" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.colorify.color_translate">
+<span class="sig-prename descclassname"><span class="pre">microfilm.colorify.</span></span><span class="sig-name descname"><span class="pre">color_translate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmap_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.colorify.color_translate" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
-<dt id="microfilm.colorify.colorify_by_cmap">
-<code class="sig-prename descclassname"><span class="pre">microfilm.colorify.</span></code><code class="sig-name descname"><span class="pre">colorify_by_cmap</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rescale_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'min_max'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.colorify.colorify_by_cmap" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.colorify.colorify_by_cmap">
+<span class="sig-prename descclassname"><span class="pre">microfilm.colorify.</span></span><span class="sig-name descname"><span class="pre">colorify_by_cmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rescale_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'min_max'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.colorify.colorify_by_cmap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Directly use an existing colormap cmap to colorize an image</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -364,17 +427,18 @@ to list of 2D arrays.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>image_colored</strong> – 3D RGB float array</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>array</p>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>image_colored</strong> (<em>array</em>) – 3D RGB float array</p></li>
+<li><p><strong>min_max</strong> (<em>tuple</em>) – actual min and max values used for rescaling</p></li>
+</ul>
+</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="microfilm.colorify.colorify_by_hex">
-<code class="sig-prename descclassname"><span class="pre">microfilm.colorify.</span></code><code class="sig-name descname"><span class="pre">colorify_by_hex</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap_hex</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'#ff6600'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flip_map</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rescale_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'min_max'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_colors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">256</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.colorify.colorify_by_hex" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.colorify.colorify_by_hex">
+<span class="sig-prename descclassname"><span class="pre">microfilm.colorify.</span></span><span class="sig-name descname"><span class="pre">colorify_by_hex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap_hex</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'#ff6600'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flip_map</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rescale_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'min_max'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_colors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">256</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.colorify.colorify_by_hex" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return 2D image as 3D RGB stack colored with a hex color.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -394,6 +458,7 @@ to list of 2D arrays.</p>
 <dd class="field-even"><p><ul class="simple">
 <li><p><strong>image_colored</strong> (<em>array</em>) – 3D RGB float array</p></li>
 <li><p><strong>cmap</strong> (<em>Matplotlib colormap object</em>) – Generated colormap from name</p></li>
+<li><p><strong>min_max</strong> (<em>tuple</em>) – actual min and max values used for rescaling</p></li>
 </ul>
 </p>
 </dd>
@@ -401,8 +466,8 @@ to list of 2D arrays.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="microfilm.colorify.colorify_by_name">
-<code class="sig-prename descclassname"><span class="pre">microfilm.colorify.</span></code><code class="sig-name descname"><span class="pre">colorify_by_name</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flip_map</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rescale_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'min_max'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_colors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">256</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.colorify.colorify_by_name" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.colorify.colorify_by_name">
+<span class="sig-prename descclassname"><span class="pre">microfilm.colorify.</span></span><span class="sig-name descname"><span class="pre">colorify_by_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flip_map</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rescale_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'min_max'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_colors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">256</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.colorify.colorify_by_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return 2D image as 3D RGB stack colored with a given colormap.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -422,6 +487,7 @@ to list of 2D arrays.</p>
 <dd class="field-even"><p><ul class="simple">
 <li><p><strong>image_colored</strong> (<em>array</em>) – 3D RGB float array</p></li>
 <li><p><strong>cmap</strong> (<em>Matplotlib colormap object</em>) – Generated colormap from name</p></li>
+<li><p><strong>min_max</strong> (<em>tuple</em>) – actual min and max values used for rescaling</p></li>
 </ul>
 </p>
 </dd>
@@ -429,8 +495,8 @@ to list of 2D arrays.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="microfilm.colorify.combine_image">
-<code class="sig-prename descclassname"><span class="pre">microfilm.colorify.</span></code><code class="sig-name descname"><span class="pre">combine_image</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">images</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proj_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'max'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.colorify.combine_image" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.colorify.combine_image">
+<span class="sig-prename descclassname"><span class="pre">microfilm.colorify.</span></span><span class="sig-name descname"><span class="pre">combine_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">images</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proj_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'max'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.colorify.combine_image" title="Permalink to this definition">¶</a></dt>
 <dd><p>Combine a list of 3D RGB arrays into a single RGB image.
 The combination is done via maximum or a sum projection
 or via alpha blending.</p>
@@ -456,8 +522,8 @@ proj_type == alpha</p></li>
 </dd></dl>
 
 <dl class="py function">
-<dt id="microfilm.colorify.multichannel_to_rgb">
-<code class="sig-prename descclassname"><span class="pre">microfilm.colorify.</span></code><code class="sig-name descname"><span class="pre">multichannel_to_rgb</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">images</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmaps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flip_map</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rescale_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'min_max'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_colors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">256</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proj_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'max'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap_objects</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.colorify.multichannel_to_rgb" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.colorify.multichannel_to_rgb">
+<span class="sig-prename descclassname"><span class="pre">microfilm.colorify.</span></span><span class="sig-name descname"><span class="pre">multichannel_to_rgb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">images</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmaps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flip_map</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rescale_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'min_max'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_colors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">256</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proj_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'max'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap_objects</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.colorify.multichannel_to_rgb" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a list of images to a single RGB image. Options can be passed
 as lists, one per channel, or as single element in which case the same value is used
 for all channel.</p>
@@ -487,6 +553,7 @@ if provided, no colormaps are computed and cmap names are ignored</p></li>
 <dd class="field-even"><p><ul class="simple">
 <li><p><strong>converted</strong> (<em>2d array</em>) – multi-channel RGB image</p></li>
 <li><p><strong>cmap_objects</strong> (<em>list</em>) – list of Matplotlib cmaps generated for each channel</p></li>
+<li><p><strong>image_min_max</strong> (<em>list of tuples</em>) – actual (min, max) values used for rescaling for each image</p></li>
 </ul>
 </p>
 </dd>
@@ -494,19 +561,20 @@ if provided, no colormaps are computed and cmap names are ignored</p></li>
 </dd></dl>
 
 <dl class="py function">
-<dt id="microfilm.colorify.random_cmap">
-<code class="sig-prename descclassname"><span class="pre">microfilm.colorify.</span></code><code class="sig-name descname"><span class="pre">random_cmap</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_colors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">256</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.colorify.random_cmap" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.colorify.random_cmap">
+<span class="sig-prename descclassname"><span class="pre">microfilm.colorify.</span></span><span class="sig-name descname"><span class="pre">random_cmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_colors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">256</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.colorify.random_cmap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create random colormap for segmentation</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="microfilm.colorify.random_grandient_cmap">
-<code class="sig-prename descclassname"><span class="pre">microfilm.colorify.</span></code><code class="sig-name descname"><span class="pre">random_grandient_cmap</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_colors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">42</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.colorify.random_grandient_cmap" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dt class="sig sig-object py" id="microfilm.colorify.random_grandient_cmap">
+<span class="sig-prename descclassname"><span class="pre">microfilm.colorify.</span></span><span class="sig-name descname"><span class="pre">random_grandient_cmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_colors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">42</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.colorify.random_grandient_cmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a colormap as the gradient of a given random color</p>
+</dd></dl>
 
 <dl class="py function">
-<dt id="microfilm.colorify.rescale_image">
-<code class="sig-prename descclassname"><span class="pre">microfilm.colorify.</span></code><code class="sig-name descname"><span class="pre">rescale_image</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rescale_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'min_max'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.colorify.rescale_image" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.colorify.rescale_image">
+<span class="sig-prename descclassname"><span class="pre">microfilm.colorify.</span></span><span class="sig-name descname"><span class="pre">rescale_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rescale_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'min_max'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.colorify.rescale_image" title="Permalink to this definition">¶</a></dt>
 <dd><p>Rescale the image between 0-1 according to a rescaling type.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -520,10 +588,11 @@ if provided, no colormaps are computed and cmap names are ignored</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>image_rescaled</strong></p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>2d array</p>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>image_rescaled</strong> (<em>2d array</em>)</p></li>
+<li><p><strong>min_max</strong> (<em>tuple</em>) – actual min and max values used for rescaling</p></li>
+</ul>
+</p>
 </dd>
 </dl>
 </dd></dl>
@@ -532,15 +601,15 @@ if provided, no colormaps are computed and cmap names are ignored</p></li>
 <div class="section" id="module-microfilm.microanim">
 <span id="microfilm-microanim-module"></span><h2>microfilm.microanim module<a class="headerlink" href="#module-microfilm.microanim" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="microfilm.microanim.Microanim">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">microfilm.microanim.</span></code><code class="sig-name descname"><span class="pre">Microanim</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmaps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flip_map</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rescale_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_colors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">256</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proj_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'max'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_label_show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_label_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'title'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_label_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_thickness</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_unit_per_pix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_size_in_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_ypos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'white'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_font_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.08</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_text_centered</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig_scaling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">72</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_text</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_location</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'upper</span> <span class="pre">left'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'white'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_font_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_kwarg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap_objects</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microanim.Microanim" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.microanim.Microanim">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">microfilm.microanim.</span></span><span class="sig-name descname"><span class="pre">Microanim</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmaps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flip_map</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rescale_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_colors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">256</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proj_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'max'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_label_show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_label_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'title'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_label_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_thickness</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_unit_per_pix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_size_in_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_ypos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'white'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_font_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.08</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_text_centered</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig_scaling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">72</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_text</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_location</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'upper</span> <span class="pre">left'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'white'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_font_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_kwarg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap_objects</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_colorbar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microanim.Microanim" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#microfilm.microplot.Microimage" title="microfilm.microplot.Microimage"><code class="xref py py-class docutils literal notranslate"><span class="pre">microfilm.microplot.Microimage</span></code></a></p>
 <p>Class implementing an animation object. This object is a subclass of of the
 Microimage object and takes the same options. The main difference is that it
 takes a time-lapse dataset as obligatory parameter, not a simple image.</p>
 <dl class="py method">
-<dt id="microfilm.microanim.Microanim.add_time_stamp">
-<code class="sig-name descname"><span class="pre">add_time_stamp</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit_per_frame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">location</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'upper</span> <span class="pre">left'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'white'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'HH:MM:SS'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_stamp_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microanim.Microanim.add_time_stamp" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.microanim.Microanim.add_time_stamp">
+<span class="sig-name descname"><span class="pre">add_time_stamp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit_per_frame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">location</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'upper</span> <span class="pre">left'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'white'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'HH:MM:SS'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_stamp_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microanim.Microanim.add_time_stamp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add time-stamp to movie</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -562,19 +631,19 @@ to Matplotlib text object</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt id="microfilm.microanim.Microanim.save_movie">
-<code class="sig-name descname"><span class="pre">save_movie</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">movie_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quality</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microanim.Microanim.save_movie" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.microanim.Microanim.save_movie">
+<span class="sig-name descname"><span class="pre">save_movie</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">movie_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quality</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microanim.Microanim.save_movie" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="microfilm.microanim.Microanim.show">
-<code class="sig-name descname"><span class="pre">show</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microanim.Microanim.show" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.microanim.Microanim.show">
+<span class="sig-name descname"><span class="pre">show</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microanim.Microanim.show" title="Permalink to this definition">¶</a></dt>
 <dd><p>Display animation object</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="microfilm.microanim.Microanim.time_range">
-<code class="sig-name descname"><span class="pre">time_range</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit_per_frame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'HH:MM:SS:mmm'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microanim.Microanim.time_range" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.microanim.Microanim.time_range">
+<span class="sig-name descname"><span class="pre">time_range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit_per_frame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'HH:MM:SS:mmm'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microanim.Microanim.time_range" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create string time-stamps with arbitrary formatting.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -590,22 +659,22 @@ the ‘HH’ for hours, ‘MM’ for minutes, ‘SS’ for seconds and ‘mmm’
 </dd></dl>
 
 <dl class="py method">
-<dt id="microfilm.microanim.Microanim.update_animation">
-<code class="sig-name descname"><span class="pre">update_animation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microanim.Microanim.update_animation" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.microanim.Microanim.update_animation">
+<span class="sig-name descname"><span class="pre">update_animation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microanim.Microanim.update_animation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update animation to time t</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="microfilm.microanim.Microanim.update_timeslider">
-<code class="sig-name descname"><span class="pre">update_timeslider</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">change</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microanim.Microanim.update_timeslider" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.microanim.Microanim.update_timeslider">
+<span class="sig-name descname"><span class="pre">update_timeslider</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">change</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microanim.Microanim.update_timeslider" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update segmentation plot</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
-<dt id="microfilm.microanim.Microanimpanel">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">microfilm.microanim.</span></code><code class="sig-name descname"><span class="pre">Microanimpanel</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rows</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">margin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figscaling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_label_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_line_space</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">fig_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microanim.Microanimpanel" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.microanim.Microanimpanel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">microfilm.microanim.</span></span><span class="sig-name descname"><span class="pre">Microanimpanel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rows</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">margin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figscaling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_label_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_line_space</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">fig_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microanim.Microanimpanel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Class implementing a multi-panel animation. All animations should
 have the same number of time points.</p>
@@ -626,8 +695,8 @@ explicit size</p></li>
 </dd>
 </dl>
 <dl class="py attribute">
-<dt id="microfilm.microanim.Microanimpanel.microanims">
-<code class="sig-name descname"><span class="pre">microanims</span></code><a class="headerlink" href="#microfilm.microanim.Microanimpanel.microanims" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.microanim.Microanimpanel.microanims">
+<span class="sig-name descname"><span class="pre">microanims</span></span><a class="headerlink" href="#microfilm.microanim.Microanimpanel.microanims" title="Permalink to this definition">¶</a></dt>
 <dd><p>list of Microanim objects</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -637,8 +706,8 @@ explicit size</p></li>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="microfilm.microanim.Microanimpanel.time_slider">
-<code class="sig-name descname"><span class="pre">time_slider</span></code><a class="headerlink" href="#microfilm.microanim.Microanimpanel.time_slider" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.microanim.Microanimpanel.time_slider">
+<span class="sig-name descname"><span class="pre">time_slider</span></span><a class="headerlink" href="#microfilm.microanim.Microanimpanel.time_slider" title="Permalink to this definition">¶</a></dt>
 <dd><p>time slider</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -648,8 +717,8 @@ explicit size</p></li>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="microfilm.microanim.Microanimpanel.output">
-<code class="sig-name descname"><span class="pre">output</span></code><a class="headerlink" href="#microfilm.microanim.Microanimpanel.output" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.microanim.Microanimpanel.output">
+<span class="sig-name descname"><span class="pre">output</span></span><a class="headerlink" href="#microfilm.microanim.Microanimpanel.output" title="Permalink to this definition">¶</a></dt>
 <dd><p>widget to display plot</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -659,8 +728,8 @@ explicit size</p></li>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="microfilm.microanim.Microanimpanel.fig">
-<code class="sig-name descname"><span class="pre">fig</span></code><a class="headerlink" href="#microfilm.microanim.Microanimpanel.fig" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.microanim.Microanimpanel.fig">
+<span class="sig-name descname"><span class="pre">fig</span></span><a class="headerlink" href="#microfilm.microanim.Microanimpanel.fig" title="Permalink to this definition">¶</a></dt>
 <dd><p>figure containing the panel</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -670,8 +739,8 @@ explicit size</p></li>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="microfilm.microanim.Microanimpanel.ax">
-<code class="sig-name descname"><span class="pre">ax</span></code><a class="headerlink" href="#microfilm.microanim.Microanimpanel.ax" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.microanim.Microanimpanel.ax">
+<span class="sig-name descname"><span class="pre">ax</span></span><a class="headerlink" href="#microfilm.microanim.Microanimpanel.ax" title="Permalink to this definition">¶</a></dt>
 <dd><p>list of Matplotlib axis objects</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -681,8 +750,8 @@ explicit size</p></li>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="microfilm.microanim.Microanimpanel.ui">
-<code class="sig-name descname"><span class="pre">ui</span></code><a class="headerlink" href="#microfilm.microanim.Microanimpanel.ui" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.microanim.Microanimpanel.ui">
+<span class="sig-name descname"><span class="pre">ui</span></span><a class="headerlink" href="#microfilm.microanim.Microanimpanel.ui" title="Permalink to this definition">¶</a></dt>
 <dd><p>animation interface</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -692,8 +761,8 @@ explicit size</p></li>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="microfilm.microanim.Microanimpanel.max_time">
-<code class="sig-name descname"><span class="pre">max_time</span></code><a class="headerlink" href="#microfilm.microanim.Microanimpanel.max_time" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.microanim.Microanimpanel.max_time">
+<span class="sig-name descname"><span class="pre">max_time</span></span><a class="headerlink" href="#microfilm.microanim.Microanimpanel.max_time" title="Permalink to this definition">¶</a></dt>
 <dd><p>number of time points</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -703,14 +772,14 @@ explicit size</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt id="microfilm.microanim.Microanimpanel.add_channel_label">
-<code class="sig-name descname"><span class="pre">add_channel_label</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel_label_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_line_space</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microanim.Microanimpanel.add_channel_label" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.microanim.Microanimpanel.add_channel_label">
+<span class="sig-name descname"><span class="pre">add_channel_label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel_label_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_line_space</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microanim.Microanimpanel.add_channel_label" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add channel labels to all plots and set their size</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="microfilm.microanim.Microanimpanel.add_element">
-<code class="sig-name descname"><span class="pre">add_element</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">microanim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig_update</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microanim.Microanimpanel.add_element" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.microanim.Microanimpanel.add_element">
+<span class="sig-name descname"><span class="pre">add_element</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">microanim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig_update</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microanim.Microanimpanel.add_element" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add an animation object to a panel</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -723,27 +792,27 @@ explicit size</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt id="microfilm.microanim.Microanimpanel.save_movie">
-<code class="sig-name descname"><span class="pre">save_movie</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">movie_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quality</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microanim.Microanimpanel.save_movie" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.microanim.Microanimpanel.save_movie">
+<span class="sig-name descname"><span class="pre">save_movie</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">movie_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quality</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microanim.Microanimpanel.save_movie" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="microfilm.microanim.Microanimpanel.update_animation">
-<code class="sig-name descname"><span class="pre">update_animation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microanim.Microanimpanel.update_animation" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.microanim.Microanimpanel.update_animation">
+<span class="sig-name descname"><span class="pre">update_animation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microanim.Microanimpanel.update_animation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update all subplots</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="microfilm.microanim.Microanimpanel.update_timeslider">
-<code class="sig-name descname"><span class="pre">update_timeslider</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">change</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microanim.Microanimpanel.update_timeslider" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.microanim.Microanimpanel.update_timeslider">
+<span class="sig-name descname"><span class="pre">update_timeslider</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">change</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microanim.Microanimpanel.update_timeslider" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update segmentation plot</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py function">
-<dt id="microfilm.microanim.save_movie">
-<code class="sig-prename descclassname"><span class="pre">microfilm.microanim.</span></code><code class="sig-name descname"><span class="pre">save_movie</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">anim_object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">movie_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quality</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microanim.save_movie" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.microanim.save_movie">
+<span class="sig-prename descclassname"><span class="pre">microfilm.microanim.</span></span><span class="sig-name descname"><span class="pre">save_movie</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">anim_object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">movie_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quality</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microanim.save_movie" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save a movie</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -761,8 +830,8 @@ explicit size</p></li>
 <div class="section" id="module-microfilm.microplot">
 <span id="microfilm-microplot-module"></span><h2>microfilm.microplot module<a class="headerlink" href="#module-microfilm.microplot" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="microfilm.microplot.Microimage">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">microfilm.microplot.</span></code><code class="sig-name descname"><span class="pre">Microimage</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">images</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmaps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flip_map</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rescale_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_colors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">256</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proj_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'max'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_label_show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_label_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'title'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_label_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_thickness</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_unit_per_pix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_size_in_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_ypos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'white'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_font_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.08</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_text_centered</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig_scaling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">72</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_text</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_location</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'upper</span> <span class="pre">left'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'white'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_font_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap_objects</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microplot.Microimage" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.microplot.Microimage">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">microfilm.microplot.</span></span><span class="sig-name descname"><span class="pre">Microimage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">images</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmaps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flip_map</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rescale_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_colors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">256</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proj_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'max'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_label_show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_label_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'title'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_label_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_thickness</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_unit_per_pix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_size_in_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_ypos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'white'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_font_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.08</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_text_centered</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig_scaling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">72</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_text</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_location</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'upper</span> <span class="pre">left'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'white'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_font_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap_objects</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_colorbar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microplot.Microimage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Class implementing the plot object. It is usually created by
 calling the microshow function but can also be used directly.</p>
@@ -810,12 +879,13 @@ a list with xy coordinates [xpos, ypos] where 0 &lt; xpos, ypos &lt; 1</p></li>
 to Matplotlib text object</p></li>
 <li><p><strong>cmaps_object</strong> (<em>list</em>) – list of cmap objects for each channel
 if provided, cmap names are ignored</p></li>
+<li><p><strong>show_colorbar</strong> (<em>bool</em>) – show colorbar</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py method">
-<dt id="microfilm.microplot.Microimage.add_channel_labels">
-<code class="sig-name descname"><span class="pre">add_channel_labels</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_label_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microplot.Microimage.add_channel_labels" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.microplot.Microimage.add_channel_labels">
+<span class="sig-name descname"><span class="pre">add_channel_labels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_label_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microplot.Microimage.add_channel_labels" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add the channel names color with the corresponding colormap as figure title</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -828,8 +898,14 @@ if provided, cmap names are ignored</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt id="microfilm.microplot.Microimage.add_label">
-<code class="sig-name descname"><span class="pre">add_label</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label_text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_location</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'upper</span> <span class="pre">left'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'white'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_font_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microplot.Microimage.add_label" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.microplot.Microimage.add_colorbar">
+<span class="sig-name descname"><span class="pre">add_colorbar</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microplot.Microimage.add_colorbar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add colorbar</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="microfilm.microplot.Microimage.add_label">
+<span class="sig-name descname"><span class="pre">add_label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label_text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_location</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'upper</span> <span class="pre">left'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'white'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_font_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microplot.Microimage.add_label" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add a figure label to an image.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -848,8 +924,8 @@ to Matplotlib text object</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt id="microfilm.microplot.Microimage.add_scalebar">
-<code class="sig-name descname"><span class="pre">add_scalebar</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_size_in_units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_unit_per_pix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_thickness</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_ypos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'white'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_font_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.08</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_text_centered</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microplot.Microimage.add_scalebar" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.microplot.Microimage.add_scalebar">
+<span class="sig-name descname"><span class="pre">add_scalebar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_size_in_units</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_unit_per_pix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_thickness</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_ypos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'white'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_font_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.08</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_text_centered</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microplot.Microimage.add_scalebar" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add scalebar to an image.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -868,20 +944,22 @@ to Matplotlib text object</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt id="microfilm.microplot.Microimage.savefig">
-<code class="sig-name descname"><span class="pre">savefig</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microplot.Microimage.savefig" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.microplot.Microimage.savefig">
+<span class="sig-name descname"><span class="pre">savefig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microplot.Microimage.savefig" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save the current figure.</p>
 <p>Call signature:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">savefig</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span>
-        <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;portrait&#39;</span><span class="p">,</span> <span class="n">papertype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">transparent</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-        <span class="n">frameon</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">savefig</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="s1">&#39;figure&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">bbox_inches</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+        <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span>
+        <span class="n">backend</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+       <span class="p">)</span>
 </pre></div>
 </div>
 <p>The available output formats depend on the backend being used.</p>
-<dl class="field-list">
+<dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>fname</strong> (<em>str</em><em> or </em><em>path-like</em><em> or </em><em>binary file-like</em>) – <p>A path, or a Python file-like object, or
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fname</strong> (<em>str</em><em> or </em><em>path-like</em><em> or </em><em>binary file-like</em>) – <p>A path, or a Python file-like object, or
 possibly some backend-dependent object such as
 <cite>matplotlib.backends.backend_pdf.PdfPages</cite>.</p>
 <p>If <em>format</em> is set, it determines the output format, and the file
@@ -893,69 +971,55 @@ extension of <em>fname</em>, if there is one.  If <em>format</em> is not
 set and <em>fname</em> has no extension, then the file is saved with
 <a href="#id1"><span class="problematic" id="id2">:rc:`savefig.format`</span></a> and the appropriate extension is appended to
 <em>fname</em>.</p>
-</p>
-</dd>
-<dt class="field-even">Other Parameters</dt>
-<dd class="field-even"><ul>
+</p></li>
 <li><p><strong>dpi</strong> (float or ‘figure’, default: <a href="#id3"><span class="problematic" id="id4">:rc:`savefig.dpi`</span></a>) – The resolution in dots per inch.  If ‘figure’, use the figure’s
 dpi value.</p></li>
-<li><p><strong>quality</strong> (int, default: <a href="#id5"><span class="problematic" id="id6">:rc:`savefig.jpeg_quality`</span></a>) – Applicable only if <em>format</em> is ‘jpg’ or ‘jpeg’, ignored otherwise.</p>
-<p>The image quality, on a scale from 1 (worst) to 95 (best).
-Values above 95 should be avoided; 100 disables portions of
-the JPEG compression algorithm, and results in large files
-with hardly any gain in image quality.</p>
-<p>This parameter is deprecated.</p>
-</li>
-<li><p><strong>optimize</strong> (<em>bool, default: False</em>) – Applicable only if <em>format</em> is ‘jpg’ or ‘jpeg’, ignored otherwise.</p>
-<p>Whether the encoder should make an extra pass over the image
-in order to select optimal encoder settings.</p>
-<p>This parameter is deprecated.</p>
-</li>
-<li><p><strong>progressive</strong> (<em>bool, default: False</em>) – Applicable only if <em>format</em> is ‘jpg’ or ‘jpeg’, ignored otherwise.</p>
-<p>Whether the image should be stored as a progressive JPEG file.</p>
-<p>This parameter is deprecated.</p>
-</li>
-<li><p><strong>facecolor</strong> (color or ‘auto’, default: <a href="#id7"><span class="problematic" id="id8">:rc:`savefig.facecolor`</span></a>) – The facecolor of the figure.  If ‘auto’, use the current figure
-facecolor.</p></li>
-<li><p><strong>edgecolor</strong> (color or ‘auto’, default: <a href="#id9"><span class="problematic" id="id10">:rc:`savefig.edgecolor`</span></a>) – The edgecolor of the figure.  If ‘auto’, use the current figure
-edgecolor.</p></li>
-<li><p><strong>orientation</strong> (<em>{‘landscape’, ‘portrait’}</em>) – Currently only supported by the postscript backend.</p></li>
-<li><p><strong>papertype</strong> (<em>str</em>) – One of ‘letter’, ‘legal’, ‘executive’, ‘ledger’, ‘a0’ through
-‘a10’, ‘b0’ through ‘b10’. Only supported for postscript
-output.</p></li>
 <li><p><strong>format</strong> (<em>str</em>) – The file format, e.g. ‘png’, ‘pdf’, ‘svg’, … The behavior when
 this is unset is documented under <em>fname</em>.</p></li>
-<li><p><strong>transparent</strong> (<em>bool</em>) – If <em>True</em>, the Axes patches will all be transparent; the
-figure patch will also be transparent unless facecolor
-and/or edgecolor are specified via kwargs.
-This is useful, for example, for displaying
-a plot on top of a colored background on a web page.  The
-transparency of these patches will be restored to their
-original values upon exit of this function.</p></li>
-<li><p><strong>bbox_inches</strong> (str or <cite>.Bbox</cite>, default: <a href="#id11"><span class="problematic" id="id12">:rc:`savefig.bbox`</span></a>) – Bounding box in inches: only the given portion of the figure is
+<li><p><strong>metadata</strong> (<em>dict</em><em>, </em><em>optional</em>) – <p>Key/value pairs to store in the image metadata. The supported keys
+and defaults depend on the image format and backend:</p>
+<ul>
+<li><p>’png’ with Agg backend: See the parameter <code class="docutils literal notranslate"><span class="pre">metadata</span></code> of
+<cite>~.FigureCanvasAgg.print_png</cite>.</p></li>
+<li><p>’pdf’ with pdf backend: See the parameter <code class="docutils literal notranslate"><span class="pre">metadata</span></code> of
+<cite>~.backend_pdf.PdfPages</cite>.</p></li>
+<li><p>’svg’ with svg backend: See the parameter <code class="docutils literal notranslate"><span class="pre">metadata</span></code> of
+<cite>~.FigureCanvasSVG.print_svg</cite>.</p></li>
+<li><p>’eps’ and ‘ps’ with PS backend: Only ‘Creator’ is supported.</p></li>
+</ul>
+</p></li>
+<li><p><strong>bbox_inches</strong> (str or <cite>.Bbox</cite>, default: <a href="#id5"><span class="problematic" id="id6">:rc:`savefig.bbox`</span></a>) – Bounding box in inches: only the given portion of the figure is
 saved.  If ‘tight’, try to figure out the tight bbox of the figure.</p></li>
-<li><p><strong>pad_inches</strong> (float, default: <a href="#id13"><span class="problematic" id="id14">:rc:`savefig.pad_inches`</span></a>) – Amount of padding around the figure when bbox_inches is ‘tight’.</p></li>
-<li><p><strong>bbox_extra_artists</strong> (list of <cite>~matplotlib.artist.Artist</cite>, optional) – A list of extra artists that will be considered when the
-tight bbox is calculated.</p></li>
-<li><p><strong>backend</strong> (<em>str, optional</em>) – Use a non-default backend to render the file, e.g. to render a
+<li><p><strong>pad_inches</strong> (float, default: <a href="#id7"><span class="problematic" id="id8">:rc:`savefig.pad_inches`</span></a>) – Amount of padding around the figure when bbox_inches is ‘tight’.</p></li>
+<li><p><strong>facecolor</strong> (color or ‘auto’, default: <a href="#id9"><span class="problematic" id="id10">:rc:`savefig.facecolor`</span></a>) – The facecolor of the figure.  If ‘auto’, use the current figure
+facecolor.</p></li>
+<li><p><strong>edgecolor</strong> (color or ‘auto’, default: <a href="#id11"><span class="problematic" id="id12">:rc:`savefig.edgecolor`</span></a>) – The edgecolor of the figure.  If ‘auto’, use the current figure
+edgecolor.</p></li>
+<li><p><strong>backend</strong> (<em>str</em><em>, </em><em>optional</em>) – Use a non-default backend to render the file, e.g. to render a
 png file with the “cairo” backend rather than the default “agg”,
 or a pdf file with the “pgf” backend rather than the default
 “pdf”.  Note that the default backend is normally sufficient.  See
 <span class="xref std std-ref">the-builtin-backends</span> for a list of valid backends for each
 file format.  Custom backends can be referenced as “module://…”.</p></li>
-<li><p><strong>metadata</strong> (<em>dict, optional</em>) – Key/value pairs to store in the image metadata. The supported keys
-and defaults depend on the image format and backend:</p>
-<ul class="simple">
-<li><p>‘png’ with Agg backend: See the parameter <code class="docutils literal notranslate"><span class="pre">metadata</span></code> of
-<cite>~.FigureCanvasAgg.print_png</cite>.</p></li>
-<li><p>‘pdf’ with pdf backend: See the parameter <code class="docutils literal notranslate"><span class="pre">metadata</span></code> of
-<cite>~.backend_pdf.PdfPages</cite>.</p></li>
-<li><p>‘svg’ with svg backend: See the parameter <code class="docutils literal notranslate"><span class="pre">metadata</span></code> of
-<cite>~.FigureCanvasSVG.print_svg</cite>.</p></li>
-<li><p>‘eps’ and ‘ps’ with PS backend: Only ‘Creator’ is supported.</p></li>
-</ul>
-</li>
-<li><p><strong>pil_kwargs</strong> (<em>dict, optional</em>) – Additional keyword arguments that are passed to
+<li><p><strong>orientation</strong> (<em>{'landscape'</em><em>, </em><em>'portrait'}</em>) – Currently only supported by the postscript backend.</p></li>
+<li><p><strong>papertype</strong> (<em>str</em>) – One of ‘letter’, ‘legal’, ‘executive’, ‘ledger’, ‘a0’ through
+‘a10’, ‘b0’ through ‘b10’. Only supported for postscript
+output.</p></li>
+<li><p><strong>transparent</strong> (<em>bool</em>) – <p>If <em>True</em>, the Axes patches will all be transparent; the
+Figure patch will also be transparent unless <em>facecolor</em>
+and/or <em>edgecolor</em> are specified via kwargs.</p>
+<p>If <em>False</em> has no effect and the color of the Axes and
+Figure patches are unchanged (unless the Figure patch
+is specified via the <em>facecolor</em> and/or <em>edgecolor</em> keyword
+arguments in which case those colors are used).</p>
+<p>The transparency of these patches will be restored to their
+original values upon exit of this function.</p>
+<p>This is useful, for example, for displaying
+a plot on top of a colored background on a web page.</p>
+</p></li>
+<li><p><strong>bbox_extra_artists</strong> (list of <cite>~matplotlib.artist.Artist</cite>, optional) – A list of extra artists that will be considered when the
+tight bbox is calculated.</p></li>
+<li><p><strong>pil_kwargs</strong> (<em>dict</em><em>, </em><em>optional</em>) – Additional keyword arguments that are passed to
 <cite>PIL.Image.Image.save</cite> when saving the figure.</p></li>
 </ul>
 </dd>
@@ -963,8 +1027,8 @@ and defaults depend on the image format and backend:</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="microfilm.microplot.Microimage.update">
-<code class="sig-name descname"><span class="pre">update</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microplot.Microimage.update" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.microplot.Microimage.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microplot.Microimage.update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update the Microimage axis or create a new copy of the object
 with a new axis and figure.</p>
 <dl class="field-list simple">
@@ -986,8 +1050,8 @@ with a new axis and figure.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="microfilm.microplot.Micropanel">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">microfilm.microplot.</span></code><code class="sig-name descname"><span class="pre">Micropanel</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rows</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">margin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figscaling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_label_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_line_space</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">fig_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microplot.Micropanel" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.microplot.Micropanel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">microfilm.microplot.</span></span><span class="sig-name descname"><span class="pre">Micropanel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rows</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">margin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figscaling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_label_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_line_space</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">fig_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microplot.Micropanel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Class implementing a panel object of multiple Microimage
 objects.</p>
@@ -1006,8 +1070,8 @@ explicit size</p></li>
 </dd>
 </dl>
 <dl class="py attribute">
-<dt id="microfilm.microplot.Micropanel.fig">
-<code class="sig-name descname"><span class="pre">fig</span></code><a class="headerlink" href="#microfilm.microplot.Micropanel.fig" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.microplot.Micropanel.fig">
+<span class="sig-name descname"><span class="pre">fig</span></span><a class="headerlink" href="#microfilm.microplot.Micropanel.fig" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>Matplotlib figure object</p>
@@ -1016,8 +1080,8 @@ explicit size</p></li>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="microfilm.microplot.Micropanel.ax">
-<code class="sig-name descname"><span class="pre">ax</span></code><a class="headerlink" href="#microfilm.microplot.Micropanel.ax" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.microplot.Micropanel.ax">
+<span class="sig-name descname"><span class="pre">ax</span></span><a class="headerlink" href="#microfilm.microplot.Micropanel.ax" title="Permalink to this definition">¶</a></dt>
 <dd><p>list of Matplotlib axis objects</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -1027,8 +1091,8 @@ explicit size</p></li>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="microfilm.microplot.Micropanel.microplots">
-<code class="sig-name descname"><span class="pre">microplots</span></code><a class="headerlink" href="#microfilm.microplot.Micropanel.microplots" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.microplot.Micropanel.microplots">
+<span class="sig-name descname"><span class="pre">microplots</span></span><a class="headerlink" href="#microfilm.microplot.Micropanel.microplots" title="Permalink to this definition">¶</a></dt>
 <dd><p>array of Microimage objects</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -1038,14 +1102,14 @@ explicit size</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt id="microfilm.microplot.Micropanel.add_channel_label">
-<code class="sig-name descname"><span class="pre">add_channel_label</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel_label_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_line_space</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microplot.Micropanel.add_channel_label" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.microplot.Micropanel.add_channel_label">
+<span class="sig-name descname"><span class="pre">add_channel_label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel_label_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_line_space</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microplot.Micropanel.add_channel_label" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add channel labels to all plots and set their size</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="microfilm.microplot.Micropanel.add_element">
-<code class="sig-name descname"><span class="pre">add_element</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">microim</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microplot.Micropanel.add_element" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.microplot.Micropanel.add_element">
+<span class="sig-name descname"><span class="pre">add_element</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">microim</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microplot.Micropanel.add_element" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add a microimage object to a panel</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1058,26 +1122,28 @@ explicit size</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt id="microfilm.microplot.Micropanel.construct_figure">
-<code class="sig-name descname"><span class="pre">construct_figure</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microplot.Micropanel.construct_figure" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.microplot.Micropanel.construct_figure">
+<span class="sig-name descname"><span class="pre">construct_figure</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microplot.Micropanel.construct_figure" title="Permalink to this definition">¶</a></dt>
 <dd><p>Construct the figure</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="microfilm.microplot.Micropanel.savefig">
-<code class="sig-name descname"><span class="pre">savefig</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microplot.Micropanel.savefig" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.microplot.Micropanel.savefig">
+<span class="sig-name descname"><span class="pre">savefig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microplot.Micropanel.savefig" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save the current figure.</p>
 <p>Call signature:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">savefig</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span>
-        <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;portrait&#39;</span><span class="p">,</span> <span class="n">papertype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">transparent</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-        <span class="n">frameon</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">savefig</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="s1">&#39;figure&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">bbox_inches</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+        <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span>
+        <span class="n">backend</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+       <span class="p">)</span>
 </pre></div>
 </div>
 <p>The available output formats depend on the backend being used.</p>
-<dl class="field-list">
+<dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>fname</strong> (<em>str</em><em> or </em><em>path-like</em><em> or </em><em>binary file-like</em>) – <p>A path, or a Python file-like object, or
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fname</strong> (<em>str</em><em> or </em><em>path-like</em><em> or </em><em>binary file-like</em>) – <p>A path, or a Python file-like object, or
 possibly some backend-dependent object such as
 <cite>matplotlib.backends.backend_pdf.PdfPages</cite>.</p>
 <p>If <em>format</em> is set, it determines the output format, and the file
@@ -1087,71 +1153,57 @@ is no attempt to make the extension, if any, of <em>fname</em> match
 <p>If <em>format</em> is not set, then the format is inferred from the
 extension of <em>fname</em>, if there is one.  If <em>format</em> is not
 set and <em>fname</em> has no extension, then the file is saved with
-<a href="#id15"><span class="problematic" id="id16">:rc:`savefig.format`</span></a> and the appropriate extension is appended to
+<a href="#id13"><span class="problematic" id="id14">:rc:`savefig.format`</span></a> and the appropriate extension is appended to
 <em>fname</em>.</p>
-</p>
-</dd>
-<dt class="field-even">Other Parameters</dt>
-<dd class="field-even"><ul>
-<li><p><strong>dpi</strong> (float or ‘figure’, default: <a href="#id17"><span class="problematic" id="id18">:rc:`savefig.dpi`</span></a>) – The resolution in dots per inch.  If ‘figure’, use the figure’s
+</p></li>
+<li><p><strong>dpi</strong> (float or ‘figure’, default: <a href="#id15"><span class="problematic" id="id16">:rc:`savefig.dpi`</span></a>) – The resolution in dots per inch.  If ‘figure’, use the figure’s
 dpi value.</p></li>
-<li><p><strong>quality</strong> (int, default: <a href="#id19"><span class="problematic" id="id20">:rc:`savefig.jpeg_quality`</span></a>) – Applicable only if <em>format</em> is ‘jpg’ or ‘jpeg’, ignored otherwise.</p>
-<p>The image quality, on a scale from 1 (worst) to 95 (best).
-Values above 95 should be avoided; 100 disables portions of
-the JPEG compression algorithm, and results in large files
-with hardly any gain in image quality.</p>
-<p>This parameter is deprecated.</p>
-</li>
-<li><p><strong>optimize</strong> (<em>bool, default: False</em>) – Applicable only if <em>format</em> is ‘jpg’ or ‘jpeg’, ignored otherwise.</p>
-<p>Whether the encoder should make an extra pass over the image
-in order to select optimal encoder settings.</p>
-<p>This parameter is deprecated.</p>
-</li>
-<li><p><strong>progressive</strong> (<em>bool, default: False</em>) – Applicable only if <em>format</em> is ‘jpg’ or ‘jpeg’, ignored otherwise.</p>
-<p>Whether the image should be stored as a progressive JPEG file.</p>
-<p>This parameter is deprecated.</p>
-</li>
+<li><p><strong>format</strong> (<em>str</em>) – The file format, e.g. ‘png’, ‘pdf’, ‘svg’, … The behavior when
+this is unset is documented under <em>fname</em>.</p></li>
+<li><p><strong>metadata</strong> (<em>dict</em><em>, </em><em>optional</em>) – <p>Key/value pairs to store in the image metadata. The supported keys
+and defaults depend on the image format and backend:</p>
+<ul>
+<li><p>’png’ with Agg backend: See the parameter <code class="docutils literal notranslate"><span class="pre">metadata</span></code> of
+<cite>~.FigureCanvasAgg.print_png</cite>.</p></li>
+<li><p>’pdf’ with pdf backend: See the parameter <code class="docutils literal notranslate"><span class="pre">metadata</span></code> of
+<cite>~.backend_pdf.PdfPages</cite>.</p></li>
+<li><p>’svg’ with svg backend: See the parameter <code class="docutils literal notranslate"><span class="pre">metadata</span></code> of
+<cite>~.FigureCanvasSVG.print_svg</cite>.</p></li>
+<li><p>’eps’ and ‘ps’ with PS backend: Only ‘Creator’ is supported.</p></li>
+</ul>
+</p></li>
+<li><p><strong>bbox_inches</strong> (str or <cite>.Bbox</cite>, default: <a href="#id17"><span class="problematic" id="id18">:rc:`savefig.bbox`</span></a>) – Bounding box in inches: only the given portion of the figure is
+saved.  If ‘tight’, try to figure out the tight bbox of the figure.</p></li>
+<li><p><strong>pad_inches</strong> (float, default: <a href="#id19"><span class="problematic" id="id20">:rc:`savefig.pad_inches`</span></a>) – Amount of padding around the figure when bbox_inches is ‘tight’.</p></li>
 <li><p><strong>facecolor</strong> (color or ‘auto’, default: <a href="#id21"><span class="problematic" id="id22">:rc:`savefig.facecolor`</span></a>) – The facecolor of the figure.  If ‘auto’, use the current figure
 facecolor.</p></li>
 <li><p><strong>edgecolor</strong> (color or ‘auto’, default: <a href="#id23"><span class="problematic" id="id24">:rc:`savefig.edgecolor`</span></a>) – The edgecolor of the figure.  If ‘auto’, use the current figure
 edgecolor.</p></li>
-<li><p><strong>orientation</strong> (<em>{‘landscape’, ‘portrait’}</em>) – Currently only supported by the postscript backend.</p></li>
-<li><p><strong>papertype</strong> (<em>str</em>) – One of ‘letter’, ‘legal’, ‘executive’, ‘ledger’, ‘a0’ through
-‘a10’, ‘b0’ through ‘b10’. Only supported for postscript
-output.</p></li>
-<li><p><strong>format</strong> (<em>str</em>) – The file format, e.g. ‘png’, ‘pdf’, ‘svg’, … The behavior when
-this is unset is documented under <em>fname</em>.</p></li>
-<li><p><strong>transparent</strong> (<em>bool</em>) – If <em>True</em>, the Axes patches will all be transparent; the
-figure patch will also be transparent unless facecolor
-and/or edgecolor are specified via kwargs.
-This is useful, for example, for displaying
-a plot on top of a colored background on a web page.  The
-transparency of these patches will be restored to their
-original values upon exit of this function.</p></li>
-<li><p><strong>bbox_inches</strong> (str or <cite>.Bbox</cite>, default: <a href="#id25"><span class="problematic" id="id26">:rc:`savefig.bbox`</span></a>) – Bounding box in inches: only the given portion of the figure is
-saved.  If ‘tight’, try to figure out the tight bbox of the figure.</p></li>
-<li><p><strong>pad_inches</strong> (float, default: <a href="#id27"><span class="problematic" id="id28">:rc:`savefig.pad_inches`</span></a>) – Amount of padding around the figure when bbox_inches is ‘tight’.</p></li>
-<li><p><strong>bbox_extra_artists</strong> (list of <cite>~matplotlib.artist.Artist</cite>, optional) – A list of extra artists that will be considered when the
-tight bbox is calculated.</p></li>
-<li><p><strong>backend</strong> (<em>str, optional</em>) – Use a non-default backend to render the file, e.g. to render a
+<li><p><strong>backend</strong> (<em>str</em><em>, </em><em>optional</em>) – Use a non-default backend to render the file, e.g. to render a
 png file with the “cairo” backend rather than the default “agg”,
 or a pdf file with the “pgf” backend rather than the default
 “pdf”.  Note that the default backend is normally sufficient.  See
 <span class="xref std std-ref">the-builtin-backends</span> for a list of valid backends for each
 file format.  Custom backends can be referenced as “module://…”.</p></li>
-<li><p><strong>metadata</strong> (<em>dict, optional</em>) – Key/value pairs to store in the image metadata. The supported keys
-and defaults depend on the image format and backend:</p>
-<ul class="simple">
-<li><p>‘png’ with Agg backend: See the parameter <code class="docutils literal notranslate"><span class="pre">metadata</span></code> of
-<cite>~.FigureCanvasAgg.print_png</cite>.</p></li>
-<li><p>‘pdf’ with pdf backend: See the parameter <code class="docutils literal notranslate"><span class="pre">metadata</span></code> of
-<cite>~.backend_pdf.PdfPages</cite>.</p></li>
-<li><p>‘svg’ with svg backend: See the parameter <code class="docutils literal notranslate"><span class="pre">metadata</span></code> of
-<cite>~.FigureCanvasSVG.print_svg</cite>.</p></li>
-<li><p>‘eps’ and ‘ps’ with PS backend: Only ‘Creator’ is supported.</p></li>
-</ul>
-</li>
-<li><p><strong>pil_kwargs</strong> (<em>dict, optional</em>) – Additional keyword arguments that are passed to
+<li><p><strong>orientation</strong> (<em>{'landscape'</em><em>, </em><em>'portrait'}</em>) – Currently only supported by the postscript backend.</p></li>
+<li><p><strong>papertype</strong> (<em>str</em>) – One of ‘letter’, ‘legal’, ‘executive’, ‘ledger’, ‘a0’ through
+‘a10’, ‘b0’ through ‘b10’. Only supported for postscript
+output.</p></li>
+<li><p><strong>transparent</strong> (<em>bool</em>) – <p>If <em>True</em>, the Axes patches will all be transparent; the
+Figure patch will also be transparent unless <em>facecolor</em>
+and/or <em>edgecolor</em> are specified via kwargs.</p>
+<p>If <em>False</em> has no effect and the color of the Axes and
+Figure patches are unchanged (unless the Figure patch
+is specified via the <em>facecolor</em> and/or <em>edgecolor</em> keyword
+arguments in which case those colors are used).</p>
+<p>The transparency of these patches will be restored to their
+original values upon exit of this function.</p>
+<p>This is useful, for example, for displaying
+a plot on top of a colored background on a web page.</p>
+</p></li>
+<li><p><strong>bbox_extra_artists</strong> (list of <cite>~matplotlib.artist.Artist</cite>, optional) – A list of extra artists that will be considered when the
+tight bbox is calculated.</p></li>
+<li><p><strong>pil_kwargs</strong> (<em>dict</em><em>, </em><em>optional</em>) – Additional keyword arguments that are passed to
 <cite>PIL.Image.Image.save</cite> when saving the figure.</p></li>
 </ul>
 </dd>
@@ -1161,8 +1213,8 @@ and defaults depend on the image format and backend:</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="microfilm.microplot.microshow">
-<code class="sig-prename descclassname"><span class="pre">microfilm.microplot.</span></code><code class="sig-name descname"><span class="pre">microshow</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">images</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmaps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flip_map</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rescale_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_colors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">256</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proj_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'max'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_label_show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_label_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'title'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_label_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_thickness</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_unit_per_pix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_size_in_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_ypos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'white'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_font_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.08</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_text_centered</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig_scaling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">72</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_text</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_location</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'upper</span> <span class="pre">left'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'white'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_font_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap_objects</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">microim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microplot.microshow" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="microfilm.microplot.microshow">
+<span class="sig-prename descclassname"><span class="pre">microfilm.microplot.</span></span><span class="sig-name descname"><span class="pre">microshow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">images</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmaps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flip_map</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rescale_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_colors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">256</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proj_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'max'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_label_show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_label_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'title'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_label_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_thickness</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_unit_per_pix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_size_in_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_ypos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'white'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_font_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.08</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalebar_text_centered</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig_scaling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">72</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_text</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_location</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'upper</span> <span class="pre">left'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'white'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_font_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap_objects</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_colorbar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">microim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microfilm.microplot.microshow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plot image</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1208,18 +1260,19 @@ a list with xy coordinates [xpos, ypos] where 0 &lt; xpos, ypos &lt; 1</p></li>
 to Matplotlib text object</p></li>
 <li><p><strong>cmap_objects</strong> (<em>list</em>) – list of Matplotlib colormaps to use for coloring
 if provided, the cmap names are ignored</p></li>
+<li><p><strong>show_colorbar</strong> (<em>bool</em>) – show colorbar</p></li>
 <li><p><strong>microim</strong> (<em>Microimage object</em>) – object to re-use</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Microimage object</p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Microimage object</p>
 </dd>
 </dl>
 </dd></dl>
 
+</div>
+<div class="section" id="module-microfilm.version">
+<span id="microfilm-version-module"></span><h2>microfilm.version module<a class="headerlink" href="#module-microfilm.version" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="module-microfilm">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-microfilm" title="Permalink to this headline">¶</a></h2>
@@ -1248,54 +1301,42 @@ if provided, the cmap names are ignored</p></li>
 
               </div>
               
-        
             
-
-
-
-<div class='prev-next-bottom'>
-    
-    <div id="prev">
-        <a class="left-prev" href="../../notebooks/create_panels.html" title="previous page">
-            <i class="prevnext-label fas fa-angle-left"></i>
-            <div class="prevnext-info">
-                <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Creating multi-panel figures</p>
-            </div>
-        </a>
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="../../notebooks/create_panels.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Creating multi-panel figures</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="microfilm.dataset.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">microfilm.dataset package</p>
     </div>
-     <div id="next">
-        <a class="right-next" href="microfilm.dataset.html" title="next page">
-            <div class="prevnext-info">
-                <p class="prevnext-label">next</p>
-                <p class="prevnext-title">microfilm.dataset package</p>
-            </div>
-            <i class="prevnext-label fas fa-angle-right"></i>
-        </a>
-     </div>
-
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
-        
+            
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By The Jupyter Book community<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By The Jupyter Book community<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-  
   </body>
 </html>
