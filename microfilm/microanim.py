@@ -24,7 +24,8 @@ class Microanim(Microimage):
         channel_label_size=0.05, scalebar_thickness=5, scalebar_unit_per_pix=None, scalebar_size_in_units=None, unit=None,
         scalebar_ypos=0.05, scalebar_color='white', scalebar_font_size=0.08, scalebar_text_centered=True,
         ax=None, fig_scaling=3, dpi=72, label_text=None, label_location='upper left',
-        label_color='white', label_font_size=15, label_kwarg={}, cmap_objects=None, show_plot=True
+        label_color='white', label_font_size=15, label_kwarg={}, cmap_objects=None, 
+        show_colorbar=False, show_plot=True
     ):
         super().__init__(
             None, cmaps, flip_map, rescale_type, limits, num_colors,
@@ -32,7 +33,7 @@ class Microanim(Microimage):
             channel_label_size, scalebar_thickness, scalebar_unit_per_pix, scalebar_size_in_units, unit,
             scalebar_ypos, scalebar_color, scalebar_font_size, scalebar_text_centered,
             ax, fig_scaling, dpi, label_text, label_location,
-            label_color, label_font_size, label_kwarg, cmap_objects
+            label_color, label_font_size, label_kwarg, cmap_objects, show_colorbar
         )
 
         if isinstance(data, np.ndarray):
@@ -82,7 +83,7 @@ class Microanim(Microimage):
 
         self.images = [self.data.load_frame(x, t) for x in self.channels]
 
-        converted, cmap_objects = multichannel_to_rgb(self.images, cmaps=self.cmaps, flip_map=self.flip_map,
+        converted, _, _ = multichannel_to_rgb(self.images, cmaps=self.cmaps, flip_map=self.flip_map,
                                     rescale_type=self.rescale_type, limits=self.limits, num_colors=self.num_colors,
                                     cmap_objects=self.cmap_objects)
 
@@ -426,7 +427,8 @@ def save_movie(anim_object, movie_name, fps=20, quality=5, format=None):
             #buf = np.frombuffer(self.ax.figure.canvas.tostring_rgb(), dtype=np.uint8 )
             buf = np.frombuffer(anim_object.fig.canvas.tostring_rgb(), dtype=np.uint8 )
             #w,h = anim_object.ax.figure.canvas.get_width_height()
-            w,h = anim_object.fig.canvas.get_width_height()
+            #w,h = anim_object.fig.canvas.get_width_height()
+            w,h = map(int, anim_object.fig.canvas.renderer.get_canvas_width_height())
             buf.shape = (h, w, 3)
             writer.append_data(buf)
             

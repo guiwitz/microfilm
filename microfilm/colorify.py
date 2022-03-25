@@ -80,10 +80,9 @@ def random_cmap(alpha=0.5, num_colors=256):
 
     return cmap
 
-def random_grandient_cmap(num_colors, seed=42):
-    
-    #rng = np.random.default_rng(2021)
-    num_colors = 256
+def random_grandient_cmap(num_colors=25, seed=42):
+    """Create a colormap as the gradient of a given random color"""
+
     rgb = hsv2rgb([np.random.random(1)[0], 0.95, 0.95])
 
     cmap = ListedColormap(np.c_[
@@ -115,14 +114,16 @@ def colorify_by_cmap(image, cmap, rescale_type='min_max', limits=None):
     -------
     image_colored: array
         3D RGB float array
+    min_max: tuple
+        actual min and max values used for rescaling
 
     """
 
-    image = rescale_image(image, rescale_type=rescale_type, limits=limits)
+    image, min_max = rescale_image(image, rescale_type=rescale_type, limits=limits)
                 
     image_colored = cmap(image)
     
-    return image_colored
+    return image_colored, min_max
 
 def colorify_by_name(image, cmap_name, flip_map=False, rescale_type='min_max', limits=None, num_colors=256):
     """
@@ -152,16 +153,18 @@ def colorify_by_name(image, cmap_name, flip_map=False, rescale_type='min_max', l
         3D RGB float array
     cmap: Matplotlib colormap object
         Generated colormap from name
+    min_max: tuple
+        actual min and max values used for rescaling
 
     """
     
-    image = rescale_image(image, rescale_type=rescale_type, limits=limits)
+    image, min_max = rescale_image(image, rescale_type=rescale_type, limits=limits)
     
     cmap = cmaps_def(cmap_name, num_colors=num_colors, flip_map=flip_map)
             
     image_colored = cmap(image)
     
-    return image_colored, cmap
+    return image_colored, cmap, min_max
 
 
 def colorify_by_hex(image, cmap_hex='#ff6600', flip_map=False, rescale_type='min_max',
@@ -193,10 +196,12 @@ def colorify_by_hex(image, cmap_hex='#ff6600', flip_map=False, rescale_type='min
         3D RGB float array
     cmap: Matplotlib colormap object
         Generated colormap from name
+    min_max: tuple
+        actual min and max values used for rescaling
 
     """
     
-    image = rescale_image(image, rescale_type=rescale_type, limits=limits)
+    image, min_max = rescale_image(image, rescale_type=rescale_type, limits=limits)
     chosen_col = np.array(list(int(cmap_hex[i:i+2], 16) for i in (1, 3, 5)))/(num_colors-1)
     new_col_scale = np.c_[np.linspace(0,chosen_col[0],num_colors),
                           np.linspace(0,chosen_col[1],num_colors),
@@ -206,7 +211,7 @@ def colorify_by_hex(image, cmap_hex='#ff6600', flip_map=False, rescale_type='min
         cmap = cmap.reversed()
     image_colored = cmap(image)
     
-    return image_colored, cmap
+    return image_colored, cmap, min_max
 
 def rescale_image(image, rescale_type='min_max', limits=None):
     """
@@ -227,9 +232,12 @@ def rescale_image(image, rescale_type='min_max', limits=None):
     Returns
     -------
     image_rescaled: 2d array
+    min_max: tuple
+        actual min and max values used for rescaling
         
     """
     
+    min_max = (image.min(), image.max())
     if image.min() == image.max():#all pixels have same value
         image_rescaled = np.ones(image.shape, dtype=np.float64)
     if rescale_type == 'min_max':
@@ -238,12 +246,13 @@ def rescale_image(image, rescale_type='min_max', limits=None):
         image_rescaled = rescale_intensity(image, in_range='dtype', out_range=(0,1))
     elif rescale_type == 'zero_max':
         image_rescaled = rescale_intensity(image, in_range=(0, image.max()), out_range=(0,1))
+        min_max = (0, image.max())
     elif rescale_type == 'limits':
         if limits is None:
             raise Exception(f"You need to provide explicit intensity limits of the form [min, max]")
         image_rescaled = rescale_intensity(image, in_range=(limits[0], limits[1]), out_range=(0,1))
-    
-    return image_rescaled
+        min_max = (limits[0], limits[1])
+    return image_rescaled, min_max
 
 
 def check_rescale_type(rescale_type, limits):
@@ -360,6 +369,8 @@ def multichannel_to_rgb(images, cmaps=None, flip_map=False, rescale_type='min_ma
         multi-channel RGB image
     cmap_objects: list
         list of Matplotlib cmaps generated for each channel
+    image_min_max: list of tuples
+        actual (min, max) values used for rescaling for each image
         
     """
     
@@ -373,11 +384,11 @@ def multichannel_to_rgb(images, cmaps=None, flip_map=False, rescale_type='min_ma
 
     # if colormaps are provided, use them, otherwise compute them
     if cmap_objects is not None:
-        colorified = [colorify_by_cmap(
+        colorified, image_min_max = zip(*[colorify_by_cmap(
             im, cmap=cmap_objects[ind],
             rescale_type=rescale_type[ind],
             limits=limits[ind]) for ind, im in enumerate(images)
-        ]
+        ])
         converted = combine_image(colorified, proj_type=proj_type, alpha=alpha)
 
     else:
@@ -397,6 +408,7 @@ def multichannel_to_rgb(images, cmaps=None, flip_map=False, rescale_type='min_ma
         
         colorified = []
         cmap_objects = []
+        image_min_max = []
         for ind, im in enumerate(images):
             if isinstance(cmaps[ind], str):
                 col_by_name = colorify_by_name(
@@ -407,17 +419,19 @@ def multichannel_to_rgb(images, cmaps=None, flip_map=False, rescale_type='min_ma
                     num_colors=num_colors)
                 colorified.append(col_by_name[0])
                 cmap_objects.append(col_by_name[1])
+                image_min_max.append(col_by_name[2])
             else:
-                col_by_cmap = colorify_by_cmap(
+                col_by_cmap, min_max = colorify_by_cmap(
                     im, cmap=cmaps[ind],
                     rescale_type=rescale_type[ind],
                     limits=limits[ind])
                 colorified.append(col_by_cmap)
                 cmap_objects.append(cmaps[ind])
+                image_min_max.append(min_max)
 
         converted = combine_image(colorified, proj_type=proj_type, alpha=alpha)
     
-    return converted, cmap_objects
+    return converted, cmap_objects, image_min_max
 
 
 def check_input(images):
