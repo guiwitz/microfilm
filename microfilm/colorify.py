@@ -1,3 +1,4 @@
+from typing import Iterable
 import warnings
 
 import matplotlib.pyplot as plt
@@ -379,7 +380,7 @@ def multichannel_to_rgb(images, cmaps=None, flip_map=False, rescale_type='min_ma
 
     if not isinstance(rescale_type, list):
             rescale_type = [rescale_type for i in range(len(images))]
-    if (limits is None) or (not any(isinstance(i, list) for i in limits)):
+    if (limits is None) or (not any(isinstance(i, Iterable) for i in limits)):
         limits = [limits for i in range(len(images))]
 
     # if colormaps are provided, use them, otherwise compute them
