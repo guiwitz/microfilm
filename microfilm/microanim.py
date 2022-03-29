@@ -19,21 +19,26 @@ class Microanim(Microimage):
     """
 
     def __init__(
-        self, data, channels=None, cmaps=None, flip_map=False, rescale_type=None, limits=None, num_colors=256,
-        proj_type='max', alpha=0.5, channel_names=None, channel_label_show=False, channel_label_type='title',
-        channel_label_size=0.05, scalebar_thickness=5, scalebar_unit_per_pix=None, scalebar_size_in_units=None, unit=None,
-        scalebar_ypos=0.05, scalebar_color='white', scalebar_font_size=0.08, scalebar_text_centered=True,
+        self, data, channels=None, cmaps=None, flip_map=False, rescale_type=None, limits=None, 
+        num_colors=256, proj_type='max', alpha=0.5, channel_names=None,
+        channel_label_show=False, channel_label_type='title', channel_label_size=0.05,
+        scalebar_thickness=0.1, scalebar_unit_per_pix=None, scalebar_size_in_units=None,
+        unit=None, scalebar_location='lower right', scalebar_color='white',
+        scalebar_font_size=12, scalebar_kwargs=None, scalebar_font_properties=None,
         ax=None, fig_scaling=3, dpi=72, label_text=None, label_location='upper left',
-        label_color='white', label_font_size=15, label_kwarg={}, cmap_objects=None, 
+        label_color='white', label_font_size=15, label_kwargs={}, cmap_objects=None,
         show_colorbar=False, show_plot=True
     ):
         super().__init__(
-            None, cmaps, flip_map, rescale_type, limits, num_colors,
-            proj_type, alpha, channel_names, channel_label_show, channel_label_type,
-            channel_label_size, scalebar_thickness, scalebar_unit_per_pix, scalebar_size_in_units, unit,
-            scalebar_ypos, scalebar_color, scalebar_font_size, scalebar_text_centered,
-            ax, fig_scaling, dpi, label_text, label_location,
-            label_color, label_font_size, label_kwarg, cmap_objects, show_colorbar
+            images=None, cmaps=cmaps, flip_map=flip_map, rescale_type=rescale_type, limits=limits,
+            num_colors=num_colors, proj_type=proj_type, alpha=alpha, channel_names=channel_names,
+            channel_label_show=channel_label_show, channel_label_type=channel_label_type, channel_label_size=channel_label_size,
+            scalebar_thickness=scalebar_thickness, scalebar_unit_per_pix=scalebar_unit_per_pix, scalebar_size_in_units=scalebar_size_in_units,
+            unit=unit, scalebar_location=scalebar_location, scalebar_color=scalebar_color,
+            scalebar_font_size=scalebar_font_size, scalebar_kwargs=scalebar_kwargs, scalebar_font_properties=scalebar_font_properties,
+            ax=ax, fig_scaling=fig_scaling, dpi=dpi, label_text=label_text, label_location=label_location,
+            label_color=label_color, label_font_size=label_font_size, label_kwargs=label_kwargs, cmap_objects=cmap_objects,
+            show_colorbar=show_colorbar
         )
 
         if isinstance(data, np.ndarray):
