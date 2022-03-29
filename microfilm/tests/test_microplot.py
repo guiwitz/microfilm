@@ -45,13 +45,13 @@ def test_microshow():
     verify_label(microim)
 
     # check scalebar
-    assert microim.ax.texts[2].get_text() == '1 mm', "Wrong scalebar legend"
-    assert microim.ax.patches[0].get_facecolor() == (1, 0, 0, 1), "Wrong scalebar color"
-    assert microim.ax.patches[0].get_width() == 2/3, "Wrong scalebar size"
+    assert microim.ax.artists[0].units == 'mm', "Wrong scalebar unit"
+    assert microim.ax.artists[0].color == 'red', "Wrong scalebar color"
+    assert microim.ax.artists[0].width_fraction == 0.1, "Wrong scalebar width"
 
     # check label
-    assert microim.ax.texts[3].get_text() == 'A', "Wrong label"
-    assert microim.ax.texts[3].get_color() == 'pink', "Wrong label color"
+    assert microim.ax.texts[2].get_text() == 'A', "Wrong label"
+    assert microim.ax.texts[2].get_color() == 'pink', "Wrong label color"
 
 def test_default_random_gradient():
     # test that images with > 3 channels use random gradient by default
@@ -73,10 +73,11 @@ def test_add_scalebar():
         images=[image, image2], cmaps=['pure_blue', 'pure_green'])
     
     microim.add_scalebar(unit='mm', scalebar_unit_per_pix=0.5, scalebar_size_in_units=1, scalebar_thickness=0.1, scalebar_color='red')
+    
     # check scalebar
-    assert microim.ax.texts[0].get_text() == '1 mm', "Wrong scalebar legend"
-    assert microim.ax.patches[0].get_facecolor() == (1, 0, 0, 1), "Wrong scalebar color"
-    assert microim.ax.patches[0].get_width() == 2/3, "Wrong scalebar size"
+    assert microim.ax.artists[0].units == 'mm', "Wrong scalebar unit"
+    assert microim.ax.artists[0].color == 'red', "Wrong scalebar color"
+    assert microim.ax.artists[0].width_fraction == 0.1, "Wrong scalebar width"
     
 def test_add_label():
     

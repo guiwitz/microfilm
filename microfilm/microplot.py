@@ -6,18 +6,22 @@ from matplotlib.patches import Rectangle
 import matplotlib as mpl
 from mpl_toolkits.axes_grid1.axes_divider import make_axes_locatable
 import numpy as np
+from matplotlib_scalebar.scalebar import ScaleBar
 
 from . import colorify
 
    
-def microshow(images=None, cmaps=None, flip_map=False, rescale_type=None, limits=None, num_colors=256,
-              proj_type='max', alpha=0.5, channel_names=None, channel_label_show=False, channel_label_type='title',
-              channel_label_size=0.05, scalebar_thickness=5, scalebar_unit_per_pix=None, scalebar_size_in_units=None,
-              unit=None, scalebar_ypos=0.05, scalebar_color='white', scalebar_font_size=0.08, scalebar_text_centered=True,
-              ax=None, fig_scaling=3, dpi=72, label_text=None, label_location='upper left',
-              label_color='white', label_font_size=15, label_kwargs={}, cmap_objects=None,
-              show_colorbar=False, microim=None
-             ):
+def microshow(
+    images=None, cmaps=None, flip_map=False, rescale_type=None, limits=None, 
+    num_colors=256, proj_type='max', alpha=0.5, channel_names=None,
+    channel_label_show=False, channel_label_type='title', channel_label_size=0.05,
+    scalebar_thickness=0.02, scalebar_unit_per_pix=None, scalebar_size_in_units=None,
+    unit=None, scalebar_location='lower right', scalebar_color='white',
+    scalebar_font_size=12, scalebar_kwargs=None, scalebar_font_properties=None,
+    ax=None, fig_scaling=3, dpi=72, label_text=None, label_location='upper left',
+    label_color='white', label_font_size=15, label_kwargs={}, cmap_objects=None,
+    show_colorbar=False, microim=None
+    ):
     """
     Plot image
     
@@ -54,22 +58,24 @@ def microshow(images=None, cmaps=None, flip_map=False, rescale_type=None, limits
         'title', 'in_fig'
     channel_label_size: float
         relative font size for channel labels
-    scalebar_thickness: int
-        height of scale bar
+    scalebar_thickness: float
+        fraction height of scale bar
     scalebar_unit_per_pix: float
         pixel scaling (e.g. 25um per pixel)
     scalebar_size_in_units: float
         size of scale bar in true units
     unit: str
         name of the scale unit
-    scale_y_pos: float
-        y position of scale bar (0-1)
+    scale_location: str
+       upper right, lower left etc.
     scalebar_color: str
         color of scale bar
     scalebar_font_size: int
         size of text, set to None for no text
-    scalebar_text_centered: bool
-        center text above scale bar
+    scalebar_kwargs: dict
+        additional options for scalebar formatting passed
+    scalebar_font_properties: dict
+        font properties for scalebar text
     ax: Matplotlib axis
         provide existing axis
     fig_scaling: int
@@ -107,23 +113,29 @@ def microshow(images=None, cmaps=None, flip_map=False, rescale_type=None, limits
         if images is None:
             raise Exception(f"You need to provide at least images")
  
-        microim = Microimage(images=images, cmaps=cmaps, flip_map=flip_map, rescale_type=rescale_type,
-        limits=limits, num_colors=num_colors, proj_type=proj_type, alpha=alpha, channel_names=channel_names,
-        channel_label_show=channel_label_show, channel_label_type=channel_label_type,
-        channel_label_size=channel_label_size, scalebar_thickness=scalebar_thickness, 
-        scalebar_unit_per_pix=scalebar_unit_per_pix, scalebar_size_in_units=scalebar_size_in_units, unit=unit,
-        scalebar_ypos=scalebar_ypos, scalebar_color=scalebar_color, scalebar_font_size=scalebar_font_size,
-        scalebar_text_centered=scalebar_text_centered, ax=ax, fig_scaling=fig_scaling, dpi=dpi, label_text=label_text,
-        label_location=label_location, label_color=label_color, label_font_size=label_font_size,
-        label_kwargs=label_kwargs, cmap_objects=cmap_objects, show_colorbar=show_colorbar
+        microim = Microimage(
+            images=images, cmaps=cmaps, flip_map=flip_map, rescale_type=rescale_type,
+            limits=limits, num_colors=num_colors, proj_type=proj_type, alpha=alpha,
+            channel_names=channel_names, channel_label_show=channel_label_show,
+            channel_label_type=channel_label_type, channel_label_size=channel_label_size,
+            scalebar_thickness=scalebar_thickness, scalebar_unit_per_pix=scalebar_unit_per_pix,
+            scalebar_size_in_units=scalebar_size_in_units, unit=unit,
+            scalebar_location=scalebar_location, scalebar_color=scalebar_color,
+            scalebar_font_size=scalebar_font_size, scalebar_kwargs=scalebar_kwargs,
+            scalebar_font_properties=scalebar_font_properties, ax=ax, fig_scaling=fig_scaling,
+            dpi=dpi, label_text=label_text, label_location=label_location,
+            label_color=label_color, label_font_size=label_font_size, label_kwargs=label_kwargs,
+            cmap_objects=cmap_objects, show_colorbar=show_colorbar
         )
     
     microim.rescale_type = colorify.check_rescale_type(microim.rescale_type, microim.limits)
 
-    converted, cmap_objects, image_min_max = colorify.multichannel_to_rgb(microim.images, cmaps=microim.cmaps, flip_map=microim.flip_map,
-                                    rescale_type=microim.rescale_type, limits=microim.limits,
-                                    num_colors=microim.num_colors, proj_type=microim.proj_type,
-                                    alpha=microim.alpha, cmap_objects=microim.cmap_objects)
+    converted, cmap_objects, image_min_max = colorify.multichannel_to_rgb(
+        microim.images, cmaps=microim.cmaps, flip_map=microim.flip_map,
+        rescale_type=microim.rescale_type, limits=microim.limits,
+        num_colors=microim.num_colors, proj_type=microim.proj_type,
+        alpha=microim.alpha, cmap_objects=microim.cmap_objects
+        )
     microim.cmap_objects = cmap_objects
     microim.image_min_max = image_min_max
 
@@ -147,7 +159,7 @@ def microshow(images=None, cmaps=None, flip_map=False, rescale_type=None, limits
         # trick https://stackoverflow.com/a/63187965
         microim.fig = plt.figure(frameon=False, dpi=microim.dpi)
         microim.fig.set_size_inches(width_scaled, height_scaled, forward=False)
-        microim.ax = plt.Axes(microim.fig, [0.0, 0.0, 1.0-0.0, 1.0])
+        microim.ax = plt.Axes(microim.fig, [0.0, 0.0, 1.0, 1.0])
         microim.ax.set_axis_off()
         microim.fig.add_axes(microim.ax)
     else:
@@ -162,13 +174,17 @@ def microshow(images=None, cmaps=None, flip_map=False, rescale_type=None, limits
     
     if microim.unit is not None:
     
-        image_width = microim.images[0].shape[1]
-        pixelsize = microim.scalebar_size_in_units / microim.scalebar_unit_per_pix
-        scale_width = pixelsize / image_width
-        microim.add_scalebar(microim.unit, microim.scalebar_size_in_units, microim.scalebar_unit_per_pix,
-                             scalebar_thickness=microim.scalebar_thickness, scalebar_ypos=microim.scalebar_ypos,
-                             scalebar_color=microim.scalebar_color, scalebar_font_size=microim.scalebar_font_size,
-                             scalebar_text_centered=microim.scalebar_text_centered)
+        microim.add_scalebar(
+            unit=microim.unit,
+            scalebar_size_in_units=microim.scalebar_size_in_units, 
+            scalebar_unit_per_pix=microim.scalebar_unit_per_pix,
+            scalebar_thickness=microim.scalebar_thickness,
+            scalebar_location=microim.scalebar_location,
+            scalebar_color=microim.scalebar_color,
+            scalebar_font_size=microim.scalebar_font_size,
+            scalebar_kwargs=microim.scalebar_kwargs,
+            scalebar_font_properties=microim.scalebar_font_properties
+            )
     
     if microim.label_text is not None:
         if len(microim.label_text) > 0:
@@ -223,22 +239,24 @@ class Microimage:
         'title', 'in_fig'
     channel_label_size: float
         relative font size of channel label
-    scalebar_thickness: int
-        height of scale bar
+    scalebar_thickness: float
+        fraction of height of scale bar
     scalebar_unit_per_pix: float
         pixel scaling (e.g. 25um per pixel)
     scalebar_size_in_units: float
         size of scale bar in true units
     unit: str
         name of the scale unit
-    scale_y_pos: float
-        y position of scale bar (0-1)
+    scalebar_location: str
+       upper right, lower right etc.
     scalebar_color: str
         color of scale bar
     scalebar_font_size: int
         size of text, set to None for no text
-    scalebar_text_centered: bool
-        center text above scale bar
+    scalebar_kwargs: dict
+        additional keyword arguments for scalebar
+    scalebar_font_properties: dict
+        font properties for scalebar text
     ax: Matplotlib axis
         provide existing axis
     fig_scaling: int
@@ -266,14 +284,17 @@ class Microimage:
 
     """
 
-    def __init__(self, images, cmaps=None, flip_map=False, rescale_type=None, limits=None, num_colors=256,
-              proj_type='max', alpha=0.5, channel_names=None, channel_label_show=False,
-              channel_label_type='title', channel_label_size=0.05, scalebar_thickness=5, scalebar_unit_per_pix=None,
-              scalebar_size_in_units=None, unit=None, scalebar_ypos=0.05, scalebar_color='white',
-              scalebar_font_size=0.08, scalebar_text_centered=True, ax=None, fig_scaling=3, dpi=72, label_text=None,
-              label_location='upper left', label_color='white', label_font_size=15, label_kwargs={},
-              cmap_objects=None, show_colorbar=False
-             ):
+    def __init__(
+        self, images, cmaps=None, flip_map=False, rescale_type=None, limits=None,
+        num_colors=256, proj_type='max', alpha=0.5, channel_names=None, channel_label_show=False,
+        channel_label_type='title', channel_label_size=0.05, scalebar_thickness=0.02,
+        scalebar_unit_per_pix=None, scalebar_size_in_units=None, unit=None,
+        scalebar_location='lower right', scalebar_color='white',
+        scalebar_font_size=12, scalebar_kwargs=None, scalebar_font_properties=None,
+        ax=None, fig_scaling=3, dpi=72, label_text=None, label_location='upper left',
+        label_color='white', label_font_size=15, label_kwargs={}, cmap_objects=None,
+        show_colorbar=False
+        ):
         
         self.__dict__.update(locals())
         del self.self
@@ -356,8 +377,10 @@ class Microimage:
     savefig.__doc__ = plt.savefig.__doc__
 
     
-    def add_scalebar(self, unit, scalebar_size_in_units, scalebar_unit_per_pix, scalebar_thickness=5, scalebar_ypos=0.05,
-        scalebar_color='white', scalebar_font_size=0.08, scalebar_text_centered=True):
+    def add_scalebar(
+        self, unit, scalebar_size_in_units, scalebar_unit_per_pix, scalebar_thickness=0.02,
+        scalebar_location='lower right', scalebar_color='white', scalebar_font_size=12,
+        scalebar_kwargs=None, scalebar_font_properties=None):
         """
         Add scalebar to an image.
 
@@ -369,16 +392,18 @@ class Microimage:
             size of scale bar in true units
         scalebar_unit_per_pix: float
             pixel scaling (e.g. 25um per pixel)
-        scalebar_thickness: int
-            height of scale bar
-        scale_y_pos: float
-            y position of scale bar (0-1)
+        scalebar_thickness: float
+            fraction of height of scale bar
+        scale_location: str
+            upper right, lower left etc.
         scalebar_color: str
             color of scale bar
         scalebar_font_size: float
             relative size of text, set to None for no text
-        scalebar_text_centered: bool
-            center text above scale bar
+        scalebar_kwargs: dict
+            additional options for scalebar formatting passed
+        scalebar_font_properties: dict
+            font properties for scalebar text
             
         """
 
@@ -386,10 +411,11 @@ class Microimage:
         self.scalebar_size_in_units = scalebar_size_in_units
         self.scalebar_unit_per_pix = scalebar_unit_per_pix
         self.scalebar_thickness = scalebar_thickness
-        self.scalebar_ypos = scalebar_ypos
+        self.scalebar_location = scalebar_location
         self.scalebar_color = scalebar_color
         self.scalebar_font_size = scalebar_font_size
-        self.scalebar_text_centered = scalebar_text_centered
+        self.scalebar_kwargs = scalebar_kwargs
+        self.scalebar_font_properties = scalebar_font_properties
         
         if len(self.ax.get_images())==0:
             raise Exception(f"You need to have an image in your plot to add a scale bar.\
@@ -398,58 +424,31 @@ class Microimage:
         if (unit is None) or (scalebar_size_in_units is None) or (scalebar_unit_per_pix is None):
             raise Exception(f"You need to provide a unit (unit), scale (scalebar_unit_per_pix) and size of your scale bar (scalebar_size_in_units)")
 
-        scalebar_thickness /= self.ax.get_images()[0].get_array().shape[0]
-
-        pixelsize = scalebar_size_in_units / scalebar_unit_per_pix
-        image_width = self.ax.get_images()[0].get_array().shape[1]
-        scale_width = pixelsize / image_width
-
-        if unit =='um':
-            scale_text = f'{scalebar_size_in_units} $\mu$m'
-        else:
-            scale_text = f'{scalebar_size_in_units} {unit}'
+        font_dict = {'size': scalebar_font_size}
+        if self.scalebar_font_properties is not None:
+            font_dict = {**font_dict, **scalebar_font_properties}
         
-        bar_pad = 0.05
-        scale_bar = Rectangle((1-scale_width-bar_pad, scalebar_ypos), width=scale_width, height=scalebar_thickness,
-                              transform=self.ax.transAxes, facecolor=scalebar_color)
+        default_scalebar_kwargs = {'frameon': False, 'scale_loc': 'top'}
+        if self.scalebar_kwargs is not None:
+            default_scalebar_kwargs = {**default_scalebar_kwargs, **self.scalebar_kwargs}
+        if scalebar_font_size is None:
+            default_scalebar_kwargs['scale_loc'] = 'none'
         
-        if self.scalebar_font_size is not None:
-                   
-            # turn font size into fraction of figure or axis
-            fontsize = self.scalebar_font_size*self.ax.get_position().bounds[-1] * self.fig.get_size_inches()[1]*100
+        scalebar = ScaleBar(
+            dx=scalebar_unit_per_pix,
+            units=unit,
+            fixed_value=scalebar_size_in_units,
+            width_fraction=scalebar_thickness,
+            location=scalebar_location,
+            color=scalebar_color,
+            font_properties=font_dict,
+            **default_scalebar_kwargs)
+        self.ax.add_artist(scalebar)
 
-            scale_text = self.ax.text(x=0, y=scalebar_ypos+scalebar_thickness+0.03, s=scale_text,
-                         transform=self.ax.transAxes, fontdict={'color':scalebar_color, 'size':fontsize})
-            text_start = 1-scale_width-bar_pad
-            
-            # trick https://stackoverflow.com/questions/5320205/matplotlib-text-dimensions
-            r = self.ax.figure.canvas.get_renderer()
-
-            right_boundary = (self.ax.get_images()[0].get_window_extent().bounds[0]+self.ax.get_images()[0].get_window_extent().bounds[2])
-            axis_width = self.ax.get_images()[0].get_window_extent().bounds[2]
-            if scalebar_text_centered:
-                bar_middle = 1-0.5*scale_width-bar_pad
-                text_start = bar_middle
-                scale_text.set_ha('center')
-
-            scale_text.set_x(text_start)
-
-            shift = scale_text.get_tightbbox(r).bounds[0]+scale_text.get_tightbbox(r).bounds[2]-right_boundary
-            shift = shift /axis_width
-            
-            # Check whether scalebar label is outside of figure and shift it if necessary
-            if shift > 0:
-
-                shift = shift
-                scale_bar = Rectangle((1-scale_width-bar_pad-shift, scalebar_ypos), width=scale_width, 
-                                      height=scalebar_thickness, transform=self.ax.transAxes, facecolor=scalebar_color)
-                text_start -= shift
-                scale_text.set_x(text_start)
-
-        self.ax.add_patch(scale_bar)
                 
-    def add_label(self, label_text, label_name='default', label_location='upper left', label_color='white',
-                 label_font_size=15, label_kwargs={}):
+    def add_label(
+        self, label_text, label_name='default', label_location='upper left',
+        label_color='white', label_font_size=15, label_kwargs={}):
         """
         Add a figure label to an image.
 
