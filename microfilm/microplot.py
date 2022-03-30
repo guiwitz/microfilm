@@ -48,6 +48,7 @@ def microshow(
         projection type of color combination
         max: maximum
         sum: sum projection, restricted to dtype range
+        alpha: alpa blending
     alpha: float
         transparency in range [0,1] of overlayed image for
         proj_type == alpha

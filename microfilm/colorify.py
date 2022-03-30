@@ -357,6 +357,7 @@ def multichannel_to_rgb(images, cmaps=None, flip_map=False, rescale_type='min_ma
         projection type of color combination
         max: maximum
         sum: sum projection, restricted to dtype range
+        alpha: alpha blending
     alpha: float
         transparency in range [0,1] of overlayed image for
         proj_type == alpha
