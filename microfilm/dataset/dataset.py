@@ -384,7 +384,7 @@ class H5(Data):
 
 class Nparray(Data):
     """Data class for digesting numpy arrays. The expected dimensions of the 
-    input array are CTXY"""
+    input array are CT(Z)XY"""
 
     def __init__(
         self,
@@ -417,12 +417,24 @@ class Nparray(Data):
         self.channelfile = self.channel_name
             
         import xarray as xr
-
         time = np.arange(self.nparray.shape[1])
-        rows = np.arange(self.nparray.shape[2])
-        cols = np.arange(self.nparray.shape[3])
-
-        self.ximage = xr.DataArray(self.nparray, coords=[self.channel_name, time, rows, cols], dims=["channel", "time", "rows", "channels"])
+        if self.nparray.ndim == 4:
+            rows = np.arange(self.nparray.shape[2])
+            cols = np.arange(self.nparray.shape[3])
+            self.ximage = xr.DataArray(
+                self.nparray,
+                coords=[self.channel_name, time, rows, cols],
+                dims=["channel", "time", "rows", "columns"]
+                )
+        elif self.nparray.ndim == 5:
+            slices = np.arange(self.nparray.shape[2])
+            rows = np.arange(self.nparray.shape[3])
+            cols = np.arange(self.nparray.shape[4])
+            self.ximage = xr.DataArray(
+                self.nparray,
+                coords=[self.channel_name, time, slices, rows, cols],
+                dims=["channels", "time", "slices", "rows", "columns"]
+                )
 
         if self.max_time is None:
             self.max_time = self.nparray.shape[1]

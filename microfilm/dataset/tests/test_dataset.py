@@ -1,33 +1,40 @@
 from microfilm import dataset
 import numpy as np
+import skimage
 
 data_tiffseries = dataset.TIFFSeries('microfilm/dataset/tests/test_folders/test_tifseries_good/')
 data_multipagetiff = dataset.MultipageTIFF('microfilm/dataset/tests/test_folders/test_multipage_good/')
 data_nd2 = dataset.ND2('microfilm/dataset/tests/test_folders/test_nd2_good/cluster.nd2')
 data_h5 = dataset.H5('microfilm/dataset/tests/test_folders/test_h5_good/')
+coli3d = skimage.io.imread('microfilm/dataset/tests/test_folders/coli_nucl_ori_3d.tif')
+data_np3d = dataset.Nparray(coli3d)
 
 all_data = {'tiffseries': data_tiffseries,
             'multipagetiff': data_multipagetiff,
             'nd2': data_nd2,
-            'h5': data_h5
+            'h5': data_h5,
+            'np': data_np3d
            }
 
 max_time_points = {'tiffseries': 51,
                    'multipagetiff': 51,
                    'nd2': 3,
-                   'h5': 51
+                   'h5': 51,
+                   'np': 20
                   }
 
 channel_names = {'tiffseries': ['channel1', 'channel1'],
                    'multipagetiff': ['C2-MAX_mitosis.tif', 'C1-MAX_mitosis.tif'],
                    'nd2': ['5-FAM/pH 9.0', 'FM 4-64/2% CHAPS'],
-                   'h5': ['C1-MAX_mitosis.h5', 'C2-MAX_mitosis.h5']
+                   'h5': ['C1-MAX_mitosis.h5', 'C2-MAX_mitosis.h5'],
+                   'np': ['0', '1']
                   }
 
 array_shape = {'tiffseries': [196, 171],
                    'multipagetiff': [196, 171],
                    'nd2': [31, 38],
-                   'h5': [196, 171]
+                   'h5': [196, 171],
+                   'np': [11, 200, 200]
                   }
 
 
