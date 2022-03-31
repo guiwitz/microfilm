@@ -282,6 +282,21 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#avoiding-double-display">
+   Avoiding double display
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#usage-with-options">
+   Usage with options
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#adjusting-size-accomodate-colorbar">
+   Adjusting size: accomodate colorbar
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#micropanel-animations">
    Micropanel animations
   </a>
@@ -309,6 +324,21 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#micropanel">
    Micropanel
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#avoiding-double-display">
+   Avoiding double display
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#usage-with-options">
+   Usage with options
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#adjusting-size-accomodate-colorbar">
+   Adjusting size: accomodate colorbar
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -409,14 +439,24 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-<p>This of course works with all the options available in Microimage:</p>
+</div>
+<div class="section" id="avoiding-double-display">
+<h2>Avoiding double display<a class="headerlink" href="#avoiding-double-display" title="Permalink to this headline">¶</a></h2>
+<p>When you create a panel, you first create each element and then add it to the panel. When using <code class="docutils literal notranslate"><span class="pre">microshow</span></code> for plot creation, you will therefore see the plots first individually upon creation and then again in the panel. If you create plots for exports, this is not an issue, but if you want to display a panale as a result in a notebook, you might want to avoid this double display. In that case you can create each plot directly as <code class="docutils literal notranslate"><span class="pre">Microimage</span></code> objects, which won’t display them:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microim1</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">image</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]],</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microim1</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">Microimage</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">image</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]],</span>
                                <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Greys&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_magenta&#39;</span><span class="p">],</span> <span class="n">flip_map</span><span class="o">=</span><span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
-                               <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">label_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">channel_label_show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                               <span class="n">channel_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nucleoid&#39;</span><span class="p">,</span> <span class="s1">&#39;ori&#39;</span><span class="p">],</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-                              <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">scalebar_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">fig_scaling</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+                               <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">label_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+<span class="n">microim2</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">Microimage</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">image</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]],</span>
+                               <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Greys&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_cyan&#39;</span><span class="p">],</span> <span class="n">flip_map</span><span class="o">=</span><span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+                               <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="n">label_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+<span class="n">micropanel</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">Micropanel</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figscaling</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">micropanel</span><span class="o">.</span><span class="n">add_element</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">microim</span><span class="o">=</span><span class="n">microim1</span><span class="p">)</span>
+<span class="n">micropanel</span><span class="o">.</span><span class="n">add_element</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">microim</span><span class="o">=</span><span class="n">microim2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -424,18 +464,27 @@ const thebe_selector_output = ".output, .cell_output"
 <img alt="../_images/create_panels_14_0.png" src="../_images/create_panels_14_0.png" />
 </div>
 </div>
+</div>
+<div class="section" id="usage-with-options">
+<h2>Usage with options<a class="headerlink" href="#usage-with-options" title="Permalink to this headline">¶</a></h2>
+<p>Creation of panels of course works with all the options available in Microimage. For example we add here a label, channel names and a scalebar:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microim2</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">image</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]],</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microim1</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">Microimage</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">image</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]],</span>
+                               <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Greys&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_magenta&#39;</span><span class="p">],</span> <span class="n">flip_map</span><span class="o">=</span><span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+                               <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">label_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">channel_label_show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                               <span class="n">channel_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nucleoid&#39;</span><span class="p">,</span> <span class="s1">&#39;ori&#39;</span><span class="p">],</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                               <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">scalebar_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">scalebar_font_size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+                               <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">fig_scaling</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">microim2</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">Microimage</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">image</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]],</span>
                                <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Greys&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_cyan&#39;</span><span class="p">],</span> <span class="n">flip_map</span><span class="o">=</span><span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
                                <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="n">label_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">channel_label_show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                              <span class="n">channel_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nucleoid&#39;</span><span class="p">,</span> <span class="s1">&#39;ter&#39;</span><span class="p">],</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-                              <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">scalebar_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">fig_scaling</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+                               <span class="n">channel_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nucleoid&#39;</span><span class="p">,</span> <span class="s1">&#39;ter&#39;</span><span class="p">],</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                               <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">scalebar_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">scalebar_font_size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+                               <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">fig_scaling</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/create_panels_15_0.png" src="../_images/create_panels_15_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -450,25 +499,33 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_panels_16_0.png" src="../_images/create_panels_16_0.png" />
+<img alt="../_images/create_panels_17_0.png" src="../_images/create_panels_17_0.png" />
 </div>
 </div>
-<p>Note that in certain cases, you may want to control the space between plots. You can do this with the <code class="docutils literal notranslate"><span class="pre">margin</span></code>option which represents the fraction of the figure to use for that space. This is particularly useful if your images have colorbars, which are not fully visible with the default margin:</p>
+</div>
+<div class="section" id="adjusting-size-accomodate-colorbar">
+<h2>Adjusting size: accomodate colorbar<a class="headerlink" href="#adjusting-size-accomodate-colorbar" title="Permalink to this headline">¶</a></h2>
+<p>Note that in certain cases, you may want to control the space between plots. You can do this with the <code class="docutils literal notranslate"><span class="pre">margin</span></code> option which represents the fraction of the figure to use for that space. This is particularly useful if your images have colorbars, which are not fully visible with the default margin:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microim1</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]],</span> <span class="n">show_colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microim1</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">Microimage</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]],</span> <span class="n">show_colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_magenta&#39;</span><span class="p">],</span> <span class="n">flip_map</span><span class="o">=</span><span class="p">[</span><span class="kc">False</span><span class="p">],</span>
                                <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">label_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">channel_label_show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                <span class="n">channel_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ori&#39;</span><span class="p">],</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-                              <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">scalebar_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">fig_scaling</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+                               <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">scalebar_color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">fig_scaling</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 
-<span class="n">microim2</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]],</span> <span class="n">show_colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="n">microim2</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">Microimage</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]],</span> <span class="n">show_colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_cyan&#39;</span><span class="p">],</span> <span class="n">flip_map</span><span class="o">=</span><span class="p">[</span><span class="kc">False</span><span class="p">],</span>
                                <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="n">label_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">channel_label_show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                              <span class="n">channel_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ter&#39;</span><span class="p">],</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-                              <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">scalebar_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">fig_scaling</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-
-<span class="n">micropanel</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">Micropanel</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">margin</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+                               <span class="n">channel_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ter&#39;</span><span class="p">],</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                               <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">scalebar_color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">fig_scaling</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">micropanel</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">Micropanel</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">margin</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
 
 <span class="n">micropanel</span><span class="o">.</span><span class="n">add_element</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">microim</span><span class="o">=</span><span class="n">microim1</span><span class="p">)</span>
 <span class="n">micropanel</span><span class="o">.</span><span class="n">add_element</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">microim</span><span class="o">=</span><span class="n">microim2</span><span class="p">)</span>
@@ -478,9 +535,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_panels_18_0.png" src="../_images/create_panels_18_0.png" />
-<img alt="../_images/create_panels_18_1.png" src="../_images/create_panels_18_1.png" />
-<img alt="../_images/create_panels_18_2.png" src="../_images/create_panels_18_2.png" />
+<img alt="../_images/create_panels_20_0.png" src="../_images/create_panels_20_0.png" />
 </div>
 </div>
 </div>

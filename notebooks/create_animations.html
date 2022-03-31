@@ -287,8 +287,8 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#interactive-object">
-   Interactive object
+  <a class="reference internal nav-link" href="#volume-data">
+   Volume data
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -349,8 +349,8 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#interactive-object">
-   Interactive object
+  <a class="reference internal nav-link" href="#volume-data">
+   Volume data
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -450,29 +450,22 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-<p>Now we can create the animation object. The animation object takes the same arguments as the <code class="docutils literal notranslate"><span class="pre">Microimage</span></code> object. The main difference is that you need to provide in addition a <code class="docutils literal notranslate"><span class="pre">data</span></code> parameter which represents your time-lapse images. The <code class="docutils literal notranslate"><span class="pre">data</span></code> can be either one of the <code class="docutils literal notranslate"><span class="pre">microfilm.dataset</span></code> objects or a simple Numpy array with dimensions <code class="docutils literal notranslate"><span class="pre">C</span> <span class="pre">x</span> <span class="pre">Z</span> <span class="pre">x</span> <span class="pre">X</span> <span class="pre">x</span> <span class="pre">Y</span></code> like <code class="docutils literal notranslate"><span class="pre">image</span></code> used here:</p>
+<p>Now we can create the animation object. The animation object takes the same arguments as the <code class="docutils literal notranslate"><span class="pre">Microimage</span></code> object. The main difference is that you need to provide in addition a <code class="docutils literal notranslate"><span class="pre">data</span></code> parameter which represents your time-lapse images. The <code class="docutils literal notranslate"><span class="pre">data</span></code> can be either one of the <code class="docutils literal notranslate"><span class="pre">microfilm.dataset</span></code> objects or a simple Numpy array with dimensions <code class="docutils literal notranslate"><span class="pre">CTXY</span></code> like <code class="docutils literal notranslate"><span class="pre">image</span></code> used here. To get a time slider, you can just use the <code class="docutils literal notranslate"><span class="pre">ui</span></code> attribute of the animation object:</p>
 <div class="cell tag_thebe-init docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anim</span> <span class="o">=</span> <span class="n">Microanim</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">image</span><span class="p">,</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_blue&#39;</span><span class="p">,</span><span class="s1">&#39;pure_red&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_green&#39;</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="interactive-object">
-<h2>Interactive object<a class="headerlink" href="#interactive-object" title="Permalink to this headline">¶</a></h2>
-<p>To display our time-lapse image and browse through it, we the simply call the <code class="docutils literal notranslate"><span class="pre">ui</span></code> of the object:</p>
-<div class="cell tag_thebe-init tag_hide-output docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anim</span><span class="o">.</span><span class="n">ui</span>
+<span class="n">anim</span><span class="o">.</span><span class="n">ui</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "0f05da003b61479fbb7d7144250e390b", "version_major": 2, "version_minor": 0}
+{"model_id": "eb3b44f93c0e474bbc6f613a62c0137a", "version_major": 2, "version_minor": 0}
+</script><script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "86b20750c1a141d39d63f5fab822996e", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
+<p>Here is an example screen capture of such an animation:</p>
 <div class="cell tag_hide_input tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
@@ -484,6 +477,41 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="output text_html"><img src="https://github.com/guiwitz/microfilm/raw/master/illustrations/create_animations_1.gif" width="300"/></div></div>
 </div>
 </div>
+<div class="section" id="volume-data">
+<h2>Volume data<a class="headerlink" href="#volume-data" title="Permalink to this headline">¶</a></h2>
+<p>Just like for the regular images generated by <code class="docutils literal notranslate"><span class="pre">microshow</span></code>, one can do a movie of a multi-channel projected volume. For this one has to again use the <code class="docutils literal notranslate"><span class="pre">volume_proj</span></code> option and pass an array of dimensions <code class="docutils literal notranslate"><span class="pre">CTZXY</span></code> (or a <code class="docutils literal notranslate"><span class="pre">dataset.Nparray</span></code>), for example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image</span> <span class="o">=</span> <span class="n">skimage</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;../microfilm/dataset/tests/test_folders/coli_nucl_ori_3d.tif&#39;</span><span class="p">)</span>
+<span class="n">image</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2, 20, 11, 200, 200)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anim</span> <span class="o">=</span> <span class="n">Microanim</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">image</span><span class="p">,</span>
+    <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_magenta&#39;</span><span class="p">,</span><span class="s1">&#39;pure_cyan&#39;</span><span class="p">],</span> <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">volume_proj</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span>
+    <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">fig_scaling</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">scalebar_thickness</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+
+<span class="n">anim</span><span class="o">.</span><span class="n">ui</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "edda5dcc782543378ac0ce7e79e68972", "version_major": 2, "version_minor": 0}
+</script><script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "005edd7ea16c4c7cbfd13322ac973d03", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+</div>
 <div class="section" id="customizing-the-plot">
 <h2>Customizing the plot<a class="headerlink" href="#customizing-the-plot" title="Permalink to this headline">¶</a></h2>
 <p>As mentioned before, you have access to almost all options that you can use in <code class="docutils literal notranslate"><span class="pre">microshow</span></code> for the animation. Here’s an example where we add a scale bar, a label and adjust the plot size:</p>
@@ -492,16 +520,12 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anim</span> <span class="o">=</span> <span class="n">Microanim</span><span class="p">(</span>
     <span class="n">data</span><span class="o">=</span><span class="n">image</span><span class="p">,</span>
     <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_blue&#39;</span><span class="p">,</span><span class="s1">&#39;pure_red&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_green&#39;</span><span class="p">],</span> <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span>
-    <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">fig_scaling</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">fig_scaling</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">scalebar_thickness</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
 
 <span class="n">anim</span><span class="o">.</span><span class="n">ui</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "60648225dc0b4a40b3345fed2b497830", "version_major": 2, "version_minor": 0}
-</script></div>
 </div>
 <div class="cell tag_hide_input docutils container">
 <div class="cell_input docutils container">
@@ -524,7 +548,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "60648225dc0b4a40b3345fed2b497830", "version_major": 2, "version_minor": 0}
+{"model_id": "54f86595ef8d49b7874c00dc706ae185", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
 <div class="cell tag_hide_input docutils container">
@@ -546,7 +570,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "60648225dc0b4a40b3345fed2b497830", "version_major": 2, "version_minor": 0}
+{"model_id": "54f86595ef8d49b7874c00dc706ae185", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
 <div class="cell tag_hide_input docutils container">
@@ -566,16 +590,13 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anim</span> <span class="o">=</span> <span class="n">Microanim</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">image</span><span class="p">,</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_blue&#39;</span><span class="p">,</span><span class="s1">&#39;pure_red&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_green&#39;</span><span class="p">],</span>
-                <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">fig_scaling</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+                <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">scalebar_thickness</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
+                <span class="n">scalebar_font_size</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">fig_scaling</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">anim</span><span class="o">.</span><span class="n">add_time_stamp</span><span class="p">(</span><span class="s1">&#39;MM&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s1">&#39;lower left&#39;</span><span class="p">)</span>
 <span class="n">anim</span><span class="o">.</span><span class="n">ui</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "b6cf3baca35a4015b3d27e9ebcae7fd5", "version_major": 2, "version_minor": 0}
-</script></div>
 </div>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
@@ -628,7 +649,8 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anim</span> <span class="o">=</span> <span class="n">Microanim</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nucleoid&#39;</span><span class="p">,</span><span class="s1">&#39;ori&#39;</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_red&#39;</span><span class="p">,</span><span class="s1">&#39;pure_green&#39;</span><span class="p">],</span>
-                <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">fig_scaling</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+                 <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> 
+                 <span class="n">scalebar_thickness</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">scalebar_font_size</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">fig_scaling</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">anim</span><span class="o">.</span><span class="n">add_label</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">)</span>
 <span class="n">anim</span><span class="o">.</span><span class="n">add_time_stamp</span><span class="p">(</span><span class="s1">&#39;MM&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s1">&#39;lower left&#39;</span><span class="p">)</span>
 </pre></div>
@@ -643,7 +665,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "34a99dfebaf14d9d909532f8057ce28e", "version_major": 2, "version_minor": 0}
+{"model_id": "01e976266ceb4231ae84a86b5b6c5d82", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
 <div class="cell tag_hide_input docutils container">
