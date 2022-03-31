@@ -357,6 +357,7 @@ def multichannel_to_rgb(images, cmaps=None, flip_map=False, rescale_type='min_ma
         projection type of color combination
         max: maximum
         sum: sum projection, restricted to dtype range
+        alpha: alpha blending
     alpha: float
         transparency in range [0,1] of overlayed image for
         proj_type == alpha
@@ -435,20 +436,64 @@ def multichannel_to_rgb(images, cmaps=None, flip_map=False, rescale_type='min_ma
     return converted, cmap_objects, image_min_max
 
 
-def check_input(images):
-    """Converts input, either 2D array, list of 2D arrays or 3D array of size DxNxM where D<4
-    to list of 2D arrays."""
+def check_input(images, is_volume=False):
+    """Converts input, either 2D (3D if is_volume) array, list of 2D (3D) arrays or 3D (4D) array of size DxNxM (DxZxNxM)
+    where D<4 to list of 2D (3D) arrays."""
     
+    ndim = 2
+    if is_volume:
+        ndim = 3
+
     if isinstance(images, np.ndarray):
-        if images.ndim == 2:
+        if images.ndim == ndim:
             images = [images]
-        elif images.ndim == 3:
+        elif images.ndim == ndim+1:
             images = [x for x in images]
     elif isinstance(images, list):
         if not isinstance(images[0], np.ndarray):
-            raise Exception(f"You need to pass a list of 2D arrays.")
-        elif images[0].ndim !=2:
-            raise Exception(f"Array should be 2D. You passed {len(images[0].shape)}D array.")
+            raise Exception(f"You need to pass a list of 2D (or 3D if is_volume is True) arrays.")
+        elif images[0].ndim !=ndim:
+            raise Exception(f"Array should be {ndim}D. You passed {images[0].ndim}D array.")
     
     return images
+
+def project_volume(images, proj_type):
+    """
+    Project a list of 3D images to a list of 2D images
+    
+    Parameters
+    ----------
+    images: list of arrays
+        list of 3d arrays of shape ZxNxM
+    proj_type: str
+        projection type for volume
+        max: maximum
+        min: minimum
+        sum: sum
+        mean: mean
+
+    Returns
+    -------
+    images_proj : list of 2D arrays (float32)
+        projected arrays
+    """
+    
+    images_proj = [im.astype(np.float32) for im in images]
+
+    if proj_type == 'max':
+        images_proj = [np.max(im, axis=0) for im in images_proj]
+        return images_proj
+    if proj_type == 'min':
+        images_proj =  [np.min(im, axis=0) for im in images_proj]
+        return images_proj
+    elif proj_type == 'sum':
+        images_proj =  [np.sum(im, axis=0) for im in images_proj]
+        return images_proj
+    elif proj_type == 'mean':
+        images_proj =  [np.sum(im, axis=0)/len(im) for im in images_proj]
+        return images_proj
+    else:
+        raise Exception(f"Your projection type {proj_type} is not implemented.")
+
+
 
