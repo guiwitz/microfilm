@@ -13,7 +13,7 @@ from . import colorify
    
 def microshow(
     images=None, cmaps=None, flip_map=False, rescale_type=None, limits=None, 
-    num_colors=256, proj_type='max', alpha=0.5, channel_names=None,
+    num_colors=256, proj_type='max', alpha=0.5, volume_proj=None, channel_names=None,
     channel_label_show=False, channel_label_type='title', channel_label_size=0.05,
     scalebar_thickness=0.02, scalebar_unit_per_pix=None, scalebar_size_in_units=None,
     unit=None, scalebar_location='lower right', scalebar_color='white',
@@ -52,6 +52,12 @@ def microshow(
     alpha: float
         transparency in range [0,1] of overlayed image for
         proj_type == alpha
+    volume_proj: str
+        projection type for volume images
+        None: no projection
+        'max': maximum projection
+        'sum': sum projection, restricted to dtype range
+        'mean': mean projection
     channel_names: list
         list of channel names
     channel_label_show: bool
@@ -117,7 +123,7 @@ def microshow(
         microim = Microimage(
             images=images, cmaps=cmaps, flip_map=flip_map, rescale_type=rescale_type,
             limits=limits, num_colors=num_colors, proj_type=proj_type, alpha=alpha,
-            channel_names=channel_names, channel_label_show=channel_label_show,
+            volume_proj=volume_proj, channel_names=channel_names, channel_label_show=channel_label_show,
             channel_label_type=channel_label_type, channel_label_size=channel_label_size,
             scalebar_thickness=scalebar_thickness, scalebar_unit_per_pix=scalebar_unit_per_pix,
             scalebar_size_in_units=scalebar_size_in_units, unit=unit,
@@ -130,7 +136,6 @@ def microshow(
         )
     
     microim.rescale_type = colorify.check_rescale_type(microim.rescale_type, microim.limits)
-
     converted, cmap_objects, image_min_max = colorify.multichannel_to_rgb(
         microim.images, cmaps=microim.cmaps, flip_map=microim.flip_map,
         rescale_type=microim.rescale_type, limits=microim.limits,
@@ -200,7 +205,18 @@ def microshow(
         microim.add_colorbar()
 
     return microim
-    
+
+def volshow(images, volume_proj='mean', **kwargs):
+    """
+    Wrapper for microshow for volume images.
+    """
+    return microshow(images, volume_proj=volume_proj, **kwargs)
+
+volshow.__doc__ = microshow.__doc__
+docstr = volshow.__doc__
+docstr = docstr.splitlines()
+docstr[1] = '   Plot volume'
+volshow.__doc__ = '\n'.join(docstr)    
 
 class Microimage:
     """
@@ -233,6 +249,12 @@ class Microimage:
     alpha: float
         transparency in range [0,1] of overlayed image for
         proj_type == alpha
+    volume_proj: str
+        projection type for volume images
+        None: no projection
+        'max': maximum projection
+        'sum': sum projection, restricted to dtype range
+        'mean': mean projection
     channel_names: list
         list of channel names
     channel_label_show: bool
@@ -287,10 +309,10 @@ class Microimage:
 
     def __init__(
         self, images, cmaps=None, flip_map=False, rescale_type=None, limits=None,
-        num_colors=256, proj_type='max', alpha=0.5, channel_names=None, channel_label_show=False,
-        channel_label_type='title', channel_label_size=0.05, scalebar_thickness=0.02,
-        scalebar_unit_per_pix=None, scalebar_size_in_units=None, unit=None,
-        scalebar_location='lower right', scalebar_color='white',
+        num_colors=256, proj_type='max', alpha=0.5, volume_proj=None, channel_names=None,
+        channel_label_show=False, channel_label_type='title', channel_label_size=0.05,
+        scalebar_thickness=0.02, scalebar_unit_per_pix=None, scalebar_size_in_units=None,
+        unit=None, scalebar_location='lower right', scalebar_color='white',
         scalebar_font_size=12, scalebar_kwargs=None, scalebar_font_properties=None,
         ax=None, fig_scaling=3, dpi=72, label_text=None, label_location='upper left',
         label_color='white', label_font_size=15, label_kwargs={}, cmap_objects=None,
@@ -322,7 +344,13 @@ class Microimage:
             self.label_kwargs = {}
 
         # check input
-        self.images = colorify.check_input(self.images)
+        is_volume = self.volume_proj is not None
+        self.images = colorify.check_input(self.images, is_volume=is_volume)
+
+        # do 3D projection if necessary
+        if (self.volume_proj is not None) and (self.images is not None):
+            self.images = colorify.project_volume(self.images, self.volume_proj)
+
         if (not isinstance(self.cmaps, list)) and self.cmaps is not None:
             self.cmaps = [self.cmaps]
         if isinstance(self.channel_names, str):

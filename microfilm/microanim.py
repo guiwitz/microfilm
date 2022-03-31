@@ -20,7 +20,7 @@ class Microanim(Microimage):
 
     def __init__(
         self, data, channels=None, cmaps=None, flip_map=False, rescale_type=None, limits=None, 
-        num_colors=256, proj_type='max', alpha=0.5, channel_names=None,
+        num_colors=256, proj_type='max', alpha=0.5, volume_proj=None, channel_names=None,
         channel_label_show=False, channel_label_type='title', channel_label_size=0.05,
         scalebar_thickness=0.1, scalebar_unit_per_pix=None, scalebar_size_in_units=None,
         unit=None, scalebar_location='lower right', scalebar_color='white',
@@ -31,7 +31,7 @@ class Microanim(Microimage):
     ):
         super().__init__(
             images=None, cmaps=cmaps, flip_map=flip_map, rescale_type=rescale_type, limits=limits,
-            num_colors=num_colors, proj_type=proj_type, alpha=alpha, channel_names=channel_names,
+            num_colors=num_colors, proj_type=proj_type, alpha=alpha, volume_proj=volume_proj, channel_names=channel_names,
             channel_label_show=channel_label_show, channel_label_type=channel_label_type, channel_label_size=channel_label_size,
             scalebar_thickness=scalebar_thickness, scalebar_unit_per_pix=scalebar_unit_per_pix, scalebar_size_in_units=scalebar_size_in_units,
             unit=unit, scalebar_location=scalebar_location, scalebar_color=scalebar_color,
@@ -41,10 +41,17 @@ class Microanim(Microimage):
             show_colorbar=show_colorbar
         )
 
+        # check for correct dimensions
         if isinstance(data, np.ndarray):
+            target_dim=5 if (volume_proj is not None) else 3
+            if data.ndim != target_dim:
+                raise ValueError(f"The array needs {target_dim} dimensions, yours has {data.ndim}")
             data = Nparray(nparray=data)
 
         self.data = data
+        if volume_proj is not None:
+            if type(data) != Nparray:
+                raise ValueError(f"Volume projection requires a dataset.Nparray object, you have {type(data)}")
         self.max_time = self.data.K-1
 
         if not isinstance(self.flip_map, list):
@@ -66,6 +73,10 @@ class Microanim(Microimage):
         self.timestamps = None
 
         self.images = [self.data.load_frame(x, 0) for x in self.channels]
+        # do 3D projection if necessary
+        if (self.volume_proj is not None):
+            self.images = colorify.project_volume(self.images, self.volume_proj)
+
         if show_plot:
             self.show()
         self.ui = ipw.VBox([self.output, self.time_slider])
@@ -87,6 +98,9 @@ class Microanim(Microimage):
         """Update animation to time t"""
 
         self.images = [self.data.load_frame(x, t) for x in self.channels]
+        # do 3D projection if necessary
+        if (self.volume_proj is not None):
+            self.images = colorify.project_volume(self.images, self.volume_proj)
 
         converted, _, _ = multichannel_to_rgb(self.images, cmaps=self.cmaps, flip_map=self.flip_map,
                                     rescale_type=self.rescale_type, limits=self.limits, num_colors=self.num_colors,
