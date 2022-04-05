@@ -390,8 +390,8 @@ where D&lt;4 to list of 2D (3D) arrays.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>cmap_name</strong> (<em>str</em>) – Matplotlib colormap or ‘pure_red’, ‘pure_green’, ‘pure_blue’
-‘pure_magenta’, ‘pure_cyan’, ‘pure_yellow’</p></li>
+<li><p><strong>cmap_name</strong> (<em>str</em>) – {‘pure_red’, ‘pure_green’, ‘pure_blue’, ‘pure_magenta’,
+‘pure_cyan’, ‘pure_yellow’} or Matplotlib colormap</p></li>
 <li><p><strong>num_colors</strong> (<em>int</em>) – number of steps in color scale</p></li>
 <li><p><strong>flip_map</strong> (<em>bool</em>) – invert colormap</p></li>
 </ul>
@@ -444,7 +444,7 @@ where D&lt;4 to list of 2D (3D) arrays.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>image</strong> (<em>2d array</em>) – image to convert to RGB</p></li>
-<li><p><strong>cmap_name</strong> (<em>str</em>) – Matplotlib colormap or ‘pure_red’, ‘pure_green’, ‘pure_blue’</p></li>
+<li><p><strong>cmap_hex</strong> (<em>str</em>) – hex string defining color, default ‘#ff6600’</p></li>
 <li><p><strong>flip_map</strong> (<em>bool</em>) – invert colormap</p></li>
 <li><p><strong>rescale_type</strong> (<em>str</em>) – ‘min_max’: between extrema values of image
 ‘dtype’: full range of image dtype
@@ -473,7 +473,8 @@ where D&lt;4 to list of 2D (3D) arrays.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>image</strong> (<em>2d array</em>) – image to convert to RGB</p></li>
-<li><p><strong>cmap_name</strong> (<em>str</em>) – Matplotlib colormap or ‘pure_red’, ‘pure_green’, ‘pure_blue’</p></li>
+<li><p><strong>cmap_name</strong> (<em>str</em>) – {‘pure_red’, ‘pure_green’, ‘pure_blue’, ‘pure_magenta’,
+‘pure_cyan’, ‘pure_yellow’} or Matplotlib colormap</p></li>
 <li><p><strong>flip_map</strong> (<em>bool</em>) – invert colormap</p></li>
 <li><p><strong>rescale_type</strong> (<em>str</em>) – ‘min_max’: between extrema values of image
 ‘dtype’: full range of image dtype

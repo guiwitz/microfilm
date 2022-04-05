@@ -12,10 +12,16 @@ Following the model of [seaborn](https://seaborn.pydata.org/index.html), ```micr
 
 ## Installation
 
-You can install this package directly from Github using: 
+You can install this package directly with pip using: 
 
 ```
 pip install microfilm
+```
+
+To get the latest stage of the package with yet unreleased features use:
+
+```
+pip install git+https://github.com/guiwitz/microfilm.git
 ```
 
 To test the package via the Jupyter interface and the notebooks available [here](notebooks) you can create a conda environment using the [environment.yml](binder/environment.yml) file:
