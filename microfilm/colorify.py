@@ -15,8 +15,8 @@ def cmaps_def(cmap_name, num_colors=256, flip_map=False):
     Parameters
     ----------
     cmap_name: str
-        Matplotlib colormap or 'pure_red', 'pure_green', 'pure_blue'
-        'pure_magenta', 'pure_cyan', 'pure_yellow'
+        {'pure_red', 'pure_green', 'pure_blue', 'pure_magenta',
+        'pure_cyan', 'pure_yellow'} or Matplotlib colormap
     num_colors: int
         number of steps in color scale
     flip_map: bool
@@ -135,7 +135,8 @@ def colorify_by_name(image, cmap_name, flip_map=False, rescale_type='min_max', l
     image: 2d array
         image to convert to RGB
     cmap_name: str
-        Matplotlib colormap or 'pure_red', 'pure_green', 'pure_blue'
+        {'pure_red', 'pure_green', 'pure_blue', 'pure_magenta',
+        'pure_cyan', 'pure_yellow'} or Matplotlib colormap
     flip_map: bool
         invert colormap
     rescale_type: str
@@ -177,8 +178,8 @@ def colorify_by_hex(image, cmap_hex='#ff6600', flip_map=False, rescale_type='min
     ----------
     image: 2d array
         image to convert to RGB
-    cmap_name: str
-        Matplotlib colormap or 'pure_red', 'pure_green', 'pure_blue'
+    cmap_hex: str
+        hex string defining color, default '#ff6600' 
     flip_map: bool
         invert colormap
     rescale_type: str
