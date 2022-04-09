@@ -43,7 +43,7 @@ class Microanim(Microimage):
 
         # check for correct dimensions
         if isinstance(data, np.ndarray):
-            target_dim=5 if (volume_proj is not None) else 3
+            target_dim=5 if (volume_proj is not None) else 4
             if data.ndim != target_dim:
                 raise ValueError(f"The array needs {target_dim} dimensions, yours has {data.ndim}")
             data = Nparray(nparray=data)

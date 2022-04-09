@@ -19,6 +19,11 @@ anim_panel = microanim.Microanimpanel(rows=1, cols=2)
 anim_panel.add_element([0,0], anim)
 anim_panel.add_element([0,1], anim2)  
 
+def test_animation_input():
+    
+    # test numpy input
+    anim_np = microanim.Microanim(data=test_image, cmaps=['pure_red', 'pure_green', 'pure_blue'])
+
 def verify_colors(anim, color, t):
     
     if color == 'red':
