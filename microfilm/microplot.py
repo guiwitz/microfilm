@@ -669,7 +669,7 @@ class Micropanel:
             gridspec_kw = {'left':0, 'right':1, 'bottom':0, 'top':1, 'wspace':self.margin, 'hspace':self.margin},
             **self.fig_kwargs)
 
-    def add_channel_label(self, channel_label_size=None, label_line_space=None,
+    def add_channel_label(self, channel_label_size=0.05, label_line_space=0.1,
                           channel_names=None, channel_colors=None):
         """Add channel labels to all plots and set their size"""
 
@@ -680,17 +680,22 @@ class Micropanel:
 
         for i in range(self.rows):
             for j in range(self.cols):
-                if channel_names is not None:
-                    self.microplots[i,j].channel_names = channel_names[i][j]
-                elif self.microplots[i,j].channel_names is None:
-                    self.microplots[i,j].channel_names = ['Channel-' + str(i) for i in range(len(self.microplots[i,j].images))]
+                if self.microplots[i,j] is not None:
+                    if channel_names is not None:
+                        self.microplots[i,j].channel_names = channel_names[i][j]
+                    elif self.microplots[i,j].channel_names is None:
+                        self.microplots[i,j].channel_names = ['Channel-' + str(i) for i in range(len(self.microplots[i,j].images))]
         
         ## title params
+        px = 1/plt.rcParams['figure.dpi']
+        figheight_px = self.fig.get_size_inches()[1] / px
+
         line_space = self.label_line_space * self.channel_label_size
         nlines = np.max([len(k) for k in [x.channel_names for x in self.microplots.ravel() if x is not None] if k is not None])
 
-        tot_space = nlines * (self.channel_label_size+line_space)
-        fontsize = self.channel_label_size*self.fig.get_size_inches()[1]*self.rows*100
+        tot_space =  (nlines * self.channel_label_size + (nlines-0.5)*line_space)
+        # make the font size the fraction of the figure height *remaining* after adding the text
+        fontsize = int(figheight_px * (1-(self.rows * tot_space)) * self.channel_label_size)
 
         # adjust figure size with label
         self.fig.clf()
@@ -733,7 +738,7 @@ class Micropanel:
                             text_to_plot = self.microplots[j, i].channel_names[num_lines-1-k]
                         self.fig.text(
                             x=xpos,
-                            y = ypos + line_space+k*(self.channel_label_size+line_space),
+                            y = ypos + 0.5 * self.channel_label_size + k * (self.channel_label_size+line_space),
                             s=text_to_plot, ha="center",
                             transform=self.fig.transFigure,
                             fontdict={'color': text_color, 'size':fontsize}
