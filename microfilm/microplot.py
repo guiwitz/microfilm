@@ -604,7 +604,7 @@ class Microimage:
             # The factor (1-tot_space) is a rescaling of the y position to take into
             # account that the axis only occupies that portion of the figure
             if channel_colors is not None:
-                text_color = channel_colors[i]
+                text_color = channel_colors[nlines-1-i]
             elif self.flip_map[nlines-1-i] is False:
                 text_color = self.cmap_objects[nlines-1-i](self.cmap_objects[nlines-1-i].N)
             else:
@@ -748,7 +748,7 @@ class Micropanel:
                         
                         # find text color
                         if channel_colors is not None:
-                            text_color = channel_colors[j][i][k]
+                            text_color = channel_colors[j][i][num_lines-1-k]
                         elif self.microplots[j,i].flip_map[num_lines-1-k] is False:
                             text_color = self.microplots[j,i].cmap_objects[num_lines-1-k](self.microplots[j,i].cmap_objects[num_lines-1-k].N)
                         else:
