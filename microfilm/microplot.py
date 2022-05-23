@@ -14,7 +14,7 @@ from . import colorify
 def microshow(
     images=None, cmaps=None, flip_map=False, rescale_type=None, limits=None, 
     num_colors=256, proj_type='max', alpha=0.5, volume_proj=None, channel_names=None,
-    channel_label_show=False, channel_label_type='title', channel_label_size=0.05,
+    channel_label_show=False, channel_label_type='title', channel_label_size=0.1,
     scalebar_thickness=0.02, scalebar_unit_per_pix=None, scalebar_size_in_units=None,
     unit=None, scalebar_location='lower right', scalebar_color='white',
     scalebar_font_size=12, scalebar_kwargs=None, scalebar_font_properties=None,
@@ -310,7 +310,7 @@ class Microimage:
     def __init__(
         self, images, cmaps=None, flip_map=False, rescale_type=None, limits=None,
         num_colors=256, proj_type='max', alpha=0.5, volume_proj=None, channel_names=None,
-        channel_label_show=False, channel_label_type='title', channel_label_size=0.05,
+        channel_label_show=False, channel_label_type='title', channel_label_size=0.1,
         scalebar_thickness=0.02, scalebar_unit_per_pix=None, scalebar_size_in_units=None,
         unit=None, scalebar_location='lower right', scalebar_color='white',
         scalebar_font_size=12, scalebar_kwargs=None, scalebar_font_properties=None,
@@ -554,7 +554,9 @@ class Microimage:
 
         return label_text
 
-    def add_channel_labels(self, channel_names=None, channel_label_size=0.05):
+    def add_channel_labels(
+        self, channel_names=None, channel_label_size=None,
+        label_line_space=0.1, channel_colors=None):
         """
         Add the channel names color with the corresponding colormap as figure title
 
@@ -564,35 +566,47 @@ class Microimage:
             list of channel names, defaults to channel-1, channel-2 etc.
         channel_label_size: float
             relative font size of label
+        label_line_space: float
+            size of space between labels as fraction of channel_label_size
+        channel_colors: list of array
+            list of colors to use for the label each channel,
+            defaults to the colormap
 
         """
 
+        if channel_label_size is not None:
+            self.channel_label_size = channel_label_size
+        self.label_line_space = label_line_space
+
         if channel_names is not None:
             self.channel_names = channel_names
-        self.channel_label_size = channel_label_size
-
-        if self.channel_names is None:
+        elif self.channel_names is None:
             self.channel_names = ['Channel-' + str(i) for i in range(len(self.images))]
 
-        figsize = self.fig.get_size_inches()[1]
-        fontsize = channel_label_size*figsize*100
-
-        line_space = 0.005 * figsize
+        px = 1/plt.rcParams['figure.dpi']
+        figheight_px = self.fig.get_size_inches()[1] / px
+        
+        line_space = self.label_line_space * self.channel_label_size
         nlines = len(self.channel_names)
+        tot_space =  ((nlines+0.5) * self.channel_label_size + (nlines-1)*line_space)
 
-        tot_space = nlines * (channel_label_size+line_space)
+        fontsize = int(figheight_px * (1-tot_space) * self.channel_label_size)
+        
         self.ax.set_position([self.ax.get_position().bounds[0], self.ax.get_position().bounds[1],
                  self.ax.get_position().bounds[2], self.ax.get_position().bounds[3]-tot_space])
 
         for i in range(nlines):
             # The factor (1-tot_space) is a rescaling of the y position to take into
             # account that the axis only occupies that portion of the figure
-            if self.flip_map[nlines-1-i] is False:
+            if channel_colors is not None:
+                text_color = channel_colors[i]
+            elif self.flip_map[nlines-1-i] is False:
                 text_color = self.cmap_objects[nlines-1-i](self.cmap_objects[nlines-1-i].N)
             else:
                 text_color = self.cmap_objects[nlines-1-i](0)
             self.ax.text(
-                x=0.5, y=1+line_space+i*(channel_label_size+line_space)/(1-tot_space),
+                x=0.5,
+                y=1 + 0.5 * self.channel_label_size + i * (self.channel_label_size+line_space),#/(1-tot_space),
                 s=self.channel_names[nlines-1-i], ha="center", transform=self.ax.transAxes,
                 fontdict={'color': text_color,'size':fontsize}
             )
@@ -643,7 +657,7 @@ class Micropanel:
     
     def __init__(
         self, rows, cols, margin=0.01, figscaling=5, figsize=None,
-        channel_label_size=0.05, label_line_space=0.2, **fig_kwargs):
+        channel_label_size=0.05, label_line_space=0.1, **fig_kwargs):
 
         self.rows = rows
         self.cols = cols
@@ -669,7 +683,7 @@ class Micropanel:
             gridspec_kw = {'left':0, 'right':1, 'bottom':0, 'top':1, 'wspace':self.margin, 'hspace':self.margin},
             **self.fig_kwargs)
 
-    def add_channel_label(self, channel_label_size=0.05, label_line_space=0.1,
+    def add_channel_label(self, channel_label_size=None, label_line_space=None,
                           channel_names=None, channel_colors=None):
         """Add channel labels to all plots and set their size"""
 
@@ -693,7 +707,7 @@ class Micropanel:
         line_space = self.label_line_space * self.channel_label_size
         nlines = np.max([len(k) for k in [x.channel_names for x in self.microplots.ravel() if x is not None] if k is not None])
 
-        tot_space =  (nlines * self.channel_label_size + (nlines-0.5)*line_space)
+        tot_space =  ((nlines+0.5) * self.channel_label_size + (nlines-1)*line_space)
         # make the font size the fraction of the figure height *remaining* after adding the text
         fontsize = int(figheight_px * (1-(self.rows * tot_space)) * self.channel_label_size)
 
