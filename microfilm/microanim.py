@@ -22,8 +22,8 @@ class Microanim(Microimage):
         self, data, channels=None, cmaps=None, flip_map=False, rescale_type=None, limits=None, 
         num_colors=256, proj_type='max', alpha=0.5, volume_proj=None, channel_names=None,
         channel_label_show=False, channel_label_type='title', channel_label_size=0.05,
-        scalebar_thickness=0.1, scalebar_unit_per_pix=None, scalebar_size_in_units=None,
-        unit=None, scalebar_location='lower right', scalebar_color='white',
+        channel_label_line_space=0.1, scalebar_thickness=0.1, scalebar_unit_per_pix=None,
+        scalebar_size_in_units=None, unit=None, scalebar_location='lower right', scalebar_color='white',
         scalebar_font_size=12, scalebar_kwargs=None, scalebar_font_properties=None,
         ax=None, fig_scaling=3, dpi=72, label_text=None, label_location='upper left',
         label_color='white', label_font_size=15, label_kwargs={}, cmap_objects=None,
@@ -33,7 +33,8 @@ class Microanim(Microimage):
             images=None, cmaps=cmaps, flip_map=flip_map, rescale_type=rescale_type, limits=limits,
             num_colors=num_colors, proj_type=proj_type, alpha=alpha, volume_proj=volume_proj, channel_names=channel_names,
             channel_label_show=channel_label_show, channel_label_type=channel_label_type, channel_label_size=channel_label_size,
-            scalebar_thickness=scalebar_thickness, scalebar_unit_per_pix=scalebar_unit_per_pix, scalebar_size_in_units=scalebar_size_in_units,
+            channel_label_line_space=channel_label_line_space, scalebar_thickness=scalebar_thickness, scalebar_unit_per_pix=scalebar_unit_per_pix,
+            scalebar_size_in_units=scalebar_size_in_units,
             unit=unit, scalebar_location=scalebar_location, scalebar_color=scalebar_color,
             scalebar_font_size=scalebar_font_size, scalebar_kwargs=scalebar_kwargs, scalebar_font_properties=scalebar_font_properties,
             ax=ax, fig_scaling=fig_scaling, dpi=dpi, label_text=label_text, label_location=label_location,
@@ -227,7 +228,7 @@ class Microanimpanel:
         dots per inches passed to plt.figure
     channel_label_size: float
         font size for channel labels (fraction of figure)
-    label_line_space: float
+    channel_label_line_space: float
         space between label lines in fraction of channel_label_size
     fig_kwargs: parameters normally passed to plt.subplots()
 
@@ -252,7 +253,7 @@ class Microanimpanel:
     
     def __init__(
         self, rows, cols, margin=0.01, figscaling=5, 
-        figsize=None, channel_label_size=0.05, label_line_space=0.2, **fig_kwargs):
+        figsize=None, channel_label_size=0.05, channel_label_line_space=0.2, **fig_kwargs):
 
         self.rows = rows
         self.cols = cols
@@ -260,7 +261,7 @@ class Microanimpanel:
         self.figsize = figsize
         self.figscaling = figscaling
         self.channel_label_size = channel_label_size
-        self.label_line_space = label_line_space
+        self.channel_label_line_space = channel_label_line_space
         self.fig_kwargs = fig_kwargs
         if 'frameon' not in self.fig_kwargs.keys():
             self.fig_kwargs['frameon'] = False
@@ -286,13 +287,13 @@ class Microanimpanel:
 
         self.debug = ipw.Output()
 
-    def add_channel_label(self, channel_label_size=None, label_line_space=None):
+    def add_channel_label(self, channel_label_size=None, channel_label_line_space=None):
         """Add channel labels to all plots and set their size"""
         
         if channel_label_size is not None:
             self.channel_label_size = channel_label_size
-        if label_line_space is not None:
-            self.label_line_space = label_line_space
+        if channel_label_line_space is not None:
+            self.channel_label_line_space = channel_label_line_space
 
         for i in range(self.rows):
             for j in range(self.cols):
@@ -300,10 +301,14 @@ class Microanimpanel:
                     self.microanims[i,j].channel_names = ['Channel-' + str(i) for i in range(len(self.microanims[i,j].images))]
         
         ## title params
+        px = 1/plt.rcParams['figure.dpi']
+        figheight_px = self.fig.get_size_inches()[1] / px
+        
+        line_space = self.channel_label_line_space * self.channel_label_size
         nlines = np.max([len(k) for k in [x.channel_names for x in self.microanims.ravel() if x is not None] if k is not None])
-        fontsize = self.channel_label_size*self.fig.get_size_inches()[1]*self.rows*100
-        line_space = self.label_line_space * self.channel_label_size
-        tot_space = nlines * (self.channel_label_size+line_space)
+        
+        tot_space =  ((nlines+0.5) * self.channel_label_size + (nlines-1)*line_space)
+        fontsize = int(figheight_px * (1-(self.rows * tot_space)) * self.channel_label_size)
 
         self.output.clear_output()
         with self.output:
@@ -329,8 +334,9 @@ class Microanimpanel:
 
                         xpos = self.ax[j,i].get_position().bounds[0]+0.5*self.ax[j,i].get_position().bounds[2]
                         ypos = self.ax[j,i].get_position().bounds[1]+self.ax[j,i].get_position().bounds[3]
+                        num_lines = len(self.microanims[j,i].channel_names)
 
-                        for k in range(nlines):
+                        for k in range(num_lines):
                             # find text color
                             if self.microanims[j,i].flip_map[nlines-1-k] is False:
                                 text_color = self.microanims[j,i].cmap_objects[nlines-1-k](self.microanims[j,i].cmap_objects[nlines-1-k].N)
@@ -339,7 +345,7 @@ class Microanimpanel:
                             
                             self.fig.text(
                                 x=xpos,
-                                y=ypos+line_space+k*(self.channel_label_size+line_space),
+                                y=ypos + 0.5 * self.channel_label_size + k * (self.channel_label_size+line_space),
                                 s=self.microanims[j, i].channel_names[nlines-1-k], ha="center",
                                 transform=self.fig.transFigure,
                                 fontdict={'color': text_color, 'size':fontsize}
