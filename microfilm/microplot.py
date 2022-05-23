@@ -669,7 +669,8 @@ class Micropanel:
             gridspec_kw = {'left':0, 'right':1, 'bottom':0, 'top':1, 'wspace':self.margin, 'hspace':self.margin},
             **self.fig_kwargs)
 
-    def add_channel_label(self, channel_label_size=None, label_line_space=None):
+    def add_channel_label(self, channel_label_size=None, label_line_space=None,
+                          channel_names=None, channel_colors=None):
         """Add channel labels to all plots and set their size"""
 
         if channel_label_size is not None:
@@ -679,7 +680,9 @@ class Micropanel:
 
         for i in range(self.rows):
             for j in range(self.cols):
-                if self.microplots[i,j].channel_names is None:
+                if channel_names is not None:
+                    self.microplots[i,j].channel_names = channel_names[i][j]
+                elif self.microplots[i,j].channel_names is None:
                     self.microplots[i,j].channel_names = ['Channel-' + str(i) for i in range(len(self.microplots[i,j].images))]
         
         ## title params
@@ -713,21 +716,24 @@ class Micropanel:
 
                     xpos = self.ax[j,i].get_position().bounds[0]+0.5*self.ax[j,i].get_position().bounds[2]
                     ypos = self.ax[j,i].get_position().bounds[1]+self.ax[j,i].get_position().bounds[3]
+                    num_lines = len(self.microplots[j,i].channel_names)
 
-                    for k in range(nlines):
+                    for k in range(num_lines):
                         
                         # find text color
-                        if self.microplots[j,i].flip_map[nlines-1-k] is False:
-                            text_color = self.microplots[j,i].cmap_objects[nlines-1-k](self.microplots[j,i].cmap_objects[nlines-1-k].N)
+                        if channel_colors is not None:
+                            text_color = channel_colors[j][i][k]
+                        elif self.microplots[j,i].flip_map[num_lines-1-k] is False:
+                            text_color = self.microplots[j,i].cmap_objects[num_lines-1-k](self.microplots[j,i].cmap_objects[num_lines-1-k].N)
                         else:
-                            text_color = self.microplots[j,i].cmap_objects[nlines-1-k](0)
+                            text_color = self.microplots[j,i].cmap_objects[num_lines-1-k](0)
 
                         text_to_plot = " "
                         if self.microplots[j, i].channel_names is not None:
-                            text_to_plot = self.microplots[j, i].channel_names[nlines-1-k]
+                            text_to_plot = self.microplots[j, i].channel_names[num_lines-1-k]
                         self.fig.text(
                             x=xpos,
-                            y = ypos + line_space + +k*(self.channel_label_size+line_space),
+                            y = ypos + line_space+k*(self.channel_label_size+line_space),
                             s=text_to_plot, ha="center",
                             transform=self.fig.transFigure,
                             fontdict={'color': text_color, 'size':fontsize}
