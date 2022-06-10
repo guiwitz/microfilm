@@ -149,8 +149,8 @@ def microshow(
 
     if microim.cmaps is None:
         if len(microim.images) < 4:
-            rgb = ['pure_red', 'pure_green', 'pure_blue']
-            microim.cmaps = [rgb[k] for k in range(len(microim.images))]
+            cmy = ['pure_cyan','pure_magenta','pure_yellow']
+            microim.cmaps = [cmy[k] for k in range(len(microim.images))]
         else:
             microim.cmaps = ['ran_gradient' for x in microim.images]
     
