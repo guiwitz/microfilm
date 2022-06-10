@@ -406,7 +406,9 @@ def multichannel_to_rgb(images, cmaps=None, flip_map=False, rescale_type='min_ma
         
         # if no colormap is provided use true RGB for d<4
         if cmaps is None:
-            if len(images) < 4:
+            if len(images) == 1:
+                cmaps = ['gray']
+            elif len(images) < 4:
                 cmaps = ['pure_cyan','pure_magenta','pure_yellow']
             else:
                 cmaps = ['ran_gradient' for x in images]
