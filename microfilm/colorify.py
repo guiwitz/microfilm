@@ -372,6 +372,11 @@ def multichannel_to_rgb(images, cmaps=None, flip_map=False, rescale_type='min_ma
         multi-channel RGB image
     cmap_objects: list
         list of Matplotlib cmaps generated for each channel
+    cmaps: list of str / Matplotlib colormaps
+        colormap as names (e.g. 'pure_red' as specified in cmaps_def) or
+        directly as Matplotlib colormaps (e.g. as returned by cmaps_def).
+        If input cmaps are provided, the same ones are returned. Otherwise
+        a list of default colormaps is returned as list of strings.
     image_min_max: list of tuples
         actual (min, max) values used for rescaling for each image
         
@@ -434,7 +439,7 @@ def multichannel_to_rgb(images, cmaps=None, flip_map=False, rescale_type='min_ma
 
         converted = combine_image(colorified, proj_type=proj_type, alpha=alpha)
     
-    return converted, cmap_objects, image_min_max
+    return converted, cmap_objects, cmaps, image_min_max
 
 
 def check_input(images, is_volume=False):

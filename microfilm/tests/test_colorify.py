@@ -102,7 +102,7 @@ def test_combine_image():
 
 def test_multichannel_to_rgb():
     
-    multic, _, _ = colorify.multichannel_to_rgb(images=[image, image2], cmaps=['pure_blue', 'pure_red'],
+    multic, _, _, _ = colorify.multichannel_to_rgb(images=[image, image2], cmaps=['pure_blue', 'pure_red'],
                                           rescale_type='limits', limits=[130, 190], num_colors=1000)
     assert multic.ndim == 3, "Wrong dimensions, not RGB image"
     np.testing.assert_almost_equal(multic[:,:,0][0], np.array([(180-130)/(190-130), 0, 0]), decimal=3)

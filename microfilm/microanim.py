@@ -103,7 +103,7 @@ class Microanim(Microimage):
         if (self.volume_proj is not None):
             self.images = colorify.project_volume(self.images, self.volume_proj)
 
-        converted, _, _ = multichannel_to_rgb(self.images, cmaps=self.cmaps, flip_map=self.flip_map,
+        converted, _, _, _ = multichannel_to_rgb(self.images, cmaps=self.cmaps, flip_map=self.flip_map,
                                     rescale_type=self.rescale_type, limits=self.limits, num_colors=self.num_colors,
                                     cmap_objects=self.cmap_objects)
 

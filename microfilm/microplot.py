@@ -138,21 +138,15 @@ def microshow(
         )
     
     microim.rescale_type = colorify.check_rescale_type(microim.rescale_type, microim.limits)
-    converted, cmap_objects, image_min_max = colorify.multichannel_to_rgb(
+    converted, cmap_objects, cmaps, image_min_max = colorify.multichannel_to_rgb(
         microim.images, cmaps=microim.cmaps, flip_map=microim.flip_map,
         rescale_type=microim.rescale_type, limits=microim.limits,
         num_colors=microim.num_colors, proj_type=microim.proj_type,
         alpha=microim.alpha, cmap_objects=microim.cmap_objects
         )
     microim.cmap_objects = cmap_objects
+    microim.cmaps = cmaps
     microim.image_min_max = image_min_max
-
-    if microim.cmaps is None:
-        if len(microim.images) < 4:
-            cmy = ['pure_cyan','pure_magenta','pure_yellow']
-            microim.cmaps = [cmy[k] for k in range(len(microim.images))]
-        else:
-            microim.cmaps = ['ran_gradient' for x in microim.images]
     
     height = microim.images[0].shape[0]
     width = microim.images[0].shape[1]
