@@ -3,8 +3,6 @@ import re
 from pathlib import Path
 import warnings
 
-from aicsimageio import AICSImage, readers
-from nd2reader import ND2Reader
 import h5py
 import skimage.io
 import numpy as np
@@ -231,6 +229,8 @@ class MultipageTIFF(Data):
 
     def initialize(self):
         
+        from aicsimageio import AICSImage, readers
+
         # if no channel names are provided, consider all folders as channel
         if self.channel_name is None:
             self.channel_name = self.find_files(self.expdir, check_time=False)
@@ -292,6 +292,8 @@ class ND2(Data):
 
     def initialize(self):
         
+        from nd2reader import ND2Reader
+
         self.nd2file = ND2Reader(self.expdir.as_posix())
         self.nd2file.metadata["z_levels"] = range(0)
 
