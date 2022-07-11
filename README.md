@@ -30,6 +30,32 @@ To test the package via the Jupyter interface and the notebooks available [here]
 conda env create -f environment.yml
 ```
 
+### Optional installs
+
+If you want to use the ```dataset``` submodule (see below in Additional functionalities) and need to handle multipage tiff files or nd2 files, use:
+
+```
+pip install "microfilm[multipage]"
+```
+
+or 
+
+```
+pip install "microfilm[nd2]"
+```
+
+If you plan to not just use simple plotting but want to create animations, you need to install:
+
+```
+pip install "microfilm[animation]"
+```
+
+To install all options use:
+
+```
+pip install "microfilm[all]"
+```
+
 ## Simple plot
 
 It is straightforward to create a ready-to-use plot of a multi-channel image dataset. In the following code snippet, we load a Numpy array of a multi-channel time-lapse dataset with shape ```CTXY``` (three channels). The figure below showing the time-point ```t=10``` is generated in a single command with a few options and saved as a png:
