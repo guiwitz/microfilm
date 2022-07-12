@@ -20,7 +20,7 @@ def microshow(
     scalebar_font_size=12, scalebar_kwargs=None, scalebar_font_properties=None,
     ax=None, fig_scaling=3, dpi=72, label_text=None, label_location='upper left',
     label_color='white', label_font_size=15, label_kwargs={}, cmap_objects=None,
-    show_colorbar=False, microim=None
+    show_colorbar=False, show_axis=False, microim=None
     ):
     """
     Plot image
@@ -109,6 +109,8 @@ def microshow(
         if provided, the cmap names are ignored
     show_colorbar: bool
         show colorbar
+    show_axis: bool
+        show plot axis
     microim: Microimage object
         object to re-use
             
@@ -134,7 +136,7 @@ def microshow(
             scalebar_font_properties=scalebar_font_properties, ax=ax, fig_scaling=fig_scaling,
             dpi=dpi, label_text=label_text, label_location=label_location,
             label_color=label_color, label_font_size=label_font_size, label_kwargs=label_kwargs,
-            cmap_objects=cmap_objects, show_colorbar=show_colorbar
+            cmap_objects=cmap_objects, show_colorbar=show_colorbar, show_axis=show_axis
         )
     
     microim.rescale_type = colorify.check_rescale_type(microim.rescale_type, microim.limits)
@@ -162,12 +164,14 @@ def microshow(
         microim.fig = plt.figure(frameon=False, dpi=microim.dpi)
         microim.fig.set_size_inches(width_scaled, height_scaled, forward=False)
         microim.ax = plt.Axes(microim.fig, [0.0, 0.0, 1.0, 1.0])
-        microim.ax.set_axis_off()
+        if not show_axis:
+             microim.ax.set_axis_off()
         microim.fig.add_axes(microim.ax)
     else:
         microim.fig = microim.ax.figure
     microim.ax.imshow(converted, interpolation='nearest')
-    microim.ax.set_axis_off()
+    if not show_axis:
+        microim.ax.set_axis_off()
  
     if microim.channel_names is None:
         microim.channel_names = channel_names
@@ -302,6 +306,8 @@ class Microimage:
         if provided, cmap names are ignored
     show_colorbar: bool
         show colorbar
+    show_axis: bool
+        show plot axis
 
     """
 
@@ -314,7 +320,7 @@ class Microimage:
         scalebar_font_size=12, scalebar_kwargs=None, scalebar_font_properties=None,
         ax=None, fig_scaling=3, dpi=72, label_text=None, label_location='upper left',
         label_color='white', label_font_size=15, label_kwargs={}, cmap_objects=None,
-        show_colorbar=False
+        show_colorbar=False, show_axis=False
         ):
         
         self.__dict__.update(locals())

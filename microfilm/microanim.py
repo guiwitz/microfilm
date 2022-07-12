@@ -27,7 +27,7 @@ class Microanim(Microimage):
         scalebar_font_size=12, scalebar_kwargs=None, scalebar_font_properties=None,
         ax=None, fig_scaling=3, dpi=72, label_text=None, label_location='upper left',
         label_color='white', label_font_size=15, label_kwargs={}, cmap_objects=None,
-        show_colorbar=False, show_plot=True
+        show_colorbar=False, show_axis=False, show_plot=True
     ):
         super().__init__(
             images=None, cmaps=cmaps, flip_map=flip_map, rescale_type=rescale_type, limits=limits,
@@ -39,7 +39,7 @@ class Microanim(Microimage):
             scalebar_font_size=scalebar_font_size, scalebar_kwargs=scalebar_kwargs, scalebar_font_properties=scalebar_font_properties,
             ax=ax, fig_scaling=fig_scaling, dpi=dpi, label_text=label_text, label_location=label_location,
             label_color=label_color, label_font_size=label_font_size, label_kwargs=label_kwargs, cmap_objects=cmap_objects,
-            show_colorbar=show_colorbar
+            show_colorbar=show_colorbar, show_axis=show_axis
         )
 
         # check for correct dimensions
