@@ -229,7 +229,8 @@ class MultipageTIFF(Data):
 
     def initialize(self):
         
-        from aicsimageio import AICSImage, readers
+        from bioio import BioImage
+        import bioio_tifffile
 
         # if no channel names are provided, consider all folders as channel
         if self.channel_name is None:
@@ -240,7 +241,7 @@ class MultipageTIFF(Data):
         self.channelfile = self.channel_name
 
         self.channel_imobj = [
-            AICSImage(os.path.join(self.expdir, x), dim_order="TYX", reader=readers.TiffReader)
+            BioImage(os.path.join(self.expdir, x), dim_order="TYX", reader=bioio_tifffile.Reader)
             for x in self.channel_name
         ]
 
