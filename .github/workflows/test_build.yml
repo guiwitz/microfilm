@@ -28,6 +28,16 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
+
+      # Temporary fix for 'pip install imageio-ffmpeg'
+      # not including the FFMPEG binary on Apple Silicon macs
+      # This step can be removed when issue is fixed in imageio-ffmpeg
+      # https://github.com/imageio/imageio-ffmpeg/issues/71
+      - name: Setup FFmpeg
+        if: ${{ runner.os == 'macOS' && runner.arch == 'ARM64' }}
+        run: |
+          brew update
+          brew install ffmpeg
       
       - name: Install dependencies
         run: |
@@ -63,15 +73,6 @@ jobs:
       with:
         python-version: "3.x"
 
-    # Temporary fix for 'pip install imageio-ffmpeg'
-    # not including the FFMPEG binary on Apple Silicon macs
-    # This step can be removed when issue is fixed in imageio-ffmpeg
-    # https://github.com/imageio/imageio-ffmpeg/issues/71
-    - name: Setup FFmpeg
-      if: ${{ runner.os == 'macOS' && runner.arch == 'ARM64' }}
-      run: |
-        brew update
-        brew install ffmpeg
     
     - name: Install dependencies
       run: |
