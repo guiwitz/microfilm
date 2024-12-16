@@ -719,9 +719,7 @@ class Micropanel:
         fontsize = int(figheight_px * (1-(self.rows * tot_space)) * self.channel_label_size)
 
         # adjust figure size with label
-        self.fig.clf()
-        self.fig.set_size_inches([self.fig.get_size_inches()[0]*(1-tot_space),
-                    self.fig.get_size_inches()[1]])
+        plt.close(self.fig)
         self.fig, self.ax = plt.subplots(
                 nrows=self.rows, ncols=self.cols,
                 figsize=[self.fig.get_size_inches()[0]*(1-tot_space),
@@ -769,6 +767,9 @@ class Micropanel:
                     self.microplots[j,i].channel_label_show = False
                     self.microplots[j,i].update(self.ax[j,i])
                     self.microplots[j,i].channel_label_show = has_label
+    
+    def __reprer__(self):
+        return self.fig
 
     def add_element(self, pos, microim, copy=False):
         """Add a microimage object to a panel
