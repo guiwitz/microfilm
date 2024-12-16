@@ -770,7 +770,7 @@ class Micropanel:
                     self.microplots[j,i].update(self.ax[j,i])
                     self.microplots[j,i].channel_label_show = has_label
 
-    def add_element(self, pos, microim):
+    def add_element(self, pos, microim, copy=False):
         """Add a microimage object to a panel
         
         Parameters
@@ -795,7 +795,8 @@ class Micropanel:
         has_label = microim.channel_label_show
 
         microim.channel_label_show = False
-        microim.update(self.ax[pos[0], pos[1]])
+        if copy:
+            microim = microim.update(self.ax[pos[0], pos[1]], copy=copy)
     
         self.microplots[pos[0], pos[1]] = microim
         
