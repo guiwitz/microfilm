@@ -16,7 +16,7 @@ def cmaps_def(cmap_name, num_colors=256, flip_map=False):
     Parameters
     ----------
     cmap_name: str
-        {'pure_red', 'pure_green', 'pure_blue', 'pure_magenta',
+        cmap colormap, {'pure_red', 'pure_green', 'pure_blue', 'pure_magenta',
         'pure_cyan', 'pure_yellow'} or Matplotlib colormap
     num_colors: int
         number of steps in color scale
