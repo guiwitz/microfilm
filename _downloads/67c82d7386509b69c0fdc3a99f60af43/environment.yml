@@ -1,0 +1,14 @@
+name: microfilm
+channels:
+  - conda-forge
+dependencies:
+  - python>=3.8
+  - pandas
+  - jupyter
+  - jupyterlab
+  - ipywidgets
+  - pip
+  - ipympl
+  - pip:
+    - tqdm
+    - microfilm

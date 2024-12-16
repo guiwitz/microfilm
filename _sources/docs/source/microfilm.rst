@@ -36,14 +36,6 @@ microfilm.microplot module
    :undoc-members:
    :show-inheritance:
 
-microfilm.version module
-------------------------
-
-.. automodule:: microfilm.version
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 Module contents
 ---------------
 

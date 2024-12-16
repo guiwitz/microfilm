@@ -1,523 +1,451 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="../" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>Producing figures with multi-channel images &#8212; microfilm</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
-    
-      
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
-    
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
-
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/create_plots';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Creating animations" href="create_animations.html" />
     <link rel="prev" title="Create your first plots" href="../docs/first_plot.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+  
+  <dialog id="pst-search-dialog">
     
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../docs/landing.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/microanim_logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">microfilm</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../docs/landing.html">
-   microfilm
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Getting started
- </span>
-</p>
+    
+    
+    <img src="../_static/microanim_logo.png" class="logo__image only-light" alt="microfilm - Home"/>
+    <img src="../_static/microanim_logo.png" class="logo__image only-dark pst-js-only" alt="microfilm - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../docs/landing.html">
+                    microfilm
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting started</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../docs/overview.html">
-   Overview
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../docs/installation.html">
-   Installation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../docs/first_plot.html">
-   Create your first plots
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/first_plot.html">Create your first plots</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Topic guides
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Topic guides</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Producing figures with multi-channel images
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="create_animations.html">
-   Creating animations
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="create_panels.html">
-   Creating multi-panel figures
-  </a>
- </li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Producing figures with multi-channel images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_animations.html">Creating animations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_panels.html">Creating multi-panel figures</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  API Reference
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../docs/source/microfilm.html">
-   microfilm package
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../docs/source/microfilm.dataset.html">
-     microfilm.dataset package
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../docs/source/microfilm.html">microfilm package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../docs/source/microfilm.dataset.html">microfilm.dataset package</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/create_plots.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+</nav></div>
     </div>
-</div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
-            <!-- Source interaction buttons -->
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/guiwitz/microfilm"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
         
         
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
     </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/guiwitz/microfilm/b1898e8?urlpath=lab/tree/notebooks/create_plots.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/guiwitz/microfilm/blob/b1898e8/notebooks/create_plots.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
 </div>
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
 
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
 
-            <!-- Launch buttons -->
+<a href="https://github.com/guiwitz/microfilm" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/guiwitz/microfilm/b1898e8?urlpath=lab/tree/notebooks/create_plots.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/guiwitz/microfilm/blob/b1898e8/notebooks/create_plots.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
-        
-        <button type="button" class="btn btn-secondary topbarbtn"
-            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
-                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
-        
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/create_plots.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
     </div>
+  
 </div>
+</div>
+              
+              
 
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Producing figures with multi-channel images</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div>
+                <h2> Contents </h2>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#basic-plotting-with-microshow">
-   Basic plotting with
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     microshow
-    </span>
-   </code>
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#load-images">
-     Load images
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#creating-a-default-plot">
-     Creating a default plot
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#d-image-inputs">
-     2D Image inputs
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
-     3D image inputs
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#options-at-creation">
-     Options at creation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#colorbar">
-     Colorbar
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#microimage-object">
-   Microimage object
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#microimage-methods">
-     Microimage methods
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#relation-to-matplotlib">
-     Relation to Matplotlib
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#copying-figures">
-     Copying figures
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#lower-level-functions">
-   Lower level functions
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#convert-image-to-display-with-chosen-colormap">
-     Convert image to display with chosen colormap
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#colormap-hex">
-     colormap hex
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#combining-images">
-     Combining images
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#direct-conversion">
-     Direct conversion
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-scalebar">
-   The scalebar
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#export">
-   Export
-  </a>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-plotting-with-microshow">Basic plotting with <code class="docutils literal notranslate"><span class="pre">microshow</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-images">Load images</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-default-plot">Creating a default plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-image-inputs">2D Image inputs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">3D image inputs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#options-at-creation">Options at creation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#colorbar">Colorbar</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#microimage-object">Microimage object</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#microimage-methods">Microimage methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relation-to-matplotlib">Relation to Matplotlib</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#copying-figures">Copying figures</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lower-level-functions">Lower level functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-image-to-display-with-chosen-colormap">Convert image to display with chosen colormap</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#colormap-hex">colormap hex</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-images">Combining images</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#direct-conversion">Direct conversion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-scalebar">The scalebar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#export">Export</a></li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Producing figures with multi-channel images</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#basic-plotting-with-microshow">
-   Basic plotting with
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     microshow
-    </span>
-   </code>
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#load-images">
-     Load images
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#creating-a-default-plot">
-     Creating a default plot
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#d-image-inputs">
-     2D Image inputs
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
-     3D image inputs
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#options-at-creation">
-     Options at creation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#colorbar">
-     Colorbar
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#microimage-object">
-   Microimage object
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#microimage-methods">
-     Microimage methods
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#relation-to-matplotlib">
-     Relation to Matplotlib
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#copying-figures">
-     Copying figures
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#lower-level-functions">
-   Lower level functions
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#convert-image-to-display-with-chosen-colormap">
-     Convert image to display with chosen colormap
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#colormap-hex">
-     colormap hex
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#combining-images">
-     Combining images
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#direct-conversion">
-     Direct conversion
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-scalebar">
-   The scalebar
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#export">
-   Export
-  </a>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="producing-figures-with-multi-channel-images">
-<h1>Producing figures with multi-channel images<a class="headerlink" href="#producing-figures-with-multi-channel-images" title="Permalink to this headline">¶</a></h1>
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="producing-figures-with-multi-channel-images">
+<h1>Producing figures with multi-channel images<a class="headerlink" href="#producing-figures-with-multi-channel-images" title="Link to this heading">#</a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">microplot</span></code> module contains tools to create figures containing multi-channel images. It offers basic tools to turn 2D images into RGB images using specific color maps, combine multiple channels, create figures, adding labels and scale bars.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#%load_ext autoreload</span>
-<span class="c1">#%autoreload 2</span>
-</pre></div>
-</div>
-</div>
-</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -529,12 +457,12 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-<div class="section" id="basic-plotting-with-microshow">
-<h2>Basic plotting with <code class="docutils literal notranslate"><span class="pre">microshow</span></code><a class="headerlink" href="#basic-plotting-with-microshow" title="Permalink to this headline">¶</a></h2>
+<section id="basic-plotting-with-microshow">
+<h2>Basic plotting with <code class="docutils literal notranslate"><span class="pre">microshow</span></code><a class="headerlink" href="#basic-plotting-with-microshow" title="Link to this heading">#</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">microshow</span></code> function should be seen as an “enhanced” version of the Matplotlib <code class="docutils literal notranslate"><span class="pre">imshow</span></code> function which specifically deals with representing multi-channel images. In this first section, we see how to use that function and apply basic customizations.</p>
-<div class="section" id="load-images">
-<h3>Load images<a class="headerlink" href="#load-images" title="Permalink to this headline">¶</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">microshow</span></code> can take as input a Numpy array or a list of images (more on input format in the <a class="reference external" href="#Image-inputs">Image inputs</a> section). Here we load a multi-dimensional image as a Numpy array, and also extract each channel as an individual stack:</p>
+<section id="load-images">
+<h3>Load images<a class="headerlink" href="#load-images" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">microshow</span></code> can take as input a Numpy array or a list of images (more on input format in the <a class="reference internal" href="#Image-inputs"><span class="xref myst">Image inputs</span></a> section). Here we load a multi-dimensional image as a Numpy array, and also extract each channel as an individual stack:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image</span> <span class="o">=</span> <span class="n">skimage</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;../demodata/coli_nucl_ori_ter.tif&#39;</span><span class="p">)</span>
@@ -586,9 +514,9 @@ image type: uint16
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="creating-a-default-plot">
-<h3>Creating a default plot<a class="headerlink" href="#creating-a-default-plot" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="creating-a-default-plot">
+<h3>Creating a default plot<a class="headerlink" href="#creating-a-default-plot" title="Link to this heading">#</a></h3>
 <p>We can use the <code class="docutils literal notranslate"><span class="pre">microshow</span></code> function to plot our multi-channel image. If no options are passed, by default the image will be represented using the the color-blind friendly magenta-cyan-yellow color combination:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -597,23 +525,23 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_12_0.png" src="../_images/create_plots_12_0.png" />
+<img alt="../_images/c20030f05865262555e908c355318e9c5ee87ab5afa7cc9f9b2ad92c65390b24.png" src="../_images/c20030f05865262555e908c355318e9c5ee87ab5afa7cc9f9b2ad92c65390b24.png" />
 </div>
 </div>
-<p>However we can easily adjust the color maps or lookup tables with the <code class="docutils literal notranslate"><span class="pre">cmaps</span></code> option where we can use any Matplotlib colormap or additionally <code class="docutils literal notranslate"><span class="pre">pure_red</span></code>, <code class="docutils literal notranslate"><span class="pre">pure_green</span></code>, <code class="docutils literal notranslate"><span class="pre">pure_blue</span></code>, <code class="docutils literal notranslate"><span class="pre">pure_cyan</span></code>, <code class="docutils literal notranslate"><span class="pre">pure_yellow</span></code> and <code class="docutils literal notranslate"><span class="pre">pure_magenta</span></code> which provide classic black-to-color color maps:</p>
+<p>However we can easily adjust the color maps or lookup tables with the <code class="docutils literal notranslate"><span class="pre">cmaps</span></code> option. Here you can use any Matplotlib colormap as well as any map from the <a class="reference external" href="https://cmap-docs.readthedocs.io/en/latest/colormaps/">cmap</a> library which collects maps from several sources (as a legacy you can still use <code class="docutils literal notranslate"><span class="pre">pure_red</span></code>, <code class="docutils literal notranslate"><span class="pre">pure_green</span></code>, <code class="docutils literal notranslate"><span class="pre">pure_blue</span></code>, <code class="docutils literal notranslate"><span class="pre">pure_cyan</span></code>, <code class="docutils literal notranslate"><span class="pre">pure_yellow</span></code> and <code class="docutils literal notranslate"><span class="pre">pure_magenta</span></code> but those will eventually be removed):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microim</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="n">multi_channel</span><span class="p">,</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_blue&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_red&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_green&#39;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microim</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="n">multi_channel</span><span class="p">,</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_14_0.png" src="../_images/create_plots_14_0.png" />
+<img alt="../_images/e0288289af401c72b22715756361ab3d66581999a20b5d3f03871479384be766.png" src="../_images/e0288289af401c72b22715756361ab3d66581999a20b5d3f03871479384be766.png" />
 </div>
 </div>
-</div>
-<div class="section" id="d-image-inputs">
-<h3>2D Image inputs<a class="headerlink" href="#d-image-inputs" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="d-image-inputs">
+<h3>2D Image inputs<a class="headerlink" href="#d-image-inputs" title="Link to this heading">#</a></h3>
 <p>As shown above, we can use a simple Numpy array as input. The dimension ordering is expected to be <code class="docutils literal notranslate"><span class="pre">CXY</span></code> i.e. <code class="docutils literal notranslate"><span class="pre">Channel/X/Y</span></code>. You can use <code class="docutils literal notranslate"><span class="pre">np.swapaxis</span></code> or <code class="docutils literal notranslate"><span class="pre">np.moveaxis</span></code> for example to change the dimensions to match this requirement. If you pass a Numpy array, <strong>all channels</strong> are plotted and therefore you need to provide the corresponding number of color maps (if not using default RGB).</p>
 <p>Alternatively you can also pass <strong>lists of images</strong>. This is useful if for example you don’t want to plot all channels of a Numpy array. For example you could use the following to only plot two out of the three channels:</p>
 <div class="cell docutils container">
@@ -623,12 +551,12 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_16_0.png" src="../_images/create_plots_16_0.png" />
+<img alt="../_images/5053d0f3ec3facbc435dd2cea6953918dc11b7b36d0d9851eba25747c02fd9e0.png" src="../_images/5053d0f3ec3facbc435dd2cea6953918dc11b7b36d0d9851eba25747c02fd9e0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="id1">
-<h3>3D image inputs<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="id1">
+<h3>3D image inputs<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <p>You also have the possibility to represent 3D data as a projection (to reperesent 3D data as volumes, we recommend using <a class="reference external" href="https://napari.org/">napari</a>. In this case, you need to provide either a Numpy array of dimensions <code class="docutils literal notranslate"><span class="pre">CZXY</span></code> or a list of 3D images of dimensions <code class="docutils literal notranslate"><span class="pre">ZXY</span></code>. As <code class="docutils literal notranslate"><span class="pre">microshow</span></code> cannot know if you want to plot multiple channels or a volume (both arrays have three dimensions), if you want to plot a volume you have two choices. You can pass an additional key-word <code class="docutils literal notranslate"><span class="pre">volume_proj</span></code> where you have the choices <code class="docutils literal notranslate"><span class="pre">min</span></code>, <code class="docutils literal notranslate"><span class="pre">max</span></code>, <code class="docutils literal notranslate"><span class="pre">mean</span></code> or you can use the <code class="docutils literal notranslate"><span class="pre">volshow</span></code> function which is identical to <code class="docutils literal notranslate"><span class="pre">microshow</span></code> but sets <code class="docutils literal notranslate"><span class="pre">volume_proj='max'</span></code> by default. As an example we load here the following dataset, composed of 20 time points, 11 slices and 2 channesl:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -650,7 +578,7 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_19_0.png" src="../_images/create_plots_19_0.png" />
+<img alt="../_images/35e239318793b61856a31439c0c4a4e7c45a05e13eaaea1e3bb8356b19330420.png" src="../_images/35e239318793b61856a31439c0c4a4e7c45a05e13eaaea1e3bb8356b19330420.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -660,16 +588,16 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_20_0.png" src="../_images/create_plots_20_0.png" />
+<img alt="../_images/35e239318793b61856a31439c0c4a4e7c45a05e13eaaea1e3bb8356b19330420.png" src="../_images/35e239318793b61856a31439c0c4a4e7c45a05e13eaaea1e3bb8356b19330420.png" />
 </div>
 </div>
-</div>
-<div class="section" id="options-at-creation">
-<h3>Options at creation<a class="headerlink" href="#options-at-creation" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="options-at-creation">
+<h3>Options at creation<a class="headerlink" href="#options-at-creation" title="Link to this heading">#</a></h3>
 <p>When we create the image, we have a large set of options that we can use to adjust the plot. For example, in addition to selecting specific color maps with <code class="docutils literal notranslate"><span class="pre">cmaps</span></code>, we can also choose a color projection type, add a scale bar and a label etc.:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microim</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_cyan&#39;</span><span class="p">,</span><span class="s1">&#39;pure_magenta&#39;</span><span class="p">],</span> <span class="n">proj_type</span><span class="o">=</span><span class="s1">&#39;sum&#39;</span><span class="p">,</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microim</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;cyan&#39;</span><span class="p">,</span><span class="s1">&#39;magenta&#39;</span><span class="p">],</span> <span class="n">proj_type</span><span class="o">=</span><span class="s1">&#39;sum&#39;</span><span class="p">,</span>
                               <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
                               <span class="n">scalebar_font_size</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">scalebar_thickness</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
                               <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">label_font_size</span><span class="o">=</span><span class="mi">30</span><span class="p">);</span>
@@ -677,49 +605,49 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_22_0.png" src="../_images/create_plots_22_0.png" />
+<img alt="../_images/71bbedcfbe7c4b26b2c1e187df021c6a890a180b5bf4cce06b4912c2385378c0.png" src="../_images/71bbedcfbe7c4b26b2c1e187df021c6a890a180b5bf4cce06b4912c2385378c0.png" />
 </div>
 </div>
 <p>We can also add the channel labels as titles:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microim</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_cyan&#39;</span><span class="p">,</span><span class="s1">&#39;pure_magenta&#39;</span><span class="p">],</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microim</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;cyan&#39;</span><span class="p">,</span><span class="s1">&#39;magenta&#39;</span><span class="p">],</span>
                               <span class="n">channel_label_show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">channel_label_size</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
                               <span class="n">channel_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;CFP&#39;</span><span class="p">,</span> <span class="s1">&#39;RFP&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_24_0.png" src="../_images/create_plots_24_0.png" />
+<img alt="../_images/75c588fa044f33d3b1e17425a801b0f7aab2557d03681924d39608dc814e2e2a.png" src="../_images/75c588fa044f33d3b1e17425a801b0f7aab2557d03681924d39608dc814e2e2a.png" />
 </div>
 </div>
-</div>
-<div class="section" id="colorbar">
-<h3>Colorbar<a class="headerlink" href="#colorbar" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="colorbar">
+<h3>Colorbar<a class="headerlink" href="#colorbar" title="Link to this heading">#</a></h3>
 <p>If you plot an image with a single channel, you can add a colorbar to your plot. The limits of intensities correspond to the limits usde during plotting and specified e.g. with the <code class="docutils literal notranslate"><span class="pre">limits</span></code> and <code class="docutils literal notranslate"><span class="pre">rescale_type</span></code> options:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">micro_colorbar</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_cyan&#39;</span><span class="p">],</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">micro_colorbar</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;cyan&#39;</span><span class="p">],</span>
                               <span class="n">channel_label_show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">channel_label_size</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
                               <span class="n">channel_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;CFP&#39;</span><span class="p">],</span> <span class="n">show_colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_26_0.png" src="../_images/create_plots_26_0.png" />
+<img alt="../_images/de26eb332bff518b433df56e95165ca0d0c1a648a14226f145cfff922175c1e6.png" src="../_images/de26eb332bff518b433df56e95165ca0d0c1a648a14226f145cfff922175c1e6.png" />
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="microimage-object">
-<h2>Microimage object<a class="headerlink" href="#microimage-object" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="microimage-object">
+<h2>Microimage object<a class="headerlink" href="#microimage-object" title="Link to this heading">#</a></h2>
 <p>When calling <code class="docutils literal notranslate"><span class="pre">microshow</span></code>, actually a <code class="docutils literal notranslate"><span class="pre">Microimage</span></code> instance is returned, which gives access to both specific functions of that instance as well as to the underlying Matplotlib objects.</p>
-<div class="section" id="microimage-methods">
-<h3>Microimage methods<a class="headerlink" href="#microimage-methods" title="Permalink to this headline">¶</a></h3>
+<section id="microimage-methods">
+<h3>Microimage methods<a class="headerlink" href="#microimage-methods" title="Link to this heading">#</a></h3>
 <p>In the examples above, we always passed <em>all</em> inputs at time of figure creation. Alternatively to this, one can also <em>first</em> create a <code class="docutils literal notranslate"><span class="pre">Microimage</span></code> object and <em>then</em> use its attached methods such as <code class="docutils literal notranslate"><span class="pre">add_label</span></code>  and <code class="docutils literal notranslate"><span class="pre">add_scalebar</span></code> to modify the plot. This can make the code slightly more readable:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microim</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_red&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_green&#39;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microim</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">])</span>
 <span class="n">microim</span><span class="o">.</span><span class="n">add_scalebar</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
                      <span class="n">scalebar_color</span><span class="o">=</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">,</span> <span class="n">scalebar_font_size</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 <span class="n">microim</span><span class="o">.</span><span class="n">add_label</span><span class="p">(</span><span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">label_font_size</span><span class="o">=</span><span class="mi">30</span><span class="p">);</span>
@@ -727,12 +655,12 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_29_0.png" src="../_images/create_plots_29_0.png" />
+<img alt="../_images/4a374a0514a1e0476391d9bde6d7400767ac855e5b335531c0c130bcd870b55d.png" src="../_images/4a374a0514a1e0476391d9bde6d7400767ac855e5b335531c0c130bcd870b55d.png" />
 </div>
 </div>
-</div>
-<div class="section" id="relation-to-matplotlib">
-<h3>Relation to Matplotlib<a class="headerlink" href="#relation-to-matplotlib" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="relation-to-matplotlib">
+<h3>Relation to Matplotlib<a class="headerlink" href="#relation-to-matplotlib" title="Link to this heading">#</a></h3>
 <p>In the same spirit as e.g. the seaborn library, the <code class="docutils literal notranslate"><span class="pre">microplot</span></code> module stays very close to Matplotlib, so that you can integrate the image plots into larger figures. There are two ways in which <code class="docutils literal notranslate"><span class="pre">microplot</span></code> and Matplotlib are related.</p>
 <p>First, the <code class="docutils literal notranslate"><span class="pre">Microimage</span></code> object gives access to the <code class="docutils literal notranslate"><span class="pre">axis</span></code> of the figure which allows you to use <em>any</em> Matplotlib customization on your plot. For example, you can turn the axes back on:</p>
 <div class="cell docutils container">
@@ -743,7 +671,7 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_31_0.png" src="../_images/create_plots_31_0.png" />
+<img alt="../_images/7b1b190f01d223a4fd196dfeff5649cd8841aee83a3fe9355fcee65f724142a6.png" src="../_images/7b1b190f01d223a4fd196dfeff5649cd8841aee83a3fe9355fcee65f724142a6.png" />
 </div>
 </div>
 <p>Second, you can integrate and <code class="docutils literal notranslate"><span class="pre">microplot</span></code> in existing Matplotlib figures again by using the <code class="docutils literal notranslate"><span class="pre">axis</span></code>. For that you can for example first create a subplot and <strong>re-use</strong> the axis reference as parameter in <code class="docutils literal notranslate"><span class="pre">microshow</span></code> to integrate the plot in that figure:</p>
@@ -755,17 +683,17 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_33_0.png" src="../_images/create_plots_33_0.png" />
+<img alt="../_images/6c4b071394d9c08c3c75828a5a374021b2158aec42f22954185b47d391fd3432.png" src="../_images/6c4b071394d9c08c3c75828a5a374021b2158aec42f22954185b47d391fd3432.png" />
 </div>
 </div>
 <p>We can then of course use these approaches together. For example, we can first create Matplotlib <code class="docutils literal notranslate"><span class="pre">subplots</span></code>, add the <code class="docutils literal notranslate"><span class="pre">micrplot</span></code> in that figure, and then add labels to each <code class="docutils literal notranslate"><span class="pre">microplot</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">micro1</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_blue&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_green&#39;</span><span class="p">],</span>
+<span class="n">micro1</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">],</span>
                               <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> 
                     <span class="n">scalebar_font_size</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">scalebar_color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
-<span class="n">micro2</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image3</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_blue&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_red&#39;</span><span class="p">],</span>
+<span class="n">micro2</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image3</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">],</span>
                               <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span>
                     <span class="n">scalebar_font_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scalebar_color</span><span class="o">=</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="c1">#, scalebar_kwargs={&#39;scale_loc&#39;:&#39;top&#39;});</span>
 
@@ -775,23 +703,23 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_35_0.png" src="../_images/create_plots_35_0.png" />
+<img alt="../_images/04f2c22314b551802ad20eb256a1771deac9d6e0563339ac7edb20b4c231581c.png" src="../_images/04f2c22314b551802ad20eb256a1771deac9d6e0563339ac7edb20b4c231581c.png" />
 </div>
 </div>
-</div>
-<div class="section" id="copying-figures">
-<h3>Copying figures<a class="headerlink" href="#copying-figures" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="copying-figures">
+<h3>Copying figures<a class="headerlink" href="#copying-figures" title="Link to this heading">#</a></h3>
 <p>Matplotlib makes it impossible to re-use a given plot in multiple figures. Once you have created a microplot with annotations you might however want to re-use it in another larger figure. The <code class="docutils literal notranslate"><span class="pre">microimage</span></code> object allows you to do that since it stores all the relevant information and can easily be recreated. For example let’s create a plot:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">micro1</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_blue&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_green&#39;</span><span class="p">],</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">micro1</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">],</span>
                              <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span>
                              <span class="n">scalebar_font_size</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">scalebar_color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_37_0.png" src="../_images/create_plots_37_0.png" />
+<img alt="../_images/42488e0b1db9e80ab489fe6444ed11e01ec531bef52f827d6f9135cf30d7007c.png" src="../_images/42488e0b1db9e80ab489fe6444ed11e01ec531bef52f827d6f9135cf30d7007c.png" />
 </div>
 </div>
 <p>And now we create a new figure with <code class="docutils literal notranslate"><span class="pre">plt.subplots()</span></code> and we can add our plot from above to it using the <code class="docutils literal notranslate"><span class="pre">update</span></code> method:</p>
@@ -804,14 +732,14 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_39_0.png" src="../_images/create_plots_39_0.png" />
+<img alt="../_images/a243a9e8c077b197cf0c02fb8407a4e768de9a26be45792295cb523057f55633.png" src="../_images/a243a9e8c077b197cf0c02fb8407a4e768de9a26be45792295cb523057f55633.png" />
 </div>
 </div>
-<p>As an alternative to creating subplots yourself, you can also create a <code class="docutils literal notranslate"><span class="pre">Micropanel</span></code> object and add to it a series of microimages. Find more information in <a class="reference internal" href="create_panels.html"><span class="doc std std-doc">this section</span></a>.</p>
-</div>
-</div>
-<div class="section" id="lower-level-functions">
-<h2>Lower level functions<a class="headerlink" href="#lower-level-functions" title="Permalink to this headline">¶</a></h2>
+<p>As an alternative to creating subplots yourself, you can also create a <code class="docutils literal notranslate"><span class="pre">Micropanel</span></code> object and add to it a series of microimages. Find more information in <a class="reference internal" href="create_panels.html"><span class="std std-doc">this section</span></a>.</p>
+</section>
+</section>
+<section id="lower-level-functions">
+<h2>Lower level functions<a class="headerlink" href="#lower-level-functions" title="Link to this heading">#</a></h2>
 <p>When calling <code class="docutils literal notranslate"><span class="pre">microshow</span></code>, several internal functions are used, e.g. to rescale the image intensity, combined multiple colormaps etc. You also have access to these functions individually from the <code class="docutils literal notranslate"><span class="pre">colorify</span></code> module.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -820,9 +748,9 @@ image type: uint16
 </div>
 </div>
 </div>
-<div class="section" id="convert-image-to-display-with-chosen-colormap">
-<h3>Convert image to display with chosen colormap<a class="headerlink" href="#convert-image-to-display-with-chosen-colormap" title="Permalink to this headline">¶</a></h3>
-<p>Using the <code class="docutils literal notranslate"><span class="pre">colorify_by_name</span></code> function, you can turn a single 2D array into a RGB image with a certain colormap. You can use any colormap from Matplotlib. Additionally, since Matplotlib doesn’t offer plain colormaps from black to a given color (used very often in microcopy), you can also specify one of <code class="docutils literal notranslate"><span class="pre">pure_green</span></code>, <code class="docutils literal notranslate"><span class="pre">pure_red</span></code>, <code class="docutils literal notranslate"><span class="pre">pure_blue</span></code>, <code class="docutils literal notranslate"><span class="pre">pure_cyan</span></code>, <code class="docutils literal notranslate"><span class="pre">pure_magenta</span></code>, <code class="docutils literal notranslate"><span class="pre">pure_yellow</span></code>:</p>
+<section id="convert-image-to-display-with-chosen-colormap">
+<h3>Convert image to display with chosen colormap<a class="headerlink" href="#convert-image-to-display-with-chosen-colormap" title="Link to this heading">#</a></h3>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">colorify_by_name</span></code> function, you can turn a single 2D array into a RGB image with a given colormap. You can use any colormap from Matplotlib and from <a class="reference external" href="https://cmap-docs.readthedocs.io/en/latest/colormaps/">cmap</a>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image2</span>
@@ -843,31 +771,33 @@ image type: uint16
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">im_green</span><span class="p">,</span> <span class="n">cmap</span><span class="p">,</span> <span class="n">min_max</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">colorify_by_name</span><span class="p">(</span><span class="n">image2</span><span class="p">,</span> <span class="n">cmap_name</span><span class="o">=</span><span class="s1">&#39;pure_green&#39;</span><span class="p">,</span> <span class="n">flip_map</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">rescale_type</span><span class="o">=</span><span class="s1">&#39;min_max&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">im_green</span><span class="p">,</span> <span class="n">cmap</span><span class="p">,</span> <span class="n">min_max</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">colorify_by_name</span><span class="p">(</span>
+    <span class="n">image2</span><span class="p">,</span> <span class="n">cmap_name</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">flip_map</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">rescale_type</span><span class="o">=</span><span class="s1">&#39;min_max&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im_green</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_45_0.png" src="../_images/create_plots_45_0.png" />
+<img alt="../_images/bfd7924a811f6af5fa26ee140019a7999ab25fea76af2012626eddb0cd24126a.png" src="../_images/bfd7924a811f6af5fa26ee140019a7999ab25fea76af2012626eddb0cd24126a.png" />
 </div>
 </div>
 <p>By default the image intensity is rescaled using the min-max values. This is often sub-optimal (e.g. if single pixels are way out of the distribution) and you can specify another rescaling. For example you can explicitly provide lower and upper limits:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">im_green</span><span class="p">,</span> <span class="n">cmap</span><span class="p">,</span> <span class="n">min_max</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">colorify_by_name</span><span class="p">(</span><span class="n">image2</span><span class="p">,</span> <span class="n">cmap_name</span><span class="o">=</span><span class="s1">&#39;pure_green&#39;</span><span class="p">,</span> <span class="n">flip_map</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">rescale_type</span><span class="o">=</span><span class="s1">&#39;limits&#39;</span><span class="p">,</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">im_green</span><span class="p">,</span> <span class="n">cmap</span><span class="p">,</span> <span class="n">min_max</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">colorify_by_name</span><span class="p">(</span>
+    <span class="n">image2</span><span class="p">,</span> <span class="n">cmap_name</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">flip_map</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">rescale_type</span><span class="o">=</span><span class="s1">&#39;limits&#39;</span><span class="p">,</span>
                                        <span class="n">limits</span><span class="o">=</span><span class="p">[</span><span class="mi">100</span><span class="p">,</span><span class="mi">105</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im_green</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_47_0.png" src="../_images/create_plots_47_0.png" />
+<img alt="../_images/7e5a7aa08c8f4bbcabd83b1c586f7021fb4caa6b759c7f20b0326970b354da3d.png" src="../_images/7e5a7aa08c8f4bbcabd83b1c586f7021fb4caa6b759c7f20b0326970b354da3d.png" />
 </div>
 </div>
-</div>
-<div class="section" id="colormap-hex">
-<h3>colormap hex<a class="headerlink" href="#colormap-hex" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="colormap-hex">
+<h3>colormap hex<a class="headerlink" href="#colormap-hex" title="Link to this heading">#</a></h3>
 <p>Alternatively to the keyword based map, you can also use a hexadecimal encoding of a color to create an colormap ranging from black to that color. This gives more flexibility:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -877,21 +807,21 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_49_0.png" src="../_images/create_plots_49_0.png" />
+<img alt="../_images/880d1134d756f4b66fc18384dada8ed6db1a92c29141aa3cad1df6c1f7496df6.png" src="../_images/880d1134d756f4b66fc18384dada8ed6db1a92c29141aa3cad1df6c1f7496df6.png" />
 </div>
 </div>
-</div>
-<div class="section" id="combining-images">
-<h3>Combining images<a class="headerlink" href="#combining-images" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="combining-images">
+<h3>Combining images<a class="headerlink" href="#combining-images" title="Link to this heading">#</a></h3>
 <p>After having converted images to a given colormap, you can combine them into a single image with overlayed colors. Currently you can use a maximum projection (default) or a sum to replicate the Fiji behavior. You can simply use the <code class="docutils literal notranslate"><span class="pre">combine_image</span></code> function for that:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">im1_mapped</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">colorify_by_name</span><span class="p">(</span><span class="n">image1</span><span class="p">,</span> <span class="n">cmap_name</span><span class="o">=</span><span class="s1">&#39;pure_red&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">im1_mapped</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">colorify_by_name</span><span class="p">(</span><span class="n">image1</span><span class="p">,</span> <span class="n">cmap_name</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
 <span class="n">im2_mapped</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">colorify_by_hex</span><span class="p">(</span><span class="n">image2</span><span class="p">,</span> <span class="n">cmap_hex</span><span class="o">=</span><span class="s1">&#39;#00ffff&#39;</span><span class="p">)</span>
 
 
-<span class="n">im1_mapped_b</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">colorify_by_name</span><span class="p">(</span><span class="n">image1</span><span class="p">,</span> <span class="n">cmap_name</span><span class="o">=</span><span class="s1">&#39;pure_red&#39;</span><span class="p">)</span>
-<span class="n">im2_mapped_b</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">colorify_by_name</span><span class="p">(</span><span class="n">image2</span><span class="p">,</span> <span class="n">cmap_name</span><span class="o">=</span><span class="s1">&#39;pure_green&#39;</span><span class="p">)</span>
+<span class="n">im1_mapped_b</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">colorify_by_name</span><span class="p">(</span><span class="n">image1</span><span class="p">,</span> <span class="n">cmap_name</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">im2_mapped_b</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">colorify_by_name</span><span class="p">(</span><span class="n">image2</span><span class="p">,</span> <span class="n">cmap_name</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
 
 <span class="n">combined</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">combine_image</span><span class="p">([</span><span class="n">im1_mapped</span><span class="p">,</span> <span class="n">im2_mapped</span><span class="p">])</span>
 <span class="n">combined_b</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">combine_image</span><span class="p">([</span><span class="n">im1_mapped_b</span><span class="p">,</span> <span class="n">im2_mapped_b</span><span class="p">])</span>
@@ -903,7 +833,7 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_51_0.png" src="../_images/create_plots_51_0.png" />
+<img alt="../_images/a88cbf9c77f130cc2847be2a37e14539b4d1da8827b9cd1327924f78387a3353.png" src="../_images/a88cbf9c77f130cc2847be2a37e14539b4d1da8827b9cd1327924f78387a3353.png" />
 </div>
 </div>
 <p>In the plots below, we compare the two available projections, maximum and sum. The difference is mostly visible when using colormaps that have large overlap, e.g. here with <code class="docutils literal notranslate"><span class="pre">summer</span></code> and <code class="docutils literal notranslate"><span class="pre">cool</span></code>. With <code class="docutils literal notranslate"><span class="pre">pure_green</span></code> and <code class="docutils literal notranslate"><span class="pre">pure_red</span></code> there would for example be no visual difference.</p>
@@ -922,45 +852,46 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_53_0.png" src="../_images/create_plots_53_0.png" />
+<img alt="../_images/736ede488242921b295d2e088218a811338ee8d8c3029cce7498b9d43cec3942.png" src="../_images/736ede488242921b295d2e088218a811338ee8d8c3029cce7498b9d43cec3942.png" />
 </div>
 </div>
-</div>
-<div class="section" id="direct-conversion">
-<h3>Direct conversion<a class="headerlink" href="#direct-conversion" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="direct-conversion">
+<h3>Direct conversion<a class="headerlink" href="#direct-conversion" title="Link to this heading">#</a></h3>
 <p>To save some steps you can also directly use a list of images and of colormaps to create a combined image:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">converted</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">multichannel_to_rgb</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_red&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_green&#39;</span><span class="p">],</span> <span class="n">flip_map</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">converted</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">multichannel_to_rgb</span><span class="p">(</span>
+    <span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">],</span> <span class="n">flip_map</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">converted</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_55_0.png" src="../_images/create_plots_55_0.png" />
+<img alt="../_images/f08850b4c0d43c819fcb352f927ca72a27128772e8b802306523053e0c9522e0.png" src="../_images/f08850b4c0d43c819fcb352f927ca72a27128772e8b802306523053e0c9522e0.png" />
 </div>
 </div>
 <p>Most of these functions also work directly with Numpy arrays:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">converted</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">multichannel_to_rgb</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;magma&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_green&#39;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">converted</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">colorify</span><span class="o">.</span><span class="n">multichannel_to_rgb</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;magma&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">converted</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_57_0.png" src="../_images/create_plots_57_0.png" />
+<img alt="../_images/64da1a5dd1d71bd031602b5b9e17a26423c8fdddbda5bfe267749328dc7a12c4.png" src="../_images/64da1a5dd1d71bd031602b5b9e17a26423c8fdddbda5bfe267749328dc7a12c4.png" />
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="the-scalebar">
-<h2>The scalebar<a class="headerlink" href="#the-scalebar" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="the-scalebar">
+<h2>The scalebar<a class="headerlink" href="#the-scalebar" title="Link to this heading">#</a></h2>
 <p>We have seen above, that you could add a scalebar to the image. These scalebars are added via the <code class="docutils literal notranslate"><span class="pre">matplotlib-scalebar</span></code> package.</p>
 <p>The only parameters needed for the scalebar are the <code class="docutils literal notranslate"><span class="pre">unit</span></code> that you use e.g. um, the size per pixel <code class="docutils literal notranslate"><span class="pre">unit_per_pixel</span></code> e.g. 0.5um/pixels, and the size of the scale bar <code class="docutils literal notranslate"><span class="pre">scalebar_size_in_units</span></code> in your unit e.g. 40um. In addition you can pass options like <code class="docutils literal notranslate"><span class="pre">scalebar_color</span></code> or <code class="docutils literal notranslate"><span class="pre">scalebar_font_size</span></code> to adjust the rendering. Note that you can pass a dictionary <code class="docutils literal notranslate"><span class="pre">scalebar_kwargs</span></code> with all possible options avaialble in the original <a class="reference external" href="https://github.com/ppinard/matplotlib-scalebar#scalebar-arguments"><code class="docutils literal notranslate"><span class="pre">ScaleBar</span></code> object</a>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microim</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_blue&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_green&#39;</span><span class="p">],</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microim</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">],</span>
                               <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
                               <span class="n">scalebar_color</span><span class="o">=</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">,</span> <span class="n">scalebar_font_size</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
                               <span class="n">scalebar_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;scale_loc&#39;</span><span class="p">:</span><span class="s1">&#39;left&#39;</span><span class="p">});</span>
@@ -968,16 +899,16 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_59_0.png" src="../_images/create_plots_59_0.png" />
+<img alt="../_images/dc5dfa128e689ea6f962f6ef780860201acd687885a24c2771db07f9a6c49f14.png" src="../_images/dc5dfa128e689ea6f962f6ef780860201acd687885a24c2771db07f9a6c49f14.png" />
 </div>
 </div>
-</div>
-<div class="section" id="export">
-<h2>Export<a class="headerlink" href="#export" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="export">
+<h2>Export<a class="headerlink" href="#export" title="Link to this heading">#</a></h2>
 <p>As the figure is simply a Matplotlib figure, you can just use the regular <code class="docutils literal notranslate"><span class="pre">savefig</span></code> function (and use <a class="reference external" href="https://stackoverflow.com/a/27227718">this trick</a> to avoid white space around the plot). You could access it via <code class="docutils literal notranslate"><span class="pre">microim.fig.savefig</span></code> but we also directly wrap it here in the microim object:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microim</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_blue&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_green&#39;</span><span class="p">],</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microim</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">],</span>
                               <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
                               <span class="n">scalebar_color</span><span class="o">=</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">,</span> <span class="n">scalebar_font_size</span><span class="o">=</span><span class="mi">15</span><span class="p">);</span>
 <span class="n">microim</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;single.png&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span> <span class="o">=</span> <span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
@@ -985,17 +916,17 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_61_0.png" src="../_images/create_plots_61_0.png" />
+<img alt="../_images/3c83f4f2908390d6926f1f25a2263c76b32d0663a8354a1b8396336f28be3f29.png" src="../_images/3c83f4f2908390d6926f1f25a2263c76b32d0663a8354a1b8396336f28be3f29.png" />
 </div>
 </div>
 <p>And for more complex plots, you can just use the regular figure creation:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">micro1</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_green&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_blue&#39;</span><span class="p">],</span>
+<span class="n">micro1</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">],</span>
                              <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span>
                              <span class="n">scalebar_font_size</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">scalebar_color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
-<span class="n">micro2</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_red&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_blue&#39;</span><span class="p">],</span>
+<span class="n">micro2</span> <span class="o">=</span> <span class="n">microplot</span><span class="o">.</span><span class="n">microshow</span><span class="p">(</span><span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">],</span>
                              <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span>
                              <span class="n">scalebar_font_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scalebar_color</span><span class="o">=</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
 
@@ -1005,7 +936,7 @@ image type: uint16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/create_plots_63_0.png" src="../_images/create_plots_63_0.png" />
+<img alt="../_images/f499c4735bc0202d34cd064422c8a7ee524bdaa417903a28427798d9f03412ce.png" src="../_images/f499c4735bc0202d34cd064422c8a7ee524bdaa417903a28427798d9f03412ce.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1022,8 +953,8 @@ image type: uint16
 </div>
 </div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1037,7 +968,7 @@ image type: uint16
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./notebooks"
         },
         predefinedOutput: true
@@ -1045,44 +976,127 @@ image type: uint16
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="../docs/first_plot.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Create your first plots</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../docs/first_plot.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Create your first plots</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="create_animations.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="create_animations.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Creating animations</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
+                </footer>
+              
+            </div>
             
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By The Jupyter Book community<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
-      </div>
-    </div>
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-plotting-with-microshow">Basic plotting with <code class="docutils literal notranslate"><span class="pre">microshow</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-images">Load images</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-default-plot">Creating a default plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-image-inputs">2D Image inputs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">3D image inputs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#options-at-creation">Options at creation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#colorbar">Colorbar</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#microimage-object">Microimage object</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#microimage-methods">Microimage methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relation-to-matplotlib">Relation to Matplotlib</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#copying-figures">Copying figures</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lower-level-functions">Lower level functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-image-to-display-with-chosen-colormap">Convert image to display with chosen colormap</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#colormap-hex">colormap hex</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-images">Combining images</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#direct-conversion">Direct conversion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-scalebar">The scalebar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#export">Export</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book community
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

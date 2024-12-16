@@ -1,407 +1,442 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="../" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>Creating animations &#8212; microfilm</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
-    
-      
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
-    
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
-
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script type="application/vnd.jupyter.widget-state+json">{"state": {"00508c3fc6c14266bfee54ba5ba742f9": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "IntSliderModel", "state": {"description": "Time", "layout": "IPY_MODEL_51af6274cb00456495719c538f95c72a", "max": 29, "style": "IPY_MODEL_f0e1fb4099c64378a7f77ea02119b299"}}, "00ad5d90575b4acba0734b5c29e8f61a": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "SliderStyleModel", "state": {"description_width": ""}}, "0f05da003b61479fbb7d7144250e390b": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "VBoxModel", "state": {"children": ["IPY_MODEL_9a1a38deef8146d685b6de9cad583f95", "IPY_MODEL_ce64b429c1624ce2ba6a62e5a73c4765"], "layout": "IPY_MODEL_f33a1028262b4c5a88de203831030e39"}}, "12d8eabd4a174ccf9da0db27142d6003": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"layout": "IPY_MODEL_2b0a6b88363d41cd83a0d7f694fa31c3", "outputs": [{"data": {"application/vnd.jupyter.widget-view+json": {"model_id": "", "version_major": 2, "version_minor": 0}, "text/plain": "Canvas(toolbar=Toolbar(toolitems=[('Home', 'Reset original view', 'home', 'home'), ('Back', 'Back to previous \u2026"}, "metadata": {}, "output_type": "display_data"}]}}, "1afc92b97b964f0cb2f27ebcc3a5a9cd": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "1fb4d8660fd44742bbdc31e3fef14b80": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "26b34a756c004bbc8194d7dc7c99188a": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "2b0a6b88363d41cd83a0d7f694fa31c3": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "33f99940e1fa42c6b8a53452d12248ab": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "34a99dfebaf14d9d909532f8057ce28e": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "VBoxModel", "state": {"children": ["IPY_MODEL_5f25aafa6a294ef2ad93cfc3a2d836ab", "IPY_MODEL_d21aa2e510174e9d9b4c78963cde750c"], "layout": "IPY_MODEL_26b34a756c004bbc8194d7dc7c99188a"}}, "35aa24f1868c4ee7aceb3e0d5c915638": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "MPLCanvasModel", "state": {"_cursor": "default", "_figure_label": "Figure 3", "_height": 216, "_image_mode": "diff", "_width": 165, "layout": "IPY_MODEL_8836d28efeb1437e8059cc90e01f00b8", "toolbar": "IPY_MODEL_a5b6ad93569b4c9991c6508235b1df67", "toolbar_position": "left"}}, "42daedeb07dd415096cdfbc9b183c69f": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "51af6274cb00456495719c538f95c72a": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "52b767840b924aeb856dbcf03fb38150": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "5764ec5616c543ef9543a973bedb452a": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "SliderStyleModel", "state": {"description_width": ""}}, "57dc8b4a04bd4b2faafd0fb87d9ab03e": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "58bb15a7c40d4e59b9cf3cd3f35050da": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "599b74a2958d49d3a63423d3c6edfc0b": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "SliderStyleModel", "state": {"description_width": ""}}, "5e35a3428ac04768b881bda845cd5e4a": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "ToolbarModel", "state": {"layout": "IPY_MODEL_1afc92b97b964f0cb2f27ebcc3a5a9cd", "toolitems": [["Home", "Reset original view", "home", "home"], ["Back", "Back to previous view", "arrow-left", "back"], ["Forward", "Forward to next view", "arrow-right", "forward"], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "arrows", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis, CTRL fixes aspect", "square-o", "zoom"], ["Download", "Download plot", "floppy-o", "save_figure"]]}}, "5f25aafa6a294ef2ad93cfc3a2d836ab": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"layout": "IPY_MODEL_c6474243b12a4e59958bf5c40173e45e", "outputs": [{"data": {"application/vnd.jupyter.widget-view+json": {"model_id": "ef3865754b2945a8b8e94646bd08476d", "version_major": 2, "version_minor": 0}, "text/plain": "Canvas(toolbar=Toolbar(toolitems=[('Home', 'Reset original view', 'home', 'home'), ('Back', 'Back to previous \u2026"}, "metadata": {}, "output_type": "display_data"}]}}, "60648225dc0b4a40b3345fed2b497830": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "VBoxModel", "state": {"children": ["IPY_MODEL_e302f6e386ac4a44aad192b330c1a33d", "IPY_MODEL_00508c3fc6c14266bfee54ba5ba742f9"], "layout": "IPY_MODEL_52b767840b924aeb856dbcf03fb38150"}}, "65aba4aef7234550968f36d91f4d0be7": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "IntSliderModel", "state": {"description": "Time", "layout": "IPY_MODEL_763ad595915f43e9a7b9703db7da2c09", "max": 29, "style": "IPY_MODEL_6a1e854325d044fda664b2379d449f5e"}}, "66f257a90ea24c4685bbdef06eadfdcd": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "6a1e854325d044fda664b2379d449f5e": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "SliderStyleModel", "state": {"description_width": ""}}, "7013ccf1fcda4a2183648ee56bff5d84": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "MPLCanvasModel", "state": {"_cursor": "default", "_figure_label": "Figure 2", "_height": 72, "_width": 55, "layout": "IPY_MODEL_edf22eef1c304f0994d1ca3ded472952", "toolbar": "IPY_MODEL_e434ba9c1eb14d62a094e27dac86ac42", "toolbar_position": "left"}}, "763ad595915f43e9a7b9703db7da2c09": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "819ab1c08a51434b99fcf7893f355d4e": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "MPLCanvasModel", "state": {"_cursor": "default", "_figure_label": "Figure 1", "_height": 216, "_width": 165, "layout": "IPY_MODEL_c8a303e96e6944608b041e39d7bb9887", "toolbar": "IPY_MODEL_d74c76ef36014ea387d7a1b35bc7c21f", "toolbar_position": "left"}}, "81d9c5a12c864e409c3decd4b29eb4b1": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "VBoxModel", "state": {"children": ["IPY_MODEL_12d8eabd4a174ccf9da0db27142d6003", "IPY_MODEL_65aba4aef7234550968f36d91f4d0be7"], "layout": "IPY_MODEL_66f257a90ea24c4685bbdef06eadfdcd"}}, "87295088f6e04c588bf8fa82d2d6a6b5": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "8836d28efeb1437e8059cc90e01f00b8": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "8e0947c2ccfc471aabc73936a2d74a06": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "9a1a38deef8146d685b6de9cad583f95": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"layout": "IPY_MODEL_e4f76eaa8937426182c8a1a02a561059", "outputs": [{"data": {"application/vnd.jupyter.widget-view+json": {"model_id": "819ab1c08a51434b99fcf7893f355d4e", "version_major": 2, "version_minor": 0}, "text/plain": "Canvas(toolbar=Toolbar(toolitems=[('Home', 'Reset original view', 'home', 'home'), ('Back', 'Back to previous \u2026"}, "metadata": {}, "output_type": "display_data"}]}}, "a335f32478904199891e2bd809baf771": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "IntSliderModel", "state": {"description": "Time", "layout": "IPY_MODEL_a78442409b68476cbd907344de86958a", "max": 29, "style": "IPY_MODEL_5764ec5616c543ef9543a973bedb452a"}}, "a5731a05281543fbad8ba43dc6cd4e28": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"layout": "IPY_MODEL_e597bc0b4fe24eef82c8a9be850e59d7", "outputs": [{"data": {"application/vnd.jupyter.widget-view+json": {"model_id": "35aa24f1868c4ee7aceb3e0d5c915638", "version_major": 2, "version_minor": 0}, "text/plain": "Canvas(toolbar=Toolbar(toolitems=[('Home', 'Reset original view', 'home', 'home'), ('Back', 'Back to previous \u2026"}, "metadata": {}, "output_type": "display_data"}]}}, "a5b6ad93569b4c9991c6508235b1df67": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "ToolbarModel", "state": {"layout": "IPY_MODEL_58bb15a7c40d4e59b9cf3cd3f35050da", "toolitems": [["Home", "Reset original view", "home", "home"], ["Back", "Back to previous view", "arrow-left", "back"], ["Forward", "Forward to next view", "arrow-right", "forward"], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "arrows", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis, CTRL fixes aspect", "square-o", "zoom"], ["Download", "Download plot", "floppy-o", "save_figure"]]}}, "a78442409b68476cbd907344de86958a": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "b6cf3baca35a4015b3d27e9ebcae7fd5": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "VBoxModel", "state": {"children": ["IPY_MODEL_a5731a05281543fbad8ba43dc6cd4e28", "IPY_MODEL_a335f32478904199891e2bd809baf771"], "layout": "IPY_MODEL_1fb4d8660fd44742bbdc31e3fef14b80"}}, "ba2aedb34a7343caad8165dcc770354d": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "bb98a6e2de6c4f2a99899076cbe7b084": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "MPLCanvasModel", "state": {"_cursor": "default", "_figure_label": "Figure 4", "_height": 360, "_image_mode": "diff", "_width": 276, "layout": "IPY_MODEL_57dc8b4a04bd4b2faafd0fb87d9ab03e", "toolbar": "IPY_MODEL_fc1d955d867243e687638cccc093a0b7", "toolbar_position": "left"}}, "c6474243b12a4e59958bf5c40173e45e": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "c8a303e96e6944608b041e39d7bb9887": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "ce64b429c1624ce2ba6a62e5a73c4765": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "IntSliderModel", "state": {"description": "Time", "layout": "IPY_MODEL_8e0947c2ccfc471aabc73936a2d74a06", "max": 29, "style": "IPY_MODEL_599b74a2958d49d3a63423d3c6edfc0b"}}, "d21aa2e510174e9d9b4c78963cde750c": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "IntSliderModel", "state": {"description": "Time", "layout": "IPY_MODEL_ba2aedb34a7343caad8165dcc770354d", "max": 29, "style": "IPY_MODEL_00ad5d90575b4acba0734b5c29e8f61a"}}, "d74c76ef36014ea387d7a1b35bc7c21f": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "ToolbarModel", "state": {"layout": "IPY_MODEL_d8a6279d452e4b7a93f31197af0c1537", "toolitems": [["Home", "Reset original view", "home", "home"], ["Back", "Back to previous view", "arrow-left", "back"], ["Forward", "Forward to next view", "arrow-right", "forward"], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "arrows", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis, CTRL fixes aspect", "square-o", "zoom"], ["Download", "Download plot", "floppy-o", "save_figure"]]}}, "d8a6279d452e4b7a93f31197af0c1537": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "e302f6e386ac4a44aad192b330c1a33d": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"layout": "IPY_MODEL_e3f8749da566418dacad33cc6098af1f", "outputs": [{"data": {"application/vnd.jupyter.widget-view+json": {"model_id": "7013ccf1fcda4a2183648ee56bff5d84", "version_major": 2, "version_minor": 0}, "text/plain": "Canvas(toolbar=Toolbar(toolitems=[('Home', 'Reset original view', 'home', 'home'), ('Back', 'Back to previous \u2026"}, "metadata": {}, "output_type": "display_data"}]}}, "e3f8749da566418dacad33cc6098af1f": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "e434ba9c1eb14d62a094e27dac86ac42": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "ToolbarModel", "state": {"layout": "IPY_MODEL_33f99940e1fa42c6b8a53452d12248ab", "toolitems": [["Home", "Reset original view", "home", "home"], ["Back", "Back to previous view", "arrow-left", "back"], ["Forward", "Forward to next view", "arrow-right", "forward"], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "arrows", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis, CTRL fixes aspect", "square-o", "zoom"], ["Download", "Download plot", "floppy-o", "save_figure"]]}}, "e4f76eaa8937426182c8a1a02a561059": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "e597bc0b4fe24eef82c8a9be850e59d7": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "edf22eef1c304f0994d1ca3ded472952": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "ef3865754b2945a8b8e94646bd08476d": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "MPLCanvasModel", "state": {"_cursor": "default", "_figure_label": "Figure 5", "_height": 360, "_image_mode": "diff", "_message": "x=14.8 y=20.1\n[0.0235, 0.0667, 0, 1]", "_width": 276, "layout": "IPY_MODEL_87295088f6e04c588bf8fa82d2d6a6b5", "toolbar": "IPY_MODEL_5e35a3428ac04768b881bda845cd5e4a", "toolbar_position": "left"}}, "f0e1fb4099c64378a7f77ea02119b299": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "SliderStyleModel", "state": {"description_width": ""}}, "f33a1028262b4c5a88de203831030e39": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "fc1d955d867243e687638cccc093a0b7": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "ToolbarModel", "state": {"layout": "IPY_MODEL_42daedeb07dd415096cdfbc9b183c69f", "toolitems": [["Home", "Reset original view", "home", "home"], ["Back", "Back to previous view", "arrow-left", "back"], ["Forward", "Forward to next view", "arrow-right", "forward"], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "arrows", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis, CTRL fixes aspect", "square-o", "zoom"], ["Download", "Download plot", "floppy-o", "save_figure"]]}}}, "version_major": 2, "version_minor": 0}</script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script crossorigin="anonymous" data-jupyter-widgets-cdn="https://cdn.jsdelivr.net/npm/" src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@1.0.6/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/create_animations';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Creating multi-panel figures" href="create_panels.html" />
     <link rel="prev" title="Producing figures with multi-channel images" href="create_plots.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+  
+  <dialog id="pst-search-dialog">
     
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../docs/landing.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/microanim_logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">microfilm</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../docs/landing.html">
-   microfilm
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Getting started
- </span>
-</p>
+    
+    
+    <img src="../_static/microanim_logo.png" class="logo__image only-light" alt="microfilm - Home"/>
+    <img src="../_static/microanim_logo.png" class="logo__image only-dark pst-js-only" alt="microfilm - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../docs/landing.html">
+                    microfilm
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting started</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../docs/overview.html">
-   Overview
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../docs/installation.html">
-   Installation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../docs/first_plot.html">
-   Create your first plots
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/first_plot.html">Create your first plots</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Topic guides
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Topic guides</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="create_plots.html">
-   Producing figures with multi-channel images
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Creating animations
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="create_panels.html">
-   Creating multi-panel figures
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="create_plots.html">Producing figures with multi-channel images</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Creating animations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_panels.html">Creating multi-panel figures</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  API Reference
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../docs/source/microfilm.html">
-   microfilm package
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../docs/source/microfilm.dataset.html">
-     microfilm.dataset package
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../docs/source/microfilm.html">microfilm package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../docs/source/microfilm.dataset.html">microfilm.dataset package</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/create_animations.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+</nav></div>
     </div>
-</div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
-            <!-- Source interaction buttons -->
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/guiwitz/microfilm"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
         
         
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
     </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/guiwitz/microfilm/b1898e8?urlpath=lab/tree/notebooks/create_animations.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/guiwitz/microfilm/blob/b1898e8/notebooks/create_animations.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
 </div>
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
 
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
 
-            <!-- Launch buttons -->
+<a href="https://github.com/guiwitz/microfilm" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/guiwitz/microfilm/b1898e8?urlpath=lab/tree/notebooks/create_animations.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/guiwitz/microfilm/blob/b1898e8/notebooks/create_animations.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
-        
-        <button type="button" class="btn btn-secondary topbarbtn"
-            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
-                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
-        
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/create_animations.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
     </div>
+  
 </div>
+</div>
+              
+              
 
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Creating animations</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div>
+                <h2> Contents </h2>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#dataset">
-   Dataset
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#create-the-animation-object">
-   Create the animation object
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#volume-data">
-   Volume data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#customizing-the-plot">
-   Customizing the plot
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#access-to-microim">
-     Access to microim
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#adding-a-time-stamp">
-   Adding a time-stamp
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exporting-the-animation">
-   Exporting the animation
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#using-the-dataset-class">
-   Using the dataset class
-  </a>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-the-animation-object">Create the animation object</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#volume-data">Volume data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-the-plot">Customizing the plot</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#access-to-microim">Access to microim</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-a-time-stamp">Adding a time-stamp</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exporting-the-animation">Exporting the animation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-dataset-class">Using the dataset class</a></li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Creating animations</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#dataset">
-   Dataset
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#create-the-animation-object">
-   Create the animation object
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#volume-data">
-   Volume data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#customizing-the-plot">
-   Customizing the plot
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#access-to-microim">
-     Access to microim
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#adding-a-time-stamp">
-   Adding a time-stamp
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exporting-the-animation">
-   Exporting the animation
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#using-the-dataset-class">
-   Using the dataset class
-  </a>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="creating-animations">
-<h1>Creating animations<a class="headerlink" href="#creating-animations" title="Permalink to this headline">¶</a></h1>
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="creating-animations">
+<h1>Creating animations<a class="headerlink" href="#creating-animations" title="Link to this heading">#</a></h1>
 <p>While the <code class="docutils literal notranslate"><span class="pre">microplot</span></code> module allows one to create single-frame multi-channel images with annotations, the <code class="docutils literal notranslate"><span class="pre">microanim</span></code> module allows one to create interactive plots and save animations of time-lapse versions of such plots. Both modules use an almost identical set of options to render the images and add annotations.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#%load_ext autoreload</span>
-<span class="c1">#%autoreload 2</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="section" id="dataset">
-<h2>Dataset<a class="headerlink" href="#dataset" title="Permalink to this headline">¶</a></h2>
+<section id="dataset">
+<h2>Dataset<a class="headerlink" href="#dataset" title="Link to this heading">#</a></h2>
 <p>To create an animation, you need a dataset containing multiple frames. As dataset, you can either use a Numpy array with shape CTXY or use one of the <code class="docutils literal notranslate"><span class="pre">dataset</span></code> classes. We start with the simplest case of an array and load a complete stack that we reshape:</p>
 <div class="cell tag_thebe-init docutils container">
 <div class="cell_input docutils container">
@@ -419,9 +454,9 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="create-the-animation-object">
-<h2>Create the animation object<a class="headerlink" href="#create-the-animation-object" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="create-the-animation-object">
+<h2>Create the animation object<a class="headerlink" href="#create-the-animation-object" title="Link to this heading">#</a></h2>
 <p>Now we can use default settings to create an animation object. For that we only need the dataset, here in the form of a Numpy array. <strong>If you use such a Numpy array, by default all channels are plotted. If you don’t want that either create a dataset object (see later) or slice your array</strong>.</p>
 <p>We will have access to some interactivity to scroll through the frames. So before we start we need to activate Matplotlib’s interactive widget mode:</p>
 <div class="cell tag_thebe-init docutils container">
@@ -453,37 +488,39 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Now we can create the animation object. The animation object takes the same arguments as the <code class="docutils literal notranslate"><span class="pre">Microimage</span></code> object. The main difference is that you need to provide in addition a <code class="docutils literal notranslate"><span class="pre">data</span></code> parameter which represents your time-lapse images. The <code class="docutils literal notranslate"><span class="pre">data</span></code> can be either one of the <code class="docutils literal notranslate"><span class="pre">microfilm.dataset</span></code> objects or a simple Numpy array with dimensions <code class="docutils literal notranslate"><span class="pre">CTXY</span></code> like <code class="docutils literal notranslate"><span class="pre">image</span></code> used here. To get a time slider, you can just use the <code class="docutils literal notranslate"><span class="pre">ui</span></code> attribute of the animation object:</p>
 <div class="cell tag_thebe-init docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anim</span> <span class="o">=</span> <span class="n">Microanim</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">image</span><span class="p">,</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_blue&#39;</span><span class="p">,</span><span class="s1">&#39;pure_red&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_green&#39;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anim</span> <span class="o">=</span> <span class="n">Microanim</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">image</span><span class="p">,</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">])</span>
 <span class="n">anim</span><span class="o">.</span><span class="n">ui</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "eb3b44f93c0e474bbc6f613a62c0137a", "version_major": 2, "version_minor": 0}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "86b20750c1a141d39d63f5fab822996e", "version_major": 2, "version_minor": 0}
-</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "1ff06cb2e7e7480897c27cff6b107e6e", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "cab8eaa5b4d94c058275dc47c0591c23", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <p>Here is an example screen capture of such an animation:</p>
 <div class="cell tag_hide_input tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
 <span class="n">Image</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://github.com/guiwitz/microfilm/raw/master/illustrations/create_animations_1.gif&#39;</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <div class="output text_html"><img src="https://github.com/guiwitz/microfilm/raw/master/illustrations/create_animations_1.gif" width="300"/></div></div>
 </div>
-</div>
-<div class="section" id="volume-data">
-<h2>Volume data<a class="headerlink" href="#volume-data" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="volume-data">
+<h2>Volume data<a class="headerlink" href="#volume-data" title="Link to this heading">#</a></h2>
 <p>Just like for the regular images generated by <code class="docutils literal notranslate"><span class="pre">microshow</span></code>, one can do a movie of a multi-channel projected volume. For this one has to again use the <code class="docutils literal notranslate"><span class="pre">volume_proj</span></code> option and pass an array of dimensions <code class="docutils literal notranslate"><span class="pre">CTZXY</span></code> (or a <code class="docutils literal notranslate"><span class="pre">dataset.Nparray</span></code>), for example:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image</span> <span class="o">=</span> <span class="n">skimage</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;../microfilm/dataset/tests/test_folders/coli_nucl_ori_3d.tif&#39;</span><span class="p">)</span>
-<span class="n">image</span><span class="o">.</span><span class="n">shape</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_vol</span> <span class="o">=</span> <span class="n">skimage</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;../microfilm/dataset/tests/test_folders/coli_nucl_ori_3d.tif&#39;</span><span class="p">)</span>
+<span class="n">image_vol</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
@@ -496,8 +533,8 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anim</span> <span class="o">=</span> <span class="n">Microanim</span><span class="p">(</span>
-    <span class="n">data</span><span class="o">=</span><span class="n">image</span><span class="p">,</span>
-    <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_magenta&#39;</span><span class="p">,</span><span class="s1">&#39;pure_cyan&#39;</span><span class="p">],</span> <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">volume_proj</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">image_vol</span><span class="p">,</span>
+    <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;magenta&#39;</span><span class="p">,</span><span class="s1">&#39;cyan&#39;</span><span class="p">],</span> <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">volume_proj</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span>
     <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">fig_scaling</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">scalebar_thickness</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
 
 <span class="n">anim</span><span class="o">.</span><span class="n">ui</span>
@@ -505,27 +542,43 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "edda5dcc782543378ac0ce7e79e68972", "version_major": 2, "version_minor": 0}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "005edd7ea16c4c7cbfd13322ac973d03", "version_major": 2, "version_minor": 0}
-</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "53aa8e5f62404d0cb8221e1a097b5302", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "4effc2bc377d47488eaa6cc591a3fbca", "version_major": 2, "version_minor": 0}</script></div>
 </div>
-</div>
-<div class="section" id="customizing-the-plot">
-<h2>Customizing the plot<a class="headerlink" href="#customizing-the-plot" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="customizing-the-plot">
+<h2>Customizing the plot<a class="headerlink" href="#customizing-the-plot" title="Link to this heading">#</a></h2>
 <p>As mentioned before, you have access to almost all options that you can use in <code class="docutils literal notranslate"><span class="pre">microshow</span></code> for the animation. Here’s an example where we add a scale bar, a label and adjust the plot size:</p>
-<div class="cell tag_hide-output docutils container">
+<div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3, 30, 220, 169)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anim</span> <span class="o">=</span> <span class="n">Microanim</span><span class="p">(</span>
     <span class="n">data</span><span class="o">=</span><span class="n">image</span><span class="p">,</span>
-    <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_blue&#39;</span><span class="p">,</span><span class="s1">&#39;pure_red&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_green&#39;</span><span class="p">],</span> <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span>
+    <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">],</span> <span class="n">label_text</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span>
     <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">fig_scaling</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">scalebar_thickness</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
 
 <span class="n">anim</span><span class="o">.</span><span class="n">ui</span>
 </pre></div>
 </div>
 </div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "53177558796b4cf692bc1a7b70d18135", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "0e3890752a4b49188aa0240e89e22114", "version_major": 2, "version_minor": 0}</script></div>
+</details>
 </div>
 <div class="cell tag_hide_input docutils container">
 <div class="cell_input docutils container">
@@ -536,20 +589,24 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell_output docutils container">
 <div class="output text_html"><img src="https://github.com/guiwitz/microfilm/raw/master/illustrations/create_animations_2.png" width="300"/></div></div>
 </div>
-<div class="section" id="access-to-microim">
-<h3>Access to microim<a class="headerlink" href="#access-to-microim" title="Permalink to this headline">¶</a></h3>
+<section id="access-to-microim">
+<h3>Access to microim<a class="headerlink" href="#access-to-microim" title="Link to this heading">#</a></h3>
 <p>As the animation object is very similar to the simple plot object, you get also access to the same underlying methods e.g. to add a label:</p>
 <div class="cell tag_hide-output docutils container">
-<div class="cell_input docutils container">
+<div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anim</span><span class="o">.</span><span class="n">add_label</span><span class="p">(</span><span class="s1">&#39;comment&#39;</span><span class="p">,</span> <span class="n">label_location</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">label_font_size</span><span class="o">=</span><span class="mi">7</span><span class="p">);</span>
 <span class="n">anim</span><span class="o">.</span><span class="n">ui</span>
 </pre></div>
 </div>
 </div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "54f86595ef8d49b7874c00dc706ae185", "version_major": 2, "version_minor": 0}
-</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "53177558796b4cf692bc1a7b70d18135", "version_major": 2, "version_minor": 0}</script></div>
+</details>
 </div>
 <div class="cell tag_hide_input docutils container">
 <div class="cell_input docutils container">
@@ -562,16 +619,20 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <p>And again, you also get access to the underlying Matplotlib objects like axis:</p>
 <div class="cell tag_hide-output docutils container">
-<div class="cell_input docutils container">
+<div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anim</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="mf">0.7</span><span class="p">)</span>
 <span class="n">anim</span><span class="o">.</span><span class="n">ui</span>
 </pre></div>
 </div>
 </div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "54f86595ef8d49b7874c00dc706ae185", "version_major": 2, "version_minor": 0}
-</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "53177558796b4cf692bc1a7b70d18135", "version_major": 2, "version_minor": 0}</script></div>
+</details>
 </div>
 <div class="cell tag_hide_input docutils container">
 <div class="cell_input docutils container">
@@ -582,14 +643,14 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell_output docutils container">
 <div class="output text_html"><img src="https://github.com/guiwitz/microfilm/raw/master/illustrations/create_animations_4.png" width="300"/></div></div>
 </div>
-</div>
-</div>
-<div class="section" id="adding-a-time-stamp">
-<h2>Adding a time-stamp<a class="headerlink" href="#adding-a-time-stamp" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="adding-a-time-stamp">
+<h2>Adding a time-stamp<a class="headerlink" href="#adding-a-time-stamp" title="Link to this heading">#</a></h2>
 <p>As a specific feature for animations, you can add a specific label which is a time stamp. At the moment it can contain hours <code class="docutils literal notranslate"><span class="pre">HH</span></code>, minutes <code class="docutils literal notranslate"><span class="pre">MM</span></code>, seconds <code class="docutils literal notranslate"><span class="pre">SS</span></code> and milliseconds <code class="docutils literal notranslate"><span class="pre">mmm</span></code>. To add it to your plot, you just specify the unit (e.g. <code class="docutils literal notranslate"><span class="pre">MM</span></code> for minutes), and the number of units per time frame e.g. here 10 min. You can also specify the exact format of your time-stamp with the <code class="docutils literal notranslate"><span class="pre">time_format</span></code> option which should be a string containing the abbreviations mentioned above e.g. <code class="docutils literal notranslate"><span class="pre">HH,</span> <span class="pre">MM</span></code></p>
 <div class="cell tag_hide-output docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anim</span> <span class="o">=</span> <span class="n">Microanim</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">image</span><span class="p">,</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_blue&#39;</span><span class="p">,</span><span class="s1">&#39;pure_red&#39;</span><span class="p">,</span> <span class="s1">&#39;pure_green&#39;</span><span class="p">],</span>
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anim</span> <span class="o">=</span> <span class="n">Microanim</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">image</span><span class="p">,</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">],</span>
                 <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> <span class="n">scalebar_thickness</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
                 <span class="n">scalebar_font_size</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">fig_scaling</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">anim</span><span class="o">.</span><span class="n">add_time_stamp</span><span class="p">(</span><span class="s1">&#39;MM&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s1">&#39;lower left&#39;</span><span class="p">)</span>
@@ -597,20 +658,34 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 </div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "3cfd6af1fd5a4880aa22ecc244cffb21", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "f4ed9b13f4f045fe9800bb3be5ab802d", "version_major": 2, "version_minor": 0}</script></div>
+</details>
 </div>
 <div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://github.com/guiwitz/microfilm/raw/master/illustrations/create_animations_5.gif&#39;</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <div class="output text_html"><img src="https://github.com/guiwitz/microfilm/raw/master/illustrations/create_animations_5.gif" width="300"/></div></div>
 </div>
-<p>Just like for regular plots, you may want to create animations with multiple panels. This is done in the same way as for figures, by assembling pre-made single animations. Find more information in <a class="reference internal" href="create_panels.html"><span class="doc std std-doc">this section</span></a>.</p>
-</div>
-<div class="section" id="exporting-the-animation">
-<h2>Exporting the animation<a class="headerlink" href="#exporting-the-animation" title="Permalink to this headline">¶</a></h2>
+<p>Just like for regular plots, you may want to create animations with multiple panels. This is done in the same way as for figures, by assembling pre-made single animations. Find more information in <a class="reference internal" href="create_panels.html"><span class="std std-doc">this section</span></a>.</p>
+</section>
+<section id="exporting-the-animation">
+<h2>Exporting the animation<a class="headerlink" href="#exporting-the-animation" title="Link to this heading">#</a></h2>
 <p>Once you are satisfied with your movie, you may want to export it to integrate it e.g. in a presentation. You can do that easily using the <code class="docutils literal notranslate"><span class="pre">save_movie</span></code> method. You can specify the image quality and the frames per second for various movie formats (.mov, .avi, .mpg, .mpeg, .mp4, .mkv, .wmv) and the image format is simply recovered from the file name. You can also export as gif, but don’t have access to the <code class="docutils literal notranslate"><span class="pre">quality</span></code> option there:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -619,7 +694,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[WARNING: _io: 411 2021-07-09 01:12:44,106] IMAGEIO FFMPEG_WRITER WARNING: input image is not divisible by macro_block_size=16, resizing from (165, 216) to (176, 224) to ensure video compatibility with most codecs and players. To prevent resizing, make your input image divisible by the macro_block_size or set the macro_block_size to 1 (risking incompatibility).
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>IMAGEIO FFMPEG_WRITER WARNING: input image is not divisible by macro_block_size=16, resizing from (165, 216) to (176, 224) to ensure video compatibility with most codecs and players. To prevent resizing, make your input image divisible by the macro_block_size or set the macro_block_size to 1 (risking incompatibility).
 </pre></div>
 </div>
 </div>
@@ -631,9 +706,9 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="using-the-dataset-class">
-<h2>Using the dataset class<a class="headerlink" href="#using-the-dataset-class" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="using-the-dataset-class">
+<h2>Using the dataset class<a class="headerlink" href="#using-the-dataset-class" title="Link to this heading">#</a></h2>
 <p>Instead of a plain Numpy array you can pass one of the <code class="docutils literal notranslate"><span class="pre">dataset</span></code> objects to the animation constructor. You have here the additional flexibility of choosing which channels to plot for example. Also, if you deal with large images, it is favorable to use a format such as H5 where not the full dataset is loaded into memory.</p>
 <p>We keep our simple example, and transform our Numpy array into a <code class="docutils literal notranslate"><span class="pre">dataset</span></code>. We can specify a name for each channel. Here again, the array format <strong>has to be CTXY</strong>.</p>
 <div class="cell docutils container">
@@ -648,7 +723,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Now we can explicitly specify which channels to plot. For example if you just want a two channels:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anim</span> <span class="o">=</span> <span class="n">Microanim</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nucleoid&#39;</span><span class="p">,</span><span class="s1">&#39;ori&#39;</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pure_red&#39;</span><span class="p">,</span><span class="s1">&#39;pure_green&#39;</span><span class="p">],</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anim</span> <span class="o">=</span> <span class="n">Microanim</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nucleoid&#39;</span><span class="p">,</span><span class="s1">&#39;ori&#39;</span><span class="p">],</span> <span class="n">cmaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="s1">&#39;green&#39;</span><span class="p">],</span>
                  <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">,</span> <span class="n">scalebar_size_in_units</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">scalebar_unit_per_pix</span><span class="o">=</span><span class="mf">0.065</span><span class="p">,</span> 
                  <span class="n">scalebar_thickness</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">scalebar_font_size</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">fig_scaling</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">anim</span><span class="o">.</span><span class="n">add_label</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">)</span>
@@ -656,17 +731,23 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "723a569421214e5595349a2c70d2bebe", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <div class="cell tag_hide-output docutils container">
-<div class="cell_input docutils container">
+<div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anim</span><span class="o">.</span><span class="n">ui</span>
 </pre></div>
 </div>
 </div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "01e976266ceb4231ae84a86b5b6c5d82", "version_major": 2, "version_minor": 0}
-</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "10bd38956635405dbf50497363e4021a", "version_major": 2, "version_minor": 0}</script></div>
+</details>
 </div>
 <div class="cell tag_hide_input docutils container">
 <div class="cell_input docutils container">
@@ -677,14 +758,8 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell_output docutils container">
 <div class="output text_html"><img src="https://github.com/guiwitz/microfilm/raw/master/illustrations/create_animations_6.png" width="450"/></div></div>
 </div>
-</div>
-</div>
-
-
-<script type="application/vnd.jupyter.widget-state+json">
-{"state": {"00508c3fc6c14266bfee54ba5ba742f9": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "IntSliderModel", "state": {"description": "Time", "layout": "IPY_MODEL_51af6274cb00456495719c538f95c72a", "max": 29, "style": "IPY_MODEL_f0e1fb4099c64378a7f77ea02119b299"}}, "00ad5d90575b4acba0734b5c29e8f61a": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "SliderStyleModel", "state": {"description_width": ""}}, "0f05da003b61479fbb7d7144250e390b": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "VBoxModel", "state": {"children": ["IPY_MODEL_9a1a38deef8146d685b6de9cad583f95", "IPY_MODEL_ce64b429c1624ce2ba6a62e5a73c4765"], "layout": "IPY_MODEL_f33a1028262b4c5a88de203831030e39"}}, "12d8eabd4a174ccf9da0db27142d6003": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"layout": "IPY_MODEL_2b0a6b88363d41cd83a0d7f694fa31c3", "outputs": [{"data": {"application/vnd.jupyter.widget-view+json": {"model_id": "", "version_major": 2, "version_minor": 0}, "text/plain": "Canvas(toolbar=Toolbar(toolitems=[('Home', 'Reset original view', 'home', 'home'), ('Back', 'Back to previous \u2026"}, "metadata": {}, "output_type": "display_data"}]}}, "1afc92b97b964f0cb2f27ebcc3a5a9cd": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "1fb4d8660fd44742bbdc31e3fef14b80": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "26b34a756c004bbc8194d7dc7c99188a": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "2b0a6b88363d41cd83a0d7f694fa31c3": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "33f99940e1fa42c6b8a53452d12248ab": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "34a99dfebaf14d9d909532f8057ce28e": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "VBoxModel", "state": {"children": ["IPY_MODEL_5f25aafa6a294ef2ad93cfc3a2d836ab", "IPY_MODEL_d21aa2e510174e9d9b4c78963cde750c"], "layout": "IPY_MODEL_26b34a756c004bbc8194d7dc7c99188a"}}, "35aa24f1868c4ee7aceb3e0d5c915638": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "MPLCanvasModel", "state": {"_cursor": "default", "_figure_label": "Figure 3", "_height": 216, "_image_mode": "diff", "_width": 165, "layout": "IPY_MODEL_8836d28efeb1437e8059cc90e01f00b8", "toolbar": "IPY_MODEL_a5b6ad93569b4c9991c6508235b1df67", "toolbar_position": "left"}}, "42daedeb07dd415096cdfbc9b183c69f": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "51af6274cb00456495719c538f95c72a": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "52b767840b924aeb856dbcf03fb38150": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "5764ec5616c543ef9543a973bedb452a": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "SliderStyleModel", "state": {"description_width": ""}}, "57dc8b4a04bd4b2faafd0fb87d9ab03e": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "58bb15a7c40d4e59b9cf3cd3f35050da": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "599b74a2958d49d3a63423d3c6edfc0b": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "SliderStyleModel", "state": {"description_width": ""}}, "5e35a3428ac04768b881bda845cd5e4a": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "ToolbarModel", "state": {"layout": "IPY_MODEL_1afc92b97b964f0cb2f27ebcc3a5a9cd", "toolitems": [["Home", "Reset original view", "home", "home"], ["Back", "Back to previous view", "arrow-left", "back"], ["Forward", "Forward to next view", "arrow-right", "forward"], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "arrows", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis, CTRL fixes aspect", "square-o", "zoom"], ["Download", "Download plot", "floppy-o", "save_figure"]]}}, "5f25aafa6a294ef2ad93cfc3a2d836ab": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"layout": "IPY_MODEL_c6474243b12a4e59958bf5c40173e45e", "outputs": [{"data": {"application/vnd.jupyter.widget-view+json": {"model_id": "ef3865754b2945a8b8e94646bd08476d", "version_major": 2, "version_minor": 0}, "text/plain": "Canvas(toolbar=Toolbar(toolitems=[('Home', 'Reset original view', 'home', 'home'), ('Back', 'Back to previous \u2026"}, "metadata": {}, "output_type": "display_data"}]}}, "60648225dc0b4a40b3345fed2b497830": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "VBoxModel", "state": {"children": ["IPY_MODEL_e302f6e386ac4a44aad192b330c1a33d", "IPY_MODEL_00508c3fc6c14266bfee54ba5ba742f9"], "layout": "IPY_MODEL_52b767840b924aeb856dbcf03fb38150"}}, "65aba4aef7234550968f36d91f4d0be7": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "IntSliderModel", "state": {"description": "Time", "layout": "IPY_MODEL_763ad595915f43e9a7b9703db7da2c09", "max": 29, "style": "IPY_MODEL_6a1e854325d044fda664b2379d449f5e"}}, "66f257a90ea24c4685bbdef06eadfdcd": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "6a1e854325d044fda664b2379d449f5e": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "SliderStyleModel", "state": {"description_width": ""}}, "7013ccf1fcda4a2183648ee56bff5d84": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "MPLCanvasModel", "state": {"_cursor": "default", "_figure_label": "Figure 2", "_height": 72, "_width": 55, "layout": "IPY_MODEL_edf22eef1c304f0994d1ca3ded472952", "toolbar": "IPY_MODEL_e434ba9c1eb14d62a094e27dac86ac42", "toolbar_position": "left"}}, "763ad595915f43e9a7b9703db7da2c09": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "819ab1c08a51434b99fcf7893f355d4e": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "MPLCanvasModel", "state": {"_cursor": "default", "_figure_label": "Figure 1", "_height": 216, "_width": 165, "layout": "IPY_MODEL_c8a303e96e6944608b041e39d7bb9887", "toolbar": "IPY_MODEL_d74c76ef36014ea387d7a1b35bc7c21f", "toolbar_position": "left"}}, "81d9c5a12c864e409c3decd4b29eb4b1": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "VBoxModel", "state": {"children": ["IPY_MODEL_12d8eabd4a174ccf9da0db27142d6003", "IPY_MODEL_65aba4aef7234550968f36d91f4d0be7"], "layout": "IPY_MODEL_66f257a90ea24c4685bbdef06eadfdcd"}}, "87295088f6e04c588bf8fa82d2d6a6b5": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "8836d28efeb1437e8059cc90e01f00b8": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "8e0947c2ccfc471aabc73936a2d74a06": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "9a1a38deef8146d685b6de9cad583f95": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"layout": "IPY_MODEL_e4f76eaa8937426182c8a1a02a561059", "outputs": [{"data": {"application/vnd.jupyter.widget-view+json": {"model_id": "819ab1c08a51434b99fcf7893f355d4e", "version_major": 2, "version_minor": 0}, "text/plain": "Canvas(toolbar=Toolbar(toolitems=[('Home', 'Reset original view', 'home', 'home'), ('Back', 'Back to previous \u2026"}, "metadata": {}, "output_type": "display_data"}]}}, "a335f32478904199891e2bd809baf771": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "IntSliderModel", "state": {"description": "Time", "layout": "IPY_MODEL_a78442409b68476cbd907344de86958a", "max": 29, "style": "IPY_MODEL_5764ec5616c543ef9543a973bedb452a"}}, "a5731a05281543fbad8ba43dc6cd4e28": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"layout": "IPY_MODEL_e597bc0b4fe24eef82c8a9be850e59d7", "outputs": [{"data": {"application/vnd.jupyter.widget-view+json": {"model_id": "35aa24f1868c4ee7aceb3e0d5c915638", "version_major": 2, "version_minor": 0}, "text/plain": "Canvas(toolbar=Toolbar(toolitems=[('Home', 'Reset original view', 'home', 'home'), ('Back', 'Back to previous \u2026"}, "metadata": {}, "output_type": "display_data"}]}}, "a5b6ad93569b4c9991c6508235b1df67": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "ToolbarModel", "state": {"layout": "IPY_MODEL_58bb15a7c40d4e59b9cf3cd3f35050da", "toolitems": [["Home", "Reset original view", "home", "home"], ["Back", "Back to previous view", "arrow-left", "back"], ["Forward", "Forward to next view", "arrow-right", "forward"], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "arrows", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis, CTRL fixes aspect", "square-o", "zoom"], ["Download", "Download plot", "floppy-o", "save_figure"]]}}, "a78442409b68476cbd907344de86958a": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "b6cf3baca35a4015b3d27e9ebcae7fd5": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "VBoxModel", "state": {"children": ["IPY_MODEL_a5731a05281543fbad8ba43dc6cd4e28", "IPY_MODEL_a335f32478904199891e2bd809baf771"], "layout": "IPY_MODEL_1fb4d8660fd44742bbdc31e3fef14b80"}}, "ba2aedb34a7343caad8165dcc770354d": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "bb98a6e2de6c4f2a99899076cbe7b084": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "MPLCanvasModel", "state": {"_cursor": "default", "_figure_label": "Figure 4", "_height": 360, "_image_mode": "diff", "_width": 276, "layout": "IPY_MODEL_57dc8b4a04bd4b2faafd0fb87d9ab03e", "toolbar": "IPY_MODEL_fc1d955d867243e687638cccc093a0b7", "toolbar_position": "left"}}, "c6474243b12a4e59958bf5c40173e45e": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "c8a303e96e6944608b041e39d7bb9887": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "ce64b429c1624ce2ba6a62e5a73c4765": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "IntSliderModel", "state": {"description": "Time", "layout": "IPY_MODEL_8e0947c2ccfc471aabc73936a2d74a06", "max": 29, "style": "IPY_MODEL_599b74a2958d49d3a63423d3c6edfc0b"}}, "d21aa2e510174e9d9b4c78963cde750c": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "IntSliderModel", "state": {"description": "Time", "layout": "IPY_MODEL_ba2aedb34a7343caad8165dcc770354d", "max": 29, "style": "IPY_MODEL_00ad5d90575b4acba0734b5c29e8f61a"}}, "d74c76ef36014ea387d7a1b35bc7c21f": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "ToolbarModel", "state": {"layout": "IPY_MODEL_d8a6279d452e4b7a93f31197af0c1537", "toolitems": [["Home", "Reset original view", "home", "home"], ["Back", "Back to previous view", "arrow-left", "back"], ["Forward", "Forward to next view", "arrow-right", "forward"], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "arrows", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis, CTRL fixes aspect", "square-o", "zoom"], ["Download", "Download plot", "floppy-o", "save_figure"]]}}, "d8a6279d452e4b7a93f31197af0c1537": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "e302f6e386ac4a44aad192b330c1a33d": {"model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "model_name": "OutputModel", "state": {"layout": "IPY_MODEL_e3f8749da566418dacad33cc6098af1f", "outputs": [{"data": {"application/vnd.jupyter.widget-view+json": {"model_id": "7013ccf1fcda4a2183648ee56bff5d84", "version_major": 2, "version_minor": 0}, "text/plain": "Canvas(toolbar=Toolbar(toolitems=[('Home', 'Reset original view', 'home', 'home'), ('Back', 'Back to previous \u2026"}, "metadata": {}, "output_type": "display_data"}]}}, "e3f8749da566418dacad33cc6098af1f": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "e434ba9c1eb14d62a094e27dac86ac42": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "ToolbarModel", "state": {"layout": "IPY_MODEL_33f99940e1fa42c6b8a53452d12248ab", "toolitems": [["Home", "Reset original view", "home", "home"], ["Back", "Back to previous view", "arrow-left", "back"], ["Forward", "Forward to next view", "arrow-right", "forward"], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "arrows", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis, CTRL fixes aspect", "square-o", "zoom"], ["Download", "Download plot", "floppy-o", "save_figure"]]}}, "e4f76eaa8937426182c8a1a02a561059": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "e597bc0b4fe24eef82c8a9be850e59d7": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "edf22eef1c304f0994d1ca3ded472952": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "ef3865754b2945a8b8e94646bd08476d": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "MPLCanvasModel", "state": {"_cursor": "default", "_figure_label": "Figure 5", "_height": 360, "_image_mode": "diff", "_message": "x=14.8 y=20.1\n[0.0235, 0.0667, 0, 1]", "_width": 276, "layout": "IPY_MODEL_87295088f6e04c588bf8fa82d2d6a6b5", "toolbar": "IPY_MODEL_5e35a3428ac04768b881bda845cd5e4a", "toolbar_position": "left"}}, "f0e1fb4099c64378a7f77ea02119b299": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "SliderStyleModel", "state": {"description_width": ""}}, "f33a1028262b4c5a88de203831030e39": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {}}, "fc1d955d867243e687638cccc093a0b7": {"model_module": "jupyter-matplotlib", "model_module_version": "^0.9.0", "model_name": "ToolbarModel", "state": {"layout": "IPY_MODEL_42daedeb07dd415096cdfbc9b183c69f", "toolitems": [["Home", "Reset original view", "home", "home"], ["Back", "Back to previous view", "arrow-left", "back"], ["Forward", "Forward to next view", "arrow-right", "forward"], ["Pan", "Left button pans, Right button zooms\nx/y fixes axis, CTRL fixes aspect", "arrows", "pan"], ["Zoom", "Zoom to rectangle\nx/y fixes axis, CTRL fixes aspect", "square-o", "zoom"], ["Download", "Download plot", "floppy-o", "save_figure"]]}}}, "version_major": 2, "version_minor": 0}
-</script>
-
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -698,7 +773,7 @@ const thebe_selector_output = ".output, .cell_output"
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./notebooks"
         },
         predefinedOutput: true
@@ -706,44 +781,113 @@ const thebe_selector_output = ".output, .cell_output"
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="create_plots.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Producing figures with multi-channel images</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="create_plots.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Producing figures with multi-channel images</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="create_panels.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="create_panels.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Creating multi-panel figures</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
+                </footer>
+              
+            </div>
             
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By The Jupyter Book community<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
-      </div>
-    </div>
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-the-animation-object">Create the animation object</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#volume-data">Volume data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-the-plot">Customizing the plot</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#access-to-microim">Access to microim</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-a-time-stamp">Adding a time-stamp</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exporting-the-animation">Exporting the animation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-dataset-class">Using the dataset class</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book community
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>
