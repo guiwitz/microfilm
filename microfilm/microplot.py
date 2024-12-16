@@ -797,6 +797,8 @@ class Micropanel:
         microim.channel_label_show = False
         if copy:
             microim = microim.update(self.ax[pos[0], pos[1]], copy=copy)
+        else:
+            microim.update(self.ax[pos[0], pos[1]], copy=copy)
     
         self.microplots[pos[0], pos[1]] = microim
         
