@@ -447,14 +447,10 @@ def save_movie(anim_object, movie_name, fps=20, quality=5, format=None):
 
         for t in range(anim_object.max_time):
             anim_object.update_animation(t)
-            #self.ax.figure.canvas.draw()
             anim_object.fig.canvas.draw()
-            #buf = np.frombuffer(self.ax.figure.canvas.tostring_rgb(), dtype=np.uint8 )
-            buf = np.frombuffer(anim_object.fig.canvas.tostring_rgb(), dtype=np.uint8 )
-            #w,h = anim_object.ax.figure.canvas.get_width_height()
-            #w,h = anim_object.fig.canvas.get_width_height()
+            buf = np.frombuffer(anim_object.fig.canvas.buffer_rgba(), dtype=np.uint8 )
             w,h = map(int, anim_object.fig.canvas.renderer.get_canvas_width_height())
-            buf.shape = (h, w, 3)
+            buf.shape = (h, w, 4)
             writer.append_data(buf)
             
         writer.close()
