@@ -7,6 +7,7 @@ import matplotlib
 from matplotlib.colors import ListedColormap
 from skimage.color import hsv2rgb
 from skimage.exposure import rescale_intensity
+from cmap import Colormap
 
 def cmaps_def(cmap_name, num_colors=256, flip_map=False):
     """
@@ -28,27 +29,29 @@ def cmaps_def(cmap_name, num_colors=256, flip_map=False):
 
     """
 
-    if cmap_name in plt.colormaps():
-        cmap = plt.get_cmap(cmap_name, num_colors)
-    elif cmap_name == 'pure_red':
-        cmap = ListedColormap(np.c_[np.linspace(0,1,num_colors), np.zeros(num_colors), np.zeros(num_colors)])
-    elif cmap_name == 'pure_green':
-        cmap = ListedColormap(np.c_[np.zeros(num_colors), np.linspace(0,1,num_colors), np.zeros(num_colors)])
-    elif cmap_name == 'pure_blue':
-        cmap = ListedColormap(np.c_[np.zeros(num_colors), np.zeros(num_colors), np.linspace(0,1,num_colors)])
-    elif cmap_name == 'pure_cyan':
-        cmap = ListedColormap(np.c_[np.zeros(num_colors), np.linspace(0,1,num_colors), np.linspace(0,1,num_colors)])
-    elif cmap_name == 'pure_magenta':
-        cmap = ListedColormap(np.c_[np.linspace(0,1,num_colors), np.zeros(num_colors), np.linspace(0,1,num_colors)])
-    elif cmap_name == 'pure_yellow':
-        cmap = ListedColormap(np.c_[np.linspace(0,1,num_colors), np.linspace(0,1,num_colors), np.zeros(num_colors)])
-    elif cmap_name == 'segmentation':
-        cmap = random_cmap(num_colors=num_colors)
-    elif cmap_name == 'ran_gradient':
-        cmap = random_grandient_cmap(num_colors=num_colors)
-    else:
-        raise Exception(f"Your colormap {cmap_name} doesn't exist either in Matplotlib or microfilm.")
-            
+    try:
+        cmap = Colormap(cmap_name)
+        cmap = cmap.to_matplotlib(N=num_colors)
+    except ValueError:
+        if cmap_name == 'pure_red':
+            cmap = ListedColormap(np.c_[np.linspace(0,1,num_colors), np.zeros(num_colors), np.zeros(num_colors)])
+        elif cmap_name == 'pure_green':
+            cmap = ListedColormap(np.c_[np.zeros(num_colors), np.linspace(0,1,num_colors), np.zeros(num_colors)])
+        elif cmap_name == 'pure_blue':
+            cmap = ListedColormap(np.c_[np.zeros(num_colors), np.zeros(num_colors), np.linspace(0,1,num_colors)])
+        elif cmap_name == 'pure_cyan':
+            cmap = ListedColormap(np.c_[np.zeros(num_colors), np.linspace(0,1,num_colors), np.linspace(0,1,num_colors)])
+        elif cmap_name == 'pure_magenta':
+            cmap = ListedColormap(np.c_[np.linspace(0,1,num_colors), np.zeros(num_colors), np.linspace(0,1,num_colors)])
+        elif cmap_name == 'pure_yellow':
+            cmap = ListedColormap(np.c_[np.linspace(0,1,num_colors), np.linspace(0,1,num_colors), np.zeros(num_colors)])
+        elif cmap_name == 'segmentation':
+            cmap = random_cmap(num_colors=num_colors)
+        elif cmap_name == 'ran_gradient':
+            cmap = random_grandient_cmap(num_colors=num_colors)
+        else:
+            raise Exception(f"Your colormap {cmap_name} doesn't exist either in Matplotlib or microfilm.")
+                
     if flip_map:
         cmap = cmap.reversed()
     
