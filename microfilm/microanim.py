@@ -450,7 +450,8 @@ def save_movie(anim_object, movie_name, fps=20, quality=5, format=None):
             anim_object.fig.canvas.draw()
             buf = np.frombuffer(anim_object.fig.canvas.buffer_rgba(), dtype=np.uint8 )
             w,h = map(int, anim_object.fig.canvas.renderer.get_canvas_width_height())
-            buf.shape = (h, w, 4)
+            #buf.shape = (h, w, 4)
+            buf = np.reshape(buf, (h, w, 4))
             writer.append_data(buf)
             
         writer.close()

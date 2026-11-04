@@ -19,15 +19,16 @@ jobs:
       fail-fast: false
       matrix:
         platform: [ ubuntu-latest, windows-latest, macos-latest ]
-        python-version: [ 3.9,  "3.10", "3.11", "3.12"]
+        python-version: [ "3.11", "3.12", "3.13", "3.14"]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
+      - name: Setup python
+        uses: astral-sh/setup-uv@v7
         with:
           python-version: ${{ matrix.python-version }}
+          activate-environment: "true"
 
       # Temporary fix for 'pip install imageio-ffmpeg'
       # not including the FFMPEG binary on Apple Silicon macs
@@ -39,24 +40,26 @@ jobs:
           brew update
           brew install ffmpeg
       
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install setuptools tox tox-gh-actions
-      
-      # this runs the platform-specific tests declared in tox.ini
       - name: Test with tox
-        run: tox
+        run: uvx --with tox-gh-actions tox -- ${{ matrix.group.files }}
         env:
           PLATFORM: ${{ matrix.platform }}
+
+  build-and-inspect-package:
+    name: Build & inspect package.
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+      - uses: hynek/build-and-inspect-python-package@v2
 
   deploy:
     # this will run when you have tagged a commit, starting with "v*"
     # and requires that you have put your twine API key in your
     # github secrets (see readme for details)
-    needs: [test]
+    needs: [test, build-and-inspect-package]
     runs-on: ubuntu-latest
-
+    if: contains(github.ref, 'tags')
     permissions:
       # IMPORTANT: this permission is mandatory for trusted publishing on PyPi
       # see https://docs.pypi.org/trusted-publishers/
@@ -64,31 +67,17 @@ jobs:
       # This permission allows writing releases
       contents: write
 
-    if: contains(github.ref, 'tags')
     steps:
-    - uses: actions/checkout@v4
-      
-    - name: Set up Python
-      uses: actions/setup-python@v5
+    - name: Download built artifact to dist/
+      uses: actions/download-artifact@v7
       with:
-        python-version: "3.x"
-
-    
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -U setuptools setuptools_scm wheel twine build
-    
-    - name: build wheels
-      run: |
-        python -m build
+        name: Packages
+        path: dist
     
     - name: 🚢 Publish to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
-      #with:
-      #  repository-url: https://test.pypi.org/legacy/
     
-    - uses: softprops/action-gh-release@v1
+    - uses: softprops/action-gh-release@v3
       with:
         generate_release_notes: true
         files: './dist/*'

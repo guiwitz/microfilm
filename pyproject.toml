@@ -1,10 +1,86 @@
 [build-system]
 requires = [
-    "setuptools>=42",
-    "wheel",
+    "setuptools>=77",
     "setuptools_scm[toml]>=6.0"
 ]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "microfilm"
+dynamic = ["version"]
+description = "Creating figures and animations for multi-channel images with a focus on microscopy."
+readme = "README.md"
+authors = [
+    { name = "Guillaume Witz", email = "guillaume.witz@math.unibe.ch" },
+]
+license = "BSD-3-Clause"
+license-files = ["LICENSE"]
+requires-python = ">=3.11"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Education",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Visualization",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Topic :: Utilities",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX",
+    "Operating System :: Unix",
+    "Operating System :: MacOS",
+]
+dependencies = [
+    "cmap",
+    "h5py",
+    "imageio",
+    "matplotlib",
+    "matplotlib-scalebar",
+    "natsort",
+    "numpy",
+    "scikit-image",
+    "tifffile",
+    "xarray",
+]
+
+[project.optional-dependencies]
+multipage = [
+    "bioio",
+    "bioio-tifffile",
+]
+nd2 = [
+    "nd2reader",
+]
+animation = [
+    "imageio-ffmpeg",
+    "ipywidgets",
+]
+tests = [
+    "pytest",
+]
+all = [
+    "bioio",
+    "bioio-tifffile",
+    "imageio-ffmpeg",
+    "ipywidgets",
+    "nd2reader",
+    "pytest",
+]
+
+[project.urls]
+Homepage = "https://github.com/guiwitz/microfilm"
+
+[tool.setuptools]
+include-package-data = false
+
+[tool.setuptools.packages.find]
+include = ["microfilm*"]
 
 [tool.setuptools_scm]
 write_to = "microfilm/_version.py"
