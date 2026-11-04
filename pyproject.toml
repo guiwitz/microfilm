@@ -61,12 +61,16 @@ animation = [
     "imageio-ffmpeg",
     "ipywidgets",
 ]
+tests = [
+    "pytest",
+]
 all = [
     "bioio",
     "bioio-tifffile",
     "imageio-ffmpeg",
     "ipywidgets",
     "nd2reader",
+    "pytest",
 ]
 
 [project.urls]
