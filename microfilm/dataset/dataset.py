@@ -79,7 +79,7 @@ class Data:
 
         self.valid_frames = np.arange(self.max_time)
         self.valid_frames = self.valid_frames[
-            ~np.in1d(self.valid_frames, self.bad_frames)
+            ~np.isin(self.valid_frames, self.bad_frames)
         ]
         self.valid_frames = self.valid_frames[:: self.step]
         self.K = len(self.valid_frames)
